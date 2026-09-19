@@ -1,0 +1,2605 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0a0a12">
+<title>پاتوق تخته‌نرد</title>
+<link rel="manifest" id="manifestLink">
+<link rel="icon" id="faviconLink">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;700;900&display=swap');
+:root{--bg:#07070c;--card:#101018;--card2:#181824;--input:#0c0c14;--border:#8a6f2a;--soft:#2a2418;--text:#f8f0d8;--muted:#a8987a;--primary:#d4af37;--dark:#7a5f1a;--accent:#f4cf6a;--contrast:#07070c;--hover:rgba(212,175,55,.20);--success:#548b67;--danger:#aa504b;--normal:#548b67;--mars:#ae7837;--black:#8d3947;--radius:24px;--btnradius:16px;--font:'Vazirmatn',sans-serif}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{min-height:100vh;margin:0;padding:11px;background-color:var(--bg);background-image:var(--bgimg,none);background-attachment:fixed;color:var(--text);font-family:Tahoma,system-ui,sans-serif;line-height:1.7}
+.app{max-width:1050px;margin:auto}
+.hero,.page,.card{background:linear-gradient(145deg,var(--card2),var(--card));border:1px solid var(--soft);box-shadow:0 8px 24px rgba(0,0,0,.06),0 2px 6px rgba(0,0,0,.04)}
+.hero{position:relative;overflow:hidden;border-radius:22px;padding:12px 14px 10px;text-align:center;margin-bottom:8px}
+.hero:before{content:"";position:absolute;width:180px;height:180px;top:-120px;right:-40px;border:1px solid var(--border);border-radius:50%;box-shadow:0 0 0 20px rgba(255,255,255,.08),0 0 0 40px rgba(255,255,255,.05);pointer-events:none;opacity:.6}
+.hero:after{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at top right,var(--hover),transparent 60%);pointer-events:none;border-radius:inherit}
+.hero>*{position:relative;z-index:1}
+.hero-title-row{display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.hero-logo{display:inline-flex;align-items:center;justify-content:center;width:22px;height:42px;color:var(--accent);filter:drop-shadow(0 3px 8px var(--hover));animation:logoFloat 4s ease-in-out infinite;flex-shrink:0}
+.hero-logo:nth-child(3){animation-delay:-2s}
+@keyframes logoFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-3px)}}
+.cukur-logo{width:100%;height:100%;display:block}
+h1,h2,h3{color:var(--accent);margin:0;font-family:var(--font,inherit);letter-spacing:-.01em}
+h1{font-size:clamp(1.7rem,6.5vw,2.4rem);font-weight:900;line-height:1.1}
+h2{font-size:1.3rem;margin-bottom:12px;font-weight:700}
+h3{font-size:1.05rem;margin-bottom:8px;font-weight:700}
+.hero p,.muted{color:var(--muted);margin:6px 0 0;font-size:.85rem}
+.tabs{position:sticky;top:0;z-index:5;display:flex;gap:5px;overflow:visible;padding:6px 0 12px;background:linear-gradient(var(--bg) 75%,transparent)}
+button,input,select,textarea{font:inherit}
+.tab,.btn,.choice,.filter,.theme{cursor:pointer}
+.tab{position:relative;flex:1 1 0;min-width:0;min-height:50px;padding:6px 3px;color:var(--muted);background:var(--card);border:1px solid var(--soft);border-radius:14px;font-weight:700;font-size:.72rem;transition:background .25s,color .25s,transform .2s,box-shadow .25s,border-color .25s;display:flex;align-items:center;justify-content:center;gap:3px;line-height:1.15;text-align:center;overflow-wrap:break-word;word-break:break-word;hyphens:auto}
+.tab:hover:not(.active){background:var(--hover);color:var(--accent);transform:translateY(-2px);border-color:var(--border)}
+.tab.active{color:var(--contrast);background:linear-gradient(135deg,var(--primary) 0%,var(--accent) 100%);border-color:var(--primary);transform:translateY(-1px);box-shadow:0 8px 22px var(--hover)}
+.gearbtn{position:fixed;top:10px;left:10px;z-index:9;width:42px;height:42px;flex:none;display:flex;align-items:center;justify-content:center;color:var(--accent);background:var(--card);border:1px solid var(--soft);border-radius:50%;font-size:1.15rem;box-shadow:0 4px 12px rgba(0,0,0,.12);transition:transform .15s,box-shadow .2s}
+.gearbtn:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(0,0,0,.16)}
+.gearbtn.active{color:var(--contrast);background:linear-gradient(145deg,var(--primary),var(--dark));border-color:var(--primary)}
+.tab.active,.choice.active,.filter.active{color:var(--contrast);background:linear-gradient(145deg,var(--primary),var(--dark));border-color:var(--primary)}
+.page{display:none;border-radius:24px;padding:16px;margin-bottom:12px}
+.page.active{display:block;animation:pageIn .28s ease}
+@keyframes pageIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.card{border-radius:var(--radius);padding:15px;margin-bottom:13px;transition:box-shadow .25s ease}
+.card.subsection{background:none;border:0;box-shadow:none;border-radius:0;padding:16px 0 0;margin:16px 0 0;border-top:1px solid var(--soft)}
+.card.subsection:hover{box-shadow:none}
+.card:hover{box-shadow:0 14px 32px rgba(0,0,0,.10),0 3px 8px rgba(0,0,0,.05)}
+.grid{display:grid;gap:10px}
+.type-buttons{grid-template-columns:repeat(3,minmax(0,1fr))}
+.avatar{display:inline-flex;align-items:center;justify-content:center;border-radius:50%;color:#ffffff;font-weight:900;flex-shrink:0;box-shadow:0 2px 6px rgba(0,0,0,.18),inset 0 -2px 4px rgba(0,0,0,.12),inset 0 2px 4px rgba(255,255,255,.15);text-shadow:0 1px 2px rgba(0,0,0,.25);line-height:1;font-family:'Vazirmatn',sans-serif;user-select:none;overflow:hidden;background-size:cover;background-position:center;background-repeat:no-repeat;border:2px solid rgba(255,255,255,.15)}
+.avatar.avatar-img{background-color:var(--input);border-color:var(--primary);box-shadow:0 3px 10px rgba(0,0,0,.28),0 0 0 1px rgba(255,255,255,.10)}
+.dnd-hint{text-align:center;font-size:.78rem;color:var(--muted);margin:0 0 12px;font-weight:600}
+.vs-slots{display:grid;grid-template-columns:1fr auto 1fr;gap:6px;align-items:stretch;margin-bottom:16px}
+.vs-slot{position:relative;min-height:126px;padding:12px 8px;background:var(--input);border:2px dashed var(--border);border-radius:16px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;font:inherit;color:var(--text);transition:border-color .2s,background .25s,transform .2s,box-shadow .25s;overflow:hidden}
+.vs-slot:hover{border-color:var(--primary);background:var(--hover)}
+.vs-slot.filled{border-style:solid;border-color:var(--primary);background:linear-gradient(180deg,var(--hover),transparent 90%);box-shadow:0 6px 20px var(--hover)}
+.vs-slot.dragover{border-style:solid;border-color:var(--accent);background:var(--hover);transform:scale(1.04);box-shadow:0 0 0 4px var(--hover),0 10px 30px var(--hover)}
+.vs-slot-label{font-size:.74rem;color:var(--muted);font-weight:700;line-height:1.2;text-align:center}
+.vs-slot-hint{font-size:.62rem;color:var(--muted);opacity:.8;line-height:1.2;text-align:center;margin-top:2px}
+.vs-slot.filled .vs-slot-label{display:none}
+.vs-slot.filled .vs-slot-hint{display:none}
+.vs-slot-name{font-weight:900;font-size:.86rem;line-height:1.15;text-align:center;max-width:100%;overflow-wrap:break-word}
+.vs-slot-remove{position:absolute;top:6px;right:6px;width:22px;height:22px;border-radius:50%;background:var(--card);color:var(--danger);display:flex;align-items:center;justify-content:center;font-size:.9rem;font-weight:900;line-height:1;opacity:.6;transition:opacity .2s,transform .15s;box-shadow:0 2px 6px rgba(0,0,0,.15)}
+.vs-slot.filled:hover .vs-slot-remove,.vs-slot.filled:focus-visible .vs-slot-remove{opacity:1}
+.vs-slot-divider{display:flex;align-items:center;justify-content:center;padding:0 2px}
+.vs-text{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--primary),var(--accent));color:var(--contrast);font-weight:900;font-size:.92rem;letter-spacing:.04em;font-family:'Vazirmatn',sans-serif;box-shadow:0 6px 18px var(--hover),0 0 22px var(--hover);animation:vsPulse 2.4s ease-in-out infinite;flex-shrink:0}
+@keyframes vsPulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+.vs-text.small{width:34px;height:34px;font-size:.78rem}
+.player-pool{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:6px}
+.pool-player{position:relative;padding:12px 6px 10px;background:var(--input);border:2px solid var(--soft);border-radius:14px;cursor:grab;user-select:none;-webkit-user-drag:element;display:flex;flex-direction:column;align-items:center;gap:5px;transition:transform .18s,border-color .2s,box-shadow .25s,background .2s,opacity .2s;text-align:center;font:inherit;color:var(--text);overflow:hidden}
+.pool-player:hover{border-color:var(--primary);transform:translateY(-3px);box-shadow:0 12px 26px rgba(0,0,0,.12)}
+.pool-player:active{transform:translateY(-1px) scale(.97);cursor:grabbing}
+.pool-player.dragging{opacity:.35;cursor:grabbing}
+.pool-player.placed{opacity:.45;border-color:var(--primary);cursor:pointer}
+.pool-player.placed:hover{opacity:.7;transform:none;box-shadow:none}
+.pool-player.placed .pp-stats{color:var(--accent)}
+.pool-player .pp-name{font-weight:900;font-size:.78rem;line-height:1.15;overflow-wrap:break-word;word-wrap:break-word;max-width:100%}
+.pool-player .pp-stats{display:inline-flex;align-items:center;gap:4px;font-size:.66rem;color:var(--muted);font-weight:600;padding:2px 7px;background:var(--hover);border-radius:99px;line-height:1.1}
+.player-pool .empty{grid-column:1/-1;text-align:center;padding:18px;color:var(--muted);font-size:.85rem}
+.vs-comparison{display:grid;gap:7px;margin-top:12px;padding:12px 14px;background:var(--input);border-radius:14px;border:1px solid var(--soft)}
+.vs-comp-row{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
+.vs-comp-val{font-weight:900;font-size:1rem;color:var(--accent);font-family:var(--font,inherit)}
+.vs-comp-val.left{text-align:left}
+.vs-comp-val.right{text-align:right}
+.vs-comp-label{font-size:.7rem;color:var(--muted);font-weight:600;white-space:nowrap}
+.winner-arena{position:relative;display:grid;grid-template-columns:1fr auto 1fr;gap:4px;align-items:stretch;background:var(--input);border:2px solid var(--soft);border-radius:22px;padding:14px 6px;overflow:hidden}
+.winner-side{position:relative;display:flex;flex-direction:column;align-items:center;gap:7px;padding:14px 6px;background:transparent;border:2px solid transparent;border-radius:16px;cursor:pointer;font:inherit;color:var(--text);transition:transform .2s,background .25s,border-color .25s,box-shadow .25s;z-index:1;overflow-wrap:break-word;word-break:break-word}
+.winner-side:hover{background:var(--hover);border-color:var(--border);transform:translateY(-2px)}
+.winner-side.active{background:linear-gradient(180deg,var(--hover),transparent 90%);border-color:var(--primary);box-shadow:0 0 0 3px var(--hover),0 8px 24px var(--hover)}
+.winner-side .avatar{transition:transform .25s}
+.winner-side.active .avatar{transform:scale(1.10);box-shadow:0 8px 26px var(--hover),0 0 30px var(--accent)}
+.winner-name{font-weight:900;font-size:.88rem;line-height:1.15;text-align:center;max-width:100%;overflow-wrap:break-word}
+.winner-stat{display:inline-flex;align-items:center;gap:4px;font-size:.66rem;color:var(--muted);font-weight:600;padding:2px 8px;background:var(--hover);border-radius:99px;line-height:1.1;white-space:nowrap}
+.winner-side.active .winner-stat{color:var(--accent)}
+.winner-pick{font-size:.64rem;color:var(--muted);font-weight:700;margin-top:2px;opacity:0;transition:opacity .2s;letter-spacing:.02em}
+.winner-side:hover .winner-pick{opacity:.9;color:var(--accent)}
+.winner-side.active .winner-pick{opacity:1;color:var(--accent)}
+.winner-side.active .winner-pick:before{content:"✓ "}
+.winner-question{text-align:center;margin:16px 0 8px;font-size:1rem;color:var(--accent);font-weight:900;font-family:var(--font,inherit)}
+.type-buttons .choice{padding:16px 6px;font-size:1.08rem;min-height:128px;overflow-wrap:break-word}
+.choice{color:var(--text);background:var(--input);border:2px solid var(--soft);border-radius:14px;font-weight:700;line-height:1.3;transition:transform .15s,border-color .2s,background .2s,box-shadow .2s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px}
+.choice-emoji{font-size:2rem;line-height:1}
+.choice-name{font-size:inherit;line-height:1.2}
+.choice:hover:not(.active){border-color:var(--primary);transform:translateY(-1px)}
+.choice small{color:var(--muted);font-size:.82rem;display:block;margin-top:4px}
+.choice.active small{color:var(--contrast);opacity:.85}
+.preview{background:var(--input);border-right:4px solid var(--primary);border-radius:16px;min-height:44px;padding:0;overflow:hidden}
+.preview-empty{padding:14px;text-align:center;color:var(--muted);font-size:.88rem}
+.preview-versus{display:grid;grid-template-columns:1fr auto 1fr;gap:8px;align-items:center;padding:14px 12px;background:linear-gradient(180deg,var(--hover),transparent)}
+.preview-player{display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center;position:relative}
+.preview-player.is-winner .avatar{transform:scale(1.08);box-shadow:0 6px 20px var(--hover),0 0 24px var(--accent)}
+.preview-player.is-loser .avatar{opacity:.55;filter:saturate(.6)}
+.preview-player .pp-pname{font-weight:900;font-size:.82rem;line-height:1.15;overflow-wrap:break-word;word-break:break-word;max-width:100%}
+.preview-player.is-winner .pp-pname{color:var(--accent)}
+.preview-player.is-loser .pp-pname{color:var(--muted)}
+.preview-check{display:inline-block;font-size:.7rem;font-weight:900;color:var(--contrast);background:var(--success);padding:2px 8px;border-radius:99px;line-height:1.4;margin-top:2px;box-shadow:0 3px 10px rgba(0,0,0,.15)}
+.preview-x-circle{width:36px;height:36px;border-radius:50%;background:var(--card);color:var(--accent);font-weight:900;font-size:.95rem;display:inline-flex;align-items:center;justify-content:center;border:2px solid var(--border);box-shadow:0 4px 12px rgba(0,0,0,.12);flex-shrink:0}
+.preview-summary{padding:12px 14px;border-top:1px dashed var(--soft);text-align:center}
+.preview-badges{display:flex;flex-wrap:wrap;justify-content:center;gap:6px;margin-bottom:6px}
+.preview-badge{display:inline-flex;align-items:center;gap:5px;padding:4px 11px;border-radius:99px;font-size:.76rem;font-weight:800;line-height:1.2;box-shadow:0 2px 6px rgba(0,0,0,.10);color:#fff}
+.preview-badge.badge-normal{background:var(--normal)}
+.preview-badge.badge-mars{background:var(--mars)}
+.preview-badge.badge-black{background:var(--black)}
+.preview-badge.badge-points{background:linear-gradient(135deg,var(--primary),var(--dark));color:var(--contrast)}
+.preview-line{font-size:.88rem;color:var(--text);font-weight:700}
+.preview-line b{color:var(--accent);font-weight:900}
+.preview-hint{margin-top:6px;font-size:.72rem;color:var(--muted);font-weight:600}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:13px}
+.btn{min-height:47px;padding:9px 16px;border:0;border-radius:var(--btnradius,14px);color:var(--contrast);background:linear-gradient(145deg,var(--primary),var(--dark));font-weight:700;box-shadow:0 4px 12px rgba(0,0,0,.10);transition:transform .15s,box-shadow .2s,filter .15s}
+.btn:hover:not(:disabled){transform:translateY(-1px);filter:brightness(1.05);box-shadow:0 6px 18px rgba(0,0,0,.15)}
+.btn.secondary{color:var(--accent);background:transparent;border:1px solid var(--border);box-shadow:none}
+.btn.secondary:hover:not(:disabled){background:var(--hover);box-shadow:none}
+.btn.danger{color:#fff;background:linear-gradient(145deg,var(--danger),#7e3936)}
+.btn.success{color:#fff;background:linear-gradient(145deg,var(--success),#39634a)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.warning{margin-top:11px;padding:11px 14px;border-radius:13px;font-size:.88rem;background:var(--input);color:var(--text);border:1px solid var(--border)}
+.summary,.headgrid,.records{display:grid;gap:10px}
+.summary{grid-template-columns:repeat(4,minmax(0,1fr));margin-bottom:13px}
+.stat,.paircard,.record,.game,.chart{background:linear-gradient(145deg,var(--card2),var(--card));border:1px solid var(--soft);border-radius:16px}
+.stat{padding:12px;text-align:center}
+.stat strong{display:block;color:var(--accent);font-size:1.15rem;font-weight:900;margin-top:3px}
+.stat span{font-size:.76rem;color:var(--muted)}
+.stat:hover,.paircard:hover,.record:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(0,0,0,.10)}
+.wrap{overflow:auto;border:1px solid var(--soft);border-radius:16px}
+table{width:100%;min-width:860px;border-collapse:collapse}
+th,td{padding:11px 8px;text-align:center;border-bottom:1px solid var(--soft);white-space:nowrap;font-size:.82rem}
+th{background:linear-gradient(145deg,var(--primary),var(--dark));color:var(--contrast);font-weight:700}
+tbody tr:first-child{background:var(--hover)}
+.evaluation{display:inline-block;padding:1px 7px;border:1px solid var(--border);border-radius:99px;color:var(--muted);font-size:.7rem}
+.headgrid{grid-template-columns:repeat(3,minmax(0,1fr))}
+.paircard{padding:13px}
+.paircard-header{display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
+.paircard-header .pair-x{color:var(--muted)}
+.score{color:var(--accent);font-size:1.4rem;text-align:center;font-weight:900;font-family:var(--font,inherit);letter-spacing:.02em}
+.filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:9px}
+.filters2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin-top:9px}
+label{color:var(--muted);font-size:.8rem;font-weight:600}
+input,select,textarea{width:100%;min-height:45px;margin-top:4px;padding:9px 11px;background:var(--input);color:var(--text);border:1.5px solid var(--soft);border-radius:12px}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px var(--hover)}
+textarea{min-height:80px;resize:vertical}
+.list{display:grid;gap:10px}
+.game{position:relative;overflow:hidden;padding:15px}
+.game:before{content:"";position:absolute;right:0;top:0;width:5px;height:100%;background:linear-gradient(var(--accent),var(--dark))}
+.gamehead{display:flex;justify-content:space-between;gap:8px;align-items:center;flex-wrap:wrap}
+.winner{color:var(--accent);font-size:1.15rem;font-weight:900;font-family:var(--font,inherit);display:inline-flex;align-items:center;gap:8px}
+.badge{display:inline-block;padding:3px 10px;border-radius:99px;color:#fff;font-size:.74rem;font-weight:700}
+.normal{background:var(--normal)}
+.mars{background:var(--mars)}
+.blackmars{background:var(--black)}
+.tag{display:inline-block;padding:3px 9px;margin:2px;border-radius:99px;background:var(--hover);color:var(--accent);border:1px solid var(--border);font-size:.72rem;font-weight:600}
+.meta{margin-top:8px;padding-top:7px;border-top:1px dashed var(--soft);font-size:.83rem;color:var(--muted)}
+.empty{text-align:center;color:var(--muted);padding:26px}
+.records{grid-template-columns:repeat(2,minmax(0,1fr))}
+.record{padding:12px}
+.record small{color:var(--muted);font-size:.78rem}
+.record strong{display:block;color:var(--accent);line-height:1.4;margin-top:4px;font-weight:700}
+.chart{padding:14px;margin-top:12px}
+.chartbox{overflow:auto;background:var(--input);border:1px solid var(--soft);border-radius:14px}
+svg{display:block;width:100%;min-width:560px;height:230px}
+.legend{display:flex;flex-wrap:wrap;gap:9px;color:var(--muted);font-size:.77rem;margin-top:7px}
+.dot{display:inline-block;width:9px;height:9px;border-radius:50%;margin-left:4px}
+.theme-current{display:flex;align-items:center;gap:10px;padding:11px 13px;background:var(--input);border:1px solid var(--soft);border-radius:14px;margin-bottom:10px;font-weight:700}
+.theme-current .swatch{width:36px;height:36px;margin:0;flex-shrink:0;border-radius:10px}
+.themegrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.theme{min-height:62px;padding:8px 6px;color:var(--text);background:var(--card);border:2px solid var(--soft);border-radius:var(--btnradius,12px);font-size:.72rem;line-height:1.2;font-weight:700}
+.theme:hover{border-color:var(--primary);transform:translateY(-1px)}
+.theme.active{border-color:var(--primary);box-shadow:0 0 0 4px var(--hover)}
+.swatch{height:22px;border-radius:8px;margin-bottom:5px}
+.modalbg{position:fixed;z-index:10;inset:0;display:none;align-items:center;justify-content:center;padding:12px;background:rgba(20,10,5,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+.modalbg.show{display:flex}
+.modal{width:min(100%,600px);max-height:92vh;overflow:auto;padding:19px;border:1px solid var(--soft);border-radius:24px;background:var(--card);box-shadow:0 24px 60px rgba(0,0,0,.35)}
+#top{position:fixed;display:none;left:16px;bottom:16px;width:50px;height:50px;border:0;border-radius:50%;color:var(--contrast);background:linear-gradient(145deg,var(--primary),var(--dark));font-size:1.3rem;box-shadow:0 8px 20px rgba(0,0,0,.20);z-index:9}
+.hidden{display:none!important}
+.guest-mode .tab[data-page="register"]{display:none!important}
+.guest-mode #settingsGear{display:none!important}
+.guest-mode #add,
+.guest-mode #last,
+.guest-mode [data-edit],
+.guest-mode [data-del]{display:none!important}
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--success);color:#fff;padding:12px 20px;border-radius:14px;box-shadow:0 10px 28px rgba(0,0,0,.30);z-index:20;opacity:0;transition:opacity .25s,transform .25s;pointer-events:none;max-width:90%;display:flex;align-items:center;gap:10px;flex-wrap:wrap;justify-content:center;font-weight:600}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(-6px);pointer-events:auto}
+.toast.bad{background:var(--danger)}
+.toast button{background:transparent;border:1px solid #fff;color:#fff;padding:4px 14px;border-radius:10px;cursor:pointer;font-weight:700;font-size:.85rem}
+.card.reveal{animation:cardIn .35s}
+@keyframes cardIn{from{opacity:0;transform:translateY(-10px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+#quickTags .tag{cursor:pointer;user-select:none;background:transparent;color:var(--muted)}
+#quickTags .tag:hover{border-color:var(--primary)}
+#quickTags .tag.active{background:var(--primary);color:var(--contrast);border-color:var(--primary)}
+[data-theme="rainy"] .hero,[data-theme="rainy"] .page,[data-theme="rainy"] .card,[data-theme="rainy"] .stat,[data-theme="rainy"] .paircard,[data-theme="rainy"] .record,[data-theme="rainy"] .game,[data-theme="rainy"] .chart,[data-theme="rainy"] .tab,[data-theme="rainy"] .modal,[data-theme="rainy"] .theme-current,[data-theme="rainy"] .pool-player,[data-theme="rainy"] .winner-arena{backdrop-filter:blur(20px) saturate(160%);-webkit-backdrop-filter:blur(20px) saturate(160%)}
+[data-theme="rainy"] .hero{box-shadow:0 12px 40px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.06)}
+@media(max-width:760px){
+  .headgrid{grid-template-columns:1fr}
+  .themegrid{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .filters{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .page{padding:13px}
+  .btn{flex:1 1 145px}
+  .card{padding:12px}
+  .player-pool{grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+  .pool-player{padding:10px 5px 9px;border-radius:12px;gap:4px}
+  .pool-player .pp-name{font-size:.72rem}
+  .pool-player .pp-stats{font-size:.6rem;padding:2px 6px}
+  .vs-slots{gap:4px}
+  .vs-slot{min-height:112px;padding:10px 5px;border-radius:14px;gap:5px}
+  .vs-slot-name{font-size:.78rem}
+  .vs-text{width:34px;height:34px;font-size:.76rem}
+  .vs-text.small{width:28px;height:28px;font-size:.68rem}
+  .winner-arena{padding:10px 4px;gap:2px;border-radius:18px}
+  .winner-side{padding:10px 4px;gap:5px;border-radius:14px}
+  .winner-name{font-size:.78rem}
+  .winner-stat{font-size:.6rem;padding:2px 6px}
+  .preview-versus{padding:11px 8px;gap:5px}
+  .preview-player .pp-pname{font-size:.74rem}
+  .preview-x-circle{width:30px;height:30px;font-size:.85rem}
+  .type-buttons{gap:6px}
+  .type-buttons .choice{font-size:.94rem;min-height:112px;padding:12px 4px}
+  .choice-emoji{font-size:1.7rem}
+  .type-buttons .choice small{font-size:.76rem;margin-top:2px}
+  h2{font-size:1.08rem;margin-bottom:9px}
+  h1{font-size:clamp(1.5rem,6.5vw,2rem)}
+  .hero{padding:10px 12px 8px}
+  .hero-logo{width:18px;height:36px}
+  .tabs{gap:4px;padding:5px 0 10px}
+  .tab{min-height:48px;padding:6px 2px;font-size:.68rem;gap:2px;border-radius:12px}
+  .dnd-hint{font-size:.7rem;margin-bottom:9px}
+}
+@media(max-width:400px){
+  .tab{font-size:.62rem;padding:6px 1px;gap:1px}
+  .pool-player .pp-name{font-size:.66rem}
+  .pool-player .pp-stats{font-size:.56rem;padding:1px 5px}
+  .vs-slot{min-height:100px;padding:9px 4px}
+}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+@media print{.tabs,.gearbtn,#top,.actions,.modalbg,.hero p,#storageWarning,#fatal,.toast{display:none!important}body{background:#fff;color:#000;padding:0}.hero,.page,.card,.stat,.game,.record,.chart,.paircard{background:#fff!important;border-color:#999!important;box-shadow:none!important}h1,h2,h3{color:#000!important}.page{display:block!important}}
+.sort-indicator{display:inline-block;font-size:.68rem;margin-right:3px;opacity:.5;transition:opacity .2s}
+.sort-indicator.active{opacity:1}
+th.sortable{cursor:pointer;user-select:none}
+th.sortable:hover{filter:brightness(1.08)}
+.theme-current.clickable{cursor:pointer;transition:background .2s,border-color .2s,transform .15s;position:relative;padding-left:120px}
+.theme-current.clickable:hover{background:var(--hover);border-color:var(--border);transform:translateY(-1px)}
+.theme-current.clickable:focus-visible{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px var(--hover)}
+.theme-hint{position:absolute;left:13px;top:50%;transform:translateY(-50%);font-size:.72rem;color:var(--muted);font-weight:600;pointer-events:none;opacity:.85}
+.theme-current.clickable:hover .theme-hint{color:var(--accent);opacity:1}
+.card.collapsible{padding:0;overflow:hidden}
+.collapse-header{width:100%;background:transparent;border:0;padding:15px;color:var(--accent);font-family:var(--font,inherit);font-size:1.3rem;font-weight:700;display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;text-align:right;transition:background .2s}
+.collapse-header:hover{background:var(--hover)}
+.collapse-header:focus-visible{outline:none;background:var(--hover)}
+.collapse-title{display:inline-flex;align-items:center;gap:8px;flex:1}
+.collapse-count{font-size:.74rem;color:var(--muted);font-weight:600;background:var(--hover);border:1px solid var(--border);padding:2px 10px;border-radius:99px}
+.collapse-arrow{display:inline-block;font-size:.85rem;color:var(--muted);transition:transform .3s ease;flex-shrink:0}
+.collapse-header[aria-expanded="true"] .collapse-arrow{transform:rotate(180deg)}
+.collapse-body{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .3s ease,opacity .25s ease;opacity:0;padding:0 15px}
+.collapse-body.open{max-height:3000px;opacity:1;padding:0 15px 15px}
+@media(max-width:760px){
+  .collapse-header{padding:12px;font-size:1.08rem}
+  .collapse-body{padding:0 12px}
+  .collapse-body.open{padding:0 12px 12px}
+}
+/* ===== پرده بارگذاری ===== */
+.loading-screen{
+  position:fixed;
+  inset:0;
+  z-index:10000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:
+    radial-gradient(ellipse at 50% 30%, rgba(244,207,106,.08), transparent 60%),
+    radial-gradient(ellipse at 50% 100%, rgba(212,175,55,.05), transparent 50%),
+    linear-gradient(180deg, #0e0e16 0%, #07070c 60%, #04040a 100%);
+  transition:opacity .5s ease, visibility .5s ease;
+}
+.loading-screen.hide{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+.loading-content{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:20px;
+  padding:30px;
+  max-width:340px;
+  width:100%;
+}
+.loading-content .logo-wrap{
+  position:relative;
+  width:80px;
+  height:160px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.loading-content .logo-wrap::before{
+  content:"";
+  position:absolute;
+  inset:-30px;
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(244,207,106,.18), transparent 65%);
+  animation:loadingGlow 2.4s ease-in-out infinite;
+  pointer-events:none;
+}
+@keyframes loadingGlow{
+  0%,100%{transform:scale(1); opacity:.6}
+  50%{transform:scale(1.15); opacity:1}
+}
+.loading-content .logo-svg{
+  width:100%;
+  height:100%;
+  color:#f4cf6a;
+  filter:drop-shadow(0 3px 12px rgba(244,207,106,.5));
+  animation:loadingFloat 3s ease-in-out infinite;
+}
+@keyframes loadingFloat{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-6px)}
+}
+.loading-content .logo-svg circle{
+  animation:loadingDotPulse 2.4s ease-in-out infinite;
+}
+.loading-content .logo-svg circle:nth-child(2){animation-delay:0s}
+.loading-content .logo-svg circle:nth-child(3){animation-delay:.15s}
+.loading-content .logo-svg circle:nth-child(4){animation-delay:.3s}
+@keyframes loadingDotPulse{
+  0%,100%{opacity:.5; r:2.6}
+  50%{opacity:1; r:3.4}
+}
+.loading-msg{
+  font-family:'Vazirmatn',Tahoma,sans-serif;
+  font-size:1rem;
+  font-weight:700;
+  color:#f4cf6a;
+  letter-spacing:.02em;
+  text-align:center;
+  min-height:1.6em;
+  transition:opacity .4s ease, transform .4s ease;
+}
+.loading-msg.swap{
+  opacity:0;
+  transform:translateY(6px);
+}
+.loading-bar{
+  width:100%;
+  max-width:260px;
+  height:3px;
+  background:rgba(212,175,55,.12);
+  border-radius:99px;
+  overflow:hidden;
+  position:relative;
+}
+.loading-bar::before{
+  content:"";
+  position:absolute;
+  top:0;
+  bottom:0;
+  width:40%;
+  border-radius:99px;
+  background:linear-gradient(90deg, transparent, #f4cf6a, #d4af37, #f4cf6a, transparent);
+  box-shadow:0 0 12px rgba(244,207,106,.6);
+  animation:loadingSlide 1.8s ease-in-out infinite;
+}
+@keyframes loadingSlide{
+  0%{right:-45%}
+  100%{right:105%}
+}
+.loading-sub{
+  font-size:.72rem;
+  color:#a8987a;
+  text-align:center;
+  font-weight:600;
+  letter-spacing:.03em;
+  opacity:.85;
+}
+</style>
+</head>
+<body>
+<div id="loadingScreen" class="loading-screen hide">
+  <div class="loading-content">
+    <div class="logo-wrap">
+      <svg class="logo-svg" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M6 26 L30 4 L54 26" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="30" cy="40" r="3" fill="currentColor"/>
+        <circle cx="30" cy="60" r="3" fill="currentColor"/>
+        <circle cx="30" cy="80" r="3" fill="currentColor"/>
+        <path d="M6 94 L30 116 L54 94" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </div>
+    <div id="loadingMsg" class="loading-msg">🎲 در حال چیدن مهره‌ها...</div>
+    <div class="loading-bar"></div>
+    <div class="loading-sub">لطفاً چند لحظه صبر کنید</div>
+  </div>
+</div>
+<div id="supaAuthOverlay" style="position:fixed;inset:0;z-index:9999;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px;direction:rtl;font-family:Vazirmatn,sans-serif"><div style="width:100%;max-width:400px;background:linear-gradient(145deg,var(--card2),var(--card));border:1px solid var(--soft);border-radius:24px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.4)"><h1 style="text-align:center;color:var(--accent);font-size:1.6rem;margin-bottom:6px">🎲 پاتوق تخته‌نرد</h1><p style="text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:22px">ورود به حساب</p><div style="margin-bottom:14px"><label style="display:block;color:var(--muted);font-size:.82rem;font-weight:600;margin-bottom:6px">اسم بازیکن</label><select id="supaUser" style="width:100%;padding:11px 14px;background:var(--input);color:var(--text);border:1.5px solid var(--soft);border-radius:12px;font-size:1rem"><option value="">— انتخاب کن —</option><option value="saeed">سعید جنائی</option><option value="mojtaba">مجتبی دهقان</option><option value="hossein">حسین دهقان</option></select></div><div style="margin-bottom:18px"><label style="display:block;color:var(--muted);font-size:.82rem;font-weight:600;margin-bottom:6px">رمز عبور</label><input id="supaPass" type="password" placeholder="حداقل ۶ کاراکتر" style="width:100%;padding:11px 14px;background:var(--input);color:var(--text);border:1.5px solid var(--soft);border-radius:12px;font-size:1rem"></div><div id="supaErr" style="display:none;padding:10px 14px;background:rgba(170,80,75,.15);border:1px solid var(--danger);color:#f8d8d6;border-radius:12px;font-size:.85rem;margin-bottom:14px"></div><button id="supaLogin" style="width:100%;padding:13px;background:linear-gradient(145deg,var(--primary),var(--dark));color:var(--contrast);border:0;border-radius:14px;font-weight:800;font-size:1rem;cursor:pointer;margin-bottom:10px">ورود</button><button id="supaSignup" style="width:100%;padding:11px;background:transparent;color:var(--accent);border:1px solid var(--border);border-radius:14px;font-weight:600;font-size:.88rem;cursor:pointer">اولین باره؟ ثبت‌نام کن</button>
+<button id="supaGuest" style="width:100%;padding:11px;background:transparent;color:var(--muted);border:1px dashed var(--soft);border-radius:14px;font-weight:600;font-size:.85rem;cursor:pointer;margin-top:8px">📺 ورود به‌عنوان بیننده</button></div></div>
+<button id="settingsGear" class="gearbtn" title="تنظیمات" aria-label="تنظیمات">⚙️</button>
+<button id="syncStatusBtn" style="position:fixed;top:10px;left:60px;z-index:9;width:42px;height:42px;display:none;align-items:center;justify-content:center;color:var(--accent);background:var(--card);border:1px solid var(--soft);border-radius:50%;font-size:1.15rem;box-shadow:0 4px 12px rgba(0,0,0,.12);cursor:pointer" title="سینک دستی" aria-label="سینک دستی">🔄</button>
+<span id="syncDot" style="position:fixed;top:22px;right:60px;z-index:9;width:14px;height:14px;display:none;border-radius:50%;background:#888;box-shadow:0 0 0 3px var(--card),0 0 0 4px var(--soft);transition:background .3s" title="وضعیت اتصال"></span>
+<span id="rtBadge" style="position:fixed;top:19px;right:84px;z-index:9;width:22px;height:22px;display:none;align-items:center;justify-content:center;font-family:'Vazirmatn',sans-serif;font-weight:900;font-size:13px;color:#4caf50;background:var(--card);border:1px solid var(--soft);border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.15);transition:opacity .3s,color .3s,text-shadow .3s;line-height:1" title="وضعیت Realtime">R</span>
+<button id="logoutBtn" style="position:fixed;top:10px;right:10px;z-index:9;width:42px;height:42px;display:none;align-items:center;justify-content:center;color:var(--accent);background:var(--card);border:1px solid var(--soft);border-radius:50%;font-size:1.15rem;box-shadow:0 4px 12px rgba(0,0,0,.12);cursor:pointer" title="خروج از حساب" aria-label="خروج">🚪</button>
+<main class="app">
+<header class="hero">
+  <div class="hero-title-row">
+    <span class="hero-logo">
+      <svg class="cukur-logo" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M6 26 L30 4 L54 26" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="30" cy="40" r="3" fill="currentColor"/>
+        <circle cx="30" cy="60" r="3" fill="currentColor"/>
+        <circle cx="30" cy="80" r="3" fill="currentColor"/>
+        <path d="M6 94 L30 116 L54 94" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+    <h1>پاتوق تخته‌نرد</h1>
+    <span class="hero-logo">
+      <svg class="cukur-logo" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <path d="M6 26 L30 4 L54 26" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+        <circle cx="30" cy="40" r="3" fill="currentColor"/>
+        <circle cx="30" cy="60" r="3" fill="currentColor"/>
+        <circle cx="30" cy="80" r="3" fill="currentColor"/>
+        <path d="M6 94 L30 116 L54 94" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </span>
+  </div>
+  <div id="storageWarning" class="warning hidden">ذخیره‌سازی مرورگر در دسترس نیست؛ حتماً پشتیبان بگیرید</div>
+  <div id="fatal" class="warning hidden"></div>
+</header>
+<nav class="tabs" role="tablist">
+  <button class="tab active" data-page="register" role="tab">🎲 ثبت</button>
+  <button class="tab" data-page="ranking" role="tab">📋 جدول</button>
+  <button class="tab" data-page="tournament" role="tab">🏆 تورنمنت</button>
+  <button class="tab" data-page="history" role="tab">📜 تاریخچه</button>
+  <button class="tab" data-page="analytics" role="tab">📈 آمار</button>
+</nav>
+
+<section id="register" class="page active">
+  <div class="card">
+    <h2 id="pairTitle">انتخاب بازیکنان</h2>
+    <p class="dnd-hint" id="dndHint">روی بازیکن بزن تا انتخاب بشه (توی دسکتاپ می‌تونی بکشیش هم)</p>
+    <div id="vsSlots" class="vs-slots"></div>
+    <input id="poolSearch" class="hidden" placeholder="جستجوی بازیکن…" style="margin-bottom:8px">
+    <div id="playerPool" class="player-pool"></div>
+    <div id="winnerArea" class="card subsection hidden">
+      <h2>نبرد ⚔️</h2>
+      <div id="winnerArena"></div>
+      <div id="winnerHint" class="muted" style="text-align:center;font-size:.78rem;margin-top:2px">روی طرفِ برنده کلیک کن</div>
+    </div>
+    <div id="typeArea" class="card subsection hidden">
+      <h2>نوع برد</h2>
+      <div id="typeButtons" class="grid type-buttons"></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>پیش‌نمایش ثبت</h2>
+    <div id="preview" class="preview"></div>
+    <div style="margin-top:12px">
+      <label>یادداشت اختیاری
+        <input id="quickNote" placeholder="مثلاً: بازی حساس، انتقامی..." maxlength="200">
+      </label>
+      <div style="margin-top:10px">
+        <label style="display:block;margin-bottom:6px">برچسب‌ها</label>
+        <div id="quickTags"></div>
+      </div>
+    </div>
+    <div class="actions">
+      <button id="add" class="btn success" disabled>➊ ابتدا زوج را انتخاب کنید</button>
+      <button id="last" class="btn danger" disabled>🗑️ حذف آخرین بازی</button>
+    </div>
+  </div>
+</section>
+
+<section id="ranking" class="page">
+  <div id="summary" class="summary"></div>
+
+  <div class="card"><h2>🏆 جدول مسابقات</h2>
+    <div class="wrap" style="overflow-x: auto;">
+      <table style="width: 100%; min-width: 600px; border-collapse: collapse;">
+        <thead>
+          <tr style="background: linear-gradient(145deg, var(--primary), var(--dark)); color: var(--contrast);">
+            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" onclick="sortTable('avatar')">👤</th>
+            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" onclick="sortTable('games')">🎲 بازی</th>
+            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" onclick="sortTable('wins')">🏆 برد</th>
+            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" onclick="sortTable('winRate')">📊 درصد برد</th>
+            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" onclick="sortTable('points')">⭐ امتیاز کل</th>
+            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" onclick="sortTable('breakdown')">🎱 نوع برد</th>
+          </tr>
+        </thead>
+        <tbody id="rankbody">
+        </tbody>
+      </table>
+    </div>
+    <button onclick="toggleFullscreen()" style="margin-top: 12px; padding: 10px 20px; background: var(--primary); color: var(--contrast); border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 700; cursor: pointer; width: 100%;">
+      📱 نمایش تمام‌صفحه (چرخش خودکار)
+    </button>
+  </div>
+  <h2>⚔️ آمار رو در رو</h2>
+  <div id="headCards" class="headgrid"></div>
+</section>
+
+<section id="tournament" class="page">
+  <div class="card">
+    <div style="display:flex;flex-wrap:wrap;gap:9px;align-items:center;justify-content:space-between">
+      <div>
+        <h2 style="margin:0">🏆 <span id="tName">تورنمنت</span></h2>
+        <p class="muted" id="tMeta" style="margin:4px 0 0"></p>
+      </div>
+      <div class="actions" style="margin:0">
+        <button id="tEditName" class="btn secondary" title="ویرایش نام">✏️ نام</button>
+        <button id="tEditStart" class="btn secondary" title="ویرایش نقطه شروع">📅 شروع</button>
+        <button id="tReset" class="btn danger">🔄 شروع تورنمنت جدید</button>
+      </div>
+    </div>
+  </div>
+  <div id="tSummary" class="summary"></div>
+  <div class="card">
+    <h2>جدول رده‌بندی تورنمنت</h2>
+    <div class="wrap"><table>
+      <thead>
+        <tr style="background:linear-gradient(145deg,var(--primary),var(--dark));color:var(--contrast)">
+          <th class="sortable" onclick="sortTournament('rank',this)">🏅 رتبه <span class="sort-indicator">↕</span></th>
+          <th>👤 نام بازیکن</th>
+          <th class="sortable" onclick="sortTournament('games',this)">🎲 بازی <span class="sort-indicator">↕</span></th>
+          <th class="sortable" onclick="sortTournament('wins',this)">🏆 برد <span class="sort-indicator">↕</span></th>
+          <th class="sortable" onclick="sortTournament('losses',this)">💔 باخت <span class="sort-indicator">↕</span></th>
+          <th class="sortable" onclick="sortTournament('winrate',this)">📈 درصد برد <span class="sort-indicator">↕</span></th>
+          <th class="sortable" onclick="sortTournament('breakdown',this)">🎱 نوع برد <span class="sort-indicator">↕</span></th>
+          <th class="sortable" onclick="sortTournament('points',this)">⭐ امتیاز <span class="sort-indicator">↕</span></th>
+          <th class="sortable" onclick="sortTournament('avg',this)">📊 میانگین <span class="sort-indicator">↕</span></th>
+        </tr>
+      </thead>
+      <tbody id="tRankBody"></tbody>
+    </table></div>
+  </div>
+  <h2>📦 آرشیو تورنمنت‌ها</h2>
+  <div id="tArchive" class="headgrid"></div>
+</section>
+
+<section id="history" class="page">
+  <div class="card"><h2>تاریخچه بازی‌ها</h2>
+    <div class="filters">
+      <label>جستجو<input id="search" placeholder="نام، تاریخ، نوع برد یا یادداشت"></label>
+      <label>نوع/بازه<select id="filterType">
+        <option value="all">همه</option><option value="normal">برد عادی</option>
+        <option value="mars">مارس</option><option value="black">سیاه مارس</option>
+        <option value="today">امروز</option><option value="week">۷ روز اخیر</option>
+        <option value="month">این ماه</option>
+      </select></label>
+      <label>بازیکن<select id="filterPlayer"></select></label>
+      <label>مرتب‌سازی<select id="sortHistory">
+        <option value="new">جدیدترین اول</option><option value="old">قدیمی‌ترین اول</option>
+      </select></label>
+    </div>
+    <div class="filters2">
+      <label>از تاریخ<input type="date" id="fromDate"></label>
+      <label>تا تاریخ<input type="date" id="toDate"></label>
+    </div>
+    <div class="actions"><button id="exportCSV" class="btn secondary">📊 خروجی CSV اکسل</button><button class="btn secondary" onclick="window.print()">🖨️ چاپ / PDF</button></div>
+  </div>
+  <div id="list" class="list"></div>
+</section>
+
+<section id="analytics" class="page">
+  <div class="card"><h2>آمار و رکوردها</h2><div id="records" class="records"></div></div>
+  <div class="chart"><h3>روند امتیاز تجمعی</h3><div id="pointsChart" class="chartbox"></div><div id="pointsLegend" class="legend"></div></div>
+  <div class="chart"><h3>درصد برد اخیر</h3>
+    <label>بازه<select id="recentRange">
+      <option value="5">۵ بازی اخیر هر بازیکن</option><option value="10">۱۰ بازی اخیر هر بازیکن</option><option value="all">کل بازی‌های هر بازیکن</option>
+    </select></label>
+    <div id="rateChart" class="chartbox"></div>
+  </div>
+  <div class="chart"><h3>انواع برد</h3><div id="typesChart" class="chartbox"></div></div>
+  <div class="chart"><h3>فعالیت ۱۴ روز اخیر</h3><div id="activityChart" class="chartbox"></div></div>
+  <div class="chart"><h3>📉 روند درصد برد</h3>
+    <p class="muted" style="font-size:.78rem;margin:0 0 10px">درصد برد تجمعی هر بازیکن در طول بازی‌ها (بالا = بهتر، پایین = افت)</p>
+    <div id="winRateTrendChart" class="chartbox"></div>
+    <div id="winRateTrendLegend" class="legend"></div>
+  </div>
+  <div class="chart"><h3>🔥 نقشه حرارتی فعالیت (روز هفته × ساعت)</h3><div id="heatmap" class="chartbox"></div></div>
+  <div class="chart"><h3>📈 پیشرفت نسبی (امتیاز تجمعی رودررو)</h3>
+    <label>زوج بازیکنان<select id="progressSelect"></select></label>
+    <div id="progressChart" class="chartbox"></div>
+  </div>
+</section>
+
+<section id="settings" class="page">
+  <div class="card"><h2>🎨 قالب</h2>
+    <div id="themeCurrent" class="theme-current clickable" role="button" tabindex="0" aria-label="تغییر قالب"></div>
+  </div>
+  <div class="card"><h2>شخصی‌سازی</h2>
+    <div class="filters">
+      <label>اندازه فونت<select id="fontScale">
+        <option value=".9">کوچک</option><option value="1">معمولی</option>
+        <option value="1.12">درشت</option><option value="1.24">خیلی درشت</option>
+      </select></label>
+      <label>شدت رنگ<select id="intensity">
+        <option value="calm">آرام</option><option value="standard">استاندارد</option><option value="bold">پررنگ</option>
+      </select></label>
+    </div>
+  </div>
+  <div class="card collapsible">
+    <button type="button" class="collapse-header" data-target="playerMgmtBody" aria-expanded="false">
+      <span class="collapse-title">👥 مدیریت بازیکنان</span>
+      <span class="collapse-count" id="playerCountBadge"></span>
+      <span class="collapse-arrow">▼</span>
+    </button>
+    <div class="collapse-body" id="playerMgmtBody">
+      <p class="muted" style="margin:0 0 10px;font-size:.8rem">برای هر بازیکن می‌تونی یه عکس آپلود کنی (اختیاری).</p>
+      <div id="playerList" class="list"></div>
+      <div class="actions">
+        <input id="newPlayer" placeholder="نام بازیکن جدید" style="flex:1;min-width:160px">
+        <button id="addPlayer" class="btn success">افزودن</button>
+      </div>
+    </div>
+  </div>
+  <div class="card collapsible">
+    <button type="button" class="collapse-header" data-target="dataMgmtBody" aria-expanded="false">
+      <span class="collapse-title">💾 مدیریت اطلاعات</span>
+      <span class="collapse-arrow">▼</span>
+    </button>
+    <div class="collapse-body" id="dataMgmtBody">
+      <p class="muted">پشتیبان شامل نسخه، تاریخ خروجی، بازیکنان، عکس‌ها، تنظیمات، تورنمنت و تمام بازی‌هاست.</p>
+      <div class="actions">
+        <button id="export" class="btn success">دریافت فایل پشتیبان JSON</button>
+        <button id="importBtn" class="btn secondary">وارد کردن پشتیبان JSON</button>
+        <button id="clear" class="btn danger">حذف کامل همه اطلاعات</button>
+      </div>
+      <input id="importFile" class="hidden" type="file" accept=".json,application/json">
+    </div>
+  </div>
+</section>
+
+<button id="top">↑</button>
+</main>
+<div id="modalBg" class="modalbg"></div>
+<div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+<script>
+(function(){'use strict';try{
+var DEFAULT_PLAYERS=['سعید جنائی','مجتبی دهقان','حسین دهقان'];
+var PKEY='backgammon_players';
+var AVKEY='backgammon_avatars';
+var PLAYERS=[],PAIRS=[],avatars={},KEY='backgammon_main_games',SKEY='backgammon_main_settings';
+var TYPES={normal:{name:'عادی',full:'برد عادی',points:1,cls:'normal',emoji:'✅'},mars:{name:'مارس',full:'مارس',points:2,cls:'mars',emoji:'🔥'},black:{name:'سیاه مارس',full:'سیاه مارس',points:3,cls:'black',emoji:'💀'}};
+var PRESET_TAGS=['حساس','تمرینی','پایانی','دوستان','انتقامی'];
+
+var THEMES={
+blackgold:['#07070c','#101018','#181824','#0c0c14','#8a6f2a','#2a2418','#f8f0d8','#a8987a','#d4af37','#7a5f1a','#f4cf6a','#07070c','rgba(212,175,55,.20)','\'Vazirmatn\',sans-serif','16px','10px','radial-gradient(ellipse at 50% -30%,rgba(244,207,106,.20),transparent 55%),radial-gradient(ellipse at 100% 100%,rgba(212,175,55,.10),transparent 45%),radial-gradient(ellipse at 0% 50%,rgba(138,111,42,.08),transparent 40%),linear-gradient(180deg,#0e0e16 0%,#07070c 60%,#04040a 100%)'],
+rainy:['#080b12','rgba(22,28,40,.55)','rgba(32,40,56,.65)','rgba(15,20,30,.55)','rgba(130,150,180,.28)','rgba(100,120,150,.16)','#e8edf5','#8a95a8','#5a7a9a','#3d5670','#a8c4dd','#ffffff','rgba(90,122,154,.20)','\'Vazirmatn\',sans-serif','22px','14px','radial-gradient(ellipse at 50% -10%,rgba(120,150,190,.16),transparent 55%),radial-gradient(ellipse at 0% 100%,rgba(70,90,120,.14),transparent 50%),radial-gradient(ellipse at 100% 80%,rgba(90,110,140,.10),transparent 45%),repeating-linear-gradient(105deg,transparent 0 4px,rgba(180,200,220,.022) 4px 5px),repeating-linear-gradient(75deg,transparent 0 7px,rgba(160,180,210,.015) 7px 8px),linear-gradient(180deg,#0c1018 0%,#080b12 50%,#05070c 100%)']
+};
+var themeNames={blackgold:'👑 طلای سیاه',rainy:'🌧️ باران شیشه‌ای'};
+
+var AVATAR_PALETTE=['#e06a6a','#d18f3e','#548b67','#4a7ab8','#8a5cc4','#c46a9e','#3d8b8b','#a35a3d','#5b6fa8','#8a7a3d','#a8495c','#3d6e8b'];
+var colors=['#5b9dc4','#b075c1','#65a276','#e0a340','#e06a6a','#6ac1e0','#c58ae0','#7ec17e'];
+var games=[],settings={theme:'blackgold',font:'1',intensity:'standard'},selected={pair:null,winner:null,type:null,slot1:null,slot2:null},storageOK=true;
+
+var quickTags=[],lastDeleted=null,undoTimer=null,poolFilter='';
+var TKEY='backgammon_tournaments';
+var tournament={name:'تورنمنت ۱',start:0,nextNum:1};
+var archive=[];
+
+function $(x){return document.getElementById(x)}
+function esc(x){return String(x==null?'':x).replace(/[&<>'"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]})}
+function id(){return'g_'+Date.now().toString(36)+'_'+Math.random().toString(36).slice(2,9)}
+function pts(t){return TYPES[t]?TYPES[t].points:0}
+function loser(g){return g.winner===g.player1?g.player2:g.player1}
+function n(x,d){return Number(x||0).toLocaleString('fa-IR',{maximumFractionDigits:d==null?2:d})}
+function percent(w,t){return t?n(w*100/t,1)+'٪':'۰٪'}
+function pdate(t){try{return new Date(t).toLocaleDateString('fa-IR-u-ca-persian')}catch(e){return new Date(t).toLocaleDateString('fa-IR')}}
+function ptime(t){try{return new Date(t).toLocaleTimeString('fa-IR')}catch(e){return new Date(t).toLocaleTimeString()}}
+function pairKey(a,b){return[a,b].sort().join('|')}
+function valid(g){return g&&PLAYERS.indexOf(g.player1)>-1&&PLAYERS.indexOf(g.player2)>-1&&g.player1!==g.player2&&PLAYERS.indexOf(g.winner)>-1&&(g.winner===g.player1||g.winner===g.player2)&&TYPES[g.type]&&isFinite(Number(g.timestamp))}
+function sign(g){return[g.timestamp,pairKey(g.player1,g.player2),g.winner,g.type].join('::')}
+
+function avatarColor(name){
+  if(!name)return AVATAR_PALETTE[0];
+  var h=0;
+  for(var i=0;i<name.length;i++){h=(h*31+name.charCodeAt(i))|0;}
+  return AVATAR_PALETTE[Math.abs(h)%AVATAR_PALETTE.length];
+}
+function avatarHTML(name,size){
+  var s=size||32;
+  var trimmed=String(name||'').trim();
+  var img=avatars[trimmed];
+  if(img){
+    return '<span class="avatar avatar-img" style="width:'+s+'px;height:'+s+'px;background-image:url(\''+img+'\')"></span>';
+  }
+  var letter=trimmed?trimmed.charAt(0):'?';
+  var color=avatarColor(trimmed);
+  return '<span class="avatar" style="background:'+color+';width:'+s+'px;height:'+s+'px;font-size:'+Math.round(s*0.42)+'px">'+esc(letter)+'</span>';
+}
+function avatarInline(name,size){return avatarHTML(name,size||26);}
+
+function get(k,d){try{var x=localStorage.getItem(k);return x?JSON.parse(x):d}catch(e){storageOK=false;$('storageWarning').classList.remove('hidden');return d}}
+function put(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){storageOK=false;$('storageWarning').classList.remove('hidden')}}
+function remove(k){try{localStorage.removeItem(k)}catch(e){storageOK=false;$('storageWarning').classList.remove('hidden')}}
+
+function buildPairs(){PAIRS=[];for(var i=0;i<PLAYERS.length;i++)for(var j=i+1;j<PLAYERS.length;j++)PAIRS.push([PLAYERS[i],PLAYERS[j]])}
+function loadPlayers(){var s=get(PKEY,null);PLAYERS=(Array.isArray(s)&&s.length>=2)?s.slice():DEFAULT_PLAYERS.slice();buildPairs()}
+function savePlayers(){put(PKEY,PLAYERS);buildPairs()}
+function loadAvatars(){var a=get(AVKEY,null);avatars=(a&&typeof a==='object'&&!Array.isArray(a))?a:{}}
+function saveAvatars(){put(AVKEY,avatars)}
+
+function saveSelection(){try{sessionStorage.setItem('backgammon_sel',JSON.stringify(selected))}catch(_){}}
+function loadSelection(){
+  try{
+    var s=JSON.parse(sessionStorage.getItem('backgammon_sel')||'{}');
+    if(s&&typeof s==='object'){
+      if(s.slot1&&PLAYERS.indexOf(s.slot1)>-1)selected.slot1=s.slot1;
+      if(s.slot2&&PLAYERS.indexOf(s.slot2)>-1)selected.slot2=s.slot2;
+      if(selected.slot1&&selected.slot2)selected.pair=[selected.slot1,selected.slot2];
+      if(selected.pair&&(s.winner===selected.pair[0]||s.winner===selected.pair[1]))selected.winner=s.winner;
+      if(TYPES[s.type])selected.type=s.type;
+    }
+  }catch(_){}
+}
+
+function loadTournament(){
+  var t=get(TKEY,null);
+  if(t&&typeof t==='object'){
+    if(typeof t.name==='string')tournament.name=t.name;
+    if(typeof t.start==='number')tournament.start=t.start;
+    if(typeof t.nextNum==='number')tournament.nextNum=t.nextNum;
+    if(Array.isArray(t.archive))archive=t.archive;
+  }
+}
+function saveTournament(){
+  put(TKEY,{name:tournament.name,start:tournament.start,nextNum:tournament.nextNum,archive:archive});
+}
+
+function load(){
+  loadPlayers();
+  loadAvatars();
+  var a=get(KEY,[]),s=get(SKEY,{});
+  games=Array.isArray(a)?a.filter(valid).map(function(g){
+    g.timestamp=Number(g.timestamp);g.id=g.id||id();
+    g.note=typeof g.note==='string'?g.note:'';
+    g.tags=Array.isArray(g.tags)?g.tags:[];
+    g.date=g.date||pdate(g.timestamp);g.time=g.time||ptime(g.timestamp);
+    return g;
+  }):[];
+  if(s&&typeof s==='object')for(var k in s)settings[k]=s[k];
+  if(!THEMES[settings.theme])settings.theme='blackgold';
+  loadTournament();
+  loadSelection();
+}
+function save(){put(KEY,games)}
+function saveSettings(){put(SKEY,settings)}
+
+function apply(){
+  var v=THEMES[settings.theme]||THEMES.blackgold;
+  var k=['--bg','--card','--card2','--input','--border','--soft','--text','--muted','--primary','--dark','--accent','--contrast','--hover','--font','--radius','--btnradius','--bgimg'];
+  k.forEach(function(x,i){document.documentElement.style.setProperty(x,v[i])});
+  document.documentElement.setAttribute('data-theme',settings.theme);
+  document.documentElement.style.fontSize=(16*Number(settings.font||1))+'px';
+  document.querySelector('.app').style.filter=settings.intensity==='calm'?'saturate(.82)':settings.intensity==='bold'?'saturate(1.16)':'';
+  document.documentElement.style.scrollBehavior='smooth';
+  $('themeCurrent')&&renderThemes();
+}
+function stats(p){
+  var s={name:p,games:0,wins:0,losses:0,normal:0,mars:0,black:0,total:0};
+  games.forEach(function(g){
+    if(g.player1!==p&&g.player2!==p)return;
+    s.games++;
+    if(g.winner===p){s.wins++;s[g.type]++;s.total+=pts(g.type)}
+    else s.losses++;
+  });
+  s.rate=s.games?s.wins/s.games:0;s.avg=s.games?s.total/s.games:0;
+  return s;
+}
+function h2h(a,b){
+  var list=games.filter(function(g){return pairKey(g.player1,g.player2)===pairKey(a,b)});
+  var aw=list.filter(function(g){return g.winner===a}).length;
+  var bw=list.filter(function(g){return g.winner===b}).length;
+  return{a:a,b:b,list:list,aw:aw,bw:bw,total:list.length};
+}
+function rankingSort(a,b){
+  if(b.rate!==a.rate)return b.rate-a.rate;
+  if(b.total!==a.total)return b.total-a.total;
+  if(b.wins!==a.wins)return b.wins-a.wins;
+  var h=h2h(a.name,b.name),d=h.aw-h.bw;if(d)return-d;
+  return a.name.localeCompare(b.name,'fa');
+}
+function validateSelection(){
+  if(selected.slot1&&PLAYERS.indexOf(selected.slot1)===-1)selected.slot1=null;
+  if(selected.slot2&&PLAYERS.indexOf(selected.slot2)===-1)selected.slot2=null;
+  if(selected.slot1&&selected.slot2){selected.pair=[selected.slot1,selected.slot2];}else{selected.pair=null;}
+  if(selected.winner&&selected.pair&&selected.pair.indexOf(selected.winner)===-1)selected.winner=null;
+  if(selected.type&&!TYPES[selected.type])selected.type=null;
+}
+function revealCard(el){el.classList.add('reveal');setTimeout(function(){el.classList.remove('reveal')},360)}
+var lastScrollGesture=0;
+function markScrollGesture(){lastScrollGesture=Date.now()}
+window.addEventListener('wheel',markScrollGesture,{passive:true});
+window.addEventListener('touchmove',markScrollGesture,{passive:true});
+function prefersReduced(){return window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;}
+function smartScroll(el){
+  if(!el)return;
+  if(Date.now()-lastScrollGesture<1500)return;
+  var rect=el.getBoundingClientRect();
+  var vh=window.innerHeight||document.documentElement.clientHeight;
+  if(rect.top>=70&&rect.bottom<=vh-20)return;
+  var targetY=window.pageYOffset+rect.top-85;
+  if(targetY<0)targetY=0;
+  window.scrollTo({top:targetY,behavior:prefersReduced()?'auto':'smooth'});
+}
+function forceScrollTop(){window.scrollTo({top:0,behavior:prefersReduced()?'auto':'smooth'});}
+function forceScrollBottom(){window.scrollTo({top:document.body.scrollHeight,behavior:prefersReduced()?'auto':'smooth'});}
+function processImage(file,callback){
+  if(!file||!/^image\//.test(file.type)){message('فایل انتخابی عکس نیست.',true);return}
+  var reader=new FileReader();
+  reader.onload=function(e){
+    var img=new Image();
+    img.onload=function(){
+      var max=220;
+      var w=img.width,h=img.height;
+      if(w>h){ if(w>max){h=Math.round(h*max/w);w=max;} }
+      else { if(h>max){w=Math.round(w*max/h);h=max;} }
+      var canvas=document.createElement('canvas');
+      canvas.width=w;canvas.height=h;
+      var ctx=canvas.getContext('2d');
+      ctx.fillStyle='#ffffff';ctx.fillRect(0,0,w,h);ctx.drawImage(img,0,0,w,h);
+      try{var dataUrl=canvas.toDataURL('image/jpeg',0.82);callback(dataUrl);}catch(err){message('پردازش عکس ممکن نشد.',true)}
+    };
+    img.onerror=function(){message('عکس نامعتبر است.',true)};
+    img.src=e.target.result;
+  };
+  reader.onerror=function(){message('خواندن فایل ناموفق بود.',true)};
+  reader.readAsDataURL(file);
+}
+function pickAvatar(playerName,callback){
+  var inp=document.createElement('input');
+  inp.type='file';inp.accept='image/*';inp.style.display='none';
+  document.body.appendChild(inp);
+  inp.onchange=function(){
+    var f=inp.files&&inp.files[0];inp.remove();
+    if(!f)return;
+    processImage(f,function(dataUrl){
+      avatars[playerName]=dataUrl;saveAvatars();
+      if(typeof callback==='function')callback();
+    });
+  };
+  inp.click();
+}
+function removeAvatar(playerName,callback){
+  if(!avatars[playerName])return;
+  delete avatars[playerName];saveAvatars();
+  if(typeof callback==='function')callback();
+}
+function slotContentHTML(name){
+  var s=stats(name);
+  return avatarHTML(name,50)+
+    '<strong class="vs-slot-name">'+esc(name)+'</strong>'+
+    '<span class="vs-stat">'+n(s.games,0)+' بازی · '+(s.games?percent(s.wins,s.games):'—')+'</span>'+
+    '<span class="vs-slot-remove" aria-hidden="true">×</span>';
+}
+function renderSlots(){
+  var el=$('vsSlots');if(!el)return;
+  var s1=selected.slot1, s2=selected.slot2;
+  el.innerHTML=
+    '<button type="button" class="vs-slot'+(s1?' filled':'')+'" data-slot="1" aria-pressed="'+(s1?'true':'false')+'"'+(s1?' aria-label="حذف '+esc(s1)+' از جای اول"':' aria-label="انتخاب بازیکن اول"')+'>'+
+      (s1? slotContentHTML(s1) : '<span class="vs-slot-label">انتخاب ۱</span><span class="vs-slot-hint">کلیک کن یا بنداز</span>')+
+    '</button>'+
+    '<div class="vs-slot-divider"><span class="vs-text'+(s1&&s2?'':' small')+'">VS</span></div>'+
+    '<button type="button" class="vs-slot'+(s2?' filled':'')+'" data-slot="2" aria-pressed="'+(s2?'true':'false')+'"'+(s2?' aria-label="حذف '+esc(s2)+' از جای دوم"':' aria-label="انتخاب بازیکن دوم"')+'>'+
+      (s2? slotContentHTML(s2) : '<span class="vs-slot-label">انتخاب ۲</span><span class="vs-slot-hint">کلیک کن یا بنداز</span>')+
+    '</button>';
+  [].forEach.call(el.querySelectorAll('.vs-slot'),function(slot){
+    var slotNum=slot.dataset.slot;
+    slot.addEventListener('dragover',function(e){e.preventDefault();if(e.dataTransfer)e.dataTransfer.dropEffect='move';slot.classList.add('dragover');});
+    slot.addEventListener('dragenter',function(e){e.preventDefault();slot.classList.add('dragover')});
+    slot.addEventListener('dragleave',function(){slot.classList.remove('dragover')});
+    slot.addEventListener('drop',function(e){
+      e.preventDefault();slot.classList.remove('dragover');
+      var name=e.dataTransfer?e.dataTransfer.getData('text/plain'):'';
+      if(!name)name=e.dataTransfer?e.dataTransfer.getData('text'):'';
+      if(name)setSlot(slotNum,name);
+    });
+    slot.onclick=function(){var filled=slotNum==='1'?selected.slot1:selected.slot2;if(filled)clearSlot(slotNum);};
+  });
+}
+function renderPool(){
+  var el=$('playerPool');if(!el)return;
+  var search=$('poolSearch');
+  if(search){
+    search.classList.toggle('hidden',PLAYERS.length<9);
+    if(search.value!==poolFilter)search.value=poolFilter;
+  }
+  if(PLAYERS.length<2){el.innerHTML='<div class="empty">حداقل دو بازیکن لازم است.</div>';return;}
+  if(PLAYERS.length===2){
+    if(!selected.slot1)selected.slot1=PLAYERS[0];
+    if(!selected.slot2)selected.slot2=PLAYERS[1];
+  }
+  var used=[selected.slot1,selected.slot2].filter(Boolean);
+  var q=poolFilter.trim().toLowerCase();
+  var list=q?PLAYERS.filter(function(p){return p.toLowerCase().indexOf(q)>-1}):PLAYERS.slice();
+  if(!list.length){el.innerHTML='<div class="empty">بازیکنی با این نام پیدا نشد.</div>';return;}
+  el.innerHTML=list.map(function(p){
+    var s=stats(p);
+    var placed=used.indexOf(p)>-1;
+    return '<button type="button" class="pool-player'+(placed?' placed':'')+'" draggable="'+(placed?'false':'true')+'" data-player="'+esc(p)+'" aria-pressed="'+(placed?'true':'false')+'">'+
+      avatarHTML(p,44)+
+      '<span class="pp-name">'+esc(p)+'</span>'+
+      '<span class="pp-stats">'+(placed?'✓ انتخاب شده':(n(s.games,0)+' · '+(s.games?percent(s.wins,s.games):'—')))+'</span>'+
+      '</button>';
+  }).join('');
+  [].forEach.call(el.querySelectorAll('.pool-player'),function(card){
+    if(card.classList.contains('placed')){
+      card.onclick=function(){
+        var name=card.dataset.player;
+        if(selected.slot1===name)clearSlot('1');
+        else if(selected.slot2===name)clearSlot('2');
+      };
+      return;
+    }
+    card.addEventListener('dragstart',function(e){
+      card.classList.add('dragging');
+      if(e.dataTransfer){
+        e.dataTransfer.setData('text/plain',card.dataset.player);
+        e.dataTransfer.setData('text',card.dataset.player);
+        e.dataTransfer.effectAllowed='move';
+      }
+    });
+    card.addEventListener('dragend',function(){card.classList.remove('dragging')});
+    card.onclick=function(){
+      var name=card.dataset.player;if(!name)return;
+      if(!selected.slot1)setSlot('1',name);
+      else if(!selected.slot2)setSlot('2',name);
+      else message('هر دو انتخاب پُر شدن. یکی رو برداشته کن.',true);
+    };
+  });
+}
+function setSlot(num,name){
+  if(!name||PLAYERS.indexOf(name)===-1)return;
+  if(num==='1'){if(selected.slot2===name)selected.slot2=null;selected.slot1=name;}
+  else{if(selected.slot1===name)selected.slot1=null;selected.slot2=name;}
+  selected.winner=null;selected.type=null;
+  renderRegister();
+  if(selected.slot1&&selected.slot2){requestAnimationFrame(function(){smartScroll($('winnerArea'))});}
+}
+function clearSlot(num){
+  if(num==='1')selected.slot1=null;else selected.slot2=null;
+  selected.pair=null;selected.winner=null;selected.type=null;
+  renderRegister();
+}
+function renderWinner(){
+  var wa=$('winnerArea'),arena=$('winnerArena'),hint=$('winnerHint');
+  if(!wa||!arena)return;
+  if(!selected.pair){wa.classList.add('hidden');return}
+  var wasHidden=wa.classList.contains('hidden');
+  wa.classList.remove('hidden');
+  if(wasHidden)revealCard(wa);
+  var a=selected.pair[0],b=selected.pair[1];
+  var sa=stats(a),sb=stats(b);
+  var key=selected.pair.join('|');
+  if(arena.dataset.key!==key){
+    arena.dataset.key=key;
+    arena.innerHTML=
+      '<div class="winner-arena">'+
+        '<button type="button" class="winner-side'+(selected.winner===a?' active':'')+'" data-win="'+esc(a)+'" aria-pressed="'+(selected.winner===a?'true':'false')+'">'+
+          avatarHTML(a,58)+
+          '<span class="winner-name">'+esc(a)+'</span>'+
+          '<span class="winner-stat">'+n(sa.games,0)+' بازی · '+(sa.games?percent(sa.wins,sa.games):'—')+'</span>'+
+          '<span class="winner-pick">برنده</span>'+
+        '</button>'+
+        '<div class="vs-slot-divider"><span class="vs-text">VS</span></div>'+
+        '<button type="button" class="winner-side'+(selected.winner===b?' active':'')+'" data-win="'+esc(b)+'" aria-pressed="'+(selected.winner===b?'true':'false')+'">'+
+          avatarHTML(b,58)+
+          '<span class="winner-name">'+esc(b)+'</span>'+
+          '<span class="winner-stat">'+n(sb.games,0)+' بازی · '+(sb.games?percent(sb.wins,sb.games):'—')+'</span>'+
+          '<span class="winner-pick">برنده</span>'+
+        '</button>'+
+      '</div>'+
+      '<div class="vs-comparison">'+
+        '<div class="vs-comp-row"><span class="vs-comp-val left">'+n(sa.games,0)+'</span><span class="vs-comp-label">بازی</span><span class="vs-comp-val right">'+n(sb.games,0)+'</span></div>'+
+        '<div class="vs-comp-row"><span class="vs-comp-val left">'+n(sa.wins,0)+'</span><span class="vs-comp-label">برد</span><span class="vs-comp-val right">'+n(sb.wins,0)+'</span></div>'+
+        '<div class="vs-comp-row"><span class="vs-comp-val left">'+(sa.games?percent(sa.wins,sa.games):'—')+'</span><span class="vs-comp-label">درصد برد</span><span class="vs-comp-val right">'+(sb.games?percent(sb.wins,sb.games):'—')+'</span></div>'+
+      '</div>';
+    [].forEach.call(arena.querySelectorAll('[data-win]'),function(btn){
+      btn.onclick=function(){
+        selected.winner=btn.dataset.win;
+        renderRegister();
+        requestAnimationFrame(function(){smartScroll($('typeArea'))});
+      };
+    });
+  }else{
+    [].forEach.call(arena.querySelectorAll('[data-win]'),function(btn){var on=btn.dataset.win===selected.winner;btn.classList.toggle('active',on);btn.setAttribute('aria-pressed',on?'true':'false');});
+  }
+  if(hint)hint.classList.toggle('hidden',!!selected.winner);
+}
+function renderTypes(){
+  var ta=$('typeArea'),tb=$('typeButtons');
+  if(!selected.pair){ta.classList.add('hidden');return}
+  var wasHidden=ta.classList.contains('hidden');
+  ta.classList.remove('hidden');
+  if(wasHidden)revealCard(ta);
+  if(!tb.children.length){
+    tb.innerHTML=Object.keys(TYPES).map(function(t){
+      var x=TYPES[t];
+      return'<button class="choice" data-t="'+t+'" aria-pressed="false"><span class="choice-emoji">'+x.emoji+'</span><span class="choice-name">'+x.name+'</span><small>'+n(x.points,0)+'×</small></button>';
+    }).join('');
+    [].forEach.call(tb.children,function(b){
+      b.onclick=function(){
+        selected.type=b.dataset.t;
+        renderRegister();
+        requestAnimationFrame(function(){forceScrollBottom()});
+      };
+    });
+  }
+  [].forEach.call(tb.children,function(b){var on=b.dataset.t===selected.type;b.classList.toggle('active',on);b.setAttribute('aria-pressed',on?'true':'false');});
+}
+function renderPreview(){
+  var el=$('preview');
+  if(!selected.pair){
+    el.innerHTML='<div class="preview-empty">برای شروع، یک بازیکن رو بکش توی جای خالی 👆</div>';
+  }else{
+    var a=selected.pair[0],b=selected.pair[1];
+    var win=selected.winner;
+    var isWinA=win===a, isWinB=win===b;
+    var playerA='<div class="preview-player'+(isWinA?' is-winner':(isWinB?' is-loser':''))+'">'+avatarHTML(a,48)+'<span class="pp-pname">'+esc(a)+'</span>'+(isWinA?'<span class="preview-check">✓ برنده</span>':'')+'</div>';
+    var playerB='<div class="preview-player'+(isWinB?' is-winner':(isWinA?' is-loser':''))+'">'+avatarHTML(b,48)+'<span class="pp-pname">'+esc(b)+'</span>'+(isWinB?'<span class="preview-check">✓ برنده</span>':'')+'</div>';
+    var summary='';
+    if(win){
+      var ti=selected.type?TYPES[selected.type]:null;
+      var badges='';
+      if(ti)badges+='<span class="preview-badge badge-'+ti.cls+'">'+ti.full+'</span>';
+      if(ti)badges+='<span class="preview-badge badge-points">+'+n(ti.points,0)+' امتیاز</span>';
+      summary='<div class="preview-summary">'+(badges?'<div class="preview-badges">'+badges+'</div>':'')+'<div class="preview-line"><b>'+esc(win)+'</b> این بازی رو برد</div>'+(!ti?'<div class="preview-hint">الان نوع برد رو انتخاب کن 👇</div>':'')+'</div>';
+    }else{
+      summary='<div class="preview-summary"><div class="preview-line">کی برنده شد؟ 🤔</div><div class="preview-hint">روی طرف برنده کلیک کن</div></div>';
+    }
+    el.innerHTML='<div class="preview-versus">'+playerA+'<span class="preview-x-circle">×</span>'+playerB+'</div>'+summary;
+  }
+  var btn=$('add');
+  if(!selected.pair){btn.textContent='➊ ابتدا زوج را انتخاب کنید';btn.disabled=true}
+  else if(!selected.winner){btn.textContent='➋ برنده را انتخاب کنید';btn.disabled=true}
+  else if(!selected.type){btn.textContent='➌ نوع برد را انتخاب کنید';btn.disabled=true}
+  else{var t=TYPES[selected.type];btn.textContent='✅ ثبت بازی ('+t.full+' برای '+selected.winner+')';btn.disabled=false}
+}
+function renderQuickTags(){
+  var el=$('quickTags');if(!el)return;
+  el.innerHTML=PRESET_TAGS.map(function(t){
+    var on=quickTags.indexOf(t)>-1;
+    return'<button type="button" class="tag '+(on?'active':'')+'" data-qt="'+esc(t)+'" aria-pressed="'+(on?'true':'false')+'">'+esc(t)+'</button>';
+  }).join('');
+  [].forEach.call(el.querySelectorAll('[data-qt]'),function(b){
+    b.onclick=function(){
+      var t=b.dataset.qt,i=quickTags.indexOf(t);
+      if(i>-1)quickTags.splice(i,1);else quickTags.push(t);
+      renderQuickTags();
+    };
+  });
+}
+function updatePairTitle(){
+  var t=$('pairTitle'),h=$('dndHint');
+  if(!t||!h)return;
+  if(selected.slot1&&selected.slot2){t.textContent='نبرد آماده‌ست ⚔️';h.textContent='حالا برنده رو انتخاب کن';}
+  else if(selected.slot1||selected.slot2){t.textContent='یه نفر دیگه انتخاب کن';h.textContent='دومی رو بزن یا بکش داخل جای خالی';}
+  else{t.textContent='انتخاب بازیکنان';h.textContent='روی بازیکن بزن یا بکشش داخل جای خالی';}
+}
+function renderRegister(){
+  validateSelection();
+  updatePairTitle();
+  renderSlots();renderPool();renderWinner();renderTypes();renderPreview();renderQuickTags();
+  var lb=$('last');if(lb)lb.disabled=!games.length;
+  saveSelection();
+}
+function toast(html,bad){
+  var e=$('toast');e.innerHTML=html;e.className='toast show'+(bad?' bad':'');
+  clearTimeout(window._tt);
+  window._tt=setTimeout(function(){e.className='toast';e.innerHTML=''},bad?3400:2400);
+}
+function message(t,bad){toast(esc(t),bad)}
+function showUndo(text,onUndo){
+  var e=$('toast');
+  e.innerHTML='<span>'+esc(text)+'</span><button id="undoBtn">واگرد</button>';
+  e.className='toast show';
+  clearTimeout(window._tt);
+  window._tt=setTimeout(function(){e.className='toast';e.innerHTML='';lastDeleted=null},5000);
+  $('undoBtn').onclick=function(){
+    if(typeof onUndo==='function')onUndo();
+    clearTimeout(window._tt);e.className='toast';e.innerHTML='';
+  };
+}
+function add(){
+  if($('add').disabled)return;
+  var now=Date.now();
+  var noteEl=$('quickNote');
+  var g={
+    id:id(),player1:selected.pair[0],player2:selected.pair[1],
+    winner:selected.winner,type:selected.type,
+    note:noteEl?noteEl.value.trim():'',
+    tags:quickTags.slice(),
+    timestamp:now,date:pdate(now),time:ptime(now)
+  };
+  games.push(g);save();if(window.__sbMarkDirty)window.__sbMarkDirty(g.id,'add');
+  toast('✅ ثبت شد: <b>'+esc(g.winner)+'</b> با '+TYPES[g.type].full+' مقابل '+esc(loser(g)));
+  selected.winner=null;selected.type=null;selected.slot1=null;selected.slot2=null;selected.pair=null;
+  if(noteEl)noteEl.value='';
+  quickTags=[];poolFilter='';
+  renderAll();
+  requestAnimationFrame(function(){forceScrollTop()});
+}
+async function deleteLast(){
+  if(!games.length){message('هنوز بازی‌ای ثبت نشده است.',true);return}
+  var g=games.slice().sort(function(a,b){return b.timestamp-a.timestamp})[0];
+  var ok=await confirmDialog('آخرین بازی ثبت‌شده حذف می‌شود:\n'+g.winner+' مقابل '+loser(g)+' ('+TYPES[g.type].full+')','حذف کن');
+  if(!ok)return;
+  games=games.filter(function(x){return x.id!==g.id});
+  save();lastDeleted=g;
+  showUndo('🗑️ بازی حذف شد: '+g.winner+' مقابل '+loser(g),function(){
+    if(lastDeleted){var __rid1=lastDeleted.id;games.push(lastDeleted);save();if(window.__sbMarkDirty)window.__sbMarkDirty(__rid1,'add');lastDeleted=null;renderAll();message('بازی بازگردانی شد.');}
+  });
+  renderAll();
+}
+function tournamentGames(){return games.filter(function(g){return g.timestamp>=tournament.start})}
+function tournamentStats(p){
+  var s={name:p,games:0,wins:0,losses:0,normal:0,mars:0,black:0,total:0};
+  tournamentGames().forEach(function(g){
+    if(g.player1!==p&&g.player2!==p)return;
+    s.games++;
+    if(g.winner===p){s.wins++;s[g.type]++;s.total+=pts(g.type)}else s.losses++;
+  });
+  s.rate=s.games?s.wins/s.games:0;s.avg=s.games?s.total/s.games:0;
+  return s;
+}
+function localIso(d){var off=d.getTimezoneOffset();var local=new Date(d.getTime()-off*60000);return local.toISOString().slice(0,16);}
+function renderTournament(){
+  if(!$('tName'))return;
+  $('tName').textContent=tournament.name;
+  var tg=tournamentGames();var cnt=tg.length;
+  var startTxt=tournament.start?pdate(tournament.start):'از ابتدا';
+  $('tMeta').textContent='شروع: '+startTxt+' — '+n(cnt,0)+' بازی';
+  var s=PLAYERS.map(tournamentStats).sort(rankingSort);
+  var totalPts=tg.reduce(function(a,g){return a+pts(g.type)},0);
+  var lead=cnt?s[0]:null;
+  $('tSummary').innerHTML=cnt?[
+    ['بازی‌های تورنمنت',n(cnt,0)],['امتیازهای تورنمنت',n(totalPts,0)],
+    ['صدرنشین',lead.name+(lead.games<5?' (ارزیابی)':'')],['درصد صدرنشین',percent(lead.wins,lead.games)]
+  ].map(function(x){return'<div class="stat"><span>'+x[0]+'</span><strong>'+esc(x[1])+'</strong></div>'}).join(''):'<div class="card empty" style="grid-column:1/-1;margin:0">هنوز بازی‌ای در این تورنمنت ثبت نشده است.</div>';
+
+  $('tRankBody').innerHTML=s.map(function(x,i){
+    var winRate=x.games>0?(x.wins/x.games*100):0;
+    var winRateColor=winRate>60?'var(--success)':winRate>40?'var(--mars)':'var(--danger)';
+    var rankIcon=(i===0&&cnt)?'🥇':(i===1&&cnt)?'🥈':(i===2&&cnt)?'🥉':n(i+1,0);
+    var breakdown='<span style="color:var(--success);font-weight:700;">'+n(x.normal,0)+'</span> | <span style="color:var(--mars);font-weight:700;">'+n(x.mars,0)+'</span> | <span style="color:var(--danger);font-weight:700;">'+n(x.black,0)+'</span>';
+    return '<tr style="background:'+(i%2===0?'var(--card)':'var(--card2)')+';border-bottom:1px solid var(--soft);"'+
+      ' data-rank="'+i+'"'+
+      ' data-name="'+esc(x.name)+'"'+
+      ' data-games="'+x.games+'"'+
+      ' data-wins="'+x.wins+'"'+
+      ' data-losses="'+x.losses+'"'+
+      ' data-winrate="'+winRate.toFixed(2)+'"'+
+      ' data-breakdown="'+x.normal+'"'+
+      ' data-points="'+x.total+'"'+
+      ' data-avg="'+x.avg.toFixed(2)+'">'+
+      '<td style="padding:11px 8px;text-align:center;font-weight:900;">'+rankIcon+'</td>'+
+      '<td style="padding:11px 8px;text-align:center;font-weight:700;">'+avatarInline(x.name,28)+' '+esc(x.name)+(x.games<5?'<br><span class="evaluation">در حال ارزیابی</span>':'')+'</td>'+
+      '<td style="padding:11px 8px;text-align:center;font-weight:700;">'+n(x.games,0)+'</td>'+
+      '<td style="padding:11px 8px;text-align:center;font-weight:700;">'+n(x.wins,0)+'</td>'+
+      '<td style="padding:11px 8px;text-align:center;font-weight:700;">'+n(x.losses,0)+'</td>'+
+      '<td style="padding:11px 8px;text-align:center;font-weight:700;font-size:1.05rem;color:'+winRateColor+';">'+percent(x.wins,x.games)+'</td>'+
+      '<td style="padding:11px 8px;text-align:center;font-size:0.85rem;">'+breakdown+'</td>'+
+      '<td style="padding:11px 8px;text-align:center;color:var(--primary);font-weight:900;font-size:1.1rem;">'+n(x.total,0)+'</td>'+
+      '<td style="padding:11px 8px;text-align:center;font-weight:700;">'+n(x.avg,2)+'</td>'+
+    '</tr>';
+  }).join('');
+
+  $('tArchive').innerHTML=archive.length?archive.slice().reverse().map(function(a){
+    var winner=a.snapshot&&a.snapshot[0]?a.snapshot[0].name:'—';
+    return'<div class="paircard" style="cursor:pointer" data-snap="'+esc(a.id)+'"><strong>📦 '+esc(a.name)+'</strong><div class="muted" style="margin-top:5px">'+esc(pdate(a.start))+' تا '+esc(pdate(a.end))+'</div><div class="score">🥇 '+esc(winner)+'</div><div class="muted">'+n(a.gamesCount||0,0)+' بازی</div></div>';
+  }).join(''):'<div class="card empty" style="grid-column:1/-1;margin:0">هنوز تورنمنتی آرشیو نشده.</div>';
+  [].forEach.call($('tArchive').querySelectorAll('[data-snap]'),function(el){el.onclick=function(){openSnapshot(el.dataset.snap)};});
+}
+async function startNewTournament(){
+  var suggested='تورنمنت '+n(tournament.nextNum,0);
+  var newName=await promptDialog('نام تورنمنت جدید:',suggested);
+  if(newName===null)return;
+  newName=(newName||'').trim()||suggested;
+  var tg=tournamentGames();var now=Date.now();
+  if(tg.length){
+    var snap=PLAYERS.map(tournamentStats).sort(rankingSort).map(function(x){
+      return{name:x.name,games:x.games,wins:x.wins,losses:x.losses,rate:x.rate,normal:x.normal,mars:x.mars,black:x.black,total:x.total,avg:x.avg};
+    });
+    archive.push({id:'t_'+now.toString(36)+'_'+Math.random().toString(36).slice(2,6),name:tournament.name,start:tournament.start,end:now,gamesCount:tg.length,snapshot:snap});
+  }
+  tournament.name=newName;tournament.start=now;tournament.nextNum++;
+  saveTournament();renderTournament();
+  toast('🏆 تورنمنت جدید شروع شد: <b>'+esc(newName)+'</b>');
+}
+async function editTournamentName(){
+  var v=await promptDialog('نام تورنمنت:',tournament.name);
+  if(v===null)return;
+  v=(v||'').trim();
+  if(!v){message('نام خالی است.',true);return}
+  tournament.name=v;saveTournament();renderTournament();
+  message('نام تورنمنت ذخیره شد.');
+}
+function editTournamentStart(){
+  var cur=tournament.start?new Date(tournament.start):new Date();
+  var iso=localIso(cur);
+  $('modalBg').innerHTML='<div class="modal"><h2>📅 ویرایش نقطه شروع</h2><p class="muted">بازی‌های بعد از این لحظه، در تورنمنت حساب می‌شوند.</p><label>تاریخ و ساعت<input type="datetime-local" id="tStartInput" value="'+iso+'" style="margin-bottom:14px"></label><div class="actions"><button id="tStartOk" class="btn success">ذخیره</button><button id="tStartClear" class="btn secondary">پاک کردن</button><button id="tStartCancel" class="btn secondary">انصراف</button></div></div>';
+  $('modalBg').className='modalbg show';
+  $('tStartOk').onclick=function(){
+    var v=$('tStartInput').value;
+    if(!v){message('تاریخ نامعتبر است.',true);return}
+    var ts=new Date(v).getTime();
+    if(isNaN(ts)){message('تاریخ نامعتبر است.',true);return}
+    tournament.start=ts;saveTournament();renderTournament();closeModal();message('نقطه شروع ذخیره شد.');
+  };
+  $('tStartClear').onclick=function(){tournament.start=0;saveTournament();renderTournament();closeModal();message('نقطه شروع پاک شد.');};
+  $('tStartCancel').onclick=closeModal;
+}
+function openSnapshot(id){
+  var a=archive.filter(function(x){return x.id===id})[0];if(!a)return;
+  var rows=(a.snapshot||[]).map(function(x,i){
+    return'<tr><td>'+n(i+1,0)+'</td><td>'+esc(x.name)+'</td><td>'+n(x.games,0)+'</td><td>'+n(x.wins,0)+'</td><td>'+n(x.losses,0)+'</td><td>'+percent(x.wins,x.games)+'</td><td>'+n(x.normal,0)+'</td><td>'+n(x.mars,0)+'</td><td>'+n(x.black,0)+'</td><td>'+n(x.total,0)+'</td><td>'+n(x.avg,2)+'</td></tr>';
+  }).join('');
+  $('modalBg').innerHTML='<div class="modal"><h2>📦 '+esc(a.name)+'</h2><p class="muted">'+esc(pdate(a.start))+' تا '+esc(pdate(a.end))+' — '+n(a.gamesCount||0,0)+' بازی</p><div class="wrap"><table><thead><tr><th>رتبه</th><th>نام</th><th>بازی</th><th>برد</th><th>باخت</th><th>درصد</th><th>عادی</th><th>مارس</th><th>سیاه</th><th>امتیاز</th><th>میانگین</th></tr></thead><tbody>'+rows+'</tbody></table></div><div class="actions"><button id="snapClose" class="btn secondary">بستن</button></div></div>';
+  $('modalBg').className='modalbg show';
+  $('snapClose').onclick=closeModal;
+}
+function renderRanking(){
+  var s=PLAYERS.map(stats).sort(rankingSort);
+  var totalPts=games.reduce(function(a,g){return a+pts(g.type)},0);
+  var lead=games.length?s[0]:null;
+
+  $('summary').innerHTML=games.length?[
+    ['مجموع بازی‌ها',n(games.length,0)],['مجموع امتیازها',n(totalPts,0)],
+    ['صدرنشین',lead.name+(lead.games<5?' (ارزیابی)':'')],['درصد صدرنشین',percent(lead.wins,lead.games)]
+  ].map(function(x){return'<div class="stat"><span>'+x[0]+'</span><strong>'+esc(x[1])+'</strong></div>'}).join(''):'<div class="card empty" style="grid-column:1/-1;margin:0">هنوز بازی‌ای ثبت نشده است.</div>';
+
+  $('rankbody').innerHTML=s.map(function(x,i){
+    var winRate = x.games > 0 ? (x.wins / x.games * 100) : 0;
+    var winRateColor = winRate > 60 ? 'var(--success)' : winRate > 40 ? 'var(--mars)' : 'var(--danger)';
+
+    var breakdown = '<span style="color:var(--success);font-weight:700;">'+n(x.normal,0)+'</span> | <span style="color:var(--mars);font-weight:700;">'+n(x.mars,0)+'</span> | <span style="color:var(--danger);font-weight:700;">'+n(x.black,0)+'</span>';
+
+    return '<tr style="background:'+(i%2===0?'var(--card)':'var(--card2)')+';border-bottom:1px solid var(--soft);"'+
+      ' data-name="'+esc(x.name)+'"'+
+      ' data-games="'+x.games+'"'+
+      ' data-wins="'+x.wins+'"'+
+      ' data-winrate="'+winRate.toFixed(2)+'"'+
+      ' data-points="'+x.total+'"'+
+      ' data-breakdown="'+x.normal+'"'+
+      '>'+
+      '<td style="padding:12px 8px;text-align:center;">'+avatarInline(x.name,32)+'</td>'+
+      '<td style="padding:12px 8px;text-align:center;font-weight:700;">'+n(x.games,0)+'</td>'+
+      '<td style="padding:12px 8px;text-align:center;font-weight:700;">'+n(x.wins,0)+'</td>'+
+      '<td style="padding:12px 8px;text-align:center;font-weight:700;font-size:1.05rem;color:'+winRateColor+';">'+percent(x.wins,x.games)+'</td>'+
+      '<td style="padding:12px 8px;text-align:center;color:var(--primary);font-weight:900;font-size:1.1rem;">'+n(x.total,0)+'</td>'+
+      '<td style="padding:12px 8px;text-align:center;font-size:0.85rem;">'+breakdown+'</td>'+
+    '</tr>';
+  }).join('');
+
+  $('headCards').innerHTML=PAIRS.map(function(p){
+    var h=h2h(p[0],p[1]);
+    var better=h.aw===h.bw?'برابر':h.aw>h.bw?h.a:h.b;
+    return'<div class="paircard"><div class="paircard-header">'+avatarInline(p[0],26)+'<span>'+esc(p[0])+'</span><span class="pair-x">×»</span>'+avatarInline(p[1],26)+'<span>'+esc(p[1])+'</span></div><div class="score">'+n(h.aw,0)+' - '+n(h.bw,0)+'</div><div class="muted">کل بازی: '+n(h.total,0)+'</div><div class="muted">'+esc(p[0])+': '+percent(h.aw,h.total)+' | '+esc(p[1])+': '+percent(h.bw,h.total)+'</div><div class="muted">برتر: '+esc(better)+'</div></div>';
+  }).join('');
+}
+function dayStart(d){var x=new Date(d);x.setHours(0,0,0,0);return x.getTime()}
+function match(g){
+  var q=$('search').value.trim().toLowerCase();
+  var t=$('filterType').value,p=$('filterPlayer').value;
+  if(p!=='all'&&g.player1!==p&&g.player2!==p)return false;
+  var now=new Date(),today=dayStart(now);
+  if(t==='today'&&g.timestamp<today)return false;
+  if(t==='week'&&g.timestamp<today-6*86400000)return false;
+  if(t==='month'&&(new Date(g.timestamp).getMonth()!==now.getMonth()||new Date(g.timestamp).getFullYear()!==now.getFullYear()))return false;
+  if(['normal','mars','black'].indexOf(t)>-1&&g.type!==t)return false;
+  var fv=$('fromDate')&&$('fromDate').value;
+  var tv=$('toDate')&&$('toDate').value;
+  if(fv){var f=new Date(fv).getTime();if(g.timestamp<f)return false}
+  if(tv){var t2=new Date(tv).getTime()+86400000;if(g.timestamp>=t2)return false}
+  var hay=[g.player1,g.player2,g.winner,loser(g),TYPES[g.type].full,g.date,g.time,g.note,(g.tags||[]).join(' ')].join(' ').toLowerCase();
+  return!q||hay.indexOf(q)>-1;
+}
+function renderHistory(){
+  var order=$('sortHistory').value;
+  var list=games.filter(match).sort(function(a,b){return order==='old'?a.timestamp-b.timestamp:b.timestamp-a.timestamp});
+  $('list').innerHTML=list.length?list.map(function(g){
+    var t=TYPES[g.type];
+    var tags=(g.tags||[]).map(function(tg){return'<span class="tag">'+esc(tg)+'</span>'}).join('');
+    return'<article class="game"><div class="gamehead"><div class="winner">'+avatarInline(g.winner,26)+' '+esc(g.winner)+' برنده شد</div><span class="badge '+t.cls+'">'+t.full+' · '+n(t.points,0)+' امتیاز</span></div><p>'+avatarInline(g.player1,20)+' '+esc(g.player1)+' × '+avatarInline(g.player2,20)+' '+esc(g.player2)+'</p>'+(tags?'<div>'+tags+'</div>':'')+'<div class="meta">بازنده: '+esc(loser(g))+' | '+esc(g.date)+'، '+esc(g.time)+'</div>'+(g.note?'<p class="muted">یادداشت: '+esc(g.note)+'</p>':'')+'<div class="actions"><button class="btn secondary" data-edit="'+esc(g.id)+'">ویرایش</button><button class="btn danger" data-del="'+esc(g.id)+'">حذف</button></div></article>';
+  }).join(''):'<div class="card empty">بازی مطابق فیلتر شما پیدا نشد.</div>';
+  [].forEach.call($('list').querySelectorAll('[data-edit]'),function(b){b.onclick=function(){edit(b.dataset.edit)}});
+  [].forEach.call($('list').querySelectorAll('[data-del]'),function(b){b.onclick=function(){del(b.dataset.del)}});
+}
+function del(i){
+  var g=games.filter(function(x){return x.id===i})[0];if(!g)return;
+  if(window.__sbDeleteGame)window.__sbDeleteGame(i);
+  games=games.filter(function(x){return x.id!==i});
+  save();lastDeleted=g;renderAll();
+  showUndo('🗑️ بازی حذف شد: '+g.winner+' مقابل '+loser(g),function(){
+    if(lastDeleted){var __rid2=lastDeleted.id;games.push(lastDeleted);save();if(window.__sbMarkDirty)window.__sbMarkDirty(__rid2,'add');lastDeleted=null;renderAll();message('بازی بازگردانی شد.')}
+  });
+}
+function opts(sel){return PLAYERS.map(function(p){return'<option value="'+esc(p)+'" '+(p===sel?'selected':'')+'>'+esc(p)+'</option>'}).join('')}
+function edit(i){
+  var g=games.filter(function(x){return x.id===i})[0];if(!g)return;
+  var tagChips=PRESET_TAGS.map(function(t){
+    var on=(g.tags||[]).indexOf(t)>-1;
+    return'<button type="button" class="tag" data-tag="'+esc(t)+'" style="cursor:pointer;'+(on?'background:var(--primary);color:var(--contrast)':'')+'">'+esc(t)+'</button>';
+  }).join('');
+  $('modalBg').innerHTML='<div class="modal"><h2>ویرایش بازی</h2><div class="grid"><label>بازیکن اول<select id="ep1">'+opts(g.player1)+'</select></label><label>بازیکن دوم<select id="ep2">'+opts(g.player2)+'</select></label><label>برنده<select id="ew"></select></label><label>نوع برد<select id="et"><option value="normal">برد عادی</option><option value="mars">مارس</option><option value="black">سیاه مارس</option></select></label><label>یادداشت<textarea id="en">'+esc(g.note)+'</textarea></label><label>برچسب‌ها<div id="tagBox" style="margin-top:4px">'+tagChips+'</div><input id="tagInput" placeholder="برچسب سفارشی + Enter" style="margin-top:6px"></label><label>تاریخ بازی<input type="date" id="editDate" value="'+g.date+'"></label><label>ساعت بازی<input type="time" id="editTime" value="'+g.time+'"></label></div><p id="autoLoser" class="muted"></p><div class="actions"><button id="saveEdit" class="btn success">ذخیره تغییرات</button><button id="cancelEdit" class="btn secondary">انصراف</button></div></div>';
+  $('modalBg').className='modalbg show';
+  $('et').value=g.type;
+  var currentTags=(g.tags||[]).slice();
+  function sync(preferred){
+    var a=$('ep1').value,b=$('ep2').value,w=$('ew');
+    if(a===b){$('autoLoser').textContent='بازیکنان باید متفاوت باشند.';return}
+    w.innerHTML='<option value="'+esc(a)+'">'+esc(a)+'</option><option value="'+esc(b)+'">'+esc(b)+'</option>';
+    w.value=(preferred===a||preferred===b)?preferred:a;
+    $('autoLoser').textContent='بازنده خودکار: '+(w.value===a?b:a);
+  }
+  $('ep1').onchange=function(){sync($('ew').value)};
+  $('ep2').onchange=function(){sync($('ew').value)};
+  $('ew').onchange=function(){sync($('ew').value)};
+  sync(g.winner);
+  [].forEach.call($('tagBox').querySelectorAll('[data-tag]'),function(b){
+    b.onclick=function(){
+      var t=b.dataset.tag,idx=currentTags.indexOf(t);
+      if(idx>-1)currentTags.splice(idx,1);else currentTags.push(t);
+      b.style.background=idx>-1?'':'var(--primary)';
+      b.style.color=idx>-1?'':'var(--contrast)';
+    };
+  });
+  $('tagInput').onkeydown=function(e){
+    if(e.key==='Enter'){
+      e.preventDefault();
+      var v=this.value.trim();if(!v)return;
+      if(currentTags.indexOf(v)===-1)currentTags.push(v);
+      this.value='';
+      var chip=document.createElement('button');chip.type='button';chip.className='tag';
+      chip.style.background='var(--primary)';chip.style.color='var(--contrast)';
+      chip.textContent=v;
+      chip.onclick=function(){var i=currentTags.indexOf(v);if(i>-1)currentTags.splice(i,1);chip.remove()};
+      $('tagBox').appendChild(chip);
+    }
+  };
+  $('saveEdit').onclick=function(){
+    var a=$('ep1').value,b=$('ep2').value,w=$('ew').value;
+    if(a===b||!w){message('بازیکنان باید متفاوت باشند و برنده مشخص شود.',true);return}
+    var dateVal=$('editDate').value,timeVal=$('editTime').value;
+    if(!dateVal||!timeVal){message('تاریخ و ساعت باید مشخص شوند.',true);return}
+    var newTimestamp=new Date(dateVal+'T'+timeVal).getTime();
+    if(isNaN(newTimestamp)){message('تاریخ یا ساعت نامعتبر است.',true);return}
+    g.player1=a;g.player2=b;g.winner=w;g.type=$('et').value;g.note=$('en').value.trim();g.tags=currentTags;
+    g.timestamp=newTimestamp;g.date=pdate(newTimestamp);g.time=ptime(newTimestamp);
+    save();if(window.__sbMarkDirty)window.__sbMarkDirty(g.id,'edit');closeModal();renderAll();
+  };
+  $('cancelEdit').onclick=closeModal;
+}
+function closeModal(){$('modalBg').className='modalbg';$('modalBg').innerHTML=''}
+function confirmDialog(msg,okLabel){
+  return new Promise(function(resolve){
+    $('modalBg').innerHTML='<div class="modal"><h2>تایید</h2><p class="muted" style="white-space:pre-line;margin:0 0 16px">'+esc(msg)+'</p><div class="actions"><button id="cdYes" class="btn danger">'+esc(okLabel||'تایید')+'</button><button id="cdNo" class="btn secondary">انصراف</button></div></div>';
+    $('modalBg').className='modalbg show';
+    function done(v){closeModal();resolve(v)}
+    $('modalBg').onclick=function(e){if(e.target===$('modalBg'))done(false)};
+    $('cdYes').onclick=function(){done(true)};
+    $('cdNo').onclick=function(){done(false)};
+  });
+}
+function promptDialog(title,def){
+  return new Promise(function(resolve){
+    $('modalBg').innerHTML='<div class="modal"><h2>'+esc(title)+'</h2><input id="pdInput" style="margin-bottom:16px"><div class="actions"><button id="pdOk" class="btn success">تایید</button><button id="pdCancel" class="btn secondary">انصراف</button></div></div>';
+    $('modalBg').className='modalbg show';
+    var inp=$('pdInput');inp.value=def||'';inp.focus();inp.select();
+    function done(v){closeModal();resolve(v)}
+    $('modalBg').onclick=function(e){if(e.target===$('modalBg'))done(null)};
+    $('pdOk').onclick=function(){done(inp.value)};
+    $('pdCancel').onclick=function(){done(null)};
+    inp.onkeydown=function(e){if(e.key==='Enter'){e.preventDefault();done(inp.value)}else if(e.key==='Escape'){done(null)}};
+  });
+}
+function svg(w,h,content){return'<svg viewBox="0 0 '+w+' '+h+'" role="img">'+content+'</svg>'}
+function bars(labels,vals,cols,max){
+  var W=620,H=230,L=38,B=42,range=W-L-12;
+  var m=max||Math.max.apply(null,vals.concat([1]));
+  var s='<line x1="'+L+'" y1="10" x2="'+L+'" y2="'+(H-B)+'" stroke="currentColor" opacity=".35"/><line x1="'+L+'" y1="'+(H-B)+'" x2="'+(W-10)+'" y2="'+(H-B)+'" stroke="currentColor" opacity=".35"/>';
+  vals.forEach(function(v,i){
+    var step=range/vals.length;var x=L+i*step+step*.18,bw=step*.64;
+    var bh=(H-B-16)*v/m,y=H-B-bh;
+    s+='<rect x="'+x+'" y="'+y+'" width="'+bw+'" height="'+bh+'" rx="5" fill="'+cols[i%cols.length]+'"/><text x="'+(x+bw/2)+'" y="'+(y-4)+'" text-anchor="middle" fill="currentColor" font-size="10">'+n(v,1)+'</text><text x="'+(x+bw/2)+'" y="'+(H-14)+'" text-anchor="middle" fill="currentColor" font-size="10">'+esc(labels[i])+'</text>';
+  });
+  return svg(W,H,s);
+}
+function chartSafe(el,fn){try{$(el).innerHTML=fn()}catch(e){console.error('Chart '+el+':',e);$(el).innerHTML='<div class="empty">نمایش این نمودار با خطا مواجه شد.</div>'}}
+function streaks(){
+  var out={};
+  PLAYERS.forEach(function(p){
+    var l=games.filter(function(g){return g.player1===p||g.player2===p}).sort(function(a,b){return a.timestamp-b.timestamp});
+    var cw=0,mw=0,cl=0,ml=0;
+    l.forEach(function(g){if(g.winner===p){cw++;mw=Math.max(mw,cw);cl=0}else{cl++;ml=Math.max(ml,cl);cw=0}});
+    var end=0;for(var i=l.length-1;i>=0&&l[i].winner===p;i--)end++;
+    out[p]={mw:mw,ml:ml,end:end};
+  });
+  return out;
+}
+function momentum(){
+  var out={};
+  PLAYERS.forEach(function(p){
+    var l=games.filter(function(g){return g.player1===p||g.player2===p}).sort(function(a,b){return a.timestamp-b.timestamp});
+    var afterW={w:0,t:0},afterL={w:0,t:0};
+    for(var i=1;i<l.length;i++){
+      var prev=l[i-1],cur=l[i];
+      if(prev.winner===p){afterW.t++;if(cur.winner===p)afterW.w++}
+      else{afterL.t++;if(cur.winner===p)afterL.w++}
+    }
+    out[p]={afterWin:afterW.t?afterW.w/afterW.t:0,afterLoss:afterL.t?afterL.w/afterL.t:0};
+  });
+  return out;
+}
+function currentLossStreak(){
+  var out={};
+  PLAYERS.forEach(function(p){
+    var l=games.filter(function(g){return g.player1===p||g.player2===p}).sort(function(a,b){return a.timestamp-b.timestamp});
+    var cur=0;
+    for(var i=l.length-1;i>=0;i--){
+      if(l[i].winner!==p) cur++;
+      else break;
+    }
+    out[p]=cur;
+  });
+  return out;
+}
+function lossByType(){
+  var out={};
+  PLAYERS.forEach(function(p){
+    var s={normal:0,mars:0,black:0};
+    games.forEach(function(g){
+      if(g.player1!==p&&g.player2!==p)return;
+      if(g.winner!==p) s[g.type]++;
+    });
+    out[p]=s;
+  });
+  return out;
+}
+function bestWeekday(){
+  var out={};
+  PLAYERS.forEach(function(p){
+    var buckets={};
+    games.forEach(function(g){
+      if(g.player1!==p&&g.player2!==p)return;
+      var d=new Date(g.timestamp).getDay();
+      if(!buckets[d])buckets[d]={w:0,t:0};
+      buckets[d].t++;
+      if(g.winner===p)buckets[d].w++;
+    });
+    var best=null;
+    Object.keys(buckets).forEach(function(d){
+      var b=buckets[d];
+      if(b.t<3)return;
+      var r=b.w/b.t;
+      if(!best||r>best.r||(r===best.r&&b.t>best.t)) best={d:+d,r:r,w:b.w,t:b.t};
+    });
+    out[p]=best;
+  });
+  return out;
+}
+function ironWall(){
+  var out=null;
+  PLAYERS.forEach(function(p){
+    var total=0,wins=0;
+    games.forEach(function(g){
+      if(g.player1!==p&&g.player2!==p)return;
+      total++;
+      if(g.winner===p)wins++;
+    });
+    if(total<10)return;
+    var oppRate=(total-wins)/total;
+    if(!out||oppRate<out.oppRate||(oppRate===out.oppRate&&total>out.total)){
+      out={name:p,oppRate:oppRate,wins:wins,total:total};
+    }
+  });
+  return out;
+}
+function renderRecords(){
+  var ss=PLAYERS.map(stats);
+  var st=streaks();
+  var mm=momentum();
+  var cls=currentLossStreak();
+  var bwd=bestWeekday();
+  var iw=ironWall();
+  var lbt=lossByType();
+  var dayNames=['یکشنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنج‌شنبه','جمعه','شنبه'];
+
+  var best=PLAYERS.slice().sort(function(a,b){return st[b].mw-st[a].mw})[0];
+  var loss=PLAYERS.slice().sort(function(a,b){return st[b].ml-st[a].ml})[0];
+
+  var hunter=null;
+  PAIRS.forEach(function(p){
+    var h=h2h(p[0],p[1]);
+    if(h.total>=3)[[p[0],h.aw,p[1]],[p[1],h.bw,p[0]]].forEach(function(x){
+      var z={p:x[0],w:x[1],o:x[2],t:h.total,r:x[1]/h.total};
+      if(!hunter||z.r>hunter.r)hunter=z;
+    });
+  });
+
+  function maxBy(fn){
+    var best=null;
+    PLAYERS.forEach(function(p){
+      var v=fn(p);
+      if(!best||v>best.v)best={name:p,v:v};
+    });
+    return best;
+  }
+
+  var mostNormalWins=maxBy(function(p){return stats(p).normal});
+  var mostMarsWins=maxBy(function(p){return stats(p).mars});
+  var mostBlackWins=maxBy(function(p){return stats(p).black});
+  var mostNormalLosses=maxBy(function(p){return lbt[p].normal});
+  var mostMarsLosses=maxBy(function(p){return lbt[p].mars});
+  var mostBlackLosses=maxBy(function(p){return lbt[p].black});
+
+  var rows=[
+    ['🏆 بیشترین برد متوالی', st[best].mw?best+' · '+n(st[best].mw,0)+' برد پشت‌سرهم':'هنوز داده‌ای نیست'],
+    ['🔵 برد متوالی فعلی', PLAYERS.map(function(p){return p.split(' ')[0]+': '+n(st[p].end,0)}).join(' | ')],
+    ['📉 طولانی‌ترین باخت متوالی', st[loss].ml?loss+' · '+n(st[loss].ml,0)+' باخت پشت‌سرهم':'هنوز داده‌ای نیست'],
+    ['🔴 باخت متوالی فعلی', PLAYERS.map(function(p){return p.split(' ')[0]+': '+n(cls[p],0)}).join(' | ')],
+    ['🎯 شکارچی حریف', hunter?hunter.p+' مقابل '+hunter.o+' · '+percent(hunter.w,hunter.t):'هنوز رودرروی ۳ بازیه‌ای نیست'],
+    ['💪 نرخ برد بعد از برد', PLAYERS.map(function(p){return p.split(' ')[0]+': '+percent(mm[p].afterWin*10,10)}).join(' | ')],
+    ['🩹 نرخ برد بعد از باخت', PLAYERS.map(function(p){return p.split(' ')[0]+': '+percent(mm[p].afterLoss*10,10)}).join(' | ')],
+    ['🎯 بیشترین برد عادی', mostNormalWins.v?mostNormalWins.name+' · '+n(mostNormalWins.v,0):'هنوز داده‌ای نیست'],
+    ['🔥 بیشترین مارس', mostMarsWins.v?mostMarsWins.name+' · '+n(mostMarsWins.v,0):'هنوز داده‌ای نیست'],
+    ['💀 بیشترین سیاه مارس', mostBlackWins.v?mostBlackWins.name+' · '+n(mostBlackWins.v,0):'هنوز داده‌ای نیست'],
+    ['💔 بیشترین باخت عادی', mostNormalLosses.v?mostNormalLosses.name+' · '+n(mostNormalLosses.v,0):'هنوز داده‌ای نیست'],
+    ['🥶 بیشترین باخت مارس', mostMarsLosses.v?mostMarsLosses.name+' · '+n(mostMarsLosses.v,0):'هنوز داده‌ای نیست'],
+    ['☠️ بیشترین باخت سیاه مارس', mostBlackLosses.v?mostBlackLosses.name+' · '+n(mostBlackLosses.v,0):'هنوز داده‌ای نیست'],
+    ['📅 بهترین روز هفته', PLAYERS.map(function(p){
+      var b=bwd[p];
+      return p.split(' ')[0]+': '+(b?dayNames[b.d]+' ('+percent(b.w,b.t)+')':'—');
+    }).join(' | ')],
+    ['🛡️ دیوار آهنین', iw?iw.name+' · حریف‌ها فقط '+percent(iw.total-iw.wins,iw.total)+' بردن':'حداقل ۱۰ بازی لازم است']
+  ];
+
+  $('records').innerHTML=rows.map(function(x){return'<div class="record"><small>'+x[0]+'</small><strong>'+esc(x[1])+'</strong></div>'}).join('');
+}
+function renderCharts(){
+  chartSafe('pointsChart',function(){
+    if(!games.length)return'<div class="empty">برای نمودار، حداقل یک بازی ثبت کنید.</div>';
+    var list=games.slice().sort(function(a,b){return a.timestamp-b.timestamp});
+    var series={};PLAYERS.forEach(function(p){series[p]=[0]});
+    list.forEach(function(g){PLAYERS.forEach(function(p){series[p].push(series[p][series[p].length-1]+(g.winner===p?pts(g.type):0))})});
+    var max=1;PLAYERS.forEach(function(p){max=Math.max(max,Math.max.apply(null,series[p]))});
+    var W=620,H=230,L=38,B=33;
+    var s='<line x1="'+L+'" y1="10" x2="'+L+'" y2="'+(H-B)+'" stroke="currentColor" opacity=".35"/><line x1="'+L+'" y1="'+(H-B)+'" x2="'+(W-10)+'" y2="'+(H-B)+'" stroke="currentColor" opacity=".35"/>';
+    PLAYERS.forEach(function(p,j){
+      var q=series[p].map(function(v,i){return(L+(W-L-15)*i/(series[p].length-1))+','+(10+(H-B-10)*(1-v/max))}).join(' ');
+      s+='<polyline points="'+q+'" fill="none" stroke="'+colors[j%colors.length]+'" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
+    });
+    $('pointsLegend').innerHTML=PLAYERS.map(function(p,i){return'<span><i class="dot" style="background:'+colors[i%colors.length]+'"></i>'+esc(p)+'</span>'}).join('');
+    return svg(W,H,s);
+  });
+  chartSafe('rateChart',function(){
+    var range=$('recentRange').value;
+    var v=PLAYERS.map(function(p){
+      var l=games.filter(function(g){return g.player1===p||g.player2===p}).sort(function(a,b){return b.timestamp-a.timestamp});
+      if(range!=='all')l=l.slice(0,Number(range));
+      return l.length?l.filter(function(g){return g.winner===p}).length*100/l.length:0;
+    });
+    return'<p class="muted">بازه برای هر بازیکن جداگانه محاسبه می‌شود.</p>'+bars(PLAYERS.map(function(p){return p.split(' ')[0]}),v,colors,100);
+  });
+  chartSafe('typesChart',function(){
+    var ss=PLAYERS.map(stats);
+    var W=620,H=230,L=38,B=38,max=1;
+    ss.forEach(function(s){max=Math.max(max,s.normal,s.mars,s.black)});
+    var groupW=(W-L-10)/ss.length;
+    var s='<line x1="'+L+'" y1="10" x2="'+L+'" y2="'+(H-B)+'" stroke="currentColor" opacity=".35"/><line x1="'+L+'" y1="'+(H-B)+'" x2="'+(W-10)+'" y2="'+(H-B)+'" stroke="currentColor" opacity=".35"/>';
+    ss.forEach(function(x,i){
+      ['normal','mars','black'].forEach(function(k,j){
+        var h=(H-B-15)*x[k]/max;
+        var xx=L+i*groupW+18+j*Math.min(38,groupW/4);
+        var bw=Math.min(27,groupW/5);
+        s+='<rect x="'+xx+'" y="'+(H-B-h)+'" width="'+bw+'" height="'+h+'" fill="'+['#548b67','#ae7837','#8d3947'][j]+'" rx="4"/>';
+      });
+      s+='<text x="'+(L+i*groupW+groupW/2)+'" y="'+(H-12)+'" fill="currentColor" text-anchor="middle" font-size="10">'+esc(x.name.split(' ')[0])+'</text>';
+    });
+    return'<div class="legend"><span><i class="dot" style="background:#548b67"></i>عادی</span><span><i class="dot" style="background:#ae7837"></i>مارس</span><span><i class="dot" style="background:#8d3947"></i>سیاه مارس</span></div>'+svg(W,H,s);
+  });
+  chartSafe('activityChart',function(){
+    var t=dayStart(new Date()),labels=[],v=[];
+    for(var i=13;i>=0;i--){
+      var d=t-i*86400000;
+      labels.push(pdate(d).split('/').slice(-2).join('/'));
+      v.push(games.filter(function(g){return g.timestamp>=d&&g.timestamp<d+86400000}).length);
+    }
+    return bars(labels,v,['var(--primary)'],Math.max.apply(null,v.concat([1])));
+  });
+  chartSafe('winRateTrendChart',function(){
+    if(!games.length)return'<div class="empty">برای نمودار، حداقل یک بازی ثبت کنید.</div>';
+    var list=games.slice().sort(function(a,b){return a.timestamp-b.timestamp});
+    var played={},wins={};
+    PLAYERS.forEach(function(p){played[p]=[0];wins[p]=[0]});
+    list.forEach(function(g){
+      PLAYERS.forEach(function(p){
+        var pl=played[p][played[p].length-1];
+        var wn=wins[p][wins[p].length-1];
+        if(g.player1===p||g.player2===p){
+          pl++; if(g.winner===p) wn++;
+        }
+        played[p].push(pl);wins[p].push(wn);
+      });
+    });
+    var W=620,H=230,L=42,B=33;
+    var s='<line x1="'+L+'" y1="10" x2="'+L+'" y2="'+(H-B)+'" stroke="currentColor" opacity=".35"/><line x1="'+L+'" y1="'+(H-B)+'" x2="'+(W-10)+'" y2="'+(H-B)+'" stroke="currentColor" opacity=".35"/>';
+    [0,25,50,75,100].forEach(function(v){
+      var y=10+(H-B-10)*(1-v/100);
+      s+='<line x1="'+L+'" y1="'+y+'" x2="'+(W-10)+'" y2="'+y+'" stroke="currentColor" opacity=".12" stroke-dasharray="3 3"/>';
+      s+='<text x="'+(L-4)+'" y="'+(y+3)+'" fill="currentColor" opacity=".6" font-size="9" text-anchor="end">'+n(v,0)+'٪</text>';
+    });
+    PLAYERS.forEach(function(p,j){
+      var pts=[];
+      for(var i=0;i<played[p].length;i++){
+        var pl=played[p][i];
+        var r=pl?wins[p][i]*100/pl:0;
+        pts.push((L+(W-L-15)*i/(played[p].length-1))+','+(10+(H-B-10)*(1-r/100)));
+      }
+      s+='<polyline points="'+pts.join(' ')+'" fill="none" stroke="'+colors[j%colors.length]+'" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
+    });
+    $('winRateTrendLegend').innerHTML=PLAYERS.map(function(p,i){return'<span><i class="dot" style="background:'+colors[i%colors.length]+'"></i>'+esc(p)+'</span>'}).join('');
+    return svg(W,H,s);
+  });
+  chartSafe('heatmap',function(){
+    var days=['شنبه','یک‌شنبه','دوشنبه','سه‌شنبه','چهارشنبه','پنج‌شنبه','جمعه'];
+    var grid=[];for(var d=0;d<7;d++){grid.push([]);for(var h=0;h<24;h++)grid[d].push(0)}
+    games.forEach(function(g){
+      var dd=new Date(g.timestamp);
+      var day=(dd.getDay()+1)%7;var hr=dd.getHours();
+      grid[day][hr]++;
+    });
+    var max=1;grid.forEach(function(r){r.forEach(function(v){if(v>max)max=v})});
+    var cw=22,ch=22,W=24*cw+60,H=7*ch+50;
+    var s='<text x="30" y="18" fill="currentColor" font-size="11" text-anchor="middle">ساعت</text>';
+    for(var h=0;h<24;h++){if(h%3===0)s+='<text x="'+(50+h*cw+cw/2)+'" y="18" fill="currentColor" font-size="10" text-anchor="middle">'+n(h,0)+'</text>';}
+    days.forEach(function(dname,d){
+      s+='<text x="45" y="'+(34+d*ch+ch/2+3)+'" fill="currentColor" font-size="10" text-anchor="end">'+esc(dname)+'</text>';
+      for(var h=0;h<24;h++){
+        var v=grid[d][h];var opacity=v/max;
+        var fill=v?'rgba(120,168,200,'+(0.15+0.85*opacity)+')':'rgba(255,255,255,.04)';
+        s+='<rect x="'+(50+h*cw)+'" y="'+(30+d*ch)+'" width="'+(cw-2)+'" height="'+(ch-2)+'" rx="4" fill="'+fill+'"/>';
+        if(v)s+='<text x="'+(50+h*cw+cw/2-1)+'" y="'+(30+d*ch+ch/2+3)+'" fill="'+(opacity>.5?'#fff':'#1c2a3a')+'" font-size="9" text-anchor="middle">'+n(v,0)+'</text>';
+      }
+    });
+    return svg(W,H,s);
+  });
+  chartSafe('progressChart',function(){
+    var idx=Number($('progressSelect').value)||0;
+    var p=PAIRS[idx];
+    if(!p)return'<div class="empty">زوجی موجود نیست.</div>';
+    var l=games.filter(function(g){return pairKey(g.player1,g.player2)===pairKey(p[0],p[1])}).sort(function(a,b){return a.timestamp-b.timestamp});
+    if(!l.length)return'<div class="empty">بازی‌ای بین این دو ثبت نشده.</div>';
+    var seriesA=[0],seriesB=[0];
+    l.forEach(function(g){
+      var aPts=seriesA[seriesA.length-1]+(g.winner===p[0]?pts(g.type):0);
+      var bPts=seriesB[seriesB.length-1]+(g.winner===p[1]?pts(g.type):0);
+      seriesA.push(aPts);seriesB.push(bPts);
+    });
+    var max=Math.max(Math.max.apply(null,seriesA),Math.max.apply(null,seriesB),1);
+    var W=620,H=230,L=38,B=33;
+    var s='<line x1="'+L+'" y1="10" x2="'+L+'" y2="'+(H-B)+'" stroke="currentColor" opacity=".35"/><line x1="'+L+'" y1="'+(H-B)+'" x2="'+(W-10)+'" y2="'+(H-B)+'" stroke="currentColor" opacity=".35"/>';
+    [seriesA,seriesB].forEach(function(series,j){
+      var q=series.map(function(v,i){return(L+(W-L-15)*i/(series.length-1))+','+(10+(H-B-10)*(1-v/max))}).join(' ');
+      s+='<polyline points="'+q+'" fill="none" stroke="'+colors[j%colors.length]+'" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>';
+    });
+    return'<div class="legend"><span><i class="dot" style="background:'+colors[0]+'"></i>'+esc(p[0])+'</span><span><i class="dot" style="background:'+colors[1]+'"></i>'+esc(p[1])+'</span></div>'+svg(W,H,s);
+  });
+}
+function renderAnalytics(){renderRecords();renderCharts()}
+function themeGridHTML(){
+  return Object.keys(THEMES).map(function(k){
+    var v=THEMES[k];
+    return'<button class="theme '+(settings.theme===k?'active':'')+'" data-theme="'+k+'"><div class="swatch" style="background:linear-gradient(135deg,'+v[8]+','+v[9]+')"></div>'+themeNames[k]+'</button>';
+  }).join('');
+}
+function renderThemes(){
+  var k=settings.theme,v=THEMES[k]||THEMES.blackgold;
+  if($('themeCurrent'))$('themeCurrent').innerHTML='<span class="theme-hint">برای تغییر، کلیک کن</span><div class="swatch" style="background:linear-gradient(135deg,'+v[8]+','+v[9]+')"></div><span>'+themeNames[k]+'</span>';
+}
+function openThemes(){
+  $('modalBg').innerHTML='<div class="modal"><h2>🎨 انتخاب قالب</h2><div class="themegrid">'+themeGridHTML()+'</div><div class="actions"><button id="closeThemes" class="btn secondary">بستن</button></div></div>';
+  $('modalBg').className='modalbg show';
+  [].forEach.call($('modalBg').querySelectorAll('.theme'),function(b){
+    b.onclick=function(){settings.theme=b.dataset.theme;apply();saveSettings();renderThemes();closeModal()};
+  });
+  $('closeThemes').onclick=closeModal;
+}
+function fill(){
+  var fp=$('filterPlayer');
+  if(fp)fp.innerHTML='<option value="all">همه بازیکنان</option>'+PLAYERS.map(function(p){return'<option value="'+esc(p)+'">'+esc(p)+'</option>'}).join('');
+  var ps=$('progressSelect');
+  var popts=PAIRS.map(function(p,i){return'<option value="'+i+'">'+esc(p[0])+' × '+esc(p[1])+'</option>'}).join('');
+  if(ps)ps.innerHTML=popts;
+  if($('fontScale'))$('fontScale').value=settings.font||'1';
+  if($('intensity'))$('intensity').value=settings.intensity||'standard';
+}
+function renderPlayers(){
+  var el=$('playerList');if(!el)return;
+  el.innerHTML=PLAYERS.map(function(p,i){
+    var s=stats(p);var hasImg=!!avatars[p];
+    return'<div class="game" style="padding:12px">'+
+      '<div class="gamehead"><strong style="display:inline-flex;align-items:center;gap:8px">'+avatarInline(p,40)+esc(p)+'</strong>'+
+      '<span class="muted">'+n(s.games,0)+' بازی · '+percent(s.wins,s.games)+'</span></div>'+
+      '<div class="actions">'+
+        '<button class="btn secondary" data-av="'+i+'">'+(hasImg?'🖼️ تغییر عکس':'📷 افزودن عکس')+'</button>'+
+        (hasImg?'<button class="btn secondary" data-avrm="'+i+'">🗑️ حذف عکس</button>':'')+
+        '<button class="btn secondary" data-ren="'+i+'">✏️ تغییر نام</button>'+
+        '<button class="btn danger" data-remp="'+i+'" '+(PLAYERS.length<=2?'disabled':'')+'>حذف</button>'+
+      '</div></div>';
+  }).join('');
+  [].forEach.call(el.querySelectorAll('[data-av]'),function(b){
+    b.onclick=function(){
+      var i=+b.dataset.av;var name=PLAYERS[i];
+      pickAvatar(name,function(){fill();renderAll();message('عکس '+name+' ذخیره شد.');});
+    };
+  });
+  [].forEach.call(el.querySelectorAll('[data-avrm]'),function(b){
+    b.onclick=function(){
+      var i=+b.dataset.avrm;var name=PLAYERS[i];
+      removeAvatar(name,function(){fill();renderAll();message('عکس '+name+' حذف شد.');});
+    };
+  });
+  [].forEach.call(el.querySelectorAll('[data-ren]'),function(b){
+    b.onclick=function(){
+      var i=+b.dataset.ren;
+      promptDialog('نام جدید:',PLAYERS[i]).then(function(nn){
+        if(nn&&nn.trim()){
+          var old=PLAYERS[i],nw=nn.trim();
+          if(PLAYERS.indexOf(nw)>-1&&nw!==old){message('این نام قبلاً وجود دارد.',true);return}
+          if(avatars[old]){avatars[nw]=avatars[old];delete avatars[old];saveAvatars();}
+          PLAYERS[i]=nw;
+          games.forEach(function(g){if(g.player1===old)g.player1=nw;if(g.player2===old)g.player2=nw;if(g.winner===old)g.winner=nw;});
+          archive.forEach(function(a){(a.snapshot||[]).forEach(function(x){if(x.name===old)x.name=nw});});
+          if(selected.slot1===old)selected.slot1=nw;
+          if(selected.slot2===old)selected.slot2=nw;
+          savePlayers();save();saveTournament();fill();renderAll();
+        }
+      });
+    };
+  });
+  [].forEach.call(el.querySelectorAll('[data-remp]'),function(b){
+    b.onclick=function(){
+      var i=+b.dataset.remp,name=PLAYERS[i];
+      var gc=games.filter(function(g){return g.player1===name||g.player2===name}).length;
+      var msg=gc?'«'+name+'» از لیست بازیکنان حذف می‌شود. '+n(gc,0)+' بازی ثبت‌شده‌ی او حفظ می‌شود. ادامه؟':'«'+name+'» حذف شود؟';
+      confirmDialog(msg).then(function(ok){
+        if(!ok)return;
+        if(avatars[name]){delete avatars[name];saveAvatars();}
+        PLAYERS.splice(i,1);savePlayers();fill();renderAll();
+        message('بازیکن حذف شد.');
+      });
+    };
+  });
+  updatePlayerCountBadge();
+}
+function activePageId(){
+  var el=document.querySelector('.page.active');
+  return el?el.id:'register';
+}
+function renderPage(p){
+  if(p==='register')renderRegister();
+  else if(p==='ranking')renderRanking();
+  else if(p==='tournament')renderTournament();
+  else if(p==='history')renderHistory();
+  else if(p==='analytics')renderAnalytics();
+  else if(p==='settings'){renderThemes();renderPlayers();}
+}
+function renderAll(){
+  renderPage(activePageId());
+}
+
+function backup(){
+  try{
+    var data={version:20,exportedAt:new Date().toISOString(),players:PLAYERS,avatars:avatars,settings:settings,games:games,tournament:tournament,archive:archive};
+    var blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+    var u=URL.createObjectURL(blob),a=document.createElement('a');
+    a.href=u;a.download='backgammon-backup-'+Date.now()+'.json';
+    document.body.appendChild(a);a.click();a.remove();
+    setTimeout(function(){URL.revokeObjectURL(u)},1000);
+  }catch(e){message('ساخت فایل پشتیبان ممکن نشد.',true)}
+}
+function restore(f){
+  if(!f)return;
+  var r=new FileReader();
+  r.onload=async function(e){
+    try{
+      var d=JSON.parse(e.target.result),arr=Array.isArray(d)?d:d.games;
+      if(!Array.isArray(arr))throw Error();
+      if(d.players&&Array.isArray(d.players)&&d.players.length>=2){
+        if(await confirmDialog('بازیکنان فعلی با فایل پشتیبان جایگزین شوند؟')){
+          PLAYERS=d.players.slice();savePlayers();
+        }
+      }
+      var seen={};games.forEach(function(g){seen[sign(g)]=1});
+      var clean=[];
+      arr.forEach(function(g){
+        if(valid(g)&&!seen[sign(g)]){
+          seen[sign(g)]=1;
+          g.timestamp=Number(g.timestamp);g.id=g.id||id();
+          g.note=typeof g.note==='string'?g.note:'';
+          g.tags=Array.isArray(g.tags)?g.tags:[];
+          g.date=g.date||pdate(g.timestamp);g.time=g.time||ptime(g.timestamp);
+          clean.push(g);
+        }
+      });
+      if(!await confirmDialog(n(clean.length,0)+' بازی معتبر قابل ورود است. ادامه؟'))return;
+      games=games.concat(clean);
+      if(d.avatars&&typeof d.avatars==='object'&&!Array.isArray(d.avatars)){
+        if(await confirmDialog('عکس‌های بازیکنان بارگذاری شوند؟')){
+          avatars=Object.assign({},d.avatars);saveAvatars();
+        }
+      }
+      if(d.settings&&typeof d.settings==='object')for(var k in d.settings)settings[k]=d.settings[k];
+      if(!THEMES[settings.theme])settings.theme='blackgold';
+      if(d.tournament&&typeof d.tournament==='object'){
+        if(typeof d.tournament.name==='string')tournament.name=d.tournament.name;
+        if(typeof d.tournament.start==='number')tournament.start=d.tournament.start;
+        if(typeof d.tournament.nextNum==='number')tournament.nextNum=d.tournament.nextNum;
+      }
+      if(Array.isArray(d.archive))archive=d.archive.slice();
+      saveTournament();save();saveSettings();apply();fill();renderAll();
+      message('بازیابی با موفقیت انجام شد.');
+    }catch(x){message('فایل پشتیبان معتبر نیست.',true)}
+  };
+  r.onerror=function(){message('خواندن فایل ناموفق بود.',true)};
+  r.readAsText(f);
+}
+async function clearAll(){
+  if(!await confirmDialog('مرحله اول: همه بازی‌ها و تنظیمات حذف شوند؟ ابتدا پشتیبان بگیرید.'))return;
+  if(!await confirmDialog('مرحله نهایی: این عمل قابل بازگشت نیست. حذف کامل تأیید می‌شود؟'))return;
+  games=[];settings={theme:'blackgold',font:'1',intensity:'standard'};
+  tournament={name:'تورنمنت ۱',start:0,nextNum:1};archive=[];
+  selected={pair:null,winner:null,type:null,slot1:null,slot2:null};
+  avatars={};
+  remove(KEY);remove(SKEY);remove(PKEY);remove(TKEY);remove(AVKEY);
+  PLAYERS=DEFAULT_PLAYERS.slice();buildPairs();
+  apply();fill();renderAll();
+  message('همه اطلاعات حذف شد.');
+}
+function exportCSV(){
+  var head=['تاریخ','ساعت','بازیکن اول','بازیکن دوم','برنده','بازنده','نوع برد','امتیاز','برچسب‌ها','یادداشت'];
+  var rows=games.slice().sort(function(a,b){return a.timestamp-b.timestamp}).map(function(g){
+    return [g.date,g.time,g.player1,g.player2,g.winner,loser(g),TYPES[g.type].full,pts(g.type),(g.tags||[]).join('|'),g.note||'']
+      .map(function(v){return'"'+String(v).replace(/"/g,'""')+'"'}).join(',');
+  });
+  var csv='\ufeff'+head.join(',')+'\n'+rows.join('\n');
+  var blob=new Blob([csv],{type:'text/csv;charset=utf-8'});
+  var u=URL.createObjectURL(blob),a=document.createElement('a');
+  a.href=u;a.download='backgammon-'+Date.now()+'.csv';
+  document.body.appendChild(a);a.click();a.remove();
+  setTimeout(function(){URL.revokeObjectURL(u)},1000);
+}
+function setupCollapsibles(){
+  var saved={};
+  try{saved=JSON.parse(localStorage.getItem('backgammon_collapse')||'{}')}catch(_){}
+  [].forEach.call(document.querySelectorAll('.collapse-header'),function(btn){
+    var targetId=btn.dataset.target;
+    var body=$(targetId);
+    if(!body)return;
+    var isOpen=!!saved[targetId];
+    if(isOpen){body.classList.add('open');btn.setAttribute('aria-expanded','true');}
+    btn.onclick=function(){
+      var nowOpen=!body.classList.contains('open');
+      body.classList.toggle('open',nowOpen);
+      btn.setAttribute('aria-expanded',nowOpen?'true':'false');
+      saved[targetId]=nowOpen;
+      try{localStorage.setItem('backgammon_collapse',JSON.stringify(saved))}catch(_){}
+    };
+  });
+}
+function updatePlayerCountBadge(){
+  var b=$('playerCountBadge');
+  if(b)b.textContent=n(PLAYERS.length,0)+' نفر';
+}
+function bind(){
+  function gotoPage(p){
+    [].forEach.call(document.querySelectorAll('.page'),function(x){x.classList.toggle('active',x.id===p)});
+    renderPage(p);
+    window.scrollTo(0,0);
+  }
+  [].forEach.call(document.querySelectorAll('.tab'),function(b){
+    b.onclick=function(){
+      var p=b.dataset.page;
+      [].forEach.call(document.querySelectorAll('.tab'),function(x){x.classList.toggle('active',x===b)});
+      $('settingsGear').classList.remove('active');
+      gotoPage(p);
+    };
+  });
+  $('settingsGear').onclick=function(){
+    [].forEach.call(document.querySelectorAll('.tab'),function(x){x.classList.remove('active')});
+    $('settingsGear').classList.add('active');
+    gotoPage('settings');
+  };
+  $('add').onclick=add;
+  $('last').onclick=deleteLast;
+  var poolSearchEl=$('poolSearch');
+  if(poolSearchEl)poolSearchEl.addEventListener('input',function(){poolFilter=this.value;renderPool();});
+  ['search','filterType','filterPlayer','sortHistory','fromDate','toDate'].forEach(function(x){
+    var el=$(x);if(!el)return;
+    el.addEventListener(x==='search'?'input':'change',renderHistory);
+  });
+  ['recentRange','progressSelect'].forEach(function(x){var el=$(x);if(el)el.addEventListener('change',renderCharts)});
+  $('fontScale').onchange=function(){settings.font=this.value;apply();saveSettings()};
+  $('intensity').onchange=function(){settings.intensity=this.value;apply();saveSettings()};
+  var tc=$('themeCurrent');
+  if(tc){
+    tc.onclick=openThemes;
+    tc.onkeydown=function(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();openThemes()}}
+  }
+  $('tReset').onclick=startNewTournament;
+  $('tEditName').onclick=editTournamentName;
+  $('tEditStart').onclick=editTournamentStart;
+  $('export').onclick=backup;
+  $('exportCSV').onclick=exportCSV;
+  $('importBtn').onclick=function(){$('importFile').click()};
+  $('importFile').onchange=function(e){restore(e.target.files[0]);this.value=''};
+  $('clear').onclick=clearAll;
+  $('addPlayer').onclick=function(){
+    var v=$('newPlayer').value.trim().replace(/\s+/g,' ');
+    if(!v){message('نام خالی است.',true);return}
+    var dup=PLAYERS.some(function(p){return p.toLowerCase()===v.toLowerCase()});
+    if(dup){message('این نام قبلاً وجود دارد.',true);return}
+    PLAYERS.push(v);savePlayers();$('newPlayer').value='';fill();renderAll();
+  };
+  $('newPlayer').addEventListener('keydown',function(e){if(e.key==='Enter'){e.preventDefault();$('addPlayer').click()}});
+  $('modalBg').onclick=function(e){if(e.target===$('modalBg'))closeModal()};
+  window.onscroll=function(){$('top').style.display=window.scrollY>420?'block':'none'};
+  $('top').onclick=function(){window.scrollTo({top:0,behavior:'smooth'})};
+  document.addEventListener('keydown',function(e){
+    if(e.target.matches('input,textarea,select'))return;
+    if(e.ctrlKey||e.metaKey||e.altKey)return;
+    var active=document.querySelector('.page.active');
+    if(!active||active.id!=='register')return;
+    if(e.key==='Enter'&&!$('add').disabled){e.preventDefault();add()}
+    if(e.key==='Backspace'&&e.shiftKey){e.preventDefault();deleteLast()}
+  });
+}
+function setupPWA(){
+  try{
+    var manifest={name:"پاتوق تخته‌نرد",short_name:"پاتوق",lang:"fa",dir:"rtl",start_url:"./",scope:"./",display:"standalone",orientation:"portrait",background_color:"#07070c",theme_color:"#0a0a12",description:"جای ثبت بازی‌ها و رقابت‌های رفقا",icons:[{src:"icon-192.png",sizes:"192x192",type:"image/png",purpose:"any maskable"},{src:"icon-512.png",sizes:"512x512",type:"image/png",purpose:"any maskable"}]};
+    var mBlob=new Blob([JSON.stringify(manifest)],{type:'application/manifest+json'});
+    document.getElementById('manifestLink').href=URL.createObjectURL(mBlob);
+    var fav='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d4af37"/><stop offset="1" stop-color="#7a5f1a"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="#0a0a12"/><g fill="none" stroke="#d4af37" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 22 L32 6 L50 22"/><path d="M14 42 L32 58 L50 42"/></g><circle cx="32" cy="29" r="2.2" fill="#f4cf6a"/><circle cx="32" cy="32" r="2.2" fill="#f4cf6a"/><circle cx="32" cy="35" r="2.2" fill="#f4cf6a"/></svg>';
+    document.getElementById('faviconLink').href='data:image/svg+xml;charset=utf-8,'+encodeURIComponent(fav);
+    if('serviceWorker' in navigator){
+      var swCode="const CACHE='backgammon-inline-v26';self.addEventListener('install',e=>{self.skipWaiting()});self.addEventListener('activate',e=>{e.waitUntil(self.clients.claim())});self.addEventListener('fetch',e=>{if(e.request.method!=='GET')return;e.respondWith(caches.match(e.request).then(cached=>cached||fetch(e.request).then(res=>{try{const clone=res.clone();caches.open(CACHE).then(c=>c.put(e.request,clone))}catch(_){}return res;}).catch(()=>cached)));});";
+      var swBlob=new Blob([swCode],{type:'application/javascript'});
+      var swURL=URL.createObjectURL(swBlob);
+      navigator.serviceWorker.register(swURL).catch(function(){});
+    }
+  }catch(_){}
+}
+load();apply();fill();bind();renderAll();setupPWA();
+setupCollapsibles();updatePlayerCountBadge();window.renderAll=renderAll;window.__reload=load;window.__loaded=true;
+}catch(e){
+  var x=document.getElementById('fatal');
+  if(x){x.textContent='خطای قابل فهم در اجرای برنامه رخ داد: '+(e.message||'خطای ناشناخته')+'؛ لطفاً فایل را دوباره ذخیره و باز کنید.';x.classList.remove('hidden')}
+  else document.body.innerHTML='<p style="padding:20px;direction:rtl">خطا در اجرای برنامه رخ داد.</p>';
+}})();
+
+function toggleFullscreen() {
+  var table = document.querySelector('#ranking table');
+  if (!table) return;
+  var existing = document.getElementById('fullscreenOverlay');
+  if (existing) { existing.remove(); return; }
+  var overlay = document.createElement('div');
+  overlay.id = 'fullscreenOverlay';
+  overlay.style.cssText = 'position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--bg); z-index: 9999; overflow: auto; padding: 20px; box-sizing: border-box;';
+  var clonedTable = table.cloneNode(true);
+  clonedTable.style.cssText = 'width: 100%; min-width: 700px; border-collapse: collapse; margin: 0 auto;';
+  var closeBtn = document.createElement('button');
+  closeBtn.textContent = '✕ بستن';
+  closeBtn.style.cssText = 'position: fixed; top: 10px; right: 10px; padding: 10px 20px; background: var(--danger); color: var(--contrast); border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; z-index: 10000;';
+  closeBtn.onclick = function() { overlay.remove(); };
+  overlay.appendChild(closeBtn);
+  overlay.appendChild(clonedTable);
+  document.body.appendChild(overlay);
+  if (screen.orientation && screen.orientation.lock) {
+    screen.orientation.lock('landscape').catch(function(e) { console.log('Orientation lock not supported'); });
+  }
+  if (overlay.requestFullscreen) {
+    overlay.requestFullscreen().catch(function(e) { console.log('Fullscreen not supported'); });
+  } else if (overlay.webkitRequestFullscreen) {
+    overlay.webkitRequestFullscreen();
+  } else if (overlay.msRequestFullscreen) {
+    overlay.msRequestFullscreen();
+  }
+}
+
+var sortDirection = {};
+function sortTable(column) {
+  var tbody = document.getElementById('rankbody');
+  if (!tbody) return;
+  var rows = Array.from(tbody.querySelectorAll('tr'));
+  if (!rows.length) return;
+
+  if (sortDirection._col !== column) {
+    sortDirection._col = column;
+    sortDirection[column] = true;
+  } else {
+    sortDirection[column] = !sortDirection[column];
+  }
+  var direction = sortDirection[column] ? 1 : -1;
+
+  rows.sort(function (a, b) {
+    var aV, bV;
+    switch (column) {
+      case 'avatar':
+        return (a.dataset.name || '').localeCompare(b.dataset.name || '', 'fa') * direction;
+      case 'games':     aV = +a.dataset.games;     bV = +b.dataset.games;     break;
+      case 'wins':      aV = +a.dataset.wins;      bV = +b.dataset.wins;      break;
+      case 'winRate':   aV = +a.dataset.winrate;   bV = +b.dataset.winrate;   break;
+      case 'points':    aV = +a.dataset.points;    bV = +b.dataset.points;    break;
+      case 'breakdown': aV = +a.dataset.breakdown; bV = +b.dataset.breakdown; break;
+      default: return 0;
+    }
+    if (aV < bV) return -1 * direction;
+    if (aV > bV) return  1 * direction;
+    return 0;
+  });
+
+  rows.forEach(function (r) { tbody.appendChild(r); });
+}
+
+var _tSortState = { col: null, dir: 1 };
+function sortTournament(column, th){
+  var tbody = document.getElementById('tRankBody');
+  if(!tbody) return;
+  var rows = Array.from(tbody.querySelectorAll('tr'));
+  if(!rows.length) return;
+  if(_tSortState.col === column) _tSortState.dir *= -1;
+  else { _tSortState.col = column; _tSortState.dir = 1; }
+  var dir = _tSortState.dir;
+  document.querySelectorAll('#tournament .sort-indicator').forEach(function(el){
+    el.classList.remove('active'); el.textContent = '↕';
+  });
+  var ind = th ? th.querySelector('.sort-indicator') : null;
+  if(ind){ ind.classList.add('active'); ind.textContent = dir === 1 ? '▲' : '▼'; }
+  rows.sort(function(a,b){
+    var aV = a.dataset[column] || '';
+    var bV = b.dataset[column] || '';
+    var aN = parseFloat(aV), bN = parseFloat(bV);
+    if(!isNaN(aN) && !isNaN(bN) && /^-?\d/.test(aV) && /^-?\d/.test(bV)){
+      return (aN - bN) * dir;
+    }
+    return aV.localeCompare(bV, 'fa') * dir;
+  });
+  rows.forEach(function(r){ tbody.appendChild(r); });
+}
+</script>
+<div id="debugBar" style="position:fixed;top:0;left:0;right:0;background:red;color:white;padding:10px;z-index:99999;text-align:center;font-size:14px">در حال بارگذاری Supabase...</div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onerror="document.getElementById('debugBar').textContent='❌ CDN لود نشد - فیلترشکن روشن کن'"></script>
+<script>setTimeout(function(){var b=document.getElementById('debugBar');if(b&&b.textContent==='در حال بارگذاری Supabase...'){if(window.supabase){b.textContent='✅ Supabase آماده';setTimeout(function(){b.style.display='none'},2000)}else{b.textContent='❌ Supabase لود نشد'}}},3000)</script>
+<script>
+window.onerror=function(m,s,l,c,e){var b=document.getElementById('debugBar');if(b){b.style.display='block';b.style.background='red';b.textContent='خطا در خط '+l+': '+m;}return false;};
+(function(){
+var U='https://tnnvqgbthiwwupadqszn.supabase.co';
+var K='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRubnZxZ2J0aGl3d3VwYWRxc3puIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk1NjA5OTYsImV4cCI6MjEwNTEzNjk5Nn0.KecGjf2Qq9xcm5cSO5b5hxf3hyhAfFE1l23dn5BXf5g';
+var sb=window.supabase.createClient(U,K);
+var curUser=null,curName='',curRole='',paused=false,timers={},dirtyIds={},isGuest=false;
+window.__sbMarkDirty=function(id,action){if(id&&!dirtyIds[id])dirtyIds[id]=action||'edit'};
+var PKEY='backgammon_players',AVKEY='backgammon_avatars',KEY='backgammon_main_games',TKEY='backgammon_tournaments',SKEY='backgammon_main_settings';
+var NAME_MAP={'saeed':'سعید جنائی','mojtaba':'مجتبی دهقان','hossein':'حسین دهقان'};
+
+function $(id){return document.getElementById(id)}
+function fakeEmail(u){return u+'@backgammon.local'}
+
+// ===== پرده بارگذاری =====
+var _loadingTimer = null;
+var _loadingIdx = 0;
+var _loadingMsgs = [
+  '🎲 در حال چیدن مهره‌ها...',
+  '✨ در حال آماده‌سازی میز...',
+  '📊 در حال بارگذاری آمار...',
+  '🎯 تقریباً آماده...'
+];
+
+function showLoading(){
+  var el = document.getElementById('loadingScreen');
+  var msgEl = document.getElementById('loadingMsg');
+  if(!el) return;
+  el.classList.remove('hide');
+  if(msgEl){
+    _loadingIdx = 0;
+    msgEl.textContent = _loadingMsgs[0];
+    msgEl.classList.remove('swap');
+  }
+  clearInterval(_loadingTimer);
+  _loadingTimer = setInterval(function(){
+    if(!msgEl) return;
+    _loadingIdx = (_loadingIdx + 1) % _loadingMsgs.length;
+    msgEl.classList.add('swap');
+    setTimeout(function(){
+      msgEl.textContent = _loadingMsgs[_loadingIdx];
+      msgEl.classList.remove('swap');
+    }, 400);
+  }, 1500);
+}
+
+function hideLoading(){
+  var el = document.getElementById('loadingScreen');
+  if(!el) return;
+  clearInterval(_loadingTimer);
+  el.classList.add('hide');
+}
+
+async function logAct(action,details){
+  if(!curName||isGuest)return;
+  try{await sb.from('activity_log').insert([{user_name:curName,action:action,details:details||{}}])}catch(e){}
+}
+
+$('supaGuest').onclick = guestLogin;
+
+async function guestLogin(){
+  showLoading();
+  isGuest = true;
+  curUser = null;
+  curRole = 'guest';
+  curName = 'بیننده';
+  try{
+    await pull();
+  }catch(e){console.error('guest pull', e)}
+  hideLoading();
+  showApp();
+  if(window.__reload) window.__reload();
+  if(window.renderAll) window.renderAll();
+  if(typeof fill === 'function') fill();
+  var rankTab = document.querySelector('.tab[data-page="ranking"]');
+  if(rankTab) rankTab.click();
+}
+
+window.__sbDeleteGame=async function(id){
+  if(!curUser||!id)return;
+  try{await sb.from('games').delete().eq('id',id);await logAct('del',{info:'یک بازی حذف شد'});}catch(e){console.error('del',e)}
+};
+
+async function pull(){
+  paused=true;
+  var changed=false;
+  try{
+    var p=await sb.from('players').select('name,avatar');
+    if(!p.error){
+      var av={};
+      (p.data||[]).forEach(function(x){if(x.avatar)av[x.name]=x.avatar});
+      if(Object.keys(av).length){
+        var avStr=JSON.stringify(av);
+        if(avStr!==localStorage.getItem(AVKEY)){
+          localStorage.setItem(AVKEY,avStr);changed=true;
+        }
+      }
+    }
+    var g=await sb.from('games').select('id,data');
+    if(!g.error){
+      var serverGames=(g.data||[]).map(function(x){return x.data}).filter(Boolean);
+      var localRaw=localStorage.getItem(KEY);
+      var localGames=[];
+      try{localGames=localRaw?JSON.parse(localRaw):[]}catch(_){localGames=[]}
+      if(!Array.isArray(localGames))localGames=[];
+      if(!serverGames.length && localGames.length){
+        console.log('pull: سرور خالی، لوکال '+localGames.length+' بازی. آپلود می‌کنم.');
+        try{
+          await sb.from('games').upsert(localGames.map(function(x){return{id:x.id,data:x}}));
+          localGames.forEach(function(x){if(x&&x.id)delete dirtyIds[x.id]});
+        }catch(e){console.error('upload local->server failed',e)}
+      }
+      else if(serverGames.length && localGames.length){
+        var map={};
+        serverGames.forEach(function(x){if(x&&x.id)map[x.id]=x});
+        var added=0;
+        localGames.forEach(function(x){
+          if(x&&x.id&&!map[x.id]){map[x.id]=x;added++;dirtyIds[x.id]='add';}
+        });
+        var merged=Object.keys(map).map(function(k){return map[k]});
+        var mergedStr=JSON.stringify(merged);
+        if(mergedStr!==localRaw){
+          localStorage.setItem(KEY,mergedStr);changed=true;
+          if(added>0)console.log('pull: '+added+' بازی از لوکال ادغام شد.');
+        }
+      }
+      else if(serverGames.length && !localGames.length){
+        var sStr=JSON.stringify(serverGames);
+        if(sStr!==localRaw){localStorage.setItem(KEY,sStr);changed=true;}
+      }
+    }
+    var t=await sb.from('tournament_state').select('data').eq('id','main').maybeSingle();
+    if(!t.error){
+      var serverT=(t.data&&t.data.data)||null;
+      if(serverT && typeof serverT==='object' && Object.keys(serverT).length){
+        var tStr=JSON.stringify(serverT);
+        if(tStr!==localStorage.getItem(TKEY)){
+          localStorage.setItem(TKEY,tStr);changed=true;
+        }
+      }
+    }
+  }catch(e){console.error('pull',e)}
+  paused=false;
+  return changed;
+}
+
+async function pushKey(k,v,attempt){
+  attempt=attempt||0;
+  if(!curUser||paused)return;
+  try{
+    if(k===KEY){
+      var arr=JSON.parse(v);
+      var ids=Object.keys(dirtyIds);
+      var toSend=ids.length?arr.filter(function(x){return x.id&&dirtyIds[x.id]}):arr;
+      if(toSend.length){
+        var r=await sb.from('games').upsert(toSend.map(function(x){return{id:x.id,data:x}}));
+        if(r.error){
+          console.error('push games failed (attempt '+(attempt+1)+'):',r.error);
+          if(attempt<3){
+            clearTimeout(timers[k]);
+            timers[k]=setTimeout(function(){pushKey(k,v,attempt+1)},3000);
+          }
+          return;
+        }
+        var sentActions={};
+        toSend.forEach(function(x){
+          if(dirtyIds[x.id]){
+            sentActions[x.id]=dirtyIds[x.id];
+            delete dirtyIds[x.id];
+          }
+        });
+        toSend.forEach(function(x){
+          var act=sentActions[x.id];
+          if(act)logAct(act,{info:act==='add'?(x.winner+' مقابل '+(x.player1===x.winner?x.player2:x.player1)):'ویرایش بازی '+x.winner+' × '+(x.player1===x.winner?x.player2:x.player1)});
+        });
+      }
+    }
+    else if(k===AVKEY){
+      var a=JSON.parse(v);
+      var rows=Object.keys(a).map(function(n){return{name:n,avatar:a[n]}});
+      if(rows.length){
+        var r2=await sb.from('players').upsert(rows);
+        if(r2.error){console.error('push avatars failed:',r2.error);}
+      }
+    }
+    else if(k===PKEY){
+      var list=JSON.parse(v);
+      var rows2=list.map(function(n){return{name:n}});
+      if(rows2.length){
+        var r3=await sb.from('players').upsert(rows2);
+        if(r3.error){console.error('push players failed:',r3.error);}
+      }
+    }
+    else if(k===TKEY){
+      var t=JSON.parse(v);
+      var r4=await sb.from('tournament_state').upsert([{id:'main',data:t}]);
+      if(r4.error){console.error('push tournament failed:',r4.error);}
+    }
+  }catch(e){console.error('push',e)}
+}
+
+var _origSet=Storage.prototype.setItem;
+Storage.prototype.setItem=function(k,v){
+  _origSet.call(this,k,v);
+  if(paused||!curUser)return;
+  if([KEY,AVKEY,PKEY,TKEY].indexOf(k)>-1){
+    clearTimeout(timers[k]);
+    timers[k]=setTimeout(function(){pushKey(k,v)},900);
+  }
+};
+
+function updateSyncDot(state){
+  var dot = document.getElementById('syncDot');
+  if(!dot) return;
+  var colors = {online:'#4caf50', syncing:'#ffc107', offline:'#f44336', error:'#9e9e9e'};
+  var titles = {online:'آنلاین — همه‌چیز سینک شده', syncing:'در حال سینک...', offline:'آفلاین — بعداً سینک می‌شه', error:'خطا در اتصال'};
+  dot.style.background = colors[state] || colors.error;
+  dot.title = titles[state] || '';
+}
+
+function updateOnlineStatus(){
+  if(!navigator.onLine){ updateSyncDot('offline'); }
+  else { updateSyncDot('online'); }
+  updateRealtimeBadge(realtimeConnected);
+}
+
+function showSyncToast(msg, isBad){
+  var el = document.getElementById('toast');
+  if(!el) return;
+  el.textContent = msg;
+  el.className = 'toast show' + (isBad ? ' bad' : '');
+  clearTimeout(window._syncToastTimeout);
+  window._syncToastTimeout = setTimeout(function(){
+    el.className = 'toast';
+    el.textContent = '';
+  }, 2000);
+}
+
+async function manualSync(){
+  if(!curUser) return;
+  updateSyncDot('syncing');
+  try{
+    await pull();
+    if(window.__reload) window.__reload();
+    if(window.renderAll) window.renderAll();
+    var localRaw = localStorage.getItem(KEY);
+    if(localRaw && Object.keys(dirtyIds).length){
+      await pushKey(KEY, localRaw);
+    }
+    updateSyncDot(navigator.onLine ? 'online' : 'offline');
+    showSyncToast('✅ سینک شد');
+  } catch(e){
+    console.error('manualSync', e);
+    updateSyncDot('error');
+    showSyncToast('❌ خطا در سینک', true);
+    setTimeout(updateOnlineStatus, 3000);
+  }
+}
+
+window.addEventListener('online', function(){ updateOnlineStatus(); manualSync(); });
+window.addEventListener('offline', updateOnlineStatus);
+
+var _syncBtn = document.getElementById('syncStatusBtn');
+if(_syncBtn) _syncBtn.onclick = manualSync;
+
+// === Realtime + Polling ترکیبی ===
+var realtimeChannel = null;
+var realtimeConnected = false;
+var _pollTimer = null;
+var _realtimeSyncTimer = null;
+var _realtimeRetryTimer = null;
+
+function updateRealtimeBadge(connected){
+  var b = document.getElementById('rtBadge');
+  if(!b) return;
+  b.style.display = 'flex';
+  if(!navigator.onLine){
+    b.textContent = '';
+    b.style.opacity = '0';
+    b.title = 'آفلاین';
+    return;
+  }
+  b.style.opacity = '1';
+  if(connected){
+    b.textContent = 'R';
+    b.style.color = '#4caf50';
+    b.style.textShadow = '0 0 6px rgba(76,175,80,.6)';
+    b.title = 'Realtime متصل — سینک آنی';
+  } else {
+    b.textContent = 'P';
+    b.style.color = '#8bc34a';
+    b.style.textShadow = 'none';
+    b.title = 'Realtime قطع — سینک با Polling';
+  }
+}
+
+function initRealtime(){
+  if(!curUser || !sb) return;
+  if(realtimeChannel){
+    try{ sb.removeChannel(realtimeChannel); }catch(_){}
+    realtimeChannel = null;
+  }
+  updateRealtimeBadge(false);
+  try{
+    realtimeChannel = sb.channel('games-realtime')
+      .on('postgres_changes', {event: '*', schema: 'public', table: 'games'}, function(payload){
+        console.log('Realtime event:', payload.eventType);
+        debouncedRealtimeSync();
+      })
+      .subscribe(function(status){
+        console.log('Realtime status:', status);
+        if(status === 'SUBSCRIBED'){
+          realtimeConnected = true;
+          updateOnlineStatus();
+          updateRealtimeBadge(true);
+          scheduleNextPoll();
+        } else if(status === 'CLOSED' || status === 'CHANNEL_ERROR' || status === 'TIMED_OUT'){
+          realtimeConnected = false;
+          updateRealtimeBadge(false);
+          scheduleNextPoll();
+          clearTimeout(_realtimeRetryTimer);
+          _realtimeRetryTimer = setTimeout(function(){
+            if(!realtimeConnected && curUser) initRealtime();
+          }, 8000);
+        }
+      });
+  }catch(e){
+    console.error('initRealtime', e);
+    realtimeConnected = false;
+    updateRealtimeBadge(false);
+  }
+}
+
+function debouncedRealtimeSync(){
+  clearTimeout(_realtimeSyncTimer);
+  _realtimeSyncTimer = setTimeout(async function(){
+    try{
+      var changed = await pull();
+      if(changed){
+        if(window.__reload) window.__reload();
+        if(window.renderAll) window.renderAll();
+      }
+      var localRaw = localStorage.getItem(KEY);
+      if(localRaw && Object.keys(dirtyIds).length){
+        await pushKey(KEY, localRaw);
+      }
+    }catch(e){console.error('realtimeSync', e)}
+  }, 300);
+}
+
+function startPolling(){
+  scheduleNextPoll();
+}
+
+function scheduleNextPoll(){
+  clearTimeout(_pollTimer);
+  var delay = realtimeConnected ? 30000 : 5000;
+  _pollTimer = setTimeout(async function(){
+    try{ await liveSync(); }catch(e){console.error('poll', e)}
+    scheduleNextPoll();
+  }, delay);
+}
+
+function showApp(){
+  $('supaAuthOverlay').style.display='none';
+  var lb=document.getElementById('logoutBtn');
+  if(lb){
+    lb.style.display='flex';
+    if(!lb.onclick){
+      lb.onclick=function(){
+        if(isGuest){ location.reload(); return; }
+        if(confirm('از حسابت خارج بشی؟')){
+          sb.auth.signOut().then(function(){location.reload()});
+        }
+      };
+    }
+  }
+  var dot=document.getElementById('syncDot');
+  if(dot) dot.style.display='block';
+  var sbtn=document.getElementById('syncStatusBtn');
+  if(sbtn) sbtn.style.display='flex';
+  var rt=document.getElementById('rtBadge');
+  if(rt) rt.style.display='flex';
+  if(isGuest){
+    document.body.classList.add('guest-mode');
+    updateRealtimeBadge(false);
+  } else {
+    initRealtime();
+  }
+  updateOnlineStatus();
+  startPolling();
+  if(!isGuest) addActivityTab();
+}
+function showLogin(){
+  $('supaAuthOverlay').style.display='flex';
+}
+
+function addActivityTab(){
+  if(curRole!=='saeed')return;
+  var settingsPage=$('settings');
+  if(!settingsPage)return;
+  if($('activityCard'))return;
+  var card=document.createElement('div');
+  card.className='card collapsible';
+  card.id='activityCard';
+  card.innerHTML='<button type="button" class="collapse-header" data-target="activityBody" aria-expanded="false"><span class="collapse-title">📋 فعالیت کاربران</span><span class="collapse-arrow">▼</span></button><div class="collapse-body" id="activityBody"><div id="activityList" style="max-height:400px;overflow:auto">در حال بارگذاری...</div></div>';
+  settingsPage.appendChild(card);
+  var header=card.querySelector('.collapse-header');
+  var body=$('activityBody');
+  var loaded=false;
+  header.onclick=function(){
+    var open=!body.classList.contains('open');
+    body.classList.toggle('open',open);
+    header.setAttribute('aria-expanded',open?'true':'false');
+    if(open&&!loaded){loaded=true;loadActivities();}
+  };
+
+}
+
+function escAct(x){return String(x==null?'':x).replace(/[&<>'"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]})}
+function dayKey(d){return d.getFullYear()+'-'+d.getMonth()+'-'+d.getDate()}
+async function loadActivities(){
+  try{
+    var r=await sb.from('activity_log').select('*').order('created_at',{ascending:false}).limit(50);
+    var el=$('activityList');
+    if(!el)return;
+    if(!r.data||!r.data.length){el.innerHTML='<p class="muted">هنوز فعالیتی ثبت نشده.</p>';return}
+    var badges={
+      add:{label:'➕ ثبت',color:'#548b67'},
+      edit:{label:'✏️ ویرایش',color:'#d4af37'},
+      del:{label:'🗑️ حذف',color:'#aa504b'},
+      login:{label:'🔑 ورود',color:'#4a7ab8'},
+      signup:{label:'🆕 ثبت‌نام',color:'#4a7ab8'}
+    };
+    var today=dayKey(new Date()),yest=dayKey(new Date(Date.now()-86400000));
+    var lastGroup=null,html='';
+    r.data.forEach(function(x){
+      var dt=new Date(x.created_at);
+      var g=dayKey(dt);
+      if(g!==lastGroup){
+        var label=g===today?'امروز':g===yest?'دیروز':dt.toLocaleDateString('fa-IR');
+        html+='<div class="muted" style="font-size:.72rem;font-weight:700;margin:'+(lastGroup?'12px':'0')+' 0 6px;padding-bottom:4px;border-bottom:1px dashed var(--soft)">'+escAct(label)+'</div>';
+        lastGroup=g;
+      }
+      var b=badges[x.action]||{label:'📌 '+escAct(x.action),color:'#8a987a'};
+      var time=dt.toLocaleTimeString('fa-IR',{hour:'2-digit',minute:'2-digit'});
+      html+='<div class="game" style="padding:9px 12px;margin-bottom:6px;font-size:.83rem;overflow:hidden">'+
+        '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">'+
+          '<span><strong>'+escAct(x.user_name)+'</strong> <span style="display:inline-block;padding:1px 8px;border-radius:99px;color:#fff;font-size:.7rem;font-weight:700;background:'+b.color+'">'+b.label+'</span></span>'+
+          '<span class="muted" style="font-size:.72rem">'+escAct(time)+'</span>'+
+        '</div>'+
+        (x.details&&x.details.info?'<div class="muted" style="margin-top:4px;font-size:.78rem">'+escAct(x.details.info)+'</div>':'')+
+      '</div>';
+    });
+    el.innerHTML=html;
+  }catch(e){$('activityList')&&($('activityList').innerHTML='<p class="muted">خطا در بارگذاری</p>')}
+}
+
+$('supaLogin').onclick=async function(){
+  var u=$('supaUser').value,p=$('supaPass').value;
+  $('supaErr').style.display='none';
+  if(!u||p.length<6)return $('supaErr').textContent='اسم و رمز (حداقل ۶) رو وارد کن',$('supaErr').style.display='block';
+  $('supaLogin').disabled=true;
+  showLoading();
+  var r=await sb.auth.signInWithPassword({email:fakeEmail(u),password:p});
+  $('supaLogin').disabled=false;
+  if(r.error){
+    hideLoading();
+    $('supaErr').textContent='ورود ناموفق. اگه بار اولته ثبت‌نام کن.';
+    $('supaErr').style.display='block';
+    return;
+  }
+  curUser=r.data.user;curRole=u;curName=NAME_MAP[u]||u;
+  await logAct('login',{info:'ورود به برنامه'});
+  await pull();
+  hideLoading();
+  showApp();
+  if(window.renderAll)window.renderAll();
+};
+
+$('supaSignup').onclick=async function(){
+  var u=$('supaUser').value,p=$('supaPass').value;
+  $('supaErr').style.display='none';
+  if(!u||p.length<6)return $('supaErr').textContent='اسم و رمز (حداقل ۶) رو وارد کن',$('supaErr').style.display='block';
+  $('supaSignup').disabled=true;
+  var r=await sb.auth.signUp({email:fakeEmail(u),password:p});
+  $('supaSignup').disabled=false;
+  if(r.error){$('supaErr').textContent=r.error.message;$('supaErr').style.display='block';return}
+  if(!r.data.session){
+    var r2=await sb.auth.signInWithPassword({email:fakeEmail(u),password:p});
+    if(r2.error){$('supaErr').textContent='ثبت شد، دستی وارد شو';$('supaErr').style.display='block';return}
+    r=r2;
+  }
+  curUser=r.data.user;curRole=u;curName=NAME_MAP[u]||u;
+  await logAct('signup',{info:'ثبت‌نام'});
+  await pull();
+  showApp();
+  if(window.renderAll)window.renderAll();
+};
+
+async function liveSync(){
+  if(document.hidden)return;
+  if(!curUser && !isGuest) return;
+  try{
+    var changed=await pull();
+    if(changed){
+      if(window.__reload)window.__reload();
+      if(window.renderAll)window.renderAll();
+    }
+  }catch(e){console.error('liveSync',e)}
+}
+
+sb.auth.getSession().then(function(r){
+  if(r.data.session){
+    curUser=r.data.session.user;
+    var em=(r.data.session.user.email||'').split('@')[0];
+    curRole=em;curName=NAME_MAP[em]||em;
+    pull().then(function(){showApp();if(window.renderAll)window.renderAll()});
+    document.addEventListener('visibilitychange',function(){
+      if(!document.hidden){
+        liveSync();
+        if(!realtimeConnected && curUser){
+          clearTimeout(_realtimeRetryTimer);
+          _realtimeRetryTimer = setTimeout(function(){ initRealtime(); }, 1000);
+        }
+      }
+    });
+  }else{showLogin()}
+});
+
+})();
+</script>
+</body>
+</html>
