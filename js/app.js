@@ -1036,6 +1036,7 @@
     }
     function renderPreview() {
       var el = $("preview");
+      if (!el) return;
       if (!selected.pair) {
         el.innerHTML = '<div class="preview-empty">برای شروع، یک بازیکن رو بکش توی جای خالی 👆</div>';
       } else {
@@ -1090,7 +1091,10 @@
           "</div>" +
           summary;
       }
+    }
+    function renderSubmit() {
       var btn = $("add");
+      if (!btn) return;
       btn.textContent = "🎲 ثبت بازی";
       btn.disabled = !(selected.pair && selected.winner && selected.type);
     }
@@ -1144,6 +1148,7 @@
       renderWinner();
       renderTypes();
       renderPreview();
+      renderSubmit();
       renderQuickTags();
       saveSelection();
     }

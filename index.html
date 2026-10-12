@@ -92,36 +92,27 @@
 
 <section id="register" class="page active" role="tabpanel" aria-labelledby="tab-register" tabindex="0">
   <div class="card">
-    <h2 id="pairTitle">انتخاب بازیکنان</h2>
-    <p class="dnd-hint" id="dndHint">روی بازیکن بزن تا انتخاب بشه (توی دسکتاپ می‌تونی بکشیش هم)</p>
     <div id="vsSlots" class="vs-slots"></div>
     <input id="poolSearch" class="hidden" placeholder="جستجوی بازیکن…" style="margin-bottom:8px">
     <div id="playerPool" class="player-pool"></div>
     <div id="winnerArea" class="card subsection hidden">
-      <h2>نبرد ⚔️</h2>
+      <h2>برنده کی بود؟ 👑</h2>
       <div id="winnerArena"></div>
-      <div id="winnerHint" class="muted" style="text-align:center;font-size:.78rem;margin-top:2px">روی طرفِ برنده کلیک کن</div>
     </div>
     <div id="typeArea" class="card subsection hidden">
       <h2>نوع برد</h2>
       <div id="typeButtons" class="grid type-buttons"></div>
     </div>
-  </div>
-  <div class="card">
-    <h2>پیش‌نمایش ثبت</h2>
-    <div id="preview" class="preview"></div>
-    <div style="margin-top:12px">
-      <label>یادداشت اختیاری
-        <input id="quickNote" placeholder="مثلاً: بازی حساس، انتقامی..." maxlength="200">
-      </label>
-      <div style="margin-top:10px">
-        <label style="display:block;margin-bottom:6px">برچسب‌ها</label>
-        <div id="quickTags"></div>
-      </div>
-    </div>
-    <div class="actions">
+    <div class="actions" style="margin-top:12px">
       <button id="add" class="btn success" disabled>🎲 ثبت بازی</button>
     </div>
+    <details class="more-details">
+      <summary>یادداشت و برچسب ▾</summary>
+      <div style="margin-top:10px">
+        <input id="quickNote" placeholder="یادداشت اختیاری — مثلاً: بازی حساس، انتقامی..." maxlength="200">
+        <div id="quickTags" style="margin-top:8px"></div>
+      </div>
+    </details>
   </div>
 </section>
 

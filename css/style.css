@@ -351,20 +351,20 @@ textarea {
   grid-template-columns: 1fr auto 1fr;
   gap: 6px;
   align-items: stretch;
-  margin-bottom: 16px;
+  margin-bottom: 10px;
 }
 .vs-slot {
   position: relative;
-  min-height: 126px;
-  padding: 12px 8px;
+  min-height: 58px;
+  padding: 8px 6px;
   background: var(--input);
   border: 2px dashed var(--border);
-  border-radius: 16px;
+  border-radius: 12px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 3px;
   cursor: pointer;
   font: inherit;
   color: var(--text);
@@ -402,6 +402,7 @@ textarea {
   text-align: center;
 }
 .vs-slot-hint {
+  display: none;
   font-size: 0.62rem;
   color: var(--muted);
   opacity: 0.8;
@@ -417,7 +418,7 @@ textarea {
 }
 .vs-slot-name {
   font-weight: 900;
-  font-size: 0.86rem;
+  font-size: 0.8rem;
   line-height: 1.15;
   text-align: center;
   max-width: 100%;
@@ -508,7 +509,7 @@ textarea {
 }
 .pool-player {
   position: relative;
-  padding: 12px 6px 10px;
+  padding: 9px 4px 8px;
   background: var(--input);
   border: 2px solid var(--soft);
   border-radius: 14px;
@@ -3227,3 +3228,29 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 /* 🎲 سوییچر میز */
 .league-switch{background:var(--card);border:1px solid var(--soft);color:var(--ink);border-radius:12px;padding:6px 8px;font:inherit;font-size:.8rem;max-width:132px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.15)}
 .league-switch:focus{outline:2px solid var(--accent,#c9a227);outline-offset:1px}
+
+/* جزئیات بیشتر صفحه ثبت */
+.more-details {
+  margin-top: 10px;
+  border-top: 1px solid var(--soft);
+  padding-top: 8px;
+}
+.more-details summary {
+  cursor: pointer;
+  color: var(--muted);
+  font-size: 0.8rem;
+  font-weight: 700;
+  user-select: none;
+  list-style: none;
+}
+.more-details summary::-webkit-details-marker { display: none; }
+.more-details[open] summary { margin-bottom: 2px; }
+
+/* دکمه ثبت تمام‌عرض در صفحه ثبت */
+#register .actions { margin-top: 14px; }
+#register #add {
+  width: 100%;
+  padding: 14px;
+  font-size: 1.05rem;
+  font-weight: 900;
+}
