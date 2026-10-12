@@ -1091,20 +1091,8 @@
           summary;
       }
       var btn = $("add");
-      if (!selected.pair) {
-        btn.textContent = "➊ ابتدا زوج را انتخاب کنید";
-        btn.disabled = true;
-      } else if (!selected.winner) {
-        btn.textContent = "➋ برنده را انتخاب کنید";
-        btn.disabled = true;
-      } else if (!selected.type) {
-        btn.textContent = "➌ نوع برد را انتخاب کنید";
-        btn.disabled = true;
-      } else {
-        var t = TYPES[selected.type];
-        btn.textContent = "✅ ثبت بازی (" + t.full + " برای " + selected.winner + ")";
-        btn.disabled = false;
-      }
+      btn.textContent = "🎲 ثبت بازی";
+      btn.disabled = !(selected.pair && selected.winner && selected.type);
     }
     function renderQuickTags() {
       var el = $("quickTags");
@@ -1157,9 +1145,41 @@
       renderTypes();
       renderPreview();
       renderQuickTags();
-      var lb = $("last");
-      if (lb) lb.disabled = !games.length;
       saveSelection();
+    }
+    async function deleteLast() {
+      if (!games.length) {
+        message("هنوز بازی‌ای ثبت نشده است.", true);
+        return;
+      }
+      var g = games.slice().sort(function (a, b) {
+        return b.timestamp - a.timestamp;
+      })[0];
+      var ok = await confirmDialog(
+        "آخرین بازی ثبت‌شده حذف می‌شود:\n" + g.winner + " مقابل " + loser(g) + " (" + TYPES[g.type].full + ")",
+        "حذف کن",
+      );
+      if (!ok) return;
+      if (window.__sbDeleteGame) await window.__sbDeleteGame(g.id);
+      var _wa2 = $("winnerArena");
+      if (_wa2) _wa2.dataset.key = "";
+      games = games.filter(function (x) {
+        return x.id !== g.id;
+      });
+      save();
+      lastDeleted = g;
+      showUndo("🗑️ بازی حذف شد: " + g.winner + " مقابل " + loser(g), function () {
+        if (lastDeleted) {
+          var __rid1 = lastDeleted.id;
+          games.push(lastDeleted);
+          save();
+          if (window.__sbMarkDirty) window.__sbMarkDirty(__rid1, "add");
+          lastDeleted = null;
+          renderAll();
+          message("بازی بازگردانی شد.");
+        }
+      });
+      renderAll();
     }
     function toast(html, bad) {
       var e = $("toast");
@@ -1228,40 +1248,6 @@
       requestAnimationFrame(function () {
         forceScrollTop();
       });
-    }
-    async function deleteLast() {
-      if (!games.length) {
-        message("هنوز بازی‌ای ثبت نشده است.", true);
-        return;
-      }
-      var g = games.slice().sort(function (a, b) {
-        return b.timestamp - a.timestamp;
-      })[0];
-      var ok = await confirmDialog(
-        "آخرین بازی ثبت‌شده حذف می‌شود:\n" + g.winner + " مقابل " + loser(g) + " (" + TYPES[g.type].full + ")",
-        "حذف کن",
-      );
-      if (!ok) return;
-      if (window.__sbDeleteGame) await window.__sbDeleteGame(g.id);
-      var _wa2 = $("winnerArena");
-      if (_wa2) _wa2.dataset.key = "";
-      games = games.filter(function (x) {
-        return x.id !== g.id;
-      });
-      save();
-      lastDeleted = g;
-      showUndo("🗑️ بازی حذف شد: " + g.winner + " مقابل " + loser(g), function () {
-        if (lastDeleted) {
-          var __rid1 = lastDeleted.id;
-          games.push(lastDeleted);
-          save();
-          if (window.__sbMarkDirty) window.__sbMarkDirty(__rid1, "add");
-          lastDeleted = null;
-          renderAll();
-          message("بازی بازگردانی شد.");
-        }
-      });
-      renderAll();
     }
     function tournamentGames() {
       return games.filter(function (g) {
@@ -3508,7 +3494,6 @@
         gotoPage("settings");
       };
       $("add").onclick = add;
-      $("last").onclick = deleteLast;
       var poolSearchEl = $("poolSearch");
       if (poolSearchEl)
         poolSearchEl.addEventListener("input", function () {
