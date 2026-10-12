@@ -921,6 +921,7 @@
       realtimeChannel = sb
         .channel("games-realtime")
         .on("postgres_changes", { event: "*", schema: "public", table: "games" }, function (payload) {
+          if (payload && payload.eventType === "INSERT") notifyNewGame(payload.new);
           debouncedRealtimeSync();
         })
         .subscribe(function (status) {
@@ -944,6 +945,29 @@
       realtimeConnected = false;
       updateRealtimeBadge(false);
     }
+  }
+
+  // اعلان بازی جدید وقتی کاربر دیگری ثبت می‌کند
+  function notifyNewGame(row) {
+    try {
+      if (!row || !row.data) return;
+      if (curUser && row.user_id && row.user_id === curUser.id) return; // بازی خودم
+      var d = row.data;
+      if (!d.winner) return;
+      var loser = d.winner === d.player1 ? d.player2 : d.player1;
+      var tname = { normal: "عادی", mars: "مارس", black: "سیاه" }[d.type] || "";
+      var text = "🎲 " + d.winner + " برد" + (loser ? " مقابل " + loser : "") + (tname ? " (" + tname + ")" : "");
+      if (window.message) window.message(text);
+      // اپ در پس‌زمینه؟ → نوتیفیکیشن محلی (بدون سرور)
+      if (document.hidden && "Notification" in window && Notification.permission === "granted" && navigator.serviceWorker) {
+        navigator.serviceWorker.ready.then(function (reg) {
+          reg.showNotification("پاتوق تخته‌نرد", {
+            body: text, icon: "./icon-192.png", badge: "./icon-192.png",
+            dir: "rtl", lang: "fa", tag: "patogh-game"
+          });
+        }).catch(function () {});
+      }
+    } catch (e) { console.warn("notifyNewGame", e); }
   }
 
   function debouncedRealtimeSync() {

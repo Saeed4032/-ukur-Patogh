@@ -3614,6 +3614,7 @@
     setupCollapsibles();
     updatePlayerCountBadge();
     window.renderAll = renderAll;
+    window.message = message;
     window.__reload = load;
     window.__loaded = true;
     window.fill = fill;
@@ -3808,3 +3809,28 @@ document.addEventListener("click", function (e) {
   else if (act === "fullscreen" && window.toggleFullscreen) window.toggleFullscreen();
   else if (act === "print") window.print();
 });
+
+// ===== دکمه‌ی اعلان بازی جدید =====
+(function () {
+  var bell = document.getElementById("notifyBell");
+  if (!bell) return;
+  if (!("Notification" in window)) { bell.style.display = "none"; return; }
+  function paint() {
+    var p = Notification.permission;
+    bell.textContent = p === "granted" ? "🔔" : "🔕";
+    bell.classList.toggle("on", p === "granted");
+    bell.title = p === "granted" ? "اعلان بازی جدید روشن است" : "روشن‌کردن اعلان بازی جدید";
+  }
+  paint();
+  bell.addEventListener("click", function () {
+    if (Notification.permission === "granted") {
+      if (window.message) window.message("اعلان بازی‌های جدید روشن است 🔔");
+      return;
+    }
+    Notification.requestPermission().then(function (p) {
+      paint();
+      if (p === "granted" && window.message) window.message("اعلان بازی جدید روشن شد 🔔");
+      else if (p === "denied" && window.message) window.message("اجازه‌ی اعلان داده نشد — از تنظیمات مرورگر می‌توانی روشنش کنی", true);
+    });
+  });
+})();

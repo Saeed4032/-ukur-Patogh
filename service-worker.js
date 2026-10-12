@@ -2,7 +2,7 @@
    - صفحه و کدهای برنامه (html/js/css): اول شبکه (با timeout)، اگه نشد از کش.
      این‌طوری نسخه‌ی جدید با اولین رفرش دیده می‌شه.
    - فونت، آیکون و supabase.js: اول کش، پشت‌صحنه تازه می‌شن. */
-var VERSION = 'v10';
+var VERSION = 'v11';
 var CACHE = 'patogh-' + VERSION;
 var CORE = [
   './',
@@ -110,4 +110,17 @@ self.addEventListener('fetch', function (e) {
   var isPinned = /\/supabase\.js$/.test(p);
 
   e.respondWith(isCode && !isPinned ? networkFirst(e, key) : cacheFirst(e, key));
+});
+
+// کلیک روی نوتیفیکیشن → فوکوس روی اپ
+self.addEventListener('notificationclick', function (e) {
+  e.notification.close();
+  e.waitUntil(
+    clients.matchAll({ type: 'window', includeUncontrolled: true }).then(function (list) {
+      for (var i = 0; i < list.length; i++) {
+        if ('focus' in list[i]) return list[i].focus();
+      }
+      if (clients.openWindow) return clients.openWindow('./');
+    })
+  );
 });
