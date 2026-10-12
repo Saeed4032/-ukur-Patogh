@@ -59,6 +59,7 @@
 <header class="hero">
   <div class="hero-title-row">
     <button id="notifyBell" class="notify-bell" type="button" aria-label="اعلان بازی جدید">🔕</button>
+    <select id="leagueSwitch" class="league-switch" title="انتخاب میز" aria-label="انتخاب میز"></select>
     <span class="hero-logo">
       <svg class="cukur-logo" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <path d="M6 26 L30 4 L54 26" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
@@ -249,6 +250,19 @@
       <label>شدت رنگ<select id="intensity">
         <option value="calm">آرام</option><option value="standard">استاندارد</option><option value="bold">پررنگ</option>
       </select></label>
+    </div>
+  </div>
+  <div class="card collapsible" id="leagueMgmtCard" style="display:none">
+    <button type="button" class="collapse-header" data-target="leagueMgmtBody" aria-expanded="false">
+      <span class="collapse-title">🎲 میزها (ادمین)</span>
+      <span class="collapse-arrow">▼</span>
+    </button>
+    <div class="collapse-body" id="leagueMgmtBody">
+      <p class="muted" style="margin:0 0 10px;font-size:.8rem">هر میز جدول، بازی‌ها و بازیکنای خودش رو داره. با ساخت میز، خودکار به همون میز می‌ری؛ از سوییچر بالای صفحه بین میزها جابه‌جا شو.</p>
+      <div class="actions">
+        <input id="newLeagueName" placeholder="نام میز جدید (مثلاً میز فامیل)" style="flex:1;min-width:160px">
+        <button id="addLeague" class="btn success">ساخت میز</button>
+      </div>
     </div>
   </div>
   <div class="card collapsible" id="playerMgmtCard" style="display:none">

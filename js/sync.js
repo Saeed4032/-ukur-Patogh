@@ -71,11 +71,15 @@
     }
     saveDirty();
   };
-  var PKEY = "backgammon_players",
-    AVKEY = "backgammon_avatars",
-    KEY = "backgammon_main_games",
-    TKEY = "backgammon_tournaments",
-    SKEY = "backgammon_main_settings";
+  var LGE = localStorage.getItem("backgammon_league") || "main",
+    LGS = LGE === "main" ? "" : "__" + LGE,
+    TID = "main" + LGS;
+  var PKEY = "backgammon_players" + LGS,
+    AVKEY = "backgammon_avatars" + LGS,
+    KEY = "backgammon_main_games" + LGS,
+    TKEY = "backgammon_tournaments" + LGS,
+    SKEY = "backgammon_main_settings" + LGS;
+  window.__leagueId = LGE;
   /* BLOCKED_PLAYERS و isBlocked در بلوک اسکریپت اول (داخل IIFE، پیش از
    فراخوانی load()) تعریف و روی window هم قرار داده شده‌اند تا این
    بلوک هم بتواند از آن‌ها استفاده کند. */
@@ -192,7 +196,7 @@
   async function logAct(action, details) {
     if (!curName || isGuest) return;
     try {
-      await sb.from("activity_log").insert([{ user_name: curName, action: action, details: details || {} }]);
+      await sb.from("activity_log").insert([{ user_name: curName, action: action, details: details || {}, league: LGE }]);
     } catch (e) {}
   }
 
@@ -256,7 +260,7 @@
         if (!ids.length) break;
         var r = await sb.from("games").upsert(
           ids.map(function (i) {
-            return { id: i, data: { id: i, deleted: true, deletedAt: Date.now() } };
+            return { id: i, data: { id: i, deleted: true, deletedAt: Date.now() }, league: LGE };
           }),
         );
         if (r.error) {
@@ -348,9 +352,9 @@
         saveDirty();
         await flushDeletes();
       }
-      var pr = await sb.from("players").delete().neq("name", "");
+      var pr = await sb.from("players").delete().neq("name", "").eq("league", LGE);
       if (pr.error) console.error("clear all players", pr.error);
-      var tr = await sb.from("tournament_state").upsert([{ id: "main", data: { deleted_players: [] } }]);
+      var tr = await sb.from("tournament_state").upsert([{ id: TID, data: { deleted_players: [] } }]);
       if (tr.error) console.error("clear tournament", tr.error);
     } catch (e) {
       console.error("clearAll data", e);
@@ -388,23 +392,31 @@
     var _u = (await sb.auth.getUser()).data.user;
     if (!(_u && _u.app_metadata && _u.app_metadata.role === "admin")) return;
     try {
-      await sb.from("players").update({ avatar: null }).eq("name", name);
+      await sb.from("players").update({ avatar: null }).eq("name", name).eq("league", LGE);
     } catch (e) {
       console.error("avatar remove", e);
     }
+  };
+  window.__saveLeagues = async function (list) {
+    var _u = (await sb.auth.getUser()).data.user;
+    if (!(_u && _u.app_metadata && _u.app_metadata.role === "admin")) return { ok: false, msg: "admin only" };
+    var r = await sb.from("tournament_state").upsert([{ id: "__meta__", data: { leagues: list } }]);
+    if (r.error) return { ok: false, msg: r.error.message };
+    localStorage.setItem("backgammon_leagues", JSON.stringify(list));
+    return { ok: true };
   };
   window.__sbDeletePlayer = async function (name) {
     if (!name) return;
     var _u = (await sb.auth.getUser()).data.user;
     if (!(_u && _u.app_metadata && _u.app_metadata.role === "admin")) return;
     try {
-      await sb.from("players").delete().eq("name", name);
-      var t = await sb.from("tournament_state").select("data").eq("id", "main").maybeSingle();
+      await sb.from("players").delete().eq("name", name).eq("league", LGE);
+      var t = await sb.from("tournament_state").select("data").eq("id", TID).maybeSingle();
       var data = (t.data && t.data.data) || {};
       var del = Array.isArray(data.deleted_players) ? data.deleted_players.slice() : [];
       if (del.indexOf(name) < 0) del.push(name);
       data.deleted_players = del;
-      await sb.from("tournament_state").upsert([{ id: "main", data: data }]);
+      await sb.from("tournament_state").upsert([{ id: TID, data: data }]);
     } catch (e) {
       console.error("delete player", e);
     }
@@ -418,8 +430,8 @@
     var adds = [],
       edits = [];
     list.forEach(function (x) {
-      if (dirtyIds[x.id] === "add") adds.push({ id: x.id, data: x, user_id: uid });
-      else edits.push({ id: x.id, data: x });
+      if (dirtyIds[x.id] === "add") adds.push({ id: x.id, data: x, user_id: uid, league: LGE });
+      else edits.push({ id: x.id, data: x, league: LGE });
     });
     var res = { error: null };
     if (adds.length) res = await sb.from("games").upsert(adds);
@@ -439,7 +451,7 @@
       needPush = false;
     try {
       await flushDeletes();
-      var p = await sb.from("players").select(light ? "name" : "name,avatar");
+      var p = await sb.from("players").select(light ? "name" : "name,avatar").eq("league", LGE);
       if (!p.error) {
         if (!light) _lastFullPull = Date.now();
         var remotePlayers = Array.isArray(p.data) ? p.data : [];
@@ -501,7 +513,7 @@
           }
         }
       }
-      var g = await sb.from("games").select("id,data");
+      var g = await sb.from("games").select("id,data").eq("league", LGE);
       if (!g.error) {
         gamesOk = true;
         var serverGames = [],
@@ -541,7 +553,7 @@
             var uid = curUser && curUser.id;
             await sb.from("games").upsert(
               localGames.map(function (x) {
-                return { id: x.id, data: x, user_id: uid };
+                return { id: x.id, data: x, user_id: uid, league: LGE };
               }),
             );
             localGames.forEach(function (x) {
@@ -584,7 +596,7 @@
           }
         }
       }
-      var t = await sb.from("tournament_state").select("data").eq("id", "main").maybeSingle();
+      var t = await sb.from("tournament_state").select("data").eq("id", TID).maybeSingle();
       if (!t.error) {
         var serverT = (t.data && t.data.data) || null;
         if (serverT && typeof serverT === "object" && Object.keys(serverT).length) {
@@ -609,6 +621,16 @@
           }
         }
       }
+      try {
+        var mt = await sb.from("tournament_state").select("data").eq("id", "__meta__").maybeSingle();
+        if (!mt.error && mt.data && mt.data.data && Array.isArray(mt.data.data.leagues) && mt.data.data.leagues.length) {
+          var lgStr = JSON.stringify(mt.data.data.leagues);
+          if (lgStr !== localStorage.getItem("backgammon_leagues")) {
+            localStorage.setItem("backgammon_leagues", lgStr);
+            if (typeof window.__leaguesUpdated === "function") window.__leaguesUpdated();
+          }
+        }
+      } catch (_) {}
     } catch (e) {
       console.error("pull", e);
     }
@@ -702,7 +724,7 @@
             return safeAv(a[n]);
           })
           .map(function (n) {
-            return { name: n, avatar: safeAv(a[n]), user_id: (curUser && curUser.id) || null };
+            return { name: n, avatar: safeAv(a[n]), user_id: (curUser && curUser.id) || null, league: LGE };
           });
         if (rows.length) {
           var r2 = await sb.from("players").upsert(rows);
@@ -713,11 +735,11 @@
       } else if (k === PKEY) {
         var list = JSON.parse(v);
         var rows2 = list.map(function (n) {
-          return { name: n, user_id: (curUser && curUser.id) || null };
+          return { name: n, user_id: (curUser && curUser.id) || null, league: LGE };
         });
         if (rows2.length) {
           try {
-            var t3 = await sb.from("tournament_state").select("data").eq("id", "main").maybeSingle();
+            var t3 = await sb.from("tournament_state").select("data").eq("id", TID).maybeSingle();
             if (!t3.error && t3.data && t3.data.data && Array.isArray(t3.data.data.deleted_players)) {
               var data3 = t3.data.data;
               var newDel = data3.deleted_players.filter(function (n) {
@@ -725,7 +747,7 @@
               });
               if (newDel.length !== data3.deleted_players.length) {
                 data3.deleted_players = newDel;
-                await sb.from("tournament_state").upsert([{ id: "main", data: data3 }]);
+                await sb.from("tournament_state").upsert([{ id: TID, data: data3 }]);
               }
             }
           } catch (_) {}
@@ -737,7 +759,7 @@
       } else if (k === TKEY) {
         var t = JSON.parse(v);
         try {
-          var t2 = await sb.from("tournament_state").select("data").eq("id", "main").maybeSingle();
+          var t2 = await sb.from("tournament_state").select("data").eq("id", TID).maybeSingle();
           if (!t2.error && t2.data && t2.data.data) {
             var rm = t2.data.data;
             if (Array.isArray(rm.deleted_players)) t.deleted_players = rm.deleted_players;
@@ -752,7 +774,7 @@
             }
           }
         } catch (_) {}
-        var r4 = await sb.from("tournament_state").upsert([{ id: "main", data: t }]);
+        var r4 = await sb.from("tournament_state").upsert([{ id: TID, data: t }]);
         if (r4.error) {
           console.error("push tournament failed:", r4.error);
         }
@@ -921,7 +943,7 @@
       realtimeChannel = sb
         .channel("games-realtime")
         .on("postgres_changes", { event: "*", schema: "public", table: "games" }, function (payload) {
-          if (payload && payload.eventType === "INSERT") notifyNewGame(payload.new);
+          if (payload && payload.eventType === "INSERT" && ((payload.new && payload.new.league) || "main") === LGE) notifyNewGame(payload.new);
           debouncedRealtimeSync();
         })
         .subscribe(function (status) {
@@ -1039,6 +1061,8 @@
     startPolling();
     var pmCard = $("playerMgmtCard");
     if (pmCard) pmCard.style.display = isAdmin() ? "" : "none";
+    var lgCard = $("leagueMgmtCard");
+    if (lgCard) lgCard.style.display = isAdmin() ? "" : "none";
     ["tReset", "tEditName", "tEditStart", "importBtn", "clear"].forEach(function (id) {
       var el = $(id);
       if (el) el.style.display = isAdmin() ? "" : "none";
@@ -1448,7 +1472,7 @@
   }
   async function loadActivities() {
     try {
-      var r = await sb.from("activity_log").select("*").order("created_at", { ascending: false }).limit(50);
+      var r = await sb.from("activity_log").select("*").eq("league", LGE).order("created_at", { ascending: false }).limit(50);
       var el = $("activityList");
       if (!el) return;
       if (!r.data || !r.data.length) {

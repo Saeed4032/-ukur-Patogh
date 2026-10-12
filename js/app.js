@@ -27,13 +27,15 @@
     window.BLOCKED_PLAYERS = BLOCKED_PLAYERS;
     window.isBlocked = isBlocked;
     window.unblockPlayer = unblockPlayer;
-    var PKEY = "backgammon_players";
-    var AVKEY = "backgammon_avatars";
+    var LGE = localStorage.getItem("backgammon_league") || "main",
+      LGS = LGE === "main" ? "" : "__" + LGE;
+    var PKEY = "backgammon_players" + LGS;
+    var AVKEY = "backgammon_avatars" + LGS;
     var PLAYERS = [],
       PAIRS = [],
       avatars = {},
-      KEY = "backgammon_main_games",
-      SKEY = "backgammon_main_settings";
+      KEY = "backgammon_main_games" + LGS,
+      SKEY = "backgammon_main_settings" + LGS;
     var TYPES = {
       normal: { name: "عادی", full: "برد عادی", points: 1, cls: "normal", emoji: "✅" },
       mars: { name: "مارس", full: "مارس", points: 2, cls: "mars", emoji: "🔥" },
@@ -171,7 +173,7 @@
       lastDeleted = null,
       undoTimer = null,
       poolFilter = "";
-    var TKEY = "backgammon_tournaments";
+    var TKEY = "backgammon_tournaments" + LGS;
     var tournament = { name: "تورنمنت ۱", start: 0, nextNum: 1 };
     var archive = [];
 
@@ -3410,6 +3412,61 @@
         };
       });
     }
+    /* 🎲 میزها — هر میز داده‌ی مستقل دارد و با تغییر سوییچر، اپ ریلود می‌شود */
+    function leaguesCache() {
+      try {
+        var l = JSON.parse(localStorage.getItem("backgammon_leagues") || "null");
+        if (Array.isArray(l) && l.length) return l;
+      } catch (_) {}
+      return [{ id: "main", label: "میز اصلی" }];
+    }
+    function renderLeagueSwitch() {
+      var sel = $("leagueSwitch");
+      if (!sel) return;
+      var cur = localStorage.getItem("backgammon_league") || "main";
+      var list = leaguesCache();
+      if (
+        !list.some(function (l) {
+          return l.id === cur;
+        })
+      )
+        list = list.concat([{ id: cur, label: "میز اصلی" }]);
+      sel.innerHTML = list
+        .map(function (l) {
+          return '<option value="' + esc(l.id) + '"' + (l.id === cur ? " selected" : "") + ">🎲 " + esc(l.label) + "</option>";
+        })
+        .join("");
+      sel.onchange = function () {
+        if (sel.value !== cur) {
+          localStorage.setItem("backgammon_league", sel.value);
+          location.reload();
+        }
+      };
+    }
+    window.__leaguesUpdated = renderLeagueSwitch;
+    renderLeagueSwitch();
+    var addLgBtn = $("addLeague");
+    if (addLgBtn)
+      addLgBtn.onclick = async function () {
+        var inp = $("newLeagueName"),
+          label = (inp.value || "").trim();
+        if (label.length < 2) {
+          message("نام میز کوتاهه.", true);
+          return;
+        }
+        var list = leaguesCache();
+        var id = "t" + Date.now().toString(36);
+        list.push({ id: id, label: label });
+        addLgBtn.disabled = true;
+        var r = window.__saveLeagues ? await window.__saveLeagues(list) : { ok: false, msg: "sync not ready" };
+        addLgBtn.disabled = false;
+        if (!r.ok) {
+          message("ساخت میز نشد: " + (r.msg || "خطا"), true);
+          return;
+        }
+        localStorage.setItem("backgammon_league", id);
+        location.reload();
+      };
     function updatePlayerCountBadge() {
       var b = $("playerCountBadge");
       if (b) b.textContent = n(PLAYERS.length, 0) + " نفر";
