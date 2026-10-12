@@ -1,6 +1,6 @@
 (function () {
-  var U = "https://tnnvqgbthiwwupadqszn.supabase.co";
-  var K =
+  var U = (window.PATOGH_CONFIG && window.PATOGH_CONFIG.SUPABASE_URL) || "https://tnnvqgbthiwwupadqszn.supabase.co";
+  var K = (window.PATOGH_CONFIG && window.PATOGH_CONFIG.SUPABASE_ANON_KEY) ||
     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRubnZxZ2J0aGl3d3VwYWRxc3puIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODk1NjA5OTYsImV4cCI6MjEwNTEzNjk5Nn0.KecGjf2Qq9xcm5cSO5b5hxf3hyhAfFE1l23dn5BXf5g";
   var sb;
   var initRetry = 0;
@@ -79,13 +79,13 @@
   /* BLOCKED_PLAYERS و isBlocked در بلوک اسکریپت اول (داخل IIFE، پیش از
    فراخوانی load()) تعریف و روی window هم قرار داده شده‌اند تا این
    بلوک هم بتواند از آن‌ها استفاده کند. */
-  var NAME_MAP = { saeed: "سعید جنائی", mojtaba: "مجتبی دهقان", hossein: "حسین دهقان" };
+  var NAME_MAP = (window.PATOGH_CONFIG && window.PATOGH_CONFIG.NAME_MAP) || { saeed: "سعید جنائی", mojtaba: "مجتبی دهقان", hossein: "حسین دهقان" };
   /* BLOCKED_PLAYERS در بالای فایل تعریف شده است (یک منبع حقیقت). */
 
   function $(id) {
     return document.getElementById(id);
   }
-  var AV_RE = /^data:image\/(?:jpeg|png|webp|gif);base64,[A-Za-z0-9+\/]+={0,2}$/;
+  var AV_RE = /^(?:data:image\/(?:jpeg|png|webp|gif);base64,[A-Za-z0-9+\/]+={0,2}|https:\/\/tnnvqgbthiwwupadqszn\.supabase\.co\/storage\/v1\/object\/public\/avatars\/[^\s"']+)$/;
   function safeAv(v) {
     return typeof v === "string" && v.length <= 400000 && AV_RE.test(v) ? v : "";
   }
@@ -355,6 +355,33 @@
     } catch (e) {
       console.error("clearAll data", e);
     }
+  };
+  // آپلود آواتار به Supabase Storage — در صورت موفقیت آدرس عمومی برمی‌گرداند
+  window.__sbUploadAvatar = async function (name, dataUrl) {
+    try {
+      if (!name || typeof dataUrl !== "string" || dataUrl.indexOf("data:image/") !== 0) return null;
+      var _u = (await sb.auth.getUser()).data.user;
+      if (!_u) return null;
+      var m = dataUrl.match(/^data:image\/(jpeg|png|webp|gif);base64,(.+)$/);
+      if (!m) return null;
+      var ext = m[1] === "jpeg" ? "jpg" : m[1];
+      var bin = atob(m[2]);
+      var bytes = new Uint8Array(bin.length);
+      for (var i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+      var path = encodeURIComponent(name) + "." + ext;
+      var up = await sb.storage.from("avatars").upload(path, bytes.buffer, { contentType: "image/" + m[1], upsert: true });
+      if (up.error) { console.warn("avatar upload", up.error); return null; }
+      var pub = sb.storage.from("avatars").getPublicUrl(path);
+      return pub && pub.data && pub.data.publicUrl ? pub.data.publicUrl + "?v=" + Date.now() : null;
+    } catch (e) { console.warn("avatar upload", e); return null; }
+  };
+  window.__sbRemoveAvatarFile = async function (name) {
+    try {
+      var _u = (await sb.auth.getUser()).data.user;
+      if (!(_u && _u.app_metadata && _u.app_metadata.role === "admin")) return;
+      var base = encodeURIComponent(name);
+      await sb.storage.from("avatars").remove([base + ".png", base + ".jpg", base + ".webp", base + ".gif"]);
+    } catch (e) { console.warn("avatar file remove", e); }
   };
   window.__sbAvatarRemoved = async function (name) {
     if (!name) return;
@@ -675,7 +702,7 @@
             return safeAv(a[n]);
           })
           .map(function (n) {
-            return { name: n, avatar: safeAv(a[n]) };
+            return { name: n, avatar: safeAv(a[n]), user_id: (curUser && curUser.id) || null };
           });
         if (rows.length) {
           var r2 = await sb.from("players").upsert(rows);
@@ -686,7 +713,7 @@
       } else if (k === PKEY) {
         var list = JSON.parse(v);
         var rows2 = list.map(function (n) {
-          return { name: n };
+          return { name: n, user_id: (curUser && curUser.id) || null };
         });
         if (rows2.length) {
           try {

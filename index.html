@@ -2,6 +2,7 @@
 <html lang="fa" dir="rtl">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob: https://tnnvqgbthiwwupadqszn.supabase.co; font-src 'self' data:; connect-src 'self' https://tnnvqgbthiwwupadqszn.supabase.co wss://tnnvqgbthiwwupadqszn.supabase.co; manifest-src 'self'; worker-src 'self'">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#0a0a12">
 <title>پاتوق تخته‌نرد</title>
@@ -132,19 +133,19 @@
       <table style="width: 100%; min-width: 600px; border-collapse: collapse;">
         <thead>
           <tr style="background: linear-gradient(145deg, var(--primary), var(--dark)); color: var(--contrast);">
-            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" onclick="sortTable('avatar')">👤 بازیکن</th>
-            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" onclick="sortTable('games')">🎲 بازی</th>
-            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" onclick="sortTable('wins')">🏆 برد</th>
-            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" onclick="sortTable('winRate')">📊 درصد برد</th>
-            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" onclick="sortTable('points')">⭐ امتیاز کل</th>
-            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" onclick="sortTable('breakdown')">🎱 نوع برد</th>
+            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" data-action="sort" data-sort="avatar">👤 بازیکن</th>
+            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" data-action="sort" data-sort="games">🎲 بازی</th>
+            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" data-action="sort" data-sort="wins">🏆 برد</th>
+            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" data-action="sort" data-sort="winRate">📊 درصد برد</th>
+            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" data-action="sort" data-sort="points">⭐ امتیاز کل</th>
+            <th style="padding: 12px 8px; text-align: center; font-weight: 700; cursor: pointer;" data-action="sort" data-sort="breakdown">🎱 نوع برد</th>
           </tr>
         </thead>
         <tbody id="rankbody">
         </tbody>
       </table>
     </div>
-    <button onclick="toggleFullscreen()" style="margin-top: 12px; padding: 10px 20px; background: var(--primary); color: var(--contrast); border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 700; cursor: pointer; width: 100%;">
+    <button data-action="fullscreen" style="margin-top: 12px; padding: 10px 20px; background: var(--primary); color: var(--contrast); border: none; border-radius: 8px; font-size: 0.9rem; font-weight: 700; cursor: pointer; width: 100%;">
       📱 نمایش تمام‌صفحه (چرخش خودکار)
     </button>
   </div>
@@ -170,12 +171,12 @@
   <div class="card">
     <h2>جدول رده‌بندی تورنمنت</h2>
     <div class="sortbar" id="tSortBar">
-      <button class="sort-chip" onclick="sortTournament('rank',this)">🏅 رتبه <span class="sort-indicator">↕</span></button>
-      <button class="sort-chip" onclick="sortTournament('name',this)">👤 نام <span class="sort-indicator">↕</span></button>
-      <button class="sort-chip" onclick="sortTournament('games',this)">🎲 بازی <span class="sort-indicator">↕</span></button>
-      <button class="sort-chip" onclick="sortTournament('wins',this)">🏆 برد <span class="sort-indicator">↕</span></button>
-      <button class="sort-chip" onclick="sortTournament('winrate',this)">📈 درصد <span class="sort-indicator">↕</span></button>
-      <button class="sort-chip" onclick="sortTournament('points',this)">⭐ امتیاز <span class="sort-indicator">↕</span></button>
+      <button class="sort-chip" data-action="sort-tournament" data-sort="rank">🏅 رتبه <span class="sort-indicator">↕</span></button>
+      <button class="sort-chip" data-action="sort-tournament" data-sort="name">👤 نام <span class="sort-indicator">↕</span></button>
+      <button class="sort-chip" data-action="sort-tournament" data-sort="games">🎲 بازی <span class="sort-indicator">↕</span></button>
+      <button class="sort-chip" data-action="sort-tournament" data-sort="wins">🏆 برد <span class="sort-indicator">↕</span></button>
+      <button class="sort-chip" data-action="sort-tournament" data-sort="winrate">📈 درصد <span class="sort-indicator">↕</span></button>
+      <button class="sort-chip" data-action="sort-tournament" data-sort="points">⭐ امتیاز <span class="sort-indicator">↕</span></button>
     </div>
     <div class="rank-list" id="tRankBody"></div>
   </div>
@@ -203,7 +204,7 @@
       <label>از تاریخ<input type="date" id="fromDate"></label>
       <label>تا تاریخ<input type="date" id="toDate"></label>
     </div>
-    <div class="actions"><button id="exportCSV" class="btn secondary">📊 خروجی CSV اکسل</button><button class="btn secondary" onclick="window.print()">🖨️ چاپ / PDF</button></div>
+    <div class="actions"><button id="exportCSV" class="btn secondary">📊 خروجی CSV اکسل</button><button class="btn secondary" data-action="print">🖨️ چاپ / PDF</button></div>
     </details>
   </div>
   <div id="list" class="list"></div>
@@ -319,12 +320,12 @@
 <button id="top">↑</button>
 <div id="modalBg" class="modalbg"></div>
 <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+<script src="js/config.js"></script>
 <script src="js/app.js"></script>
 <div id="offlineBar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#7a5f1a;color:#fff;padding:8px 12px;z-index:99999;text-align:center;font-size:13px;cursor:pointer">🔌 حالت محلی — سرور در دسترس نیست. برای تلاش مجدد اینجا را لمس کن</div>
 <script src="js/local-mode.js"></script>
 <!-- بارگذاری از CDN رسمی، همراه با fallback از CDNهای جایگزین -->
 <script src="./supabase.js"></script>
-<script src="js/supabase-loader.js"></script>
 <script src="js/sync.js"></script>
 <script src="js/signup.js"></script>
 <script src="js/sounds.js"></script>

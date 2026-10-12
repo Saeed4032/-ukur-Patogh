@@ -7,7 +7,7 @@
    loadPlayers() همین‌جا اجرا می‌شود. چون کدِ بلوک اسکریپت دوم
    (pull / ensurePlayerExists) هم به آن نیاز دارد و به متغیرهای این
    IIFE دسترسی ندارد، هر سه را روی window هم می‌گذاریم. */
-    var BLOCKED_PLAYERS = ["سعید جنائی", "مجتبی دهقان", "حسین دهقان"];
+    var BLOCKED_PLAYERS = (window.PATOGH_CONFIG && window.PATOGH_CONFIG.BLOCKED_PLAYERS) || ["سعید جنائی", "مجتبی دهقان", "حسین دهقان"];
     function isBlocked(name) {
       return typeof name === "string" && BLOCKED_PLAYERS.indexOf(name.trim()) > -1;
     }
@@ -615,9 +615,19 @@
         cleanup();
         if (!f) return;
         processImage(f, function (dataUrl) {
-          avatars[playerName] = dataUrl;
-          saveAvatars();
-          if (typeof callback === "function") callback();
+          var done = function (url) {
+            avatars[playerName] = url;
+            saveAvatars();
+            if (typeof callback === "function") callback();
+          };
+          // اول تلاش برای آپلود به Storage؛ اگر نشد همان base64 ذخیره می‌شود
+          if (window.__sbUploadAvatar) {
+            window.__sbUploadAvatar(playerName, dataUrl).then(function (url) {
+              done(url || dataUrl);
+            }).catch(function () { done(dataUrl); });
+          } else {
+            done(dataUrl);
+          }
         });
       };
       inp.click();
@@ -641,6 +651,7 @@
       delete avatars[playerName];
       saveAvatars();
       if (window.__sbAvatarRemoved) window.__sbAvatarRemoved(playerName);
+      if (window.__sbRemoveAvatarFile) window.__sbRemoveAvatarFile(playerName);
       if (typeof callback === "function") callback();
     }
 
@@ -3672,3 +3683,14 @@ function sortTournament(column, th) {
     tbody.appendChild(r);
   });
 }
+
+// ===== اتصال رویدادها بدون onclick ایستا (سازگار با CSP) =====
+document.addEventListener("click", function (e) {
+  var el = e.target.closest("[data-action]");
+  if (!el) return;
+  var act = el.getAttribute("data-action");
+  if (act === "sort" && window.sortTable) window.sortTable(el.getAttribute("data-sort"));
+  else if (act === "sort-tournament" && window.sortTournament) window.sortTournament(el.getAttribute("data-sort"), el);
+  else if (act === "fullscreen" && window.toggleFullscreen) window.toggleFullscreen();
+  else if (act === "print") window.print();
+});
