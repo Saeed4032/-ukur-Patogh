@@ -524,6 +524,55 @@
     function rankingSort(a, b) {
       return rankingSortIn(a, b, games);
     }
+
+    // ===== سخنگوی مسابقه — کامنت طنز بعد از هر بازی =====
+    function commentaryFor(g) {
+      if (!g || !g.winner) return "";
+      var w = g.winner;
+      var l = g.winner === g.player1 ? g.player2 : g.player1;
+      // اگر بازی هنوز در لیست نیست (رویداد realtime)، موقتاً اضافه‌اش می‌کنیم
+      var pool = games.some(function (x) { return x.id === g.id; }) ? games : games.concat([g]);
+      // برد پیاپی برنده
+      var ws = 0;
+      pool.filter(function (x) { return x.player1 === w || x.player2 === w; })
+        .sort(function (x, y) { return y.timestamp - x.timestamp; })
+        .every(function (x) { if (x.winner === w) { ws++; return true; } return false; });
+      // باخت پیاپی بازنده
+      var ls = 0;
+      pool.filter(function (x) { return x.player1 === l || x.player2 === l; })
+        .sort(function (x, y) { return y.timestamp - x.timestamp; })
+        .every(function (x) { if (x.winner !== l) { ls++; return true; } return false; });
+      // مجموع بردها و رودررو
+      var wWins = pool.filter(function (x) { return x.winner === w; }).length;
+      var h = h2hIn(w, l, pool);
+      var diff = h.aw - h.bw;
+
+      var cands = [];
+      var typeLines = [];
+      if (g.type === "black") typeLines.push(
+        "🖤 سیاه! " + w + " حساب " + l + " رو صاف کرد!",
+        "💀 " + l + " سیاه شد... صدای هیاهوی میز رو بشنویم 😂"
+      );
+      else if (g.type === "mars") typeLines.push(
+        "🔥 مارس! " + w + " داغش کرد " + l + " رو!",
+        "🌶️ مارس تند بود — " + l + " هنوز داره می‌سوزه"
+      );
+      typeLines.forEach(function (t) { cands.push(t); cands.push(t); }); // وزن بیشتر
+      if (ws >= 5) cands.push("🚨 " + w + " با " + ws + " برد پیاپی داره آتیش می‌گیره! جلوشو بگیرین!");
+      else if (ws === 4) cands.push("🔥 " + w + " چهارمین برد پیاپی! سری محکمه");
+      else if (ws === 3) cands.push("🔥 " + w + " سومین برد پشت سر هم — سری شروع شد");
+      if (ls >= 4) cands.push("🥲 " + l + " " + ls + " تا پشت سر هم باخت... کسی به دادش برسه");
+      else if (ls === 3) cands.push("😅 " + l + " سومین باخت پیاپی — یه چای مهربونانه براش بیارین ☕");
+      if (diff >= 5) cands.push("😎 " + w + " با " + diff + " برد اختلاف داره " + l + " رو به اسمش سند می‌زنه");
+      if (wWins > 0 && wWins % 25 === 0) cands.push("🏆 " + w + " به " + wWins + " برد رسید — جشنواره‌ست!");
+      cands.push(
+        "🎲 " + l + " می‌گه تاس خراب بود 😄",
+        "😤 " + l + " قسم خورد دست بعدی انتقام بگیره",
+        "🍿 میز داغه — دست بعدی کیه؟",
+        "📢 هیئت داوران: برد کاملاً قانونی اعلام شد"
+      );
+      return cands[Math.floor(Math.random() * cands.length)];
+    }
     function validateSelection() {
       if (selected.slot1 && PLAYERS.indexOf(selected.slot1) === -1) selected.slot1 = null;
       if (selected.slot2 && PLAYERS.indexOf(selected.slot2) === -1) selected.slot2 = null;
@@ -1164,7 +1213,7 @@
       games.push(g);
       save();
       if (window.__sbMarkDirty) window.__sbMarkDirty(g.id, "add");
-      toast("✅ ثبت شد: <b>" + esc(g.winner) + "</b> با " + TYPES[g.type].full + " مقابل " + esc(loser(g)));
+      toast("✅ ثبت شد: " + g.winner + " با " + TYPES[g.type].full + " مقابل " + loser(g) + " — 🎙️ " + commentaryFor(g));
       selected.winner = null;
       selected.type = null;
       selected.slot1 = null;
@@ -3615,6 +3664,7 @@
     updatePlayerCountBadge();
     window.renderAll = renderAll;
     window.message = message;
+    window.__commentary = commentaryFor;
     window.__reload = load;
     window.__loaded = true;
     window.fill = fill;

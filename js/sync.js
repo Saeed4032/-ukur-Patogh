@@ -956,7 +956,8 @@
       if (!d.winner) return;
       var loser = d.winner === d.player1 ? d.player2 : d.player1;
       var tname = { normal: "عادی", mars: "مارس", black: "سیاه" }[d.type] || "";
-      var text = "🎲 " + d.winner + " برد" + (loser ? " مقابل " + loser : "") + (tname ? " (" + tname + ")" : "");
+      var text = window.__commentary ? window.__commentary(d) :
+        "🎲 " + d.winner + " برد" + (loser ? " مقابل " + loser : "") + (tname ? " (" + tname + ")" : "");
       if (window.message) window.message(text);
       // اپ در پس‌زمینه؟ → نوتیفیکیشن محلی (بدون سرور)
       if (document.hidden && "Notification" in window && Notification.permission === "granted" && navigator.serviceWorker) {
