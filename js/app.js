@@ -476,9 +476,9 @@
       document.documentElement.style.scrollBehavior = "smooth";
       $("themeCurrent") && renderThemes();
     }
-    function stats(p) {
+    function statsIn(p, list) {
       var s = { name: p, games: 0, wins: 0, losses: 0, normal: 0, mars: 0, black: 0, total: 0 };
-      games.forEach(function (g) {
+      list.forEach(function (g) {
         if (g.player1 !== p && g.player2 !== p) return;
         s.games++;
         if (g.winner === p) {
@@ -491,8 +491,11 @@
       s.avg = s.games ? s.total / s.games : 0;
       return s;
     }
-    function h2h(a, b) {
-      var list = games.filter(function (g) {
+    function stats(p) {
+      return statsIn(p, games);
+    }
+    function h2hIn(a, b, source) {
+      var list = source.filter(function (g) {
         return pairKey(g.player1, g.player2) === pairKey(a, b);
       });
       var aw = list.filter(function (g) {
@@ -503,17 +506,23 @@
       }).length;
       return { a: a, b: b, list: list, aw: aw, bw: bw, total: list.length };
     }
-    function rankingSort(a, b) {
+    function h2h(a, b) {
+      return h2hIn(a, b, games);
+    }
+    function rankingSortIn(a, b, source) {
       var pa = a.games < 5,
         pb = b.games < 5;
       if (pa !== pb) return pa ? 1 : -1;
       if (b.rate !== a.rate) return b.rate - a.rate;
       if (b.total !== a.total) return b.total - a.total;
       if (b.wins !== a.wins) return b.wins - a.wins;
-      var h = h2h(a.name, b.name),
+      var h = h2hIn(a.name, b.name, source),
         d = h.aw - h.bw;
       if (d) return -d;
       return a.name.localeCompare(b.name, "fa");
+    }
+    function rankingSort(a, b) {
+      return rankingSortIn(a, b, games);
     }
     function validateSelection() {
       if (selected.slot1 && PLAYERS.indexOf(selected.slot1) === -1) selected.slot1 = null;
@@ -1516,10 +1525,15 @@
       }
     }
     window.renderRanking = function () {
+      renderSeasonBar();
+      var bn = $("seasonBanner");
+      if (bn) bn.innerHTML = seasonBannerHTML();
+      var gg = seasonGames();
       var key = [
+        seasonFilter,
         PLAYERS.slice().sort().join("|"),
-        games.length,
-        games
+        gg.length,
+        gg
           .map(function (g) {
             return [g.id, g.player1, g.player2, g.winner, g.type, pts(g.type)].join(":");
           })
@@ -1530,11 +1544,11 @@
         if ($("rankbody")) $("rankbody").innerHTML = renderRankingCache.body;
         return;
       }
-      var s = PLAYERS.map(stats).sort(rankingSort);
-      var totalPts = games.reduce(function (a, g) {
+      var s = PLAYERS.map(function (p) { return statsIn(p, gg); }).sort(function (x, y) { return rankingSortIn(x, y, gg); });
+      var totalPts = gg.reduce(function (a, g) {
         return a + pts(g.type);
       }, 0);
-      var lead = games.length && s.length ? s[0] : null;
+      var lead = gg.length && s.length ? s[0] : null;
       var summary = lead
         ? [
             ["مجموع بازی‌ها", n(games.length, 0)],
@@ -1549,6 +1563,7 @@
         : '<div class="card empty" style="grid-column:1/-1;margin:0">هنوز بازی‌ای ثبت نشده است.</div>';
       var body = s
         .map(function (x, i) {
+          var crown = seasonClosed(seasonFilter) && i === 0 && x.games > 0 ? ' <span class="crown" title="قهرمان این فصل">👑</span>' : "";
           var winRate = x.games > 0 ? (x.wins / x.games) * 100 : 0;
           var winRateColor = winRate > 60 ? "var(--success)" : winRate > 40 ? "var(--mars)" : "var(--danger)";
           var breakdown =
@@ -1589,6 +1604,7 @@
             avatarInline(x.name, 32) +
             " " +
             esc(x.name) +
+            crown +
             "</td>" +
             '<td style="padding:12px 8px;text-align:center;font-weight:700;">' +
             n(x.games, 0) +
@@ -1622,6 +1638,104 @@
         var d = new Date(t);
         return d.getFullYear() + "-" + d.getMonth();
       }
+    }
+    // ===== فصل‌ها و قهرمان ماه (بر اساس ماه شمسی) =====
+    var _fmtSeasonKey = null, _fmtSeasonLabel = null;
+    try {
+      _fmtSeasonKey = new Intl.DateTimeFormat("en-u-ca-persian", { year: "numeric", month: "2-digit" });
+      _fmtSeasonLabel = new Intl.DateTimeFormat("fa-u-ca-persian", { year: "numeric", month: "long" });
+    } catch (e) {}
+    function seasonKey(t) {
+      if (_fmtSeasonKey) {
+        try {
+          var parts = _fmtSeasonKey.formatToParts(new Date(t)), y = "0", m = "00";
+          for (var i = 0; i < parts.length; i++) {
+            if (parts[i].type === "year") y = parts[i].value;
+            else if (parts[i].type === "month") m = parts[i].value;
+          }
+          return y + "-" + m;
+        } catch (e) {}
+      }
+      var d = new Date(t);
+      return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2);
+    }
+    var seasonFilter = "all";
+    function seasonClosed(key) {
+      return key !== "all" && key < seasonKey(Date.now());
+    }
+    function seasonsList() {
+      var map = {};
+      games.forEach(function (g) {
+        var k = seasonKey(g.timestamp);
+        if (!map[k]) map[k] = _fmtSeasonLabel ? _fmtSeasonLabel.format(new Date(g.timestamp)) : k;
+      });
+      var cur = seasonKey(Date.now());
+      return Object.keys(map).sort().reverse().map(function (k) {
+        return { key: k, label: map[k], current: k === cur };
+      });
+    }
+    function seasonGames() {
+      if (seasonFilter === "all") return games;
+      return games.filter(function (g) { return seasonKey(g.timestamp) === seasonFilter; });
+    }
+    function seasonLabelOf(key) {
+      var g0 = null;
+      for (var i = 0; i < games.length; i++) if (seasonKey(games[i].timestamp) === key) { g0 = games[i]; break; }
+      return g0 && _fmtSeasonLabel ? _fmtSeasonLabel.format(new Date(g0.timestamp)) : key;
+    }
+    function seasonBannerHTML() {
+      if (!seasonClosed(seasonFilter)) return "";
+      var list = seasonGames();
+      if (!list.length) return "";
+      var s = PLAYERS.map(function (p) { return statsIn(p, list); })
+        .sort(function (x, y) { return rankingSortIn(x, y, list); })
+        .filter(function (x) { return x.games > 0; });
+      if (!s.length) return "";
+      var c = s[0];
+      return '<div class="champion-banner"><span class="cb-crown">👑</span><div class="cb-text"><strong>قهرمان ' +
+        esc(seasonLabelOf(seasonFilter)) + ': ' + esc(c.name) + '</strong><span class="muted">' +
+        n(c.wins, 0) + " برد از " + n(c.games, 0) + " بازی · " + n(c.total, 0) + " امتیاز</span></div></div>";
+    }
+    function renderSeasonBar() {
+      var bar = $("seasonBar");
+      if (!bar) return;
+      var seasons = seasonsList();
+      if (!seasons.length) { bar.innerHTML = ""; return; }
+      var chips = ['<button type="button" class="seasonchip' + (seasonFilter === "all" ? " active" : "") + '" data-season="all">همه</button>'];
+      seasons.forEach(function (sn) {
+        chips.push('<button type="button" class="seasonchip' + (seasonFilter === sn.key ? " active" : "") + '" data-season="' + sn.key + '">' +
+          (sn.current ? "🟢 " : "") + esc(sn.label) + "</button>");
+      });
+      chips.push('<button type="button" class="seasonchip hof" data-season="__hof">🏆 تالار افتخار</button>');
+      bar.innerHTML = chips.join("");
+      Array.prototype.forEach.call(bar.querySelectorAll("[data-season]"), function (b) {
+        b.addEventListener("click", function () {
+          var k = b.getAttribute("data-season");
+          if (k === "__hof") { renderHallOfFame(); return; }
+          seasonFilter = k;
+          renderRanking();
+        });
+      });
+    }
+    function renderHallOfFame() {
+      var seasons = seasonsList().filter(function (sn) { return seasonClosed(sn.key); });
+      var rows = seasons.map(function (sn) {
+        var list = games.filter(function (g) { return seasonKey(g.timestamp) === sn.key; });
+        var s = PLAYERS.map(function (p) { return statsIn(p, list); })
+          .sort(function (x, y) { return rankingSortIn(x, y, list); })
+          .filter(function (x) { return x.games > 0; });
+        if (!s.length) return "";
+        var c = s[0];
+        var others = s.slice(1, 3).map(function (x) { return esc(x.name) + " (" + n(x.total, 0) + ")"; }).join("، ");
+        return '<div class="hof-row"><span class="hof-crown">👑</span><div class="hof-main"><strong>' + esc(sn.label) +
+          '</strong><span class="hof-champ">' + avatarInline(c.name, 28) + " " + esc(c.name) + '</span></div><div class="hof-side muted">' +
+          n(c.total, 0) + " امتیاز · " + n(c.wins, 0) + " برد" + (others ? '<br><span style="font-size:.8em">بعدی: ' + others + "</span>" : "") + "</div></div>";
+      }).join("");
+      $("modalBg").innerHTML = '<div class="modal" role="dialog" aria-modal="true"><h2>🏆 تالار افتخار — قهرمانان فصل‌ها</h2>' +
+        (rows || '<p class="muted">هنوز فصلی تمام نشده است.</p>') +
+        '<div class="actions"><button id="hofClose" class="btn secondary">بستن</button></div></div>';
+      $("modalBg").className = "modalbg show";
+      $("hofClose").onclick = closeModal;
     }
     function dayStart(d) {
       var x = new Date(d);
