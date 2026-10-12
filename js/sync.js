@@ -1061,8 +1061,8 @@
     startPolling();
     var pmCard = $("playerMgmtCard");
     if (pmCard) pmCard.style.display = isAdmin() ? "" : "none";
-    var lgCard = $("leagueMgmtCard");
-    if (lgCard) lgCard.style.display = isAdmin() ? "" : "none";
+    var lgRow = $("leagueCreateRow");
+    if (lgRow) lgRow.style.display = isAdmin() ? "" : "none";
     ["tReset", "tEditName", "tEditStart", "importBtn", "clear"].forEach(function (id) {
       var el = $(id);
       if (el) el.style.display = isAdmin() ? "" : "none";
