@@ -8,6 +8,18 @@
   var overlay = document.getElementById("supaAuthOverlay");
   if (!err || !loginBtn) return;
 
+  var passInput = document.getElementById("supaPass");
+  var passToggle = document.getElementById("supaPassToggle");
+  if (passInput && passToggle) {
+    passToggle.setAttribute("aria-pressed", "false");
+    passToggle.addEventListener("click", function () {
+      var isVisible = passInput.type === "password";
+      passInput.type = isVisible ? "text" : "password";
+      passToggle.setAttribute("aria-label", isVisible ? "مخفی کردن رمز" : "نمایش رمز");
+      passToggle.setAttribute("aria-pressed", String(isVisible));
+    });
+  }
+
   if (forgot)
     forgot.onclick = function () {
       err.className = "login-msg info";
