@@ -2,17 +2,19 @@
    - صفحه و کدهای برنامه (html/js/css): اول شبکه (با timeout)، اگه نشد از کش.
      این‌طوری نسخه‌ی جدید با اولین رفرش دیده می‌شه.
    - فونت، آیکون و supabase.js: اول کش، پشت‌صحنه تازه می‌شن. */
-var VERSION = 'v16';
+var VERSION = 'v17';
 var CACHE = 'patogh-' + VERSION;
 var CORE = [
   './',
   './index.html',
   './css/style.css',
+  './css/login.css',
   './js/app.js',
   './js/local-mode.js',
   './js/config.js',
   './js/sync.js',
   './js/signup.js',
+  './js/login.js',
   './js/sounds.js',
   './js/bottom-nav.js',
   './js/scroll.js',
