@@ -18,3 +18,5 @@ jobs:
           node-version: 20
       - name: Run smoke tests
         run: node tests/smoke.mjs
+      - name: Run sync and login regression tests
+        run: node --test tests/initial-upload.mjs tests/login-signup.mjs

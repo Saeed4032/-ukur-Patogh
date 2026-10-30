@@ -130,15 +130,3 @@
 
   initSignupForm();
 })();
-
-(function () {
-  var b = document.getElementById("supaPassToggle"),
-    i = document.getElementById("supaPass");
-  if (!b || !i) return;
-  b.onclick = function () {
-    var show = i.type === "password";
-    i.type = show ? "text" : "password";
-    b.textContent = show ? "🙈" : "👁";
-    b.setAttribute("aria-label", show ? "پنهان کردن رمز" : "نمایش رمز");
-  };
-})();
