@@ -15,6 +15,7 @@
     passToggle.addEventListener("click", function () {
       var isVisible = passInput.type === "password";
       passInput.type = isVisible ? "text" : "password";
+      passToggle.textContent = isVisible ? "🙈" : "👁";
       passToggle.setAttribute("aria-label", isVisible ? "مخفی کردن رمز" : "نمایش رمز");
       passToggle.setAttribute("aria-pressed", String(isVisible));
     });

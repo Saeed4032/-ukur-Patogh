@@ -10,6 +10,9 @@
     paused = false,
     timers = {},
     dirtyIds = {},
+    dirtyRevisions = {},
+    gamePushInFlight = false,
+    gamePushQueued = false,
     isGuest = false;
   function activateOfflineMode(text) {
     if (window.__enterLocalMode) window.__enterLocalMode();
@@ -63,6 +66,7 @@
   }
   window.__sbMarkDirty = function (id, action) {
     if (!id || isGuest) return;
+    dirtyRevisions[id] = (dirtyRevisions[id] || 0) + 1;
     if (!dirtyIds[id]) dirtyIds[id] = action || "edit";
     var pd = getPendingDel();
     if (pd[id]) {
@@ -425,6 +429,18 @@
   /* بازی‌های جدید با user_id فرستاده می‌شن؛ ویرایش‌ها بدون user_id،
      تا مالکیت بازیِ بقیه عوض نشه. دو گروه جدا upsert می‌شن چون upsert
      ستون‌های غایب رو null می‌کنه. */
+  async function sendGameRows(rows) {
+    var controller = typeof AbortController === "function" ? new AbortController() : null;
+    var request = sb.from("games").upsert(rows);
+    if (controller && request && typeof request.abortSignal === "function") request = request.abortSignal(controller.signal);
+    try {
+      return await withTimeout(request, NET_TIMEOUT, "push-games");
+    } catch (e) {
+      if (controller) controller.abort();
+      throw e;
+    }
+  }
+
   async function upsertGames(list) {
     var uid = curUser && curUser.id;
     var adds = [],
@@ -434,8 +450,8 @@
       else edits.push({ id: x.id, data: x, league: LGE });
     });
     var res = { error: null };
-    if (adds.length) res = await sb.from("games").upsert(adds);
-    if (!res.error && edits.length) res = await sb.from("games").upsert(edits);
+    if (adds.length) res = await sendGameRows(adds);
+    if (!res.error && edits.length) res = await sendGameRows(edits);
     return res;
   }
 
@@ -447,6 +463,7 @@
     var light = !!(opts && opts.light) && Date.now() - _lastFullPull < FULL_PULL_EVERY;
     paused = true;
     var changed = false,
+      initialUploadFailed = false,
       gamesOk = false,
       needPush = false;
     try {
@@ -549,17 +566,32 @@
           changed = true;
         }
         if (!serverGames.length && localGames.length && curUser) {
+          // حتی بازی‌های قدیمی که علامت dirty ندارند باید تا تأیید سرور در صف بمانند.
+          localGames.forEach(function (x) {
+            if (x && x.id && !dirtyIds[x.id]) dirtyIds[x.id] = "add";
+          });
+          saveDirty();
           try {
             var uid = curUser && curUser.id;
-            await sb.from("games").upsert(
+            var uploadResult = await sb.from("games").upsert(
               localGames.map(function (x) {
                 return { id: x.id, data: x, user_id: uid, league: LGE };
               }),
             );
-            localGames.forEach(function (x) {
-              if (x && x.id) delete dirtyIds[x.id];
-            });
+            if (uploadResult.error) throw uploadResult.error;
+
+            // ویرایشی که هنگام ارسال انجام شده نباید با پاسخ قدیمی پاک شود.
+            var currentGames = JSON.parse(localStorage.getItem(KEY) || "[]");
+            if (Array.isArray(currentGames)) {
+              localGames.forEach(function (x) {
+                if (!x || !x.id) return;
+                var current = currentGames.find(function (g) { return g && g.id === x.id; });
+                if (current && JSON.stringify(current) === JSON.stringify(x)) delete dirtyIds[x.id];
+              });
+              saveDirty();
+            }
           } catch (e) {
+            initialUploadFailed = true;
             console.error("upload local->server failed", e);
           }
         } else if (serverGames.length && localGames.length && curUser) {
@@ -635,12 +667,12 @@
       console.error("pull", e);
     }
     paused = false;
-    if (curUser && gamesOk && (needPush || Object.keys(dirtyIds).length)) {
+    if (curUser && gamesOk && !initialUploadFailed && (needPush || Object.keys(dirtyIds).length)) {
       try {
         pushKey(KEY, localStorage.getItem(KEY));
       } catch (_) {}
     }
-    if (gamesOk && curUser) {
+    if (gamesOk && curUser && !initialUploadFailed) {
       try {
         localStorage.removeItem("backgammon_local_new");
       } catch (_) {}
@@ -648,7 +680,35 @@
     return changed;
   }
 
+  // ارسال‌های بازی نباید هم‌زمان باشند: پاسخ قدیمی می‌تواند روی سرور
+  // بعد از پاسخ جدید برسد و نسخهٔ جدیدتر را بازنویسی کند.
   async function pushKey(k, v, attempt) {
+    if (k !== KEY) return pushKeyUnlocked(k, v, attempt);
+    if (gamePushInFlight) {
+      gamePushQueued = true;
+      return;
+    }
+    gamePushInFlight = true;
+    try {
+      return await pushKeyUnlocked(k, v, attempt);
+    } finally {
+      gamePushInFlight = false;
+      if (gamePushQueued) {
+        gamePushQueued = false;
+        pushKey(KEY, localStorage.getItem(KEY));
+      }
+    }
+  }
+
+  function retryGamePush(k, attempt) {
+    if (attempt >= 3 || !curUser) return;
+    clearTimeout(timers[k]);
+    timers[k] = setTimeout(function () {
+      pushKey(k, localStorage.getItem(k), attempt + 1);
+    }, 3000);
+  }
+
+  async function pushKeyUnlocked(k, v, attempt) {
     attempt = attempt || 0;
     if (!curUser) return;
     if (paused) {
@@ -660,11 +720,33 @@
     }
     try {
       if (k === KEY) {
-        var arr = JSON.parse(v);
+        // مقدار زمان‌بندی‌شده ممکن است قدیمی باشد؛ همیشه آخرین نسخه را بفرست.
+        var arr = JSON.parse(localStorage.getItem(KEY) || "[]");
         var toSend = arr.filter(function (x) {
           return x && x.id && dirtyIds[x.id];
         });
         if (toSend.length) {
+          var sentRevisions = {}, sentDirtyActions = {};
+          toSend.forEach(function (x) {
+            sentRevisions[x.id] = dirtyRevisions[x.id] || 0;
+            sentDirtyActions[x.id] = dirtyIds[x.id];
+          });
+          function canSettle(x) {
+            if (!dirtyIds[x.id]) return false;
+            try {
+              var currentGames = JSON.parse(localStorage.getItem(KEY) || "[]");
+              if (!Array.isArray(currentGames)) return false;
+              var current = currentGames.find(function (g) { return g && g.id === x.id; });
+              if (!current) return false;
+              if ((dirtyRevisions[x.id] || 0) === sentRevisions[x.id] &&
+                  dirtyIds[x.id] === sentDirtyActions[x.id] && JSON.stringify(current) === JSON.stringify(x)) return true;
+              // نسخهٔ جدیدتر را پس از پایان درخواست فعلی ارسال کن.
+              gamePushQueued = true;
+            } catch (e) {
+              console.error("check pending game", e);
+            }
+            return false;
+          }
           var r = await upsertGames(toSend);
           if (r.error) {
             console.error("push games failed (attempt " + (attempt + 1) + "):", r.error);
@@ -672,9 +754,10 @@
               var rej = 0;
               for (var q3 = 0; q3 < toSend.length; q3++) {
                 var x3 = toSend[q3];
+                if (!canSettle(x3)) continue;
                 var r3 = await upsertGames([x3]);
-                if (!r3.error) delete dirtyIds[x3.id];
-                else if (isRlsErr(r3.error)) {
+                if (!r3.error && canSettle(x3)) delete dirtyIds[x3.id];
+                else if (isRlsErr(r3.error) && canSettle(x3)) {
                   delete dirtyIds[x3.id];
                   rej++;
                 }
@@ -683,21 +766,17 @@
               if (rej) setTimeout(rejectedRestore, 0);
               return;
             }
-            if (attempt < 3) {
-              clearTimeout(timers[k]);
-              timers[k] = setTimeout(function () {
-                pushKey(k, v, attempt + 1);
-              }, 3000);
-            }
+            retryGamePush(k, attempt);
             return;
           }
           var sentActions = {};
           toSend.forEach(function (x) {
-            if (dirtyIds[x.id]) {
-              sentActions[x.id] = dirtyIds[x.id];
+            if (canSettle(x)) {
+              sentActions[x.id] = sentDirtyActions[x.id];
               delete dirtyIds[x.id];
             }
           });
+          saveDirty();
           toSend.forEach(function (x) {
             var act = sentActions[x.id];
             if (act && act !== "quiet")
@@ -781,6 +860,7 @@
       }
     } catch (e) {
       console.error("push", e);
+      if (k === KEY) retryGamePush(k, attempt);
     }
   }
 
