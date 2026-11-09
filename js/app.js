@@ -716,18 +716,11 @@
     }
 
     function slotContentHTML(name) {
-      var s = stats(name);
       return (
-        avatarHTML(name, 50) +
+        avatarHTML(name, 96) +
         '<strong class="vs-slot-name">' +
         esc(name) +
-        "</strong>" +
-        '<span class="vs-stat">' +
-        n(s.games, 0) +
-        " بازی · " +
-        (s.games ? percent(s.wins, s.games) : "—") +
-        "</span>" +
-        '<span class="vs-slot-remove" aria-hidden="true">×</span>'
+        "</strong>"
       );
     }
     function renderSlots() {
@@ -743,9 +736,7 @@
         '"' +
         (s1 ? ' aria-label="حذف ' + esc(s1) + ' از جای اول"' : ' aria-label="انتخاب بازیکن اول"') +
         ">" +
-        (s1
-          ? slotContentHTML(s1)
-          : '<span class="vs-slot-label">انتخاب ۱</span><span class="vs-slot-hint">کلیک کن یا بنداز</span>') +
+        (s1 ? slotContentHTML(s1) : "") +
         "</button>" +
         '<div class="vs-slot-divider"><span class="vs-text' +
         (s1 && s2 ? "" : " small") +
@@ -829,7 +820,7 @@
             '" aria-pressed="' +
             (placed ? "true" : "false") +
             '">' +
-            avatarHTML(p, 44) +
+            avatarHTML(p, 72) +
             '<span class="pp-name">' +
             esc(p) +
             "</span>" +
