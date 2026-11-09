@@ -513,16 +513,12 @@
             if (parsedAv && typeof parsedAv === "object" && !Array.isArray(parsedAv)) localAv = parsedAv;
           } catch (_) {}
           var av = {};
-          if (remoteNames.length) {
-            remotePlayers.forEach(function (x) {
-              if (x && typeof x.name === "string" && safeAv(x.avatar)) av[x.name] = x.avatar;
-            });
-            localNames.forEach(function (name) {
-              if (remoteNames.indexOf(name) < 0 && safeAv(localAv[name])) av[name] = localAv[name];
-            });
-          } else {
-            av = localAv;
-          }
+          Object.keys(localAv).forEach(function (name) {
+            if (safeAv(localAv[name])) av[name] = localAv[name];
+          });
+          remotePlayers.forEach(function (x) {
+            if (x && typeof x.name === "string" && safeAv(x.avatar)) av[x.name] = x.avatar;
+          });
           var avStr = JSON.stringify(av);
           if (avStr !== localStorage.getItem(AVKEY)) {
             localStorage.setItem(AVKEY, avStr);
@@ -918,6 +914,8 @@
       await pull();
       if (window.__reload) window.__reload();
       if (window.renderAll) window.renderAll();
+      var avRaw = localStorage.getItem(AVKEY);
+      if (avRaw) await pushKey(AVKEY, avRaw);
       var localRaw = localStorage.getItem(KEY);
       if (localRaw && Object.keys(dirtyIds).length) {
         await pushKey(KEY, localRaw);
