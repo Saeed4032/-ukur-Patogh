@@ -3246,11 +3246,86 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 .more-details summary::-webkit-details-marker { display: none; }
 .more-details[open] summary { margin-bottom: 2px; }
 
-/* دکمه ثبت تمام‌عرض در صفحه ثبت */
+/* دکمه ثبت تمام‌عرض — آیین میز */
 #register .actions { margin-top: 14px; }
 #register #add {
   width: 100%;
   padding: 14px;
   font-size: 1.05rem;
   font-weight: 900;
+  color: var(--contrast);
+  background: linear-gradient(145deg, var(--primary), var(--dark));
+}
+#register #add:disabled {
+  opacity: 0.45;
+}
+#register #add:active:not(:disabled) {
+  transform: scale(0.97);
+  transition: transform 0.09s ease-out;
+}
+#register .vs-slot.piece-sit {
+  animation: ritualSit 0.17s ease-out;
+}
+@keyframes ritualSit {
+  from { opacity: 0.5; transform: translateY(-9px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+#register.reg-stage-pair .vs-slot[data-slot="1"] {
+  transform: translateX(-7px);
+  transition: transform 0.18s ease-out;
+}
+#register.reg-stage-pair .vs-slot[data-slot="2"] {
+  transform: translateX(7px);
+  transition: transform 0.18s ease-out;
+}
+#register #winnerArea.ritual-in,
+#register #typeArea.ritual-in {
+  animation: ritualIn 0.18s ease-out;
+}
+@keyframes ritualIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+#register .winner-arena.has-winner .winner-side:not(.active) {
+  opacity: 0.42;
+}
+#register .winner-side.active .winner-name::before {
+  content: "👑 ";
+}
+#register .choice.play-type[data-t="normal"] {
+  animation: ritualNormal 0.16s ease-out;
+}
+#register .choice.play-type[data-t="mars"] {
+  animation: ritualMars 0.18s ease-out;
+}
+#register .choice.play-type[data-t="black"] {
+  animation: ritualBlack 0.22s ease-out;
+}
+@keyframes ritualNormal {
+  from { opacity: 0.65; transform: translateY(-5px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes ritualMars {
+  from { opacity: 0.7; transform: scale(0.96); }
+  45% { opacity: 1; transform: scale(1.04); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes ritualBlack {
+  from { opacity: 0.7; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  #register .vs-slot.piece-sit,
+  #register.reg-stage-pair .vs-slot[data-slot="1"],
+  #register.reg-stage-pair .vs-slot[data-slot="2"],
+  #register #winnerArea.ritual-in,
+  #register #typeArea.ritual-in,
+  #register .choice.play-type[data-t="normal"],
+  #register .choice.play-type[data-t="mars"],
+  #register .choice.play-type[data-t="black"],
+  #register #add:active:not(:disabled) {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
 }

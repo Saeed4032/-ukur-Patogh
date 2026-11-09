@@ -576,15 +576,41 @@
       return cands[Math.floor(Math.random() * cands.length)];
     }
     function validateSelection() {
+      var previousSlot1 = selected.slot1,
+        previousSlot2 = selected.slot2;
       if (selected.slot1 && PLAYERS.indexOf(selected.slot1) === -1) selected.slot1 = null;
       if (selected.slot2 && PLAYERS.indexOf(selected.slot2) === -1) selected.slot2 = null;
+      if (selected.slot1 && selected.slot1 === selected.slot2) selected.slot2 = null;
+      if (PLAYERS.length === 2 && PLAYERS[0] !== PLAYERS[1]) {
+        if (!selected.slot1) selected.slot1 = PLAYERS[0] === selected.slot2 ? PLAYERS[1] : PLAYERS[0];
+        if (!selected.slot2) selected.slot2 = PLAYERS[0] === selected.slot1 ? PLAYERS[1] : PLAYERS[0];
+      }
+      if (selected.slot1 !== previousSlot1 || selected.slot2 !== previousSlot2) {
+        selected.winner = null;
+        selected.type = null;
+      }
       if (selected.slot1 && selected.slot2) {
         selected.pair = [selected.slot1, selected.slot2];
       } else {
         selected.pair = null;
       }
-      if (selected.winner && selected.pair && selected.pair.indexOf(selected.winner) === -1) selected.winner = null;
-      if (selected.type && !TYPES[selected.type]) selected.type = null;
+      if (selected.winner && (!selected.pair || selected.pair.indexOf(selected.winner) === -1)) selected.winner = null;
+      if (selected.type && (typeof selected.type !== "string" || !Object.prototype.hasOwnProperty.call(TYPES, selected.type)))
+        selected.type = null;
+    }
+    function registrationReady() {
+      var pair = selected.pair;
+      return (
+        Array.isArray(pair) &&
+        pair.length === 2 &&
+        typeof pair[0] === "string" && pair[0].trim() !== "" &&
+        typeof pair[1] === "string" && pair[1].trim() !== "" &&
+        pair[0] !== pair[1] &&
+        pair[0] === selected.slot1 && pair[1] === selected.slot2 &&
+        PLAYERS.indexOf(pair[0]) > -1 && PLAYERS.indexOf(pair[1]) > -1 &&
+        (selected.winner === pair[0] || selected.winner === pair[1]) &&
+        typeof selected.type === "string" && Object.prototype.hasOwnProperty.call(TYPES, selected.type)
+      );
     }
     function revealCard(el) {
       el.classList.add("reveal");
@@ -593,6 +619,9 @@
       }, 360);
     }
     var lastScrollGesture = 0;
+    var animSlot = null;
+    var animWinner = false;
+    var animType = null;
     function markScrollGesture() {
       lastScrollGesture = Date.now();
     }
@@ -617,7 +646,90 @@
     function forceScrollBottom() {
       window.scrollTo({ top: document.body.scrollHeight, behavior: prefersReduced() ? "auto" : "smooth" });
     }
-    function processImage(file, callback) {
+    var _fxAudio = null;
+    function fxAudio() {
+      try {
+        if (!_fxAudio) _fxAudio = new (window.AudioContext || window.webkitAudioContext)();
+        if (_fxAudio.state === "suspended") _fxAudio.resume();
+        return _fxAudio;
+      } catch (e) {
+        return null;
+      }
+    }
+    function fxTone(freq, dur, type, vol, delay) {
+      if (prefersReduced()) return;
+      setTimeout(function () {
+        try {
+          var c = fxAudio();
+          if (!c) return;
+          var o = c.createOscillator();
+          var g = c.createGain();
+          o.type = type || "sine";
+          o.frequency.value = freq;
+          g.gain.setValueAtTime(vol || 0.1, c.currentTime);
+          g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + dur);
+          o.connect(g);
+          g.connect(c.destination);
+          o.start();
+          o.stop(c.currentTime + dur);
+        } catch (e) {}
+      }, delay || 0);
+    }
+    function fxNoise(dur, vol, filterType, freq, delay) {
+      if (prefersReduced()) return;
+      setTimeout(function () {
+        try {
+          var c = fxAudio();
+          if (!c) return;
+          var len = Math.max(1, Math.floor(c.sampleRate * dur));
+          var buf = c.createBuffer(1, len, c.sampleRate);
+          var data = buf.getChannelData(0);
+          for (var i = 0; i < len; i++) data[i] = Math.random() * 2 - 1;
+          var src = c.createBufferSource();
+          src.buffer = buf;
+          var f = c.createBiquadFilter();
+          f.type = filterType || "bandpass";
+          f.frequency.value = freq || 400;
+          f.Q.value = 0.9;
+          var g = c.createGain();
+          g.gain.setValueAtTime(vol || 0.08, c.currentTime);
+          g.gain.exponentialRampToValueAtTime(0.001, c.currentTime + dur);
+          src.connect(f);
+          f.connect(g);
+          g.connect(c.destination);
+          src.start();
+          src.stop(c.currentTime + dur);
+        } catch (e) {}
+      }, delay || 0);
+    }
+    function fxWood() {
+      fxNoise(0.045, 0.1, "bandpass", 420, 0);
+      fxTone(180, 0.06, "sine", 0.07, 0);
+    }
+    function fxPairSound() {
+      fxNoise(0.04, 0.09, "bandpass", 300, 0);
+    }
+    function fxWinnerSound() {
+      fxTone(108, 0.09, "sine", 0.13, 0);
+    }
+    function fxTypeSound(t) {
+      if (t === "mars") {
+        fxTone(240, 0.05, "triangle", 0.11, 0);
+        fxTone(320, 0.06, "triangle", 0.1, 75);
+      } else if (t === "black") {
+        fxTone(72, 0.16, "sine", 0.15, 0);
+        fxNoise(0.12, 0.07, "lowpass", 160, 0);
+      } else {
+        fxTone(196, 0.08, "sine", 0.1, 0);
+      }
+    }
+    function fxSuccessSound(t) {
+      fxTypeSound(t);
+      if (t === "mars") fxTone(392, 0.1, "sine", 0.08, 150);
+      else if (t === "black") fxTone(96, 0.14, "sine", 0.1, 120);
+      else fxTone(262, 0.1, "sine", 0.08, 90);
+    }
+        function processImage(file, callback) {
       if (!file || !/^image\//.test(file.type)) {
         message("فایل انتخابی عکس نیست.", true);
         return;
@@ -787,22 +899,26 @@
           if (filled) clearSlot(slotNum);
         };
       });
+      if (animSlot) {
+        var popped = el.querySelector('.vs-slot[data-slot="' + animSlot + '"]');
+        if (popped) {
+          if (!prefersReduced()) popped.classList.add("piece-sit");
+          fxWood();
+        }
+        animSlot = null;
+      }
     }
     function renderPool() {
       var el = $("playerPool");
       if (!el) return;
       var search = $("poolSearch");
       if (search) {
-        search.classList.toggle("hidden", PLAYERS.length < 9);
+        search.classList.remove("hidden");
         if (search.value !== poolFilter) search.value = poolFilter;
       }
       if (PLAYERS.length < 2) {
         el.innerHTML = '<div class="empty">حداقل دو بازیکن لازم است.</div>';
         return;
-      }
-      if (PLAYERS.length === 2) {
-        if (!selected.slot1) selected.slot1 = PLAYERS[0];
-        if (!selected.slot2) selected.slot2 = PLAYERS[1];
       }
       var used = [selected.slot1, selected.slot2].filter(Boolean);
       var q = poolFilter.trim().toLowerCase();
@@ -838,13 +954,32 @@
               ? "✓ انتخاب شده"
               : n(s.games, 0) + " بازی · " + (s.games ? percent(s.wins, s.games) + " برد" : "—")) +
             "</span>" +
+            '<span class="pool-cam" data-avpick="' +
+            esc(p) +
+            '" role="button" aria-label="عکس ' +
+            esc(p) +
+            '"><svg viewBox="0 0 24 24"><path d="M4 8h3l2-2h6l2 2h3v11H4z"/><circle cx="12" cy="13.5" r="3.2"/></svg></span>' +
             "</button>"
           );
         })
         .join("");
+      [].forEach.call(el.querySelectorAll(".pool-cam"), function (cam) {
+        cam.onclick = function (e) {
+          e.preventDefault();
+          e.stopPropagation();
+          var name = cam.getAttribute("data-avpick");
+          if (!name) return;
+          pickAvatar(name, function () {
+            fill();
+            renderAll();
+            message("عکس " + name + " ذخیره شد.");
+          });
+        };
+      });
       [].forEach.call(el.querySelectorAll(".pool-player"), function (card) {
         if (card.classList.contains("placed")) {
-          card.onclick = function () {
+          card.onclick = function (e) {
+            if (e.target.closest && e.target.closest(".pool-cam")) return;
             var name = card.dataset.player;
             if (selected.slot1 === name) clearSlot("1");
             else if (selected.slot2 === name) clearSlot("2");
@@ -862,7 +997,8 @@
         card.addEventListener("dragend", function () {
           card.classList.remove("dragging");
         });
-        card.onclick = function () {
+        card.onclick = function (e) {
+          if (e.target.closest && e.target.closest(".pool-cam")) return;
           var name = card.dataset.player;
           if (!name) return;
           if (!selected.slot1) setSlot("1", name);
@@ -882,8 +1018,10 @@
       }
       selected.winner = null;
       selected.type = null;
+      animSlot = num;
       renderRegister();
       if (selected.slot1 && selected.slot2) {
+        fxPairSound();
         requestAnimationFrame(function () {
           smartScroll($("winnerArea"));
         });
@@ -908,7 +1046,13 @@
       }
       var wasHidden = wa.classList.contains("hidden");
       wa.classList.remove("hidden");
-      if (wasHidden) revealCard(wa);
+      if (wasHidden) {
+        if (!prefersReduced()) {
+          wa.classList.remove("ritual-in");
+          void wa.offsetWidth;
+          wa.classList.add("ritual-in");
+        }
+      }
       var a = selected.pair[0],
         b = selected.pair[1];
       var sa = stats(a),
@@ -976,6 +1120,8 @@
         [].forEach.call(arena.querySelectorAll("[data-win]"), function (btn) {
           btn.onclick = function () {
             selected.winner = btn.dataset.win;
+            selected.type = null;
+            animWinner = true;
             renderRegister();
             requestAnimationFrame(function () {
               smartScroll($("typeArea"));
@@ -990,17 +1136,35 @@
         });
       }
       if (hint) hint.classList.toggle("hidden", !!selected.winner);
+      if (arena) arena.classList.toggle("has-winner", !!selected.winner);
+      if (animWinner && selected.winner) {
+        var burst = arena.querySelector(".winner-side.active");
+        if (burst) {
+          if (!prefersReduced()) {
+            burst.classList.remove("win-burst");
+            void burst.offsetWidth;
+            burst.classList.add("win-burst");
+          }
+          fxWinnerSound();
+        }
+        animWinner = false;
+      }
     }
     function renderTypes() {
       var ta = $("typeArea"),
         tb = $("typeButtons");
-      if (!selected.pair) {
+      if (!ta || !tb) return;
+      if (!selected.pair || !selected.winner) {
         ta.classList.add("hidden");
         return;
       }
       var wasHidden = ta.classList.contains("hidden");
       ta.classList.remove("hidden");
-      if (wasHidden) revealCard(ta);
+      if (wasHidden && !prefersReduced()) {
+        ta.classList.remove("ritual-in");
+        void ta.offsetWidth;
+        ta.classList.add("ritual-in");
+      }
       if (!tb.children.length) {
         tb.innerHTML = Object.keys(TYPES)
           .map(function (t) {
@@ -1011,19 +1175,20 @@
               '" aria-pressed="false"><span class="choice-emoji">' +
               x.emoji +
               '</span><span class="choice-name">' +
-              x.name +
+              x.full +
               "</span><small>" +
               n(x.points, 0) +
-              "×</small></button>"
+              " امتیاز</small></button>"
             );
           })
           .join("");
         [].forEach.call(tb.children, function (b) {
           b.onclick = function () {
             selected.type = b.dataset.t;
+            animType = b.dataset.t;
             renderRegister();
             requestAnimationFrame(function () {
-              forceScrollBottom();
+              smartScroll($("add"));
             });
           };
         });
@@ -1032,6 +1197,15 @@
         var on = b.dataset.t === selected.type;
         b.classList.toggle("active", on);
         b.setAttribute("aria-pressed", on ? "true" : "false");
+        if (on && animType === b.dataset.t) {
+          if (!prefersReduced()) {
+            b.classList.remove("play-type");
+            void b.offsetWidth;
+            b.classList.add("play-type");
+          }
+          fxTypeSound(b.dataset.t);
+          animType = null;
+        }
       });
     }
     function renderPreview() {
@@ -1096,7 +1270,7 @@
       var btn = $("add");
       if (!btn) return;
       btn.textContent = "🎲 ثبت بازی";
-      btn.disabled = !(selected.pair && selected.winner && selected.type);
+      btn.disabled = !registrationReady();
     }
     function renderQuickTags() {
       var el = $("quickTags");
@@ -1151,6 +1325,12 @@
       renderSubmit();
       renderQuickTags();
       saveSelection();
+      var page = $("register");
+      if (page) {
+        page.classList.toggle("reg-stage-pair", !!(selected.slot1 && selected.slot2));
+        page.classList.toggle("reg-stage-winner", !!selected.winner);
+        page.classList.toggle("reg-stage-type", !!selected.type);
+      }
     }
     async function deleteLast() {
       if (!games.length) {
@@ -1221,6 +1401,11 @@
     }
     function add() {
       if ($("add").disabled) return;
+      if (!registrationReady()) {
+        $("add").disabled = true;
+        message("بازیکن‌ها، برنده و نوع برد را دوباره بررسی کن.", true);
+        return;
+      }
       var now = Date.now();
       var noteEl = $("quickNote");
       var g = {
@@ -1235,11 +1420,17 @@
         date: pdate(now),
         time: ptime(now),
       };
+      if (!valid(g)) {
+        $("add").disabled = true;
+        message("اطلاعات بازی معتبر نیست؛ دوباره بررسی کن.", true);
+        return;
+      }
       var _wa1 = $("winnerArena");
       if (_wa1) _wa1.dataset.key = "";
       games.push(g);
       save();
       if (window.__sbMarkDirty) window.__sbMarkDirty(g.id, "add");
+      fxSuccessSound(g.type);
       toast("✅ ثبت شد: " + g.winner + " با " + TYPES[g.type].full + " مقابل " + loser(g) + " — 🎙️ " + commentaryFor(g));
       selected.winner = null;
       selected.type = null;
@@ -1566,6 +1757,271 @@
         if (first && first.focus) first.focus();
       }
     }
+    function rankingCardsHTML(s) {
+      if (!s.length) return '<div class="rk-empty">هنوز بازی‌ای ثبت نشده است.</div>';
+      return s.map(function (x, i) {
+        var medal;
+        if (x.games >= 5 && i < 3) medal = '<span class="rk-medal m' + (i + 1) + '">' + (i + 1) + "</span>";
+        else medal = '<span class="rk-pos">' + n(i + 1, 0) + "</span>";
+        var evalb = x.games < 5 ? '<span class="rk-eval">ارزیابی</span>' : "";
+        return (
+          '<article class="rk-card' +
+          (i === 0 && x.games > 0 ? " lead" : "") +
+          '">' +
+          medal +
+          '<div class="rk-who">' +
+          avatarInline(x.name, 48) +
+          "<div><strong>" +
+          esc(x.name) +
+          "</strong><span class=\"rk-sub\">" +
+          n(x.games, 0) +
+          " بازی · " +
+          n(x.wins, 0) +
+          " برد" +
+          evalb +
+          "</span></div></div>" +
+          '<div class="rk-pts"><b>' +
+          n(x.total, 0) +
+          "</b><small>امتیاز</small></div>" +
+          '<div class="rk-types"><span>عادی ' +
+          n(x.normal, 0) +
+          "</span><span>مارس " +
+          n(x.mars, 0) +
+          "</span><span>سیاه‌مارس " +
+          n(x.black, 0) +
+          "</span></div></article>"
+        );
+      }).join("");
+    }
+    function rankingH2HHTML(source) {
+      var cards = [];
+      for (var i = 0; i < PAIRS.length; i++) {
+        var h = h2hIn(PAIRS[i][0], PAIRS[i][1], source);
+        if (h.total) cards.push(h);
+      }
+      cards.sort(function (a, b) { return b.total - a.total; });
+      cards = cards.slice(0, 4);
+      if (!cards.length) return '<div class="rk-empty">هنوز رودررویی ثبت نشده است.</div>';
+      return cards.map(function (h) {
+        return (
+          '<div class="rk-h2h-card">' +
+          '<div class="rk-h2h-side">' +
+          avatarInline(h.a, 40) +
+          "<div><strong>" + esc(h.a) + "</strong><small>" + n(h.aw, 0) + " برد</small></div></div>" +
+          '<div class="rk-h2h-vs">VS</div>' +
+          '<div class="rk-h2h-side b">' +
+          avatarInline(h.b, 40) +
+          "<div><strong>" + esc(h.b) + "</strong><small>" + n(h.bw, 0) + " برد</small></div></div>" +
+          "</div>"
+        );
+      }).join("");
+    }
+    function rankingHofSnippet() {
+      var seasons = seasonsList().filter(function (sn) { return seasonClosed(sn.key); });
+      if (!seasons.length) return "";
+      var sn = seasons[0];
+      var list = games.filter(function (g) { return seasonKey(g.timestamp) === sn.key; });
+      var s = PLAYERS.map(function (p) { return statsIn(p, list); })
+        .sort(function (x, y) { return rankingSortIn(x, y, list); })
+        .filter(function (x) { return x.games > 0; });
+      if (!s.length) return "";
+      var c = s[0];
+      return '<div class="rk-h2h-card" style="grid-template-columns:1fr"><div class="rk-h2h-side">' +
+        avatarInline(c.name, 36) +
+        "<div><strong>تالار افتخار — " + esc(sn.label) + "</strong><small>قهرمان: " +
+        esc(c.name) + " · " + n(c.total, 0) + " امتیاز</small></div></div></div>";
+    }
+    var rkFsResize = null;
+    function rkViewport() {
+      var vv = window.visualViewport;
+      return {
+        w: Math.round((vv && vv.width) || window.innerWidth || 0),
+        h: Math.round((vv && vv.height) || window.innerHeight || 0),
+      };
+    }
+    function layoutRankingFs(el) {
+      if (!el) return;
+      var s = rkViewport();
+      if (!s.w || !s.h) return;
+      el.style.position = "fixed";
+      el.style.zIndex = "9999";
+      el.style.right = "auto";
+      el.style.bottom = "auto";
+      el.style.margin = "0";
+      el.style.maxWidth = "none";
+      el.style.maxHeight = "none";
+      el.style.boxSizing = "border-box";
+      el.style.overflow = "auto";
+      if (s.w >= s.h) {
+        el.classList.remove("rk-fs-forced");
+        el.style.width = s.w + "px";
+        el.style.height = s.h + "px";
+        el.style.top = "0px";
+        el.style.left = "0px";
+        el.style.transform = "none";
+        return;
+      }
+      el.classList.add("rk-fs-forced");
+      el.style.width = s.h + "px";
+      el.style.height = s.w + "px";
+      el.style.top = "50%";
+      el.style.left = "50%";
+      el.style.transformOrigin = "center center";
+      el.style.transform = "translate(-50%, -50%) rotate(90deg)";
+    }
+    function stopRankingFsLayout() {
+      if (!rkFsResize) return;
+      window.removeEventListener("resize", rkFsResize);
+      window.removeEventListener("orientationchange", rkFsResize);
+      if (window.visualViewport) window.visualViewport.removeEventListener("resize", rkFsResize);
+      rkFsResize = null;
+    }
+    function startRankingFsLayout(el) {
+      stopRankingFsLayout();
+      rkFsResize = function () {
+        layoutRankingFs(el);
+      };
+      window.addEventListener("resize", rkFsResize);
+      window.addEventListener("orientationchange", rkFsResize);
+      if (window.visualViewport) window.visualViewport.addEventListener("resize", rkFsResize);
+      layoutRankingFs(el);
+    }
+    function tryLockLandscape() {
+      var o = (screen && (screen.orientation || screen.mozOrientation)) || null;
+      if (!o || typeof o.lock !== "function") return Promise.resolve(false);
+      return o.lock("landscape").then(function () { return true; }).catch(function () {
+        return o.lock("landscape-primary").then(function () { return true; }).catch(function () { return false; });
+      });
+    }
+    function tryFullscreenEl(el) {
+      var targets = [el, document.documentElement];
+      function next(i) {
+        if (i >= targets.length) return Promise.resolve(false);
+        var t = targets[i];
+        var fn = t && (t.requestFullscreen || t.webkitRequestFullscreen || t.msRequestFullscreen);
+        if (!fn) return next(i + 1);
+        try {
+          var p = fn.call(t);
+          if (p && typeof p.then === "function") {
+            return p.then(function () { return true; }).catch(function () { return next(i + 1); });
+          }
+          return Promise.resolve(true);
+        } catch (e) {
+          return next(i + 1);
+        }
+      }
+      return next(0);
+    }
+    function closeRankingFullscreen() {
+      var existing = document.getElementById("fullscreenOverlay");
+      stopRankingFsLayout();
+      if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function () {});
+      if (document.webkitFullscreenElement && document.webkitExitFullscreen) document.webkitExitFullscreen();
+      if (screen.orientation && screen.orientation.unlock) {
+        try { screen.orientation.unlock(); } catch (e) {}
+      }
+      document.documentElement.classList.remove("rk-fs-open");
+      document.body.classList.remove("rk-fs-open");
+      if (existing) existing.remove();
+    }
+    function bindRankingFullscreen(overlay) {
+      var closeBtn = overlay.querySelector(".rk-fs-close");
+      if (closeBtn) closeBtn.onclick = closeRankingFullscreen;
+      Array.prototype.forEach.call(overlay.querySelectorAll("[data-season]"), function (b) {
+        b.addEventListener("click", function () {
+          var k = b.getAttribute("data-season");
+          if (k === "__hof") { renderHallOfFame(); return; }
+          seasonFilter = k;
+          renderRanking();
+          var html = rankingLandscapeHTML();
+          overlay.innerHTML = html;
+          bindRankingFullscreen(overlay);
+          layoutRankingFs(overlay);
+        });
+      });
+
+    }
+    function rankingLandscapeHTML() {
+      var gg = seasonGames();
+      var s = PLAYERS.map(function (p) { return statsIn(p, gg); }).sort(function (x, y) { return rankingSortIn(x, y, gg); });
+      var totalPts = gg.reduce(function (a, g) { return a + pts(g.type); }, 0);
+      var lead = gg.length && s.length ? s[0] : null;
+      var stats = lead
+        ? [
+            ["مجموع بازی‌ها", n(gg.length, 0)],
+            ["مجموع امتیازها", n(totalPts, 0)],
+            ["صدرنشین", lead.name],
+            ["درصد صدرنشین", percent(lead.wins, lead.games)],
+          ].map(function (x) {
+            return '<div class="stat"><span>' + x[0] + "</span><strong>" + esc(x[1]) + "</strong></div>";
+          }).join("")
+        : '<div class="rk-empty" style="grid-column:1/-1">هنوز بازی‌ای ثبت نشده است.</div>';
+      var seasons = seasonsList();
+      var chips = ['<button type="button" class="seasonchip' + (seasonFilter === "all" ? " active" : "") + '" data-season="all">همه</button>'];
+      seasons.forEach(function (sn) {
+        chips.push(
+          '<button type="button" class="seasonchip' + (seasonFilter === sn.key ? " active" : "") + '" data-season="' + sn.key + '">' +
+            (sn.current ? "● " : "") + esc(sn.label) + "</button>"
+        );
+      });
+      chips.push('<button type="button" class="seasonchip hof" data-season="__hof">تالار افتخار</button>');
+      var rows = s.map(function (x, i) {
+        var winRate = x.games > 0 ? (x.wins / x.games) * 100 : 0;
+        var evalb = x.games < 5 ? ' <span class="rk-eval">ارزیابی</span>' : "";
+        var medal = x.games >= 5 && i < 3 ? '<span class="rk-medal m' + (i + 1) + '">' + (i + 1) + "</span> " : n(i + 1, 0) + " ";
+        return (
+          '<tr class="' + (i === 0 && x.games > 0 ? "lead" : "") + '" data-name="' + esc(x.name) +
+          '" data-games="' + x.games + '" data-wins="' + x.wins + '" data-winrate="' + winRate.toFixed(2) +
+          '" data-points="' + x.total + '" data-breakdownscore="' + (x.normal + x.mars * 2 + x.black * 3) + '">' +
+          "<td>" + medal + "</td>" +
+          "<td>" + avatarInline(x.name, 28) + " " + esc(x.name) + evalb + "</td>" +
+          "<td>" + n(x.games, 0) + "</td>" +
+          "<td>" + n(x.wins, 0) + "</td>" +
+          "<td>" + percent(x.wins, x.games) + "</td>" +
+          "<td>" + n(x.total, 0) + "</td>" +
+          "<td>" + n(x.normal, 0) + "</td>" +
+          "<td>" + n(x.mars, 0) + "</td>" +
+          "<td>" + n(x.black, 0) + "</td></tr>"
+        );
+      }).join("");
+      return (
+        '<div class="rk-fs-top"><h2>پاتوق تخته‌نرد</h2>' +
+        '<button type="button" class="rk-fs-close" aria-label="بستن">×</button></div>' +
+        '<div class="seasonbar">' + chips.join("") + "</div>" +
+        '<div class="rk-fs-stats">' + stats + "</div>" +
+        '<div class="rk-fs-table-wrap"><table><thead><tr>' +
+        "<th>رتبه</th><th>بازیکن</th><th>بازی</th><th>برد</th><th>درصد برد</th><th>امتیاز</th>" +
+        "<th>عادی</th><th>مارس</th><th>سیاه‌مارس</th>" +
+        "</tr></thead><tbody>" + rows + "</tbody></table></div>" +
+        '<div class="rk-fs-foot">' + rankingH2HHTML(gg) + rankingHofSnippet() + "</div>" +
+        '<p class="rk-fs-hint">نمای افقی فعال است. برای خروج × را بزن.</p>'
+      );
+    }
+    window.__openRankingFullscreen = function () {
+      var existing = document.getElementById("fullscreenOverlay");
+      if (existing) { closeRankingFullscreen(); return; }
+      var overlay = document.createElement("div");
+      overlay.id = "fullscreenOverlay";
+      overlay.className = "rk-fs";
+      overlay.setAttribute("role", "dialog");
+      overlay.setAttribute("aria-modal", "true");
+      overlay.innerHTML = rankingLandscapeHTML();
+      document.body.appendChild(overlay);
+      document.documentElement.classList.add("rk-fs-open");
+      document.body.classList.add("rk-fs-open");
+      bindRankingFullscreen(overlay);
+      startRankingFsLayout(overlay);
+      tryFullscreenEl(overlay).then(function () {
+        return tryLockLandscape();
+      }).then(function () {
+        layoutRankingFs(overlay);
+      }).catch(function () {
+        layoutRankingFs(overlay);
+      });
+    };
+    window.toggleFullscreen = function () {
+      window.__openRankingFullscreen();
+    };
     window.renderRanking = function () {
       renderSeasonBar();
       var bn = $("seasonBanner");
@@ -1584,6 +2040,8 @@
       if (renderRankingCache.key === key) {
         if ($("summary")) $("summary").innerHTML = renderRankingCache.summary;
         if ($("rankbody")) $("rankbody").innerHTML = renderRankingCache.body;
+        if ($("rankList")) $("rankList").innerHTML = renderRankingCache.list;
+        if ($("headCards")) $("headCards").innerHTML = renderRankingCache.h2h;
         return;
       }
       var s = PLAYERS.map(function (p) { return statsIn(p, gg); }).sort(function (x, y) { return rankingSortIn(x, y, gg); });
@@ -1593,7 +2051,7 @@
       var lead = gg.length && s.length ? s[0] : null;
       var summary = lead
         ? [
-            ["مجموع بازی‌ها", n(games.length, 0)],
+            ["مجموع بازی‌ها", n(gg.length, 0)],
             ["مجموع امتیازها", n(totalPts, 0)],
             ["صدرنشین", lead.name + (lead.games < 5 ? " (ارزیابی)" : "")],
             ["درصد صدرنشین", percent(lead.wins, lead.games)],
@@ -1602,7 +2060,7 @@
               return '<div class="stat"><span>' + x[0] + "</span><strong>" + esc(x[1]) + "</strong></div>";
             })
             .join("")
-        : '<div class="card empty" style="grid-column:1/-1;margin:0">هنوز بازی‌ای ثبت نشده است.</div>';
+        : '<div class="rk-empty" style="grid-column:1/-1">هنوز بازی‌ای ثبت نشده است.</div>';
       var body = s
         .map(function (x, i) {
           var crown = seasonClosed(seasonFilter) && i === 0 && x.games > 0 ? ' <span class="crown" title="قهرمان این فصل">👑</span>' : "";
@@ -1669,9 +2127,13 @@
           );
         })
         .join("");
-      renderRankingCache = { key: key, summary: summary, body: body };
+      var list = rankingCardsHTML(s);
+      var h2h = rankingH2HHTML(gg);
+      renderRankingCache = { key: key, summary: summary, body: body, list: list, h2h: h2h };
       if ($("summary")) $("summary").innerHTML = summary;
       if ($("rankbody")) $("rankbody").innerHTML = body;
+      if ($("rankList")) $("rankList").innerHTML = list;
+      if ($("headCards")) $("headCards").innerHTML = h2h;
     };
     function persianYM(t) {
       try {
@@ -3164,7 +3626,20 @@
       var el = document.querySelector(".page.active");
       return el ? el.id : "register";
     }
+    function placeOnlineStrip() {
+      var box = $("onlineUsers");
+      var mount = $("regOnlineMount");
+      if (!box || !mount) return;
+      var onReg = $("register") && $("register").classList.contains("active");
+      if (onReg) {
+        if (box.parentNode !== mount) mount.appendChild(box);
+      } else if (box.parentNode === mount) {
+        var main = document.querySelector("main.app");
+        if (main && main.parentNode) main.parentNode.insertBefore(box, main);
+      }
+    }
     function renderPage(p) {
+      placeOnlineStrip();
       if (p === "register") renderRegister();
       else if (p === "ranking") renderRanking();
       else if (p === "tournament") renderTournament();
@@ -3499,6 +3974,10 @@
         gotoPage("settings");
       };
       $("add").onclick = add;
+      document.addEventListener("pointerdown", function fxUnlock() {
+        fxAudio();
+        document.removeEventListener("pointerdown", fxUnlock);
+      });
       var poolSearchEl = $("poolSearch");
       if (poolSearchEl)
         poolSearchEl.addEventListener("input", function () {
@@ -3757,47 +4236,9 @@
 })();
 
 function toggleFullscreen() {
-  var table = document.querySelector("#ranking table");
-  if (!table) return;
-  var existing = document.getElementById("fullscreenOverlay");
-  if (existing) {
-    existing.remove();
+  if (typeof window.__openRankingFullscreen === "function") {
+    window.__openRankingFullscreen();
     return;
-  }
-  var overlay = document.createElement("div");
-  overlay.id = "fullscreenOverlay";
-  overlay.style.cssText =
-    "position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--bg); z-index: 9999; overflow: auto; padding: 20px; box-sizing: border-box;";
-  var clonedTable = table.cloneNode(true);
-  clonedTable.style.cssText = "width: 100%; min-width: 700px; border-collapse: collapse; margin: 0 auto;";
-  var closeBtn = document.createElement("button");
-  closeBtn.textContent = "✕ بستن";
-  closeBtn.style.cssText =
-    "position: fixed; top: 10px; right: 10px; padding: 10px 20px; background: var(--danger); color: var(--contrast); border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; z-index: 10000;";
-  function closeOverlay() {
-    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function () {});
-    if (screen.orientation && screen.orientation.unlock)
-      try {
-        screen.orientation.unlock();
-      } catch (e) {}
-    overlay.remove();
-  }
-  closeBtn.onclick = closeOverlay;
-  overlay.appendChild(closeBtn);
-  overlay.appendChild(clonedTable);
-  document.body.appendChild(overlay);
-  if (overlay.requestFullscreen) {
-    overlay
-      .requestFullscreen()
-      .then(function () {
-        if (screen.orientation && screen.orientation.lock) screen.orientation.lock("landscape").catch(function () {});
-      })
-      .catch(function () {});
-  } else if (overlay.webkitRequestFullscreen) {
-    overlay.webkitRequestFullscreen();
-    if (screen.orientation && screen.orientation.lock) screen.orientation.lock("landscape").catch(function () {});
-  } else if (overlay.msRequestFullscreen) {
-    overlay.msRequestFullscreen();
   }
 }
 

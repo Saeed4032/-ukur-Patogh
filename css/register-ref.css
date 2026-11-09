@@ -1,0 +1,509 @@
+/* مرجع بصری ثبت بازی — فقط پوسته‌ی صفحهٔ ثبت. تم‌ها از متغیرها می‌آیند. */
+#register.page {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  max-width: 430px;
+  margin: 0 auto;
+}
+#register .card {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+}
+#register .card.subsection {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  margin-top: 8px;
+}
+
+body:has(#register.page.active) {
+  padding: 0 0 calc(var(--nav-h, 72px) + env(safe-area-inset-bottom, 0px));
+  background-color: var(--bg);
+}
+body:has(#register.page.active) .app {
+  max-width: 430px;
+  margin: 0 auto;
+  padding: calc(10px + env(safe-area-inset-top, 0px)) 14px 16px;
+  --reg-board: none;
+  background-image:
+    linear-gradient(180deg, rgba(7, 7, 12, 0.18) 0%, rgba(7, 7, 12, 0.55) 26%, var(--bg) 52%),
+    var(--reg-board);
+  background-size: 100% auto, 140% auto;
+  background-position: top center, top 8% left 70%;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+html:not([data-theme]) body:has(#register.page.active) .app,
+[data-theme="blackgold"] body:has(#register.page.active) .app {
+  --reg-board: url("../img/register/board.jpg");
+}
+[data-theme="royal"] body:has(#register.page.active) .app,
+[data-theme="emerald"] body:has(#register.page.active) .app,
+[data-theme="walnut"] body:has(#register.page.active) .app,
+[data-theme="rainy"] body:has(#register.page.active) .app {
+  --reg-board: none;
+}
+body:has(#register.page.active) .hero,
+body:has(#register.page.active) .tabs {
+  display: none;
+}
+
+.reg-hero { text-align: center; margin-bottom: 14px; }
+.reg-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.reg-rule {
+  width: 42px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
+.reg-title h2 {
+  margin: 0;
+  font-size: 1.42rem;
+  font-weight: 900;
+  color: var(--accent);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.65);
+}
+.title-dice {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 8px rgba(0, 0, 0, 0.65));
+  content: url("../img/register/dice-gold.png");
+}
+#regOnlineMount {
+  display: flex;
+  justify-content: center;
+  min-height: 8px;
+  margin-top: 8px;
+}
+#regOnlineMount .online-users {
+  position: static;
+  display: none;
+  bottom: auto;
+  right: auto;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  backdrop-filter: none;
+}
+#regOnlineMount .online-users.show {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+#regOnlineMount .online-av .avatar {
+  width: 28px;
+  height: 28px;
+  border: 2px solid #1a1208;
+}
+#regOnlineMount .online-av {
+  position: relative;
+}
+#regOnlineMount .online-av::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #3ddc84;
+  border: 2px solid #0a0908;
+}
+.online-caption {
+  color: var(--text);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+.online-caption i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #3ddc84;
+  margin: 0 4px 0 2px;
+}
+
+#register .vs-slots { gap: 8px; margin-bottom: 14px; position: relative; }
+#register .vs-slot {
+  position: relative;
+  min-height: 148px;
+  padding: 16px 8px 12px;
+  border: 0;
+  border-radius: 34px;
+  background:
+    radial-gradient(ellipse at 50% 0%, color-mix(in srgb, var(--primary) 16%, transparent), transparent 55%),
+    rgba(8, 7, 10, 0.86);
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--primary) 55%, transparent),
+    inset 0 0 0 7px rgba(8, 7, 10, 0.94),
+    inset 0 0 0 8px color-mix(in srgb, var(--primary) 28%, transparent),
+    0 12px 28px rgba(0, 0, 0, 0.45);
+}
+#register .vs-slot.filled {
+  background: radial-gradient(ellipse at 50% 20%, color-mix(in srgb, var(--primary) 22%, transparent), transparent 60%), rgba(10, 8, 6, 0.82);
+}
+#register .vs-slot .avatar {
+  width: 78px !important;
+  height: 78px !important;
+  border-radius: 50%;
+  border: 2px solid var(--primary);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.45), 0 0 16px color-mix(in srgb, var(--primary) 28%, transparent);
+  font-size: 32px !important;
+}
+#register .vs-slot-hint,
+#register .vs-stat { display: none; }
+#register .vs-slot-name { font-size: 0.92rem; }
+#register .vs-text {
+  position: relative;
+  z-index: 1;
+  width: auto;
+  height: auto;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  animation: none;
+  font-family: Georgia, "Times New Roman", serif;
+  font-style: italic;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.75);
+}
+#register .vs-text::before {
+  content: "";
+  position: absolute;
+  inset: -36px -14px;
+  background: radial-gradient(ellipse at 50% 50%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 72%);
+  z-index: -1;
+  pointer-events: none;
+}
+#register .vs-slot.filled::after {
+  content: "✓";
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--primary), var(--dark));
+  color: var(--contrast);
+  font-size: 0.72rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#register #poolSearch {
+  display: block !important;
+  width: 100%;
+  height: 44px;
+  margin: 0 0 10px;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent);
+  background: rgba(0, 0, 0, 0.55) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><circle cx='10.5' cy='10.5' r='6.2' fill='none' stroke='%239c9078' stroke-width='2'/><path d='M15.2 15.2L20 20' stroke='%239c9078' stroke-width='2' stroke-linecap='round'/></svg>") no-repeat 14px center / 18px;
+  color: var(--text);
+  padding: 0 18px 0 40px;
+}
+#register #poolSearch.hidden { display: block !important; }
+
+#register .player-pool {
+  display: flex;
+  overflow-x: auto;
+  gap: 12px;
+  padding: 10px 8px 8px;
+  margin: 0 0 14px;
+  border-radius: 18px;
+  background: rgba(8, 7, 10, 0.62);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary) 16%, transparent);
+  grid-template-columns: none;
+  scrollbar-width: none;
+}
+#register .player-pool::-webkit-scrollbar { display: none; }
+#register .pool-player {
+  flex: 0 0 70px;
+  background: none;
+  border: 0;
+  padding: 0;
+  box-shadow: none;
+}
+#register .pool-player:hover { transform: none; box-shadow: none; }
+#register .pool-player .avatar {
+  position: relative;
+  width: 58px !important;
+  height: 58px !important;
+  border-radius: 14px;
+  border: 2px solid transparent;
+}
+#register .pool-player.placed {
+  opacity: 1;
+  position: relative;
+  padding: 4px 3px 6px;
+  border-radius: 16px;
+  background: linear-gradient(160deg, color-mix(in srgb, var(--primary) 18%, transparent), rgba(8, 7, 10, 0.2));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary) 70%, transparent);
+}
+#register .pool-player.placed .avatar {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--primary) 40%, transparent);
+}
+#register .pool-player.placed .avatar::after {
+  content: "✓";
+  position: absolute;
+  top: -6px;
+  left: -6px;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--primary), var(--dark));
+  color: var(--contrast);
+  font-size: 0.62rem;
+  font-weight: 900;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#register .pool-player .pp-stats { display: none; }
+#register .pool-player .pp-name { font-size: 0.72rem; }
+#register .pool-player { position: relative; }
+#register .pool-cam {
+  position: absolute;
+  bottom: 18px;
+  left: -2px;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(145deg, var(--accent), var(--dark));
+  color: var(--contrast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+  font-size: 0;
+}
+#register .pool-cam svg {
+  width: 12px;
+  height: 12px;
+  stroke: var(--contrast);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+#register #winnerArea h2,
+#register #typeArea h2 {
+  text-align: center;
+  font-size: 1.05rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+#register #winnerArea h2::before {
+  content: "";
+  width: 26px;
+  height: 22px;
+  background: url("../img/register/crown.png") center / contain no-repeat;
+}
+#register .vs-comparison { display: none; }
+#register .winner-arena {
+  grid-template-columns: 1fr 1fr;
+  background: rgba(8, 7, 10, 0.82);
+  border: 0;
+  border-radius: 24px;
+  box-shadow:
+    inset 0 0 0 1px color-mix(in srgb, var(--primary) 50%, transparent),
+    inset 0 0 0 7px rgba(8, 7, 10, 0.94),
+    inset 0 0 0 8px color-mix(in srgb, var(--primary) 22%, transparent);
+  padding: 20px 10px 18px;
+}
+#register .winner-arena .vs-slot-divider { display: none; }
+#register .winner-side .avatar {
+  width: 96px !important;
+  height: 96px !important;
+  border-radius: 50%;
+  border: 3px solid color-mix(in srgb, var(--primary) 28%, transparent);
+}
+#register .winner-side.active {
+  background: radial-gradient(circle at 50% 38%, color-mix(in srgb, var(--accent) 22%, transparent), transparent 64%);
+  border-radius: 20px;
+}
+#register .winner-side.active .avatar {
+  border-color: var(--accent);
+  box-shadow:
+    0 0 0 3px rgba(0, 0, 0, 0.45),
+    0 0 18px color-mix(in srgb, var(--primary) 35%, transparent);
+  transform: none;
+}
+#register .winner-arena.has-winner .winner-side:not(.active) .avatar {
+  filter: grayscale(0.35) brightness(0.72);
+  border-color: color-mix(in srgb, var(--muted) 50%, transparent);
+}
+#register .winner-stat,
+#register .winner-pick { display: none; }
+#register .winner-name {
+  min-width: 86px;
+  color: var(--contrast);
+  background: linear-gradient(180deg, var(--accent), var(--primary) 55%, var(--dark));
+  padding: 5px 16px 6px;
+  clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
+  font-size: 0.86rem;
+}
+#register .winner-side:not(.active) .winner-name {
+  background: linear-gradient(180deg, #3a3224, #241c14);
+  color: var(--text);
+}
+#register .winner-side.active .winner-name::before { content: none; }
+
+#register .type-buttons {
+  padding: 12px 10px;
+  border-radius: 22px;
+  background: rgba(8, 7, 10, 0.72);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary) 16%, transparent);
+}
+#register .choice {
+  min-height: 118px;
+  border-radius: 20px;
+  border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent);
+  background: linear-gradient(180deg, rgba(28, 22, 14, 0.92), rgba(10, 9, 12, 0.94));
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary) 10%, transparent);
+}
+#register .choice .choice-emoji {
+  display: block;
+  width: 44px;
+  height: 44px;
+  font-size: 0;
+  border-radius: 50%;
+  background: center 58% / 170% no-repeat;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+#register .choice[data-t="normal"] .choice-emoji { background-image: url("../img/register/checker-white.jpg"); }
+#register .choice[data-t="mars"] .choice-emoji { background-image: url("../img/register/checker-mars.jpg"); }
+#register .choice[data-t="black"] .choice-emoji { background-image: url("../img/register/checker-black.jpg"); }
+#register .choice.active {
+  color: var(--contrast);
+  background: linear-gradient(180deg, var(--accent), var(--primary) 42%, var(--dark));
+  border-color: var(--accent);
+  box-shadow: 0 0 16px color-mix(in srgb, var(--primary) 32%, transparent), inset 0 1px 0 rgba(255, 255, 255, 0.28);
+}
+#register .choice.active small { color: var(--contrast); }
+
+#register .more-details {
+  margin-top: 12px;
+  border-radius: 16px;
+  background: rgba(8, 7, 10, 0.7);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--primary) 16%, transparent);
+  padding: 4px 12px;
+  border-top: 0;
+}
+#register .more-details summary {
+  color: var(--text);
+  font-size: 0.88rem;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+#register .more-details summary::before {
+  content: "✎";
+  color: var(--accent);
+  font-size: 0.95rem;
+}
+#register .more-details summary::after {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid var(--muted);
+  border-bottom: 2px solid var(--muted);
+  transform: rotate(45deg);
+  margin-top: -4px;
+}
+#register .more-details[open] summary::after {
+  transform: rotate(-135deg);
+  margin-top: 4px;
+}
+#register #quickNote {
+  width: 100%;
+  border: 0;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.35);
+  color: var(--text);
+  padding: 10px 12px;
+}
+
+#register .actions { margin-top: 14px; position: static; }
+#register #add {
+  width: 100%;
+  min-height: 56px;
+  border-radius: 999px;
+  font-size: 1.12rem;
+  font-weight: 900;
+  color: var(--contrast);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: linear-gradient(180deg, #f6e2a4 0%, var(--accent) 38%, var(--primary) 70%, var(--dark) 100%);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+#register #add::after {
+  content: "";
+  width: 26px;
+  height: 26px;
+  background: url("../img/register/dice-gold.png") center / contain no-repeat;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.35));
+}
+
+@media (min-width: 768px) {
+  body:has(#register.page.active) .bottom-nav { display: flex; }
+  body:has(#register.page.active) .tabs { display: none; }
+}
+
+body:has(#register.page.active) .bottom-nav {
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  width: min(430px, 100%);
+  height: calc(72px + env(safe-area-inset-bottom, 0px));
+  padding: 8px 10px calc(8px + env(safe-area-inset-bottom, 0px));
+  background: linear-gradient(180deg, color-mix(in srgb, var(--card2) 80%, #000), var(--bg));
+  border-radius: 28px 28px 0 0;
+  border-top: 0;
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--primary) 35%, transparent), 0 -8px 24px rgba(0, 0, 0, 0.45);
+}
+.nav-item svg.nav-icon {
+  width: 22px;
+  height: 22px;
+  display: block;
+  flex-shrink: 0;
+}
+body:has(#register.page.active) .nav-item { color: var(--primary); opacity: 0.72; }
+body:has(#register.page.active) .nav-item.active {
+  opacity: 1;
+  color: var(--accent);
+  background: radial-gradient(ellipse at 50% 120%, color-mix(in srgb, var(--primary) 38%, transparent), transparent 68%);
+  border-radius: 16px 16px 0 0;
+}
+body:has(#register.page.active) .nav-item.active::after {
+  top: auto;
+  bottom: 2px;
+  width: 28px;
+  height: 3px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, transparent, var(--primary), transparent);
+}
