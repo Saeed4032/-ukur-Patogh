@@ -1219,13 +1219,6 @@
         extra.toLocaleString("fa-IR") +
         "</span>";
     wrap.innerHTML = html;
-    var cap = document.getElementById("onlineCaption");
-    if (cap) {
-      cap.innerHTML =
-        '<i></i> ' +
-        onlineUsersList.length.toLocaleString("fa-IR") +
-        " نفر آنلاین";
-    }
     box.classList.add("show");
   }
 
