@@ -718,6 +718,14 @@
     function winRingHTML() {
       return '<img class="win-ring" src="img/register/win-ring.png" alt="" aria-hidden="true">';
     }
+    function winBowHTML() {
+      return (
+        '<span class="win-bow">' +
+        '<img src="img/register/win-bow.png" alt="" aria-hidden="true">' +
+        "<b>برنده</b>" +
+        "</span>"
+      );
+    }
     function slotContentHTML(name) {
       return (
         avatarHTML(name, 144) +
@@ -750,7 +758,7 @@
           '">' +
           slotContentHTML(name) +
           winRingHTML() +
-          '<span class="win-bow">برنده</span>' +
+          winBowHTML() +
           "</button>"
         );
       }
@@ -920,7 +928,7 @@
           '">' +
           avatarHTML(a, 100) +
           winRingHTML() +
-          '<span class="win-bow">برنده</span>' +
+          winBowHTML() +
           '<span class="winner-name">' +
           esc(a) +
           "</span>" +
@@ -934,7 +942,7 @@
           '">' +
           avatarHTML(b, 100) +
           winRingHTML() +
-          '<span class="win-bow">برنده</span>' +
+          winBowHTML() +
           '<span class="winner-name">' +
           esc(b) +
           "</span>" +
