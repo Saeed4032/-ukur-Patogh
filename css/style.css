@@ -3338,37 +3338,22 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #register .win-ring {
   position: absolute;
   left: 50%;
-  top: 1px;
+  top: 0;
   width: 120px;
   height: 120px;
   margin-left: -60px;
-  border-radius: 50%;
   pointer-events: none;
-  z-index: 0;
+  z-index: 2;
   display: none;
-  background: conic-gradient(
-    from 125deg,
-    #6b4e10 0%,
-    #fff8d6 12%,
-    #f0d060 24%,
-    #8a6914 38%,
-    #ffe9a0 52%,
-    #d4af37 66%,
-    #5a4210 80%,
-    #fff3c4 100%
-  );
-  box-shadow:
-    0 8px 16px rgba(0, 0, 0, 0.5),
-    0 2px 0 rgba(255, 248, 220, 0.55),
-    inset 0 3px 4px rgba(255, 255, 255, 0.5),
-    inset 0 -4px 6px rgba(50, 30, 5, 0.55);
+  overflow: visible;
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.45));
 }
 #register .winner-side.active .win-ring,
 #register .vs-slot.is-winner .win-ring {
   display: block;
 }
 #register .vs-slot .win-ring {
-  top: 1px;
+  top: 0;
   width: 164px;
   height: 164px;
   margin-left: -82px;
@@ -3382,12 +3367,12 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 0.78rem;
   font-weight: 900;
   line-height: 1.2;
-  color: #2a1c08;
+  color: #2a2416;
   white-space: nowrap;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
-  background: linear-gradient(180deg, #fff6d0 0%, #f0d060 45%, #d4af37 100%);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  background: linear-gradient(180deg, #f8f4e6 0%, #e4d7b0 48%, #b7a57a 100%);
   border-radius: 4px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }
 #register .winner-side.active .win-bow,
 #register .vs-slot.is-winner .win-bow {
@@ -3402,13 +3387,13 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #register .win-bow::before {
   left: -10px;
-  border-right-color: #c9a227;
-  border-bottom-color: #c9a227;
+  border-right-color: #b7a57a;
+  border-bottom-color: #b7a57a;
 }
 #register .win-bow::after {
   right: -10px;
-  border-left-color: #c9a227;
-  border-bottom-color: #c9a227;
+  border-left-color: #b7a57a;
+  border-bottom-color: #b7a57a;
 }
 #register .vs-slot .win-bow {
   font-size: 0.85rem;
