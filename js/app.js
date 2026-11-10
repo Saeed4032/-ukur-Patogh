@@ -736,13 +736,17 @@
       el.classList.remove("idle");
       function slotBtn(num, name) {
         if (!name) return "";
+        var won = selected.winner && selected.winner === name;
         return (
-          '<button type="button" class="vs-slot filled" data-slot="' +
+          '<button type="button" class="vs-slot filled' +
+          (won ? " is-winner" : "") +
+          '" data-slot="' +
           num +
           '" aria-pressed="true" aria-label="حذف ' +
           esc(name) +
           '">' +
           slotContentHTML(name) +
+          '<i class="win-ring" aria-hidden="true"></i>' +
           "</button>"
         );
       }
@@ -911,6 +915,7 @@
           (selected.winner === a ? "true" : "false") +
           '">' +
           avatarHTML(a, 100) +
+          '<i class="win-ring" aria-hidden="true"></i>' +
           '<span class="winner-name">' +
           esc(a) +
           "</span>" +
@@ -923,6 +928,7 @@
           (selected.winner === b ? "true" : "false") +
           '">' +
           avatarHTML(b, 100) +
+          '<i class="win-ring" aria-hidden="true"></i>' +
           '<span class="winner-name">' +
           esc(b) +
           "</span>" +

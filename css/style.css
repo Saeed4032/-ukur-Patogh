@@ -3258,6 +3258,14 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 1.05rem;
   font-weight: 900;
 }
+#register #winnerArea,
+#register #winnerArea.card,
+#register #winnerArea.card.subsection,
+#register #winnerArena,
+#register .winner-arena,
+#register .winner-side {
+  overflow: visible !important;
+}
 #register #winnerArea.card,
 #register #winnerArea.card.subsection {
   background: rgba(10, 8, 6, 0.72);
@@ -3266,7 +3274,6 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   box-shadow: none;
   padding: 14px 12px 16px;
   margin-top: 12px;
-  overflow: visible;
 }
 #register #winnerArea h2 {
   margin: 0 0 14px;
@@ -3328,49 +3335,36 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
     inset 0 2px 3px rgba(255, 236, 190, 0.28),
     inset 0 -3px 4px rgba(40, 24, 4, 0.55);
 }
-#register .winner-side.active::before {
-  content: "";
+#register .win-ring {
   position: absolute;
   left: 50%;
-  top: 2px;
-  width: 116px;
-  height: 116px;
-  margin-left: -58px;
+  top: 10px;
+  width: 100px;
+  height: 100px;
+  margin-left: -50px;
   border-radius: 50%;
   pointer-events: none;
-  z-index: 0;
-  background: conic-gradient(
-    from 130deg,
-    #4a340c 0%,
-    #f6e7b2 10%,
-    #d4af37 22%,
-    #6b4e14 36%,
-    #fff4c8 48%,
-    #c9a227 60%,
-    #5a4210 74%,
-    #e8c56b 88%,
-    #4a340c 100%
-  );
+  z-index: 3;
+  opacity: 0;
+  background: none;
   box-shadow:
-    0 5px 14px rgba(0, 0, 0, 0.55),
-    0 1px 0 rgba(255, 240, 200, 0.4),
-    inset 0 2px 2px rgba(255, 248, 220, 0.45),
-    inset 0 -3px 4px rgba(40, 24, 4, 0.55);
+    0 0 0 2px #2a1c08,
+    0 0 0 4px #f6e7b2,
+    0 0 0 5px #8a6918,
+    0 0 0 8px #d4af37,
+    0 0 0 10px #5a4210,
+    0 0 0 12px #e8c56b,
+    0 5px 14px rgba(0, 0, 0, 0.5);
 }
-#register .winner-side.active::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  top: 9px;
-  width: 102px;
-  height: 102px;
-  margin-left: -51px;
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 2;
-  box-shadow:
-    inset 0 0 0 1px rgba(42, 28, 8, 0.7),
-    inset 0 2px 3px rgba(0, 0, 0, 0.35);
+#register .winner-side.active .win-ring,
+#register .vs-slot.is-winner .win-ring {
+  opacity: 1;
+}
+#register .vs-slot .win-ring {
+  top: 10px;
+  width: 144px;
+  height: 144px;
+  margin-left: -72px;
 }
 #register .winner-name {
   font-size: 0.78rem;
@@ -3423,6 +3417,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   transform: scale(1.04);
 }
 #register .vs-slot.filled {
+  position: relative;
   width: auto;
   height: auto;
   min-height: 0;
@@ -3430,8 +3425,9 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   background: none;
   box-shadow: none;
   gap: 6px;
-  padding: 0;
+  padding: 10px 8px 0;
   border-radius: 0;
+  overflow: visible;
 }
 #register .vs-slot.filled:hover {
   background: none;
