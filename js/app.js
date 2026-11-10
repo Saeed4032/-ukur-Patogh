@@ -1083,7 +1083,13 @@
       var btn = $("add");
       if (!btn) return;
       btn.textContent = "🎲 ثبت بازی";
-      btn.disabled = !(selected.pair && selected.winner && selected.type);
+      var ready = !!(selected.pair && selected.winner && selected.type);
+      btn.disabled = !ready;
+      btn.hidden = !ready;
+      var actions = btn.parentNode;
+      if (actions && actions.classList && actions.classList.contains("actions")) {
+        actions.hidden = !ready;
+      }
     }
     function renderQuickTags() {
       var el = $("quickTags");

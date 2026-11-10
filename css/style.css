@@ -3248,6 +3248,10 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* دکمه ثبت تمام‌عرض در صفحه ثبت */
 #register .actions { margin-top: 14px; }
+#register .actions[hidden],
+#register #add[hidden] {
+  display: none !important;
+}
 #register #add {
   width: 100%;
   padding: 14px;
