@@ -728,30 +728,28 @@
       if (!el) return;
       var s1 = selected.slot1,
         s2 = selected.slot2;
+      if (!s1 && !s2) {
+        el.innerHTML = "";
+        el.classList.add("idle");
+        return;
+      }
+      el.classList.remove("idle");
+      function slotBtn(num, name) {
+        if (!name) return "";
+        return (
+          '<button type="button" class="vs-slot filled" data-slot="' +
+          num +
+          '" aria-pressed="true" aria-label="حذف ' +
+          esc(name) +
+          '">' +
+          slotContentHTML(name) +
+          "</button>"
+        );
+      }
       el.innerHTML =
-        '<button type="button" class="vs-slot' +
-        (s1 ? " filled" : "") +
-        '" data-slot="1" aria-pressed="' +
-        (s1 ? "true" : "false") +
-        '"' +
-        (s1 ? ' aria-label="حذف ' + esc(s1) + ' از جای اول"' : ' aria-label="انتخاب بازیکن اول"') +
-        ">" +
-        (s1 ? slotContentHTML(s1) : "") +
-        "</button>" +
-        '<div class="vs-slot-divider"><span class="vs-text' +
-        (s1 && s2 ? "" : " small") +
-        '">VS</span></div>' +
-        '<button type="button" class="vs-slot' +
-        (s2 ? " filled" : "") +
-        '" data-slot="2" aria-pressed="' +
-        (s2 ? "true" : "false") +
-        '"' +
-        (s2 ? ' aria-label="حذف ' + esc(s2) + ' از جای دوم"' : ' aria-label="انتخاب بازیکن دوم"') +
-        ">" +
-        (s2
-          ? slotContentHTML(s2)
-          : '<span class="vs-slot-label">انتخاب ۲</span><span class="vs-slot-hint">کلیک کن یا بنداز</span>') +
-        "</button>";
+        slotBtn("1", s1) +
+        (s1 && s2 ? '<div class="vs-slot-divider"><span class="vs-text">VS</span></div>' : "") +
+        slotBtn("2", s2);
       [].forEach.call(el.querySelectorAll(".vs-slot"), function (slot) {
         var slotNum = slot.dataset.slot;
         slot.addEventListener("dragover", function (e) {
