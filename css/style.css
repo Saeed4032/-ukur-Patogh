@@ -3265,9 +3265,9 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #register .vs-slot {
   justify-self: center;
-  width: 96px;
-  min-height: 96px;
-  height: 96px;
+  width: 144px;
+  min-height: 144px;
+  height: 144px;
   padding: 0;
   border-radius: 50%;
   border: 2px dashed var(--border);
@@ -3302,15 +3302,15 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   box-shadow: none;
 }
 #register .vs-slot.filled .avatar {
-  width: 96px !important;
-  height: 96px !important;
+  width: 144px !important;
+  height: 144px !important;
   border-radius: 50%;
 }
 #register .vs-slot-name {
   font-size: 0.62rem;
   font-weight: 700;
   line-height: 1.15;
-  max-width: 96px;
+  max-width: 144px;
 }
 #register .vs-slot-label,
 #register .vs-slot-hint,
@@ -3326,8 +3326,8 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   margin-top: 8px;
 }
 #register .pool-player {
-  flex: 0 0 80px;
-  width: 80px;
+  flex: 0 0 124px;
+  width: 124px;
   min-height: 0;
   padding: 2px 0 0;
   background: none;
@@ -3348,15 +3348,15 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0.42;
 }
 #register .pool-player .avatar {
-  width: 72px !important;
-  height: 72px !important;
+  width: 120px !important;
+  height: 120px !important;
   border-radius: 50%;
 }
 #register .pool-player .pp-name {
   font-size: 0.68rem;
   font-weight: 700;
   line-height: 1.15;
-  max-width: 80px;
+  max-width: 124px;
 }
 #register .pool-player .pp-stats {
   font-size: 0.5rem;

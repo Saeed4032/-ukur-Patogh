@@ -717,7 +717,7 @@
 
     function slotContentHTML(name) {
       return (
-        avatarHTML(name, 96) +
+        avatarHTML(name, 144) +
         '<strong class="vs-slot-name">' +
         esc(name) +
         "</strong>"
@@ -820,7 +820,7 @@
             '" aria-pressed="' +
             (placed ? "true" : "false") +
             '">' +
-            avatarHTML(p, 72) +
+            avatarHTML(p, 120) +
             '<span class="pp-name">' +
             esc(p) +
             "</span>" +
