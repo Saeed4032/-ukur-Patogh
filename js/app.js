@@ -808,7 +808,6 @@
       }
       el.innerHTML = list
         .map(function (p) {
-          var s = stats(p);
           var placed = used.indexOf(p) > -1;
           return (
             '<button type="button" class="pool-player' +
@@ -819,17 +818,9 @@
             esc(p) +
             '" aria-pressed="' +
             (placed ? "true" : "false") +
-            '">' +
-            avatarHTML(p, 120) +
-            '<span class="pp-name">' +
+            '"><span class="pp-name">' +
             esc(p) +
-            "</span>" +
-            '<span class="pp-stats">' +
-            (placed
-              ? "✓ انتخاب شده"
-              : n(s.games, 0) + " بازی · " + (s.games ? percent(s.wins, s.games) + " برد" : "—")) +
-            "</span>" +
-            "</button>"
+            "</span></button>"
           );
         })
         .join("");
