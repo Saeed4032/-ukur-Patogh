@@ -747,18 +747,13 @@
       el.classList.remove("idle");
       function slotBtn(num, name) {
         if (!name) return "";
-        var won = selected.winner && selected.winner === name;
         return (
-          '<button type="button" class="vs-slot filled' +
-          (won ? " is-winner" : "") +
-          '" data-slot="' +
+          '<button type="button" class="vs-slot filled" data-slot="' +
           num +
           '" aria-pressed="true" aria-label="حذف ' +
           esc(name) +
           '">' +
           avatarHTML(name, 144) +
-          winRingHTML() +
-          winBowHTML() +
           '<strong class="vs-slot-name">' +
           esc(name) +
           "</strong>" +

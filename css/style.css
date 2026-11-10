@@ -3348,15 +3348,8 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   object-fit: contain;
   filter: none;
 }
-#register .winner-side.active .win-ring,
-#register .vs-slot.is-winner .win-ring {
+#register .winner-side.active .win-ring {
   display: block;
-}
-#register .vs-slot .win-ring {
-  top: -28px;
-  width: 220px;
-  height: 220px;
-  margin-left: -110px;
 }
 #register .win-bow {
   display: none;
@@ -3400,8 +3393,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: inherit;
   color: inherit;
 }
-#register .winner-side.active .win-bow,
-#register .vs-slot.is-winner .win-bow {
+#register .winner-side.active .win-bow {
   display: block;
 }
 #register .win-bow::before,
@@ -3409,13 +3401,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   content: none;
   display: none;
 }
-#register .vs-slot .win-bow {
-  top: auto;
-  width: 248px;
-  height: 88px;
-  margin: -16px auto 2px;
-  font-size: 0.92rem;
-}
+
 #register .winner-name {
   font-size: 0.78rem;
   font-weight: 700;
