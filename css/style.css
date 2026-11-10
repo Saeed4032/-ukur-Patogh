@@ -3258,9 +3258,16 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 1.05rem;
   font-weight: 900;
 }
+#register .winner-arena {
+  overflow: visible;
+  padding: 8px 0;
+  gap: 8px;
+  background: none;
+  border: 0;
+}
 #register .winner-side .avatar {
-  width: 144px !important;
-  height: 144px !important;
+  width: 120px !important;
+  height: 120px !important;
   border-radius: 50%;
 }
 #register .winner-side.active .avatar {

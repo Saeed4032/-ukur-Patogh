@@ -931,7 +931,7 @@
           '" aria-pressed="' +
           (selected.winner === b ? "true" : "false") +
           '">' +
-          avatarHTML(b, 144) +
+          avatarHTML(b, 120) +
           '<span class="winner-name">' +
           esc(b) +
           "</span>" +
