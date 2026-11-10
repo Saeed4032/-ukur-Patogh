@@ -912,7 +912,7 @@
           '" aria-pressed="' +
           (selected.winner === a ? "true" : "false") +
           '">' +
-          avatarHTML(a, 58) +
+          avatarHTML(a, 144) +
           '<span class="winner-name">' +
           esc(a) +
           "</span>" +
@@ -931,7 +931,7 @@
           '" aria-pressed="' +
           (selected.winner === b ? "true" : "false") +
           '">' +
-          avatarHTML(b, 58) +
+          avatarHTML(b, 144) +
           '<span class="winner-name">' +
           esc(b) +
           "</span>" +

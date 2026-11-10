@@ -3258,6 +3258,14 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 1.05rem;
   font-weight: 900;
 }
+#register .winner-side .avatar {
+  width: 144px !important;
+  height: 144px !important;
+  border-radius: 50%;
+}
+#register .winner-side.active .avatar {
+  transform: none;
+}
 
 /* تب ثبت: مربع‌ها → دایره. آواتار بزرگ، نام کوچک، آمار خیلی کوچک */
 #register .vs-slots {
