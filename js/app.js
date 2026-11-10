@@ -715,72 +715,8 @@
       if (typeof callback === "function") callback();
     }
 
-    function winRingSVG(px) {
-      var id = "gr" + Math.random().toString(36).slice(2, 9);
-      var s = px || 120;
-      var c = (s / 2).toFixed(1);
-      var r = (s / 2 - 8).toFixed(1);
-      return (
-        '<svg class="win-ring" width="' +
-        s +
-        '" height="' +
-        s +
-        '" viewBox="0 0 ' +
-        s +
-        " " +
-        s +
-        '" aria-hidden="true">' +
-        "<defs>" +
-        '<linearGradient id="' +
-        id +
-        'a" x1="0.12" y1="0" x2="0.92" y2="1">' +
-        '<stop offset="0" stop-color="#f8f4e6"/>' +
-        '<stop offset="0.22" stop-color="#e4d7b0"/>' +
-        '<stop offset="0.48" stop-color="#8d7b52"/>' +
-        '<stop offset="0.72" stop-color="#f0e6c8"/>' +
-        '<stop offset="1" stop-color="#b7a57a"/>' +
-        "</linearGradient>" +
-        '<linearGradient id="' +
-        id +
-        'b" x1="0.2" y1="0" x2="0.8" y2="1">' +
-        '<stop offset="0" stop-color="#ffffff" stop-opacity="0.75"/>' +
-        '<stop offset="0.4" stop-color="#ffffff" stop-opacity="0"/>' +
-        "</linearGradient>" +
-        "</defs>" +
-        '<circle cx="' +
-        c +
-        '" cy="' +
-        c +
-        '" r="' +
-        (s / 2 - 5).toFixed(1) +
-        '" fill="none" stroke="rgba(18,14,10,0.55)" stroke-width="1.4"/>' +
-        '<circle cx="' +
-        c +
-        '" cy="' +
-        c +
-        '" r="' +
-        r +
-        '" fill="none" stroke="url(#' +
-        id +
-        'a)" stroke-width="7.5"/>' +
-        '<circle cx="' +
-        c +
-        '" cy="' +
-        c +
-        '" r="' +
-        (s / 2 - 11.5).toFixed(1) +
-        '" fill="none" stroke="rgba(18,14,10,0.45)" stroke-width="1.3"/>' +
-        '<circle cx="' +
-        c +
-        '" cy="' +
-        c +
-        '" r="' +
-        (s / 2 - 6.5).toFixed(1) +
-        '" fill="none" stroke="url(#' +
-        id +
-        'b)" stroke-width="2.2"/>' +
-        "</svg>"
-      );
+    function winRingHTML() {
+      return '<img class="win-ring" src="img/register/win-ring.png" alt="" aria-hidden="true">';
     }
     function slotContentHTML(name) {
       return (
@@ -813,7 +749,7 @@
           esc(name) +
           '">' +
           slotContentHTML(name) +
-          winRingSVG(164) +
+          winRingHTML() +
           '<span class="win-bow">برنده</span>' +
           "</button>"
         );
@@ -983,7 +919,7 @@
           (selected.winner === a ? "true" : "false") +
           '">' +
           avatarHTML(a, 100) +
-          winRingSVG(120) +
+          winRingHTML() +
           '<span class="win-bow">برنده</span>' +
           '<span class="winner-name">' +
           esc(a) +
@@ -997,7 +933,7 @@
           (selected.winner === b ? "true" : "false") +
           '">' +
           avatarHTML(b, 100) +
-          winRingSVG(120) +
+          winRingHTML() +
           '<span class="win-bow">برنده</span>' +
           '<span class="winner-name">' +
           esc(b) +
