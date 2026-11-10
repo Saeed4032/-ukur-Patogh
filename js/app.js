@@ -818,7 +818,9 @@
             esc(p) +
             '" aria-pressed="' +
             (placed ? "true" : "false") +
-            '"><span class="pp-name">' +
+            '">' +
+            avatarHTML(p, 36) +
+            '<span class="pp-name">' +
             esc(p) +
             "</span></button>"
           );
