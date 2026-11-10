@@ -756,9 +756,12 @@
           '" aria-pressed="true" aria-label="حذف ' +
           esc(name) +
           '">' +
-          slotContentHTML(name) +
+          avatarHTML(name, 144) +
           winRingHTML() +
           winBowHTML() +
+          '<strong class="vs-slot-name">' +
+          esc(name) +
+          "</strong>" +
           "</button>"
         );
       }

@@ -3360,12 +3360,12 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #register .win-bow {
   display: none;
-  position: absolute;
-  left: 50%;
-  top: 46px;
+  position: relative;
+  left: auto;
+  top: auto;
   width: 172px;
   height: 62px;
-  margin: 0 0 0 -86px;
+  margin: -12px auto 2px;
   padding: 0;
   z-index: 4;
   pointer-events: none;
@@ -3379,6 +3379,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   line-height: 1;
   white-space: nowrap;
   text-shadow: 0 1px 0 rgba(255, 236, 190, 0.35);
+  flex-shrink: 0;
 }
 #register .win-bow img {
   position: absolute;
@@ -3409,10 +3410,10 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   display: none;
 }
 #register .vs-slot .win-bow {
-  top: 68px;
+  top: auto;
   width: 248px;
   height: 88px;
-  margin-left: -124px;
+  margin: -16px auto 2px;
   font-size: 0.92rem;
 }
 #register .winner-name {
