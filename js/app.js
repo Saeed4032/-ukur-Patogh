@@ -747,6 +747,7 @@
           '">' +
           slotContentHTML(name) +
           '<i class="win-ring" aria-hidden="true"></i>' +
+          '<span class="win-bow">برنده</span>' +
           "</button>"
         );
       }
@@ -916,6 +917,7 @@
           '">' +
           avatarHTML(a, 100) +
           '<i class="win-ring" aria-hidden="true"></i>' +
+          '<span class="win-bow">برنده</span>' +
           '<span class="winner-name">' +
           esc(a) +
           "</span>" +
@@ -929,6 +931,7 @@
           '">' +
           avatarHTML(b, 100) +
           '<i class="win-ring" aria-hidden="true"></i>' +
+          '<span class="win-bow">برنده</span>' +
           '<span class="winner-name">' +
           esc(b) +
           "</span>" +

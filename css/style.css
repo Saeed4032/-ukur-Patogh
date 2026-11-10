@@ -3348,16 +3348,17 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   opacity: 0;
   background: none;
   box-shadow:
-    0 0 0 2px #2a1c08,
-    0 0 0 4px #f6e7b2,
-    0 0 0 5px #8a6918,
-    0 0 0 8px #d4af37,
-    0 0 0 10px #5a4210,
-    0 0 0 12px #e8c56b,
-    0 5px 14px rgba(0, 0, 0, 0.5);
+    0 0 0 2px #fff6d4,
+    0 0 0 5px #ffe9a0,
+    0 0 0 6px #f5d56a,
+    0 0 0 9px #fff3c0,
+    0 0 0 11px #e8c44a,
+    0 0 16px rgba(255, 224, 120, 0.7);
 }
 #register .winner-side.active .win-ring,
-#register .vs-slot.is-winner .win-ring {
+#register .vs-slot.is-winner .win-ring,
+#register .winner-side.active .win-bow,
+#register .vs-slot.is-winner .win-bow {
   opacity: 1;
 }
 #register .vs-slot .win-ring {
@@ -3365,6 +3366,43 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   width: 144px;
   height: 144px;
   margin-left: -72px;
+}
+#register .win-bow {
+  position: absolute;
+  left: 50%;
+  top: 86px;
+  transform: translateX(-50%);
+  z-index: 4;
+  opacity: 0;
+  pointer-events: none;
+  white-space: nowrap;
+  padding: 4px 20px 5px;
+  font-size: 0.72rem;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  color: #3a2a0c;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  background: linear-gradient(180deg, #fff4c4 0%, #f0d060 42%, #d4af37 100%);
+  clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+}
+#register .win-bow::before,
+#register .win-bow::after {
+  content: "";
+  position: absolute;
+  top: 4px;
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(180deg, #ffe9a0, #c9a227);
+  transform: rotate(45deg);
+  z-index: -1;
+}
+#register .win-bow::before { left: -4px; }
+#register .win-bow::after { right: -4px; }
+#register .vs-slot .win-bow {
+  top: 126px;
+  font-size: 0.8rem;
+  padding: 5px 22px 6px;
 }
 #register .winner-name {
   font-size: 0.78rem;
