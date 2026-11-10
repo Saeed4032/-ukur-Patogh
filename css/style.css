@@ -3258,20 +3258,77 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 1.05rem;
   font-weight: 900;
 }
+#register #winnerArea.card,
+#register #winnerArea.card.subsection {
+  background: rgba(10, 8, 6, 0.72);
+  border: 1px solid color-mix(in srgb, var(--primary) 55%, transparent);
+  border-radius: 22px;
+  box-shadow: none;
+  padding: 14px 12px 16px;
+  margin-top: 12px;
+}
+#register #winnerArea h2 {
+  margin: 0 0 14px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--accent);
+}
 #register .winner-arena {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 36px;
   overflow: visible;
-  padding: 8px 0;
-  gap: 8px;
+  padding: 4px 0 0;
   background: none;
   border: 0;
+  grid-template-columns: none;
+}
+#register .winner-side {
+  background: none;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+  min-height: 0;
+  gap: 8px;
+}
+#register .winner-side:hover {
+  background: none;
+  border: 0;
+  transform: none;
+  box-shadow: none;
+}
+#register .winner-side.active {
+  background: none;
+  border: 0;
+  box-shadow: none;
 }
 #register .winner-side .avatar {
-  width: 120px !important;
-  height: 120px !important;
+  width: 100px !important;
+  height: 100px !important;
   border-radius: 50%;
+  border: 2px solid color-mix(in srgb, var(--primary) 70%, transparent);
 }
 #register .winner-side.active .avatar {
   transform: none;
+  border-width: 3px;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.45), 0 0 18px color-mix(in srgb, var(--primary) 40%, transparent);
+}
+#register .winner-name {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--muted);
+}
+#register .winner-side.active .winner-name {
+  color: var(--accent);
+}
+#register .winner-stat,
+#register .winner-pick,
+#register .winner-arena .vs-slot-divider,
+#register .vs-comparison {
+  display: none !important;
 }
 
 /* تب ثبت: مربع‌ها → دایره. آواتار بزرگ، نام کوچک، آمار خیلی کوچک */

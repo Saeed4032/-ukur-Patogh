@@ -898,8 +898,6 @@
       if (wasHidden) revealCard(wa);
       var a = selected.pair[0],
         b = selected.pair[1];
-      var sa = stats(a),
-        sb = stats(b);
       var key = selected.pair.join("|");
       if (arena.dataset.key !== key) {
         arena.dataset.key = key;
@@ -912,18 +910,11 @@
           '" aria-pressed="' +
           (selected.winner === a ? "true" : "false") +
           '">' +
-          avatarHTML(a, 144) +
+          avatarHTML(a, 100) +
           '<span class="winner-name">' +
           esc(a) +
           "</span>" +
-          '<span class="winner-stat">' +
-          n(sa.games, 0) +
-          " بازی · " +
-          (sa.games ? percent(sa.wins, sa.games) : "—") +
-          "</span>" +
-          '<span class="winner-pick">برنده</span>' +
           "</button>" +
-          '<div class="vs-slot-divider"><span class="vs-text">VS</span></div>' +
           '<button type="button" class="winner-side' +
           (selected.winner === b ? " active" : "") +
           '" data-win="' +
@@ -931,34 +922,11 @@
           '" aria-pressed="' +
           (selected.winner === b ? "true" : "false") +
           '">' +
-          avatarHTML(b, 120) +
+          avatarHTML(b, 100) +
           '<span class="winner-name">' +
           esc(b) +
           "</span>" +
-          '<span class="winner-stat">' +
-          n(sb.games, 0) +
-          " بازی · " +
-          (sb.games ? percent(sb.wins, sb.games) : "—") +
-          "</span>" +
-          '<span class="winner-pick">برنده</span>' +
           "</button>" +
-          "</div>" +
-          '<div class="vs-comparison">' +
-          '<div class="vs-comp-row"><span class="vs-comp-val left">' +
-          n(sa.games, 0) +
-          '</span><span class="vs-comp-label">بازی</span><span class="vs-comp-val right">' +
-          n(sb.games, 0) +
-          "</span></div>" +
-          '<div class="vs-comp-row"><span class="vs-comp-val left">' +
-          n(sa.wins, 0) +
-          '</span><span class="vs-comp-label">برد</span><span class="vs-comp-val right">' +
-          n(sb.wins, 0) +
-          "</span></div>" +
-          '<div class="vs-comp-row"><span class="vs-comp-val left">' +
-          (sa.games ? percent(sa.wins, sa.games) : "—") +
-          '</span><span class="vs-comp-label">درصد برد</span><span class="vs-comp-val right">' +
-          (sb.games ? percent(sb.wins, sb.games) : "—") +
-          "</span></div>" +
           "</div>";
         [].forEach.call(arena.querySelectorAll("[data-win]"), function (btn) {
           btn.onclick = function () {
