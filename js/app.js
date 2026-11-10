@@ -786,6 +786,7 @@
         if (search.value !== poolFilter) search.value = poolFilter;
       }
       if (PLAYERS.length < 2) {
+        el.classList.remove("picked");
         el.innerHTML = '<div class="empty">حداقل دو بازیکن لازم است.</div>';
         return;
       }
@@ -801,6 +802,7 @@
           })
         : PLAYERS.slice();
       if (!list.length) {
+        el.classList.remove("picked");
         el.innerHTML = '<div class="empty">بازیکنی با این نام پیدا نشد.</div>';
         return;
       }
@@ -850,6 +852,9 @@
           else message("هر دو انتخاب پُر شدن. یکی رو برداشته کن.", true);
         };
       });
+      var both = !!(selected.slot1 && selected.slot2);
+      el.classList.toggle("picked", both);
+      if (search) search.classList.toggle("picked-hide", both);
     }
     function setSlot(num, name) {
       if (!name || PLAYERS.indexOf(name) === -1) return;

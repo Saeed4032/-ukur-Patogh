@@ -3324,19 +3324,34 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #register .player-pool {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  justify-content: flex-start;
   gap: 8px;
   margin-top: 10px;
+  transition: opacity 0.28s ease, max-height 0.28s ease, margin 0.28s ease;
+  max-height: 70vh;
+  overflow: auto;
+}
+#register .player-pool.picked {
+  opacity: 0;
+  max-height: 0;
+  margin: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+#register #poolSearch.picked-hide {
+  display: none !important;
 }
 #register .pool-player {
-  flex: 0 1 auto;
-  width: auto;
-  min-height: 44px;
-  padding: 10px 16px;
+  flex: 0 0 auto;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 16px;
   background: var(--input);
   border: 1px solid var(--soft);
-  border-radius: 999px;
+  border-radius: 14px;
   box-shadow: none;
   gap: 0;
   overflow: visible;
