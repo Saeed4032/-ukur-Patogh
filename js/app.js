@@ -912,7 +912,7 @@
       if (wasHidden) revealCard(wa);
       var a = selected.pair[0],
         b = selected.pair[1];
-      var key = selected.pair.join("|") + "::" + (selected.winner || "");
+      var key = selected.pair.join("|");
       if (arena.dataset.key !== key) {
         arena.dataset.key = key;
         arena.innerHTML =

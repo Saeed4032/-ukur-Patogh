@@ -3289,10 +3289,10 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #register .winner-arena {
   display: flex;
   justify-content: center;
-  align-items: flex-start;
-  gap: 36px;
+  align-items: center;
+  gap: 28px;
   overflow: visible;
-  padding: 4px 0 0;
+  padding: 18px 0 8px;
   background: none;
   border: 0;
   grid-template-columns: none;
@@ -3333,18 +3333,22 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   z-index: 1;
   width: 100px !important;
   height: 100px !important;
+  font-size: 42px !important;
   border-radius: 50%;
   border: 2px solid rgba(180, 150, 70, 0.28);
   box-shadow: none;
   opacity: 1;
   filter: none;
-}
-#register .winner-side:not(.active) .avatar {
-  filter: none;
-  opacity: 0.9;
-  border-color: rgba(255, 255, 255, 0.12);
+  transition:
+    width 0.4s ease,
+    height 0.4s ease,
+    font-size 0.4s ease,
+    opacity 0.4s ease;
 }
 #register .winner-side.active .avatar {
+  width: 156px !important;
+  height: 156px !important;
+  font-size: 66px !important;
   transform: none;
   filter: none;
   opacity: 1;
@@ -3353,13 +3357,21 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
     0 0 0 2px #2a1c08,
     inset 0 2px 4px rgba(0, 0, 0, 0.35);
 }
+#register .winner-arena:has(.active) .winner-side:not(.active) .avatar {
+  width: 52px !important;
+  height: 52px !important;
+  font-size: 22px !important;
+  filter: none;
+  opacity: 0.92;
+  border-color: rgba(255, 255, 255, 0.12);
+}
 #register .win-ring {
   position: absolute;
   left: 50%;
-  top: -18px;
-  width: 156px;
-  height: 156px;
-  margin-left: -78px;
+  top: -34px;
+  width: 243px;
+  height: 243px;
+  margin-left: -121px;
   pointer-events: none;
   z-index: 2;
   display: none;
@@ -3374,9 +3386,9 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   position: relative;
   left: auto;
   top: auto;
-  width: 172px;
-  height: 62px;
-  margin: -12px auto 2px;
+  width: 220px;
+  height: 80px;
+  margin: -16px auto 2px;
   padding: 0;
   z-index: 4;
   pointer-events: none;
@@ -3424,9 +3436,16 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 0.78rem;
   font-weight: 700;
   color: var(--muted);
+  transition: font-size 0.4s ease, color 0.4s ease;
 }
 #register .winner-side.active .winner-name {
   color: var(--accent);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+#register .winner-arena:has(.active) .winner-side:not(.active) .winner-name {
+  font-size: 0.68rem;
+  opacity: 0.7;
 }
 #register .winner-stat,
 #register .winner-pick,
