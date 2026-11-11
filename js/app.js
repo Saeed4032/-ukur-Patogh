@@ -3681,12 +3681,61 @@
       if (localBlock()) return;
       return _lm_rmav(n, cb);
     };
+    function initRegisterScene() {
+      var urls = [
+        "img/register/tab-bg.jpg",
+        "img/register/tab-bg-15.jpg",
+        "img/register/tab-bg-16.jpg",
+        "img/register/tab-bg-17.jpg",
+        "img/register/tab-bg-19.jpg",
+        "img/register/tab-bg-20.jpg"
+      ];
+      var root = document.getElementById("register");
+      if (!root) return;
+      var layers = root.querySelectorAll(".reg-scene-layer");
+      if (layers.length < 2) return;
+      urls.forEach(function (u) {
+        var im = new Image();
+        im.src = u;
+      });
+      var a = layers[0];
+      var b = layers[1];
+      var i = 0;
+      var showingA = true;
+      var timer = null;
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        return;
+      }
+      function tick() {
+        if (document.hidden) return;
+        if (!root.classList.contains("active")) return;
+        i = (i + 1) % urls.length;
+        var incoming = showingA ? b : a;
+        var outgoing = showingA ? a : b;
+        incoming.style.backgroundImage = "url(\"" + urls[i] + "\")";
+        incoming.classList.add("is-on");
+        outgoing.classList.remove("is-on");
+        showingA = !showingA;
+      }
+      function loop() {
+        if (timer) clearInterval(timer);
+        timer = setInterval(tick, 5500);
+      }
+      document.addEventListener("visibilitychange", function () {
+        if (document.hidden) {
+          if (timer) clearInterval(timer);
+          timer = null;
+        } else loop();
+      });
+      loop();
+    }
     load();
     apply();
     fill();
     bind();
     renderAll();
     setupPWA();
+    initRegisterScene();
     setupCollapsibles();
     updatePlayerCountBadge();
     window.renderAll = renderAll;

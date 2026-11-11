@@ -3693,22 +3693,56 @@ html[data-theme="blackgold"] #register.page {
   padding-top: calc(12px + env(safe-area-inset-top, 0px));
   overflow: visible;
 }
-html:not([data-theme]) #register.page::before,
-html[data-theme="blackgold"] #register.page::before {
-  content: "";
+#register .reg-scene {
+  display: none;
+}
+html:not([data-theme]) #register .reg-scene,
+html[data-theme="blackgold"] #register .reg-scene {
+  display: block;
   position: absolute;
   left: 0;
   right: 0;
   top: 0;
   height: 46vh;
-  background-image:
-    linear-gradient(180deg, rgba(7, 7, 12, 0.12) 0%, rgba(7, 7, 12, 0.28) 58%, #07070c 100%),
-    url("../img/register/tab-bg.jpg");
-  background-size: cover;
-  background-position: center 38%;
-  background-repeat: no-repeat;
-  pointer-events: none;
   z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+html:not([data-theme]) #register .reg-scene-layer,
+html[data-theme="blackgold"] #register .reg-scene-layer {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 30%;
+  background-repeat: no-repeat;
+  opacity: 0;
+  transition: opacity 1.15s ease;
+}
+html:not([data-theme]) #register .reg-scene-layer:first-child,
+html[data-theme="blackgold"] #register .reg-scene-layer:first-child {
+  background-image: url("../img/register/tab-bg.jpg");
+}
+html:not([data-theme]) #register .reg-scene-layer.is-on,
+html[data-theme="blackgold"] #register .reg-scene-layer.is-on {
+  opacity: 1;
+}
+html:not([data-theme]) #register .reg-scene::after,
+html[data-theme="blackgold"] #register .reg-scene::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(7, 7, 12, 0.12) 0%, rgba(7, 7, 12, 0.28) 58%, #07070c 100%);
+  z-index: 1;
+}
+html:not([data-theme]) #register.page::before,
+html[data-theme="blackgold"] #register.page::before {
+  content: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  html:not([data-theme]) #register .reg-scene-layer,
+  html[data-theme="blackgold"] #register .reg-scene-layer {
+    transition: none;
+  }
 }
 html:not([data-theme]) #register.page > .card,
 html[data-theme="blackgold"] #register.page > .card {
