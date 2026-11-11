@@ -3710,39 +3710,6 @@ html[data-theme="blackgold"] #register.page::before {
   pointer-events: none;
   z-index: 0;
 }
-html:not([data-theme]) #register.page::after,
-html[data-theme="blackgold"] #register.page::after {
-  content: "";
-  position: absolute;
-  z-index: 0;
-  pointer-events: none;
-  width: 64px;
-  height: 70px;
-  top: 27vh;
-  right: 9%;
-  background: url("../img/register/die.png") center / contain no-repeat;
-  opacity: 0.62;
-  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.55));
-  animation: dieSlow 10s ease-in-out infinite;
-}
-@keyframes dieSlow {
-  0%,
-  100% {
-    transform: rotate(-10deg) translateY(0);
-  }
-  40% {
-    transform: rotate(14deg) translateY(-7px);
-  }
-  70% {
-    transform: rotate(-4deg) translateY(-2px);
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  html:not([data-theme]) #register.page::after,
-  html[data-theme="blackgold"] #register.page::after {
-    animation: none;
-  }
-}
 html:not([data-theme]) #register.page > .card,
 html[data-theme="blackgold"] #register.page > .card {
   position: relative;
