@@ -3486,22 +3486,31 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #register .vs-slot-remove {
   display: none !important;
 }
+#register.page > .card {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100dvh - var(--nav-h, 62px) - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 24px);
+}
 #register .player-pool {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
   align-items: stretch;
   justify-content: flex-start;
-  gap: 8px;
-  margin-top: 10px;
-  transition: opacity 0.28s ease, max-height 0.28s ease, margin 0.28s ease;
-  max-height: 70vh;
+  gap: 10px;
+  margin-top: auto;
+  padding: 12px 10px 14px;
+  transition: opacity 0.28s ease, max-height 0.28s ease, margin 0.28s ease, padding 0.28s ease;
+  max-height: 58vh;
   overflow: auto;
+  width: 100%;
+  border-radius: 20px;
 }
 #register .player-pool.picked {
   opacity: 0;
   max-height: 0;
   margin: 0;
+  padding: 0;
   overflow: hidden;
   pointer-events: none;
 }
@@ -3512,13 +3521,13 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   flex: 0 0 auto;
   flex-direction: row;
   width: 100%;
-  min-height: 48px;
-  padding: 8px 14px;
+  min-height: 72px;
+  padding: 14px 18px;
   background: var(--input);
   border: 1px solid var(--soft);
-  border-radius: 14px;
+  border-radius: 18px;
   box-shadow: none;
-  gap: 10px;
+  gap: 14px;
   overflow: visible;
   justify-content: flex-start;
   align-items: center;
@@ -3538,15 +3547,15 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #register .pool-player .avatar {
   display: inline-flex !important;
-  width: 36px !important;
-  height: 36px !important;
+  width: 48px !important;
+  height: 48px !important;
   border-radius: 50%;
   flex-shrink: 0;
 }
 #register .pool-player .pp-name {
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   font-weight: 800;
-  line-height: 1.2;
+  line-height: 1.25;
   max-width: none;
   text-align: right;
 }
@@ -3577,16 +3586,11 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   -webkit-backdrop-filter: none;
 }
 
-/* تب ثبت: پس‌زمینه چراغ میز — فقط طلای سیاه */
+/* تب ثبت: پس‌زمینه چراغ میز فقط در نوار بالا — طلای سیاه */
 html:not([data-theme]) body:has(#register.page.active),
 html[data-theme="blackgold"] body:has(#register.page.active) {
   background-color: #07070c;
-  background-image:
-    linear-gradient(180deg, rgba(7, 7, 12, 0.22) 0%, rgba(7, 7, 12, 0.4) 46%, rgba(7, 7, 12, 0.78) 100%),
-    url("../img/register/tab-bg.jpg");
-  background-size: cover, cover;
-  background-position: center top, center top;
-  background-repeat: no-repeat;
+  background-image: none;
 }
 html:not([data-theme]) body:has(#register.page.active) .hero,
 html:not([data-theme]) body:has(#register.page.active) .tabs,
@@ -3596,16 +3600,40 @@ html[data-theme="blackgold"] body:has(#register.page.active) .tabs {
 }
 html:not([data-theme]) #register.page,
 html[data-theme="blackgold"] #register.page {
-  background: transparent;
+  position: relative;
+  background: #07070c;
   border: 0;
   box-shadow: none;
   padding-top: calc(12px + env(safe-area-inset-top, 0px));
+  overflow: visible;
+}
+html:not([data-theme]) #register.page::before,
+html[data-theme="blackgold"] #register.page::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 46vh;
+  background-image:
+    linear-gradient(180deg, rgba(7, 7, 12, 0.12) 0%, rgba(7, 7, 12, 0.28) 58%, #07070c 100%),
+    url("../img/register/tab-bg.jpg");
+  background-size: cover;
+  background-position: center 12%;
+  background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: 0;
 }
 html:not([data-theme]) #register.page > .card,
 html[data-theme="blackgold"] #register.page > .card {
-  background: rgba(8, 7, 10, 0.5);
-  border: 1px solid color-mix(in srgb, var(--primary) 38%, transparent);
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  border: 0;
   box-shadow: none;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+}
+html:not([data-theme]) #register .player-pool,
+html[data-theme="blackgold"] #register .player-pool {
+  background: rgba(8, 7, 10, 0.82);
+  border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent);
 }
