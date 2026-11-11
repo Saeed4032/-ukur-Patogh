@@ -3551,14 +3551,16 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   width: 100%;
   min-height: 72px;
   padding: 14px 18px;
-  background: var(--input);
-  border: 1px solid var(--soft);
+  background: rgba(22, 18, 12, 0.55);
+  border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent);
   border-radius: 18px;
   box-shadow: none;
   gap: 14px;
   overflow: visible;
   justify-content: flex-start;
   align-items: center;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
 }
 #register .pool-player:hover,
 #register .pool-player.placed:hover {
@@ -3671,8 +3673,8 @@ html[data-theme="blackgold"] #register.page > .card {
 }
 html:not([data-theme]) #register .player-pool,
 html[data-theme="blackgold"] #register .player-pool {
-  background: rgba(12, 10, 8, 0.96);
-  border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent);
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
+  background: rgba(18, 14, 10, 0.42);
+  border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  backdrop-filter: blur(18px) saturate(140%);
 }
