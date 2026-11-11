@@ -3267,13 +3267,17 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   overflow: visible !important;
 }
 #register #winnerArea.card,
-#register #winnerArea.card.subsection {
-  background: rgba(10, 8, 6, 0.72);
+#register #winnerArea.card.subsection,
+#register #typeArea.card,
+#register #typeArea.card.subsection {
+  background: rgba(12, 10, 8, 0.96);
   border: 1px solid color-mix(in srgb, var(--primary) 55%, transparent);
   border-radius: 22px;
   box-shadow: none;
   padding: 14px 12px 16px;
   margin-top: 12px;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 #register #winnerArea h2 {
   margin: 0 0 14px;
@@ -3314,6 +3318,16 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   border: 0;
   box-shadow: none;
 }
+#register .avatar,
+#register .avatar.avatar-img {
+  opacity: 1;
+  isolation: isolate;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
 #register .winner-side .avatar {
   position: relative;
   z-index: 1;
@@ -3322,14 +3336,18 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   border-radius: 50%;
   border: 2px solid rgba(180, 150, 70, 0.28);
   box-shadow: none;
+  opacity: 1;
+  filter: none;
 }
 #register .winner-side:not(.active) .avatar {
-  filter: grayscale(0.45) brightness(0.72);
+  filter: none;
+  opacity: 0.9;
   border-color: rgba(255, 255, 255, 0.12);
 }
 #register .winner-side.active .avatar {
   transform: none;
   filter: none;
+  opacity: 1;
   border: 0;
   box-shadow:
     0 0 0 2px #2a1c08,
@@ -3550,7 +3568,14 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   transform: none;
 }
 #register .pool-player.placed {
-  opacity: 0.4;
+  opacity: 1;
+}
+#register .pool-player.placed .pp-name {
+  opacity: 0.45;
+}
+#register .pool-player.placed .avatar {
+  opacity: 1;
+  filter: none;
 }
 #register .pool-player .pp-stats {
   display: none !important;
@@ -3561,6 +3586,8 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   height: 48px !important;
   border-radius: 50%;
   flex-shrink: 0;
+  opacity: 1;
+  filter: none;
 }
 #register .pool-player .pp-name {
   font-size: 1.2rem;
@@ -3644,6 +3671,8 @@ html[data-theme="blackgold"] #register.page > .card {
 }
 html:not([data-theme]) #register .player-pool,
 html[data-theme="blackgold"] #register .player-pool {
-  background: rgba(8, 7, 10, 0.82);
+  background: rgba(12, 10, 8, 0.96);
   border: 1px solid color-mix(in srgb, var(--primary) 28%, transparent);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
