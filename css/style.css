@@ -3705,7 +3705,7 @@ html[data-theme="blackgold"] #register.page::before {
     linear-gradient(180deg, rgba(7, 7, 12, 0.12) 0%, rgba(7, 7, 12, 0.28) 58%, #07070c 100%),
     url("../img/register/tab-bg.jpg");
   background-size: cover;
-  background-position: center 12%;
+  background-position: center 38%;
   background-repeat: no-repeat;
   pointer-events: none;
   z-index: 0;
