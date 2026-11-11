@@ -3422,8 +3422,17 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 12px;
+  gap: 8px;
   margin-bottom: 14px;
+}
+#register .vs-slot-divider {
+  flex: 0 0 auto;
+  align-self: flex-start;
+  height: 144px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 #register .vs-slots.idle {
   display: none;
@@ -3454,14 +3463,15 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #register .vs-slot.filled {
   position: relative;
-  width: auto;
+  flex: 0 0 160px;
+  width: 160px;
   height: auto;
   min-height: 0;
   border: 0;
   background: none;
   box-shadow: none;
-  gap: 6px;
-  padding: 10px 8px 0;
+  gap: 8px;
+  padding: 0;
   border-radius: 0;
   overflow: visible;
 }
