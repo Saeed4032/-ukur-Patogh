@@ -3576,3 +3576,36 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
 }
+
+/* تب ثبت: پس‌زمینه چراغ میز — فقط طلای سیاه */
+html:not([data-theme]) body:has(#register.page.active),
+html[data-theme="blackgold"] body:has(#register.page.active) {
+  background-color: #07070c;
+  background-image:
+    linear-gradient(180deg, rgba(7, 7, 12, 0.22) 0%, rgba(7, 7, 12, 0.4) 46%, rgba(7, 7, 12, 0.78) 100%),
+    url("../img/register/tab-bg.jpg");
+  background-size: cover, cover;
+  background-position: center top, center top;
+  background-repeat: no-repeat;
+}
+html:not([data-theme]) body:has(#register.page.active) .hero,
+html:not([data-theme]) body:has(#register.page.active) .tabs,
+html[data-theme="blackgold"] body:has(#register.page.active) .hero,
+html[data-theme="blackgold"] body:has(#register.page.active) .tabs {
+  display: none;
+}
+html:not([data-theme]) #register.page,
+html[data-theme="blackgold"] #register.page {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  padding-top: calc(12px + env(safe-area-inset-top, 0px));
+}
+html:not([data-theme]) #register.page > .card,
+html[data-theme="blackgold"] #register.page > .card {
+  background: rgba(8, 7, 10, 0.5);
+  border: 1px solid color-mix(in srgb, var(--primary) 38%, transparent);
+  box-shadow: none;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
