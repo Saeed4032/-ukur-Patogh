@@ -3521,6 +3521,34 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   height: 144px !important;
   border-radius: 50%;
 }
+#register .vs-slots.has-winner {
+  gap: 6px;
+  margin-bottom: 8px;
+  align-items: center;
+}
+#register .vs-slots.has-winner .vs-slot.filled {
+  flex: 0 0 48px;
+  width: 48px;
+  gap: 0;
+}
+#register .vs-slots.has-winner .vs-slot.filled .avatar {
+  width: 44px !important;
+  height: 44px !important;
+}
+#register .vs-slots.has-winner .vs-slot-name {
+  display: none;
+}
+#register .vs-slots.has-winner .vs-slot-divider {
+  height: 44px;
+  align-self: center;
+}
+#register .vs-slots.has-winner .vs-text {
+  width: 26px;
+  height: 26px;
+  font-size: 0.55rem;
+  box-shadow: none;
+  animation: none;
+}
 #register .vs-slot-name {
   font-size: 0.62rem;
   font-weight: 700;

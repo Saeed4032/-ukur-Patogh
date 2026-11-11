@@ -745,6 +745,7 @@
         return;
       }
       el.classList.remove("idle");
+      el.classList.toggle("has-winner", !!(selected.winner && s1 && s2));
       function slotBtn(num, name) {
         if (!name) return "";
         return (
