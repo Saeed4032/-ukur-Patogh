@@ -2925,6 +2925,122 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #ranking table td:first-child {
   background: var(--card);
 }
+#ranking .rank-sheet {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+#ranking .rank-fs {
+  display: block;
+  width: 100%;
+  margin-top: 16px;
+  padding: 10px 20px;
+  background: var(--primary);
+  color: var(--contrast);
+  border: 0;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  cursor: pointer;
+  font-family: inherit;
+}
+.rank-portrait {
+  margin-top: 4px;
+}
+.rank-bars {
+  direction: ltr;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 12px;
+  min-height: 168px;
+}
+.rank-col {
+  flex: 1 1 0;
+  max-width: 110px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+.rank-col.is-empty {
+  visibility: hidden;
+}
+.rank-col .avatar {
+  width: 44px !important;
+  height: 44px !important;
+  margin-bottom: 6px;
+  border: 2px solid #d4af37;
+}
+.rank-col.gold .avatar {
+  width: 56px !important;
+  height: 56px !important;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.16);
+}
+.rank-col-name {
+  font-size: 0.78rem;
+  font-weight: 800;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  direction: rtl;
+}
+.rank-col-pct {
+  margin: 4px 0 6px;
+  font-size: 1.05rem;
+  font-weight: 900;
+  color: #e8c56a;
+  direction: rtl;
+}
+.rank-shaft {
+  width: 100%;
+  max-width: 78px;
+  border-radius: 10px 10px 4px 4px;
+}
+.rank-col.gold .rank-shaft {
+  background: linear-gradient(#f3e0a4, #8a6418);
+}
+.rank-col.silver .rank-shaft {
+  background: linear-gradient(#e8e8e8, #6a6a6a);
+}
+.rank-col.bronze .rank-shaft {
+  background: linear-gradient(#e0b08a, #7a4a28);
+}
+.rank-rest {
+  margin-top: 14px;
+}
+.rank-slim {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 4px;
+  border-top: 1px solid rgba(212, 175, 55, 0.12);
+}
+.rank-slim-n {
+  width: 1.4rem;
+  color: #8f836c;
+  font-weight: 800;
+  font-size: 0.8rem;
+}
+.rank-slim .avatar {
+  width: 36px !important;
+  height: 36px !important;
+}
+.rank-slim-name {
+  font-weight: 800;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.rank-slim-pct {
+  margin-right: auto;
+  color: #e8c56a;
+  font-size: 1.05rem;
+}
 .rchips {
   display: flex;
   flex-wrap: wrap;

@@ -1561,6 +1561,56 @@
         if (first && first.focus) first.focus();
       }
     }
+    function rankPortraitHTML(s) {
+      if (!s.length) return '<div class="empty">هنوز بازیکنی وجود ندارد.</div>';
+      function col(x, place) {
+        if (!x) return '<div class="rank-col is-empty"></div>';
+        var wr = x.games > 0 ? (x.wins / x.games) * 100 : 0;
+        var h = Math.max(28, Math.round(wr * 1.15));
+        var cls = place === 1 ? "gold" : place === 2 ? "silver" : "bronze";
+        return (
+          '<div class="rank-col ' +
+          cls +
+          '">' +
+          avatarHTML(x.name, place === 1 ? 56 : 44) +
+          '<div class="rank-col-name">' +
+          esc(x.name) +
+          "</div>" +
+          '<div class="rank-col-pct">' +
+          percent(x.wins, x.games) +
+          "</div>" +
+          '<div class="rank-shaft" style="height:' +
+          h +
+          'px"></div></div>'
+        );
+      }
+      var top = s.slice(0, 3);
+      var rest = s.slice(3);
+      var html = '<div class="rank-bars" dir="ltr">' + col(top[1], 2) + col(top[0], 1) + col(top[2], 3) + "</div>";
+      if (rest.length) {
+        html +=
+          '<div class="rank-rest">' +
+          rest
+            .map(function (x, i) {
+              return (
+                '<div class="rank-slim">' +
+                '<span class="rank-slim-n">' +
+                n(i + 4, 0) +
+                "</span>" +
+                avatarHTML(x.name, 36) +
+                '<span class="rank-slim-name">' +
+                esc(x.name) +
+                "</span>" +
+                '<b class="rank-slim-pct">' +
+                percent(x.wins, x.games) +
+                "</b></div>"
+              );
+            })
+            .join("") +
+          "</div>";
+      }
+      return html;
+    }
     window.renderRanking = function () {
       renderSeasonBar();
       var bn = $("seasonBanner");
@@ -1578,6 +1628,7 @@
       ].join("::");
       if (renderRankingCache.key === key) {
         if ($("rankbody")) $("rankbody").innerHTML = renderRankingCache.body;
+        if ($("rankPortrait") && renderRankingCache.portrait) $("rankPortrait").innerHTML = renderRankingCache.portrait;
         return;
       }
       var s = PLAYERS.map(function (p) { return statsIn(p, gg); }).sort(function (x, y) { return rankingSortIn(x, y, gg); });
@@ -1647,8 +1698,10 @@
           );
         })
         .join("");
-      renderRankingCache = { key: key, body: body };
+      var portrait = rankPortraitHTML(s);
+      renderRankingCache = { key: key, body: body, portrait: portrait };
       if ($("rankbody")) $("rankbody").innerHTML = body;
+      if ($("rankPortrait")) $("rankPortrait").innerHTML = portrait;
     };
     function persianYM(t) {
       try {
@@ -1810,7 +1863,7 @@
       return x.getTime();
     }
     var renderHistoryCache = { key: null, html: null };
-    var renderRankingCache = { key: null, body: null };
+    var renderRankingCache = { key: null, body: null, portrait: null };
     var renderChartsCache = { key: null };
     function debounce(fn, delay) {
       var timer = null;
