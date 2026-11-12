@@ -3771,7 +3771,7 @@ html[data-theme="blackgold"] #register .reg-scene::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgba(7, 7, 12, 0.12) 0%, rgba(7, 7, 12, 0.22) 42%, rgba(7, 7, 12, 0.55) 68%, #07070c 82%);
+  background: linear-gradient(180deg, rgba(7, 7, 12, 0.12) 0%, rgba(7, 7, 12, 0.28) 58%, #07070c 100%);
   z-index: 1;
 }
 html:not([data-theme]) #register.page::before,
