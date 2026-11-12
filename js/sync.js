@@ -886,6 +886,7 @@
     if (btn) {
       var bad = state === "offline" || state === "error";
       btn.classList.toggle("conn-bad", bad);
+      btn.classList.toggle("need-sync", bad || state === "syncing");
       if (bad) btn.title = title;
       else if (state === "online" && !btn.classList.contains("syncing")) btn.title = "سینک دستی";
     }
@@ -1107,7 +1108,7 @@
   function showApp() {
     $("supaAuthOverlay").style.display = "none";
     var sbBtn = document.getElementById("syncBtn");
-    if (sbBtn) sbBtn.style.display = "flex";
+    if (sbBtn) sbBtn.style.display = "";
     var lb = document.getElementById("profileBtn");
     if (lb) {
       lb.style.display = isGuest ? "none" : "flex";

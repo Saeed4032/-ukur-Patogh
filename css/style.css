@@ -2035,6 +2035,12 @@ th.sortable:hover {
   margin: 0;
   font-size: 0.8rem;
 }
+.syncbtn.need-sync,
+.syncbtn.conn-bad,
+.syncbtn.syncing,
+.syncbtn.err {
+  display: flex;
+}
 .syncbtn {
   position: fixed;
   top: 14px;
