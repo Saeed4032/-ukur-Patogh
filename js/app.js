@@ -1565,23 +1565,19 @@
       if (!s.length) return '<div class="empty">هنوز بازیکنی وجود ندارد.</div>';
       function col(x, place) {
         if (!x) return '<div class="rank-col is-empty"></div>';
-        var wr = x.games > 0 ? (x.wins / x.games) * 100 : 0;
-        var h = Math.max(28, Math.round(wr * 1.15));
         var cls = place === 1 ? "gold" : place === 2 ? "silver" : "bronze";
         return (
           '<div class="rank-col ' +
           cls +
           '">' +
-          avatarHTML(x.name, place === 1 ? 56 : 44) +
+          avatarHTML(x.name, place === 1 ? 62 : 46) +
           '<div class="rank-col-name">' +
           esc(x.name) +
           "</div>" +
           '<div class="rank-col-pct">' +
           percent(x.wins, x.games) +
           "</div>" +
-          '<div class="rank-shaft" style="height:' +
-          h +
-          'px"></div></div>'
+          '<div class="rank-shaft"></div></div>'
         );
       }
       var top = s.slice(0, 3);
