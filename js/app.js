@@ -1577,7 +1577,7 @@
           '<div class="rank-col-pct">' +
           percent(x.wins, x.games) +
           "</div>" +
-          '<div class="rank-shaft"></div></div>'
+          '<div class="rank-shaft"><i class="rs-top"></i><i class="rs-face"></i><i class="rs-side"></i></div></div>'
         );
       }
       var top = s.slice(0, 3);

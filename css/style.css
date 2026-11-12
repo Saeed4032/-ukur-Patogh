@@ -2954,12 +2954,13 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 14px;
-  min-height: 260px;
+  gap: 22px;
+  min-height: 280px;
+  padding: 18px 12px 8px 4px;
 }
 .rank-col {
-  flex: 1 1 0;
-  max-width: 118px;
+  flex: 0 0 auto;
+  width: 86px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2968,19 +2969,23 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 .rank-col.is-empty {
   visibility: hidden;
 }
-.rank-col .avatar {
+#ranking .rank-col .avatar,
+#ranking .rank-col .avatar.avatar-img {
   width: 46px !important;
   height: 46px !important;
   margin-bottom: 7px;
   border: 2px solid #cfd3d8;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
+  overflow: visible;
 }
-.rank-col.gold .avatar {
-  width: 62px !important;
-  height: 62px !important;
+#ranking .rank-col.gold .avatar,
+#ranking .rank-col.gold .avatar.avatar-img {
+  width: 64px !important;
+  height: 64px !important;
   border: 3px solid #e8c56a;
-  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.18), 0 8px 18px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2), 0 10px 20px rgba(0, 0, 0, 0.5);
 }
-.rank-col.bronze .avatar {
+#ranking .rank-col.bronze .avatar {
   border-color: #c4894a;
 }
 .rank-col-name {
@@ -2993,15 +2998,15 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   direction: rtl;
 }
 .rank-col-pct {
-  margin: 3px 0 8px;
+  margin: 3px 0 10px;
   font-size: 1.12rem;
   font-weight: 900;
   direction: rtl;
 }
 .rank-col.gold .rank-col-pct {
   color: #f3e0a4;
-  font-size: 1.28rem;
-  text-shadow: 0 1px 0 #4a3408, 0 0 12px rgba(243, 224, 164, 0.35);
+  font-size: 1.3rem;
+  text-shadow: 0 1px 0 #4a3408, 0 0 12px rgba(243, 224, 164, 0.4);
 }
 .rank-col.silver .rank-col-pct {
   color: #e8eef4;
@@ -3012,57 +3017,76 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   text-shadow: 0 1px 0 #3a1c08;
 }
 .rank-shaft {
-  width: 100%;
-  max-width: 92px;
   position: relative;
-  border-radius: 12px 12px 5px 5px;
-  overflow: hidden;
+  width: 64px;
+  margin: 0 auto;
+  overflow: visible;
 }
-.rank-shaft::before {
-  content: "";
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 38%;
-  background: linear-gradient(90deg, rgba(255, 255, 255, 0.38), rgba(255, 255, 255, 0));
+.rank-shaft i {
+  display: block;
   pointer-events: none;
 }
-.rank-shaft::after {
-  content: "";
+.rank-shaft .rs-face {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  border-radius: 6px 2px 2px 4px;
+}
+.rank-shaft .rs-side {
+  position: absolute;
+  top: 10px;
+  bottom: 0;
+  left: 100%;
+  width: 14px;
+  transform: skewY(-20deg);
+  transform-origin: top left;
+  border-radius: 0 3px 3px 0;
+  z-index: 0;
+}
+.rank-shaft .rs-top {
   position: absolute;
   left: 0;
-  right: 0;
-  top: 0;
+  width: 64px;
   height: 14px;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.45), transparent);
-  pointer-events: none;
+  top: -10px;
+  transform: skewX(-38deg);
+  transform-origin: bottom left;
+  border-radius: 3px;
+  z-index: 2;
 }
-.rank-col.gold .rank-shaft {
-  height: 148px;
-  background: linear-gradient(180deg, #fff3c4 0%, #e8c56a 12%, #d4af37 38%, #9a7218 72%, #5a420c 100%);
-  box-shadow:
-    inset 0 2px 0 rgba(255, 248, 220, 0.7),
-    inset 0 -10px 14px rgba(60, 40, 0, 0.45),
-    inset -10px 0 12px rgba(80, 50, 0, 0.35),
-    0 14px 22px rgba(0, 0, 0, 0.5),
-    0 0 22px rgba(212, 175, 55, 0.28);
+.rank-col.gold .rank-shaft { height: 148px; }
+.rank-col.silver .rank-shaft { height: 92px; }
+.rank-col.bronze .rank-shaft { height: 52px; }
+.rank-col.gold .rs-face {
+  background: linear-gradient(180deg, #fff3c4 0%, #e8c56a 14%, #d4af37 42%, #9a7218 78%, #5a420c 100%);
+  box-shadow: 0 16px 24px rgba(0, 0, 0, 0.5), 0 0 18px rgba(212, 175, 55, 0.35);
 }
-.rank-col.silver .rank-shaft {
-  height: 92px;
-  background: linear-gradient(180deg, #ffffff 0%, #e8edf2 14%, #c5ccd4 40%, #8b939c 74%, #4e555c 100%);
-  box-shadow:
-    inset 0 2px 0 rgba(255, 255, 255, 0.85),
-    inset 0 -10px 14px rgba(20, 24, 28, 0.4),
-    inset -10px 0 12px rgba(30, 34, 38, 0.3),
-    0 12px 18px rgba(0, 0, 0, 0.45);
+.rank-col.gold .rs-side {
+  background: linear-gradient(180deg, #a67c22, #4a3408);
 }
-.rank-col.bronze .rank-shaft {
-  height: 52px;
-  background: linear-gradient(180deg, #ffd7b0 0%, #e09a5a 14%, #c46a2c 42%, #8a3e14 76%, #4a2008 100%);
-  box-shadow:
-    inset 0 2px 0 rgba(255, 230, 200, 0.55),
-    inset 0 -10px 14px rgba(50, 18, 0, 0.45),
-    inset -10px 0 12px rgba(60, 20, 0, 0.3),
-    0 12px 18px rgba(0, 0, 0, 0.45);
+.rank-col.gold .rs-top {
+  background: linear-gradient(90deg, #fff8dc, #e8c56a);
+  box-shadow: 0 0 10px rgba(243, 224, 164, 0.45);
+}
+.rank-col.silver .rs-face {
+  background: linear-gradient(180deg, #ffffff 0%, #e8edf2 14%, #c5ccd4 42%, #8b939c 78%, #4e555c 100%);
+  box-shadow: 0 14px 20px rgba(0, 0, 0, 0.48);
+}
+.rank-col.silver .rs-side {
+  background: linear-gradient(180deg, #9aa3ad, #3e444a);
+}
+.rank-col.silver .rs-top {
+  background: linear-gradient(90deg, #ffffff, #c5ccd4);
+}
+.rank-col.bronze .rs-face {
+  background: linear-gradient(180deg, #ffd7b0 0%, #e09a5a 14%, #c46a2c 42%, #8a3e14 78%, #4a2008 100%);
+  box-shadow: 0 14px 20px rgba(0, 0, 0, 0.48);
+}
+.rank-col.bronze .rs-side {
+  background: linear-gradient(180deg, #8a3e14, #3a1604);
+}
+.rank-col.bronze .rs-top {
+  background: linear-gradient(90deg, #ffd7b0, #c46a2c);
 }
 .rank-rest {
   margin-top: 14px;
