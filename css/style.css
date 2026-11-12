@@ -3799,7 +3799,7 @@ body:has(#ranking.page.active) .hero {
 html:not([data-theme]) body:has(#ranking.page.active),
 html[data-theme="blackgold"] body:has(#ranking.page.active) {
   background-color: #07070c;
-  background-image: radial-gradient(ellipse 90% 55% at 50% -5%, rgba(244, 207, 106, 0.28), rgba(122, 95, 26, 0.12) 42%, #07070c 70%);
+  background-image: radial-gradient(ellipse 80% 48% at 50% 0%, rgba(196, 148, 42, 0.22), rgba(72, 52, 14, 0.16) 40%, #07070c 68%);
   background-attachment: fixed;
 }
 html:not([data-theme]) #ranking.page,
