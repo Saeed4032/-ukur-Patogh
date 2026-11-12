@@ -873,17 +873,22 @@
   window.__sbOnLocalSave = scheduleLocalPush;
 
   function updateSyncDot(state) {
-    var dot = document.getElementById("syncDot");
-    if (!dot) return;
-    var colors = { online: "#4caf50", syncing: "#ffc107", offline: "#f44336", error: "#9e9e9e" };
     var titles = {
       online: "آنلاین — همه‌چیز سینک شده",
       syncing: "در حال سینک...",
       offline: "آفلاین — بعداً سینک می‌شه",
       error: "خطا در اتصال",
     };
-    dot.style.background = colors[state] || colors.error;
-    dot.title = titles[state] || "";
+    var title = titles[state] || titles.error;
+    var line = document.getElementById("connStatusLine");
+    if (line) line.textContent = title;
+    var btn = document.getElementById("syncBtn");
+    if (btn) {
+      var bad = state === "offline" || state === "error";
+      btn.classList.toggle("conn-bad", bad);
+      if (bad) btn.title = title;
+      else if (state === "online" && !btn.classList.contains("syncing")) btn.title = "سینک دستی";
+    }
   }
 
   function updateOnlineStatus() {
@@ -987,24 +992,16 @@
   var _realtimeRetryTimer = null;
 
   function updateRealtimeBadge(connected) {
-    var b = document.getElementById("rtBadge");
-    if (!b) return;
-    b.style.display = "flex";
+    var rtLine = document.getElementById("rtStatusLine");
+    if (!rtLine) return;
     if (!navigator.onLine) {
-      b.textContent = "";
-      b.style.opacity = "0";
-      b.title = "آفلاین";
+      rtLine.textContent = "Realtime: آفلاین";
       return;
     }
-    b.style.opacity = "1";
     if (connected) {
-      b.textContent = "R";
-      b.style.color = "#4caf50";
-      b.title = "Realtime متصل — سینک آنی";
+      rtLine.textContent = "Realtime: متصل — سینک آنی";
     } else {
-      b.textContent = "P";
-      b.style.color = "#8bc34a";
-      b.title = "Realtime قطع — سینک با Polling";
+      rtLine.textContent = "Realtime: قطع — سینک با Polling";
     }
   }
 
@@ -1122,12 +1119,8 @@
         };
       }
     }
-    var dot = document.getElementById("syncDot");
-    if (dot) dot.style.display = "block";
     var sbtn = document.getElementById("syncStatusBtn");
     if (sbtn) sbtn.style.display = "flex";
-    var rt = document.getElementById("rtBadge");
-    if (rt) rt.style.display = "flex";
     if (isGuest) {
       document.body.classList.add("guest-mode");
       updateRealtimeBadge(false);

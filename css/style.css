@@ -2005,6 +2005,32 @@ th.sortable:hover {
   margin-top: 4px;
 }
 /* ===== دکمه سینک دستی (کنار چرخ‌دنده تنظیمات) ===== */
+#syncDot,
+#rtBadge {
+  display: none !important;
+}
+#syncBtn.conn-bad::after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  left: 1px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e24c44;
+  box-shadow: 0 0 0 2px #101018;
+  pointer-events: none;
+}
+#connStatusCard .conn-line {
+  margin: 0 0 4px;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+#connStatusCard .conn-rt {
+  margin: 0;
+  font-size: 0.8rem;
+}
 .syncbtn {
   position: fixed;
   top: 14px;
