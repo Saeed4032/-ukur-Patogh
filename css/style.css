@@ -3618,7 +3618,12 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   max-height: 58vh;
   overflow: auto;
   width: 100%;
-  border-radius: 20px;
+  background: none;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 #register .player-pool.picked {
   opacity: 0;
@@ -3794,8 +3799,9 @@ html[data-theme="blackgold"] #register.page > .card {
 }
 html:not([data-theme]) #register .player-pool,
 html[data-theme="blackgold"] #register .player-pool {
-  background: rgba(18, 14, 10, 0.22);
-  border: 1px solid color-mix(in srgb, var(--primary) 40%, transparent);
-  -webkit-backdrop-filter: blur(28px) saturate(160%);
-  backdrop-filter: blur(28px) saturate(160%);
+  background: none;
+  border: 0;
+  box-shadow: none;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
