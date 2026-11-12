@@ -3279,14 +3279,14 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #register #winnerArea.card,
 #register #winnerArea.card.subsection {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 22px;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
   box-shadow: none;
   padding: 14px 12px 16px;
   margin-top: 12px;
-  -webkit-backdrop-filter: blur(8px) saturate(130%);
-  backdrop-filter: blur(8px) saturate(130%);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 #register #winnerArea h2 {
   margin: 0 0 14px;
