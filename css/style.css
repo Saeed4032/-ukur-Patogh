@@ -3266,8 +3266,6 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #register .winner-side {
   overflow: visible !important;
 }
-#register #winnerArea.card,
-#register #winnerArea.card.subsection,
 #register #typeArea.card,
 #register #typeArea.card.subsection {
   background: rgba(18, 14, 10, 0.22);
@@ -3279,12 +3277,24 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   -webkit-backdrop-filter: blur(28px) saturate(160%);
   backdrop-filter: blur(28px) saturate(160%);
 }
+#register #winnerArea.card,
+#register #winnerArea.card.subsection {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 22px;
+  box-shadow: none;
+  padding: 14px 12px 16px;
+  margin-top: 12px;
+  -webkit-backdrop-filter: blur(8px) saturate(130%);
+  backdrop-filter: blur(8px) saturate(130%);
+}
 #register #winnerArea h2 {
   margin: 0 0 14px;
   text-align: center;
   font-size: 1rem;
   font-weight: 800;
   color: var(--accent);
+  text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
 }
 #register .winner-arena {
   display: flex;
@@ -3337,8 +3347,10 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   border-radius: 50%;
   border: 2px solid rgba(180, 150, 70, 0.28);
   box-shadow: none;
-  opacity: 1;
+  opacity: 1 !important;
   filter: none;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
   transition:
     width 0.4s ease,
     height 0.4s ease,
@@ -3362,7 +3374,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   height: 52px !important;
   font-size: 22px !important;
   filter: none;
-  opacity: 0.92;
+  opacity: 1;
   border-color: rgba(255, 255, 255, 0.12);
 }
 #register .win-ring {
@@ -3436,6 +3448,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 0.78rem;
   font-weight: 700;
   color: var(--muted);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.75);
   transition: font-size 0.4s ease, color 0.4s ease;
 }
 #register .winner-side.active .winner-name {
