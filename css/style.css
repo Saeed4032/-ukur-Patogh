@@ -3796,6 +3796,23 @@ body:has(#ranking.page.active) .hero {
 #ranking.page {
   padding-top: calc(52px + env(safe-area-inset-top, 0px));
 }
+html:not([data-theme]) body:has(#ranking.page.active),
+html[data-theme="blackgold"] body:has(#ranking.page.active) {
+  background-color: #07070c;
+  background-image: radial-gradient(ellipse 90% 55% at 50% -5%, rgba(244, 207, 106, 0.28), rgba(122, 95, 26, 0.12) 42%, #07070c 70%);
+  background-attachment: fixed;
+}
+html:not([data-theme]) #ranking.page,
+html[data-theme="blackgold"] #ranking.page {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+html:not([data-theme]) #ranking.page > .card,
+html[data-theme="blackgold"] #ranking.page > .card {
+  background: rgba(16, 16, 24, 0.82);
+  border: 1px solid rgba(212, 175, 55, 0.12);
+}
 html:not([data-theme]) #register.page,
 html[data-theme="blackgold"] #register.page {
   position: relative;
