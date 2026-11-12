@@ -1146,6 +1146,9 @@
   // ===== کاربران آنلاین (Presence) =====
   var presenceChannel = null;
   var onlineUsersList = [];
+  window.__onlineNames = function () {
+    return onlineUsersList.slice();
+  };
 
   function initPresence() {
     if (!curUser || !sb || isGuest) return;
@@ -1188,29 +1191,8 @@
 
   function renderOnlineUsers() {
     var box = document.getElementById("onlineUsers");
-    var wrap = document.getElementById("onlineAvatars");
-    if (!box || !wrap) return;
-    if (!onlineUsersList.length) {
-      box.classList.remove("show");
-      return;
-    }
-    var show = onlineUsersList.slice(0, 5);
-    var extra = onlineUsersList.length - show.length;
-    var html = show
-      .map(function (name) {
-        var av = typeof window.__avatarHTML === "function" ? window.__avatarHTML(name, 24) : "";
-        return '<span class="online-av" title="' + escAct(name) + '">' + av + "</span>";
-      })
-      .join("");
-    if (extra > 0)
-      html +=
-        '<span class="online-more" title="' +
-        escAct(extra + " نفر دیگر آنلاین") +
-        '">+' +
-        extra.toLocaleString("fa-IR") +
-        "</span>";
-    wrap.innerHTML = html;
-    box.classList.add("show");
+    if (box) box.classList.remove("show");
+    if (typeof window.__onOnlineUsersChanged === "function") window.__onOnlineUsersChanged();
   }
 
   // ===== خودکار کردن کاربر به‌عنوان بازیکن =====

@@ -792,6 +792,20 @@
         };
       });
     }
+    function markPoolOnline() {
+      var el = $("playerPool");
+      if (!el) return;
+      var raw = typeof window.__onlineNames === "function" ? window.__onlineNames() : [];
+      var on = {};
+      for (var i = 0; i < raw.length; i++) {
+        var n = String(raw[i] || "").trim();
+        if (n) on[n] = true;
+      }
+      [].forEach.call(el.querySelectorAll(".pool-player"), function (card) {
+        card.classList.toggle("is-online", !!on[String(card.dataset.player || "").trim()]);
+      });
+    }
+    window.__onOnlineUsersChanged = markPoolOnline;
     function renderPool() {
       var el = $("playerPool");
       if (!el) return;
@@ -841,6 +855,7 @@
           );
         })
         .join("");
+      markPoolOnline();
       [].forEach.call(el.querySelectorAll(".pool-player"), function (card) {
         if (card.classList.contains("placed")) {
           card.onclick = function () {

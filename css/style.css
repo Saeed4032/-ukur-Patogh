@@ -1892,8 +1892,12 @@ th.sortable:hover {
   letter-spacing: 0.03em;
   opacity: 0.85;
 }
-/* ===== کاربران آنلاین (شناور پایین راست) ===== */
-.online-users {
+/* ===== کاربران آنلاین: شناور حذف شد؛ چراغ روی آواتار لیست ثبت ===== */
+.online-users,
+.online-users.show {
+  display: none !important;
+}
+.online-users--unused {
   position: fixed;
   bottom: calc(16px + env(safe-area-inset-bottom, 0px));
   right: 16px;
@@ -3681,6 +3685,21 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   flex-shrink: 0;
   opacity: 1;
   filter: none;
+  position: relative;
+  overflow: visible;
+}
+#register .pool-player.is-online .avatar::after {
+  content: "";
+  position: absolute;
+  bottom: 1px;
+  inset-inline-start: 1px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #32c36a;
+  box-shadow: 0 0 0 1.5px #120e0a;
+  pointer-events: none;
+  z-index: 2;
 }
 #register .pool-player .pp-name {
   font-size: 1.2rem;
