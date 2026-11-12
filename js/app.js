@@ -1577,27 +1577,10 @@
           .join("|"),
       ].join("::");
       if (renderRankingCache.key === key) {
-        if ($("summary")) $("summary").innerHTML = renderRankingCache.summary;
         if ($("rankbody")) $("rankbody").innerHTML = renderRankingCache.body;
         return;
       }
       var s = PLAYERS.map(function (p) { return statsIn(p, gg); }).sort(function (x, y) { return rankingSortIn(x, y, gg); });
-      var totalPts = gg.reduce(function (a, g) {
-        return a + pts(g.type);
-      }, 0);
-      var lead = gg.length && s.length ? s[0] : null;
-      var summary = lead
-        ? [
-            ["مجموع بازی‌ها", n(games.length, 0)],
-            ["مجموع امتیازها", n(totalPts, 0)],
-            ["صدرنشین", lead.name + (lead.games < 5 ? " (ارزیابی)" : "")],
-            ["درصد صدرنشین", percent(lead.wins, lead.games)],
-          ]
-            .map(function (x) {
-              return '<div class="stat"><span>' + x[0] + "</span><strong>" + esc(x[1]) + "</strong></div>";
-            })
-            .join("")
-        : '<div class="card empty" style="grid-column:1/-1;margin:0">هنوز بازی‌ای ثبت نشده است.</div>';
       var body = s
         .map(function (x, i) {
           var crown = seasonClosed(seasonFilter) && i === 0 && x.games > 0 ? ' <span class="crown" title="قهرمان این فصل">👑</span>' : "";
@@ -1664,8 +1647,7 @@
           );
         })
         .join("");
-      renderRankingCache = { key: key, summary: summary, body: body };
-      if ($("summary")) $("summary").innerHTML = summary;
+      renderRankingCache = { key: key, body: body };
       if ($("rankbody")) $("rankbody").innerHTML = body;
     };
     function persianYM(t) {
@@ -1828,7 +1810,7 @@
       return x.getTime();
     }
     var renderHistoryCache = { key: null, html: null };
-    var renderRankingCache = { key: null, summary: null, body: null };
+    var renderRankingCache = { key: null, body: null };
     var renderChartsCache = { key: null };
     function debounce(fn, delay) {
       var timer = null;
