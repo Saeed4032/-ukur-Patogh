@@ -3755,6 +3755,9 @@ html[data-theme="blackgold"] body:has(#register.page.active) .hero,
 html[data-theme="blackgold"] body:has(#register.page.active) .tabs {
   display: none;
 }
+body:has(#ranking.page.active) .hero {
+  display: none;
+}
 html:not([data-theme]) #register.page,
 html[data-theme="blackgold"] #register.page {
   position: relative;
