@@ -3747,8 +3747,9 @@ html[data-theme="blackgold"] #register .reg-scene {
   left: 0;
   right: 0;
   top: 0;
-  bottom: 0;
-  height: auto;
+  bottom: auto;
+  height: 60vh;
+  max-height: 60vh;
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
