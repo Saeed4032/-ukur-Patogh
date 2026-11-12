@@ -3793,6 +3793,9 @@ html[data-theme="blackgold"] body:has(#register.page.active) .tabs {
 body:has(#ranking.page.active) .hero {
   display: none;
 }
+#ranking.page {
+  padding-top: calc(52px + env(safe-area-inset-top, 0px));
+}
 html:not([data-theme]) #register.page,
 html[data-theme="blackgold"] #register.page {
   position: relative;
