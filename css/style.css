@@ -3613,7 +3613,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   justify-content: flex-start;
   gap: 10px;
   margin-top: auto;
-  padding: 12px 10px 14px;
+  padding: 12px 0 14px;
   transition: opacity 0.28s ease, max-height 0.28s ease, margin 0.28s ease, padding 0.28s ease;
   max-height: 58vh;
   overflow: auto;
@@ -3721,6 +3721,8 @@ html:not([data-theme]) body:has(#register.page.active),
 html[data-theme="blackgold"] body:has(#register.page.active) {
   background-color: #07070c;
   background-image: none;
+  padding-left: 0.5vw;
+  padding-right: 0.5vw;
 }
 html:not([data-theme]) body:has(#register.page.active) .hero,
 html:not([data-theme]) body:has(#register.page.active) .tabs,
@@ -3797,6 +3799,8 @@ html[data-theme="blackgold"] #register.page > .card {
   background: transparent;
   border: 0;
   box-shadow: none;
+  padding-left: 0;
+  padding-right: 0;
 }
 html:not([data-theme]) #register .player-pool,
 html[data-theme="blackgold"] #register .player-pool {
