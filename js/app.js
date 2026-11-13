@@ -3696,7 +3696,7 @@
           (location.protocol === "https:" || location.hostname === "localhost" || location.hostname === "127.0.0.1")
         ) {
           window.addEventListener("load", function () {
-            navigator.serviceWorker.register("service-worker.js").catch(function (e) {
+            navigator.serviceWorker.register("service-worker.js", { updateViaCache: "none" }).catch(function (e) {
               console.warn("SW register failed", e);
             });
           });

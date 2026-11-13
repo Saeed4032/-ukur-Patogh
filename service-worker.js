@@ -33,7 +33,7 @@ var CORE = [
   './img/register/tab-bg-19.jpg',
   './img/register/tab-bg-20.jpg'
 ];
-var NET_TIMEOUT = 4000;
+var NET_TIMEOUT = 12000;
 
 self.addEventListener('install', function (e) {
   e.waitUntil(
