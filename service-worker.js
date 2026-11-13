@@ -2,7 +2,7 @@
    - صفحه و کدهای برنامه (html/js/css): اول شبکه (با timeout)، اگه نشد از کش.
      این‌طوری نسخه‌ی جدید با اولین رفرش دیده می‌شه.
    - فونت، آیکون و supabase.js: اول کش، پشت‌صحنه تازه می‌شن. */
-var VERSION = 'v74';
+var VERSION = 'v75';
 var CACHE = 'patogh-' + VERSION;
 var CORE = [
   './',
@@ -63,7 +63,7 @@ function isAppShell(url) {
 function cacheKeyFor(req, url) {
   // همه‌ی ناوبری‌ها به صفحه‌ی اصلی، فقط با یک کلید کش می‌شن
   if (req.mode === 'navigate' && isAppShell(url)) return './index.html';
-  url.search = '';
+  if (!/\.(css|js)$/.test(url.pathname)) url.search = '';
   return url.toString();
 }
 

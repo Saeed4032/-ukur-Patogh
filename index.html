@@ -15,8 +15,28 @@
 <meta name="apple-mobile-web-app-title" content="پاتوق">
 
 <link rel="preload" href="fonts/Vazirmatn-Variable.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=75">
 <link rel="stylesheet" href="css/login.css">
+<style id="rankPodiumFix">
+#ranking .rank-col.gold .rank-shaft {
+  height: 148px !important;
+  background: linear-gradient(180deg, #fff6d2 0%, #f2d36a 22%, #e0b430 55%, #c99620 100%) !important;
+}
+#ranking .rank-col.silver .rank-shaft {
+  height: 92px !important;
+  background: linear-gradient(180deg, #ffffff 0%, #eef2f6 25%, #c8d0d8 60%, #aeb6be 100%) !important;
+}
+#ranking .rank-col.bronze .rank-shaft {
+  height: 52px !important;
+  background: linear-gradient(180deg, #ffd9b4 0%, #e8a45a 25%, #d07a30 60%, #b86220 100%) !important;
+}
+#ranking .rank-shaft .rs-face {
+  position: absolute !important;
+  inset: 0 !important;
+  height: auto !important;
+  width: 100% !important;
+}
+</style>
 </head>
 <body>
 <div id="loadingScreen" class="loading-screen hide">
@@ -363,7 +383,7 @@
 <div id="modalBg" class="modalbg"></div>
 <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 <script src="js/config.js"></script>
-<script src="js/app.js"></script>
+<script src="js/app.js?v=75"></script>
 <div id="offlineBar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#7a5f1a;color:#fff;padding:8px 12px;z-index:99999;text-align:center;font-size:13px;cursor:pointer">🔌 حالت محلی — سرور در دسترس نیست. برای تلاش مجدد اینجا را لمس کن</div>
 <script src="js/local-mode.js"></script>
 <!-- بارگذاری از CDN رسمی، همراه با fallback از CDNهای جایگزین -->
