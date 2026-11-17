@@ -952,9 +952,6 @@
           btn.onclick = function () {
             selected.winner = btn.dataset.win;
             renderRegister();
-            requestAnimationFrame(function () {
-              smartScroll($("typeArea"));
-            });
           };
         });
       } else {
