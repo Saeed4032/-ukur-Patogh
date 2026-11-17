@@ -3341,27 +3341,31 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #register #typeButtons .choice {
   position: relative;
   z-index: 0;
-  min-height: 96px;
-  padding: 14px 8px 12px;
-  gap: 8px;
+  width: min(108px, 100%);
+  height: auto;
+  min-height: 0;
+  aspect-ratio: 1;
+  margin-inline: auto;
+  padding: 8px;
+  gap: 0;
   color: var(--text);
   background: var(--card);
   border: 1px solid var(--soft);
-  border-radius: 18px;
+  border-radius: 50%;
   box-shadow: none;
+  justify-content: center;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   transition:
-    min-height 0.28s ease,
+    width 0.28s ease,
     padding 0.28s ease,
     opacity 0.28s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease;
+    border-color 0.2s ease;
 }
 #register #typeButtons .choice.active {
   z-index: 2;
-  min-height: 122px;
-  padding: 18px 10px 14px;
+  width: min(140px, 100%);
+  padding: 10px;
   border-color: transparent;
   box-shadow: none;
 }
@@ -3373,8 +3377,8 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 1.12rem;
 }
 #register #typeButtons .choice.is-dim {
-  min-height: 58px;
-  padding: 8px 4px;
+  width: min(64px, 100%);
+  padding: 4px;
   opacity: 0.48;
   border-color: var(--soft);
   box-shadow: none;
@@ -3387,16 +3391,21 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   filter: none;
 }
 #register #typeButtons .choice.is-dim .choice-name {
-  font-size: 0.7rem;
-  line-height: 1.15;
+  font-size: 0.62rem;
+  line-height: 1.1;
+}
+#register #typeButtons .choice.is-dim .choice-mark {
+  gap: 2px;
+  padding: 2px;
 }
 #register #typeButtons .choice-mark {
   position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  padding: 12px 16px 10px;
+  justify-content: center;
+  gap: 6px;
+  padding: 4px 6px;
 }
 #register #typeButtons .choice-die-wrap {
   position: relative;
@@ -3460,8 +3469,12 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #register #typeButtons .choice-name {
   font-family: "Parastoo", sans-serif;
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   font-weight: 700;
+  text-align: center;
+  line-height: 1.15;
+  max-width: 6.4em;
+  overflow-wrap: anywhere;
 }
 #register #typeButtons .choice.active {
   color: var(--text);
