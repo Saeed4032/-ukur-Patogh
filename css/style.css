@@ -1,9 +1,14 @@
 @font-face {
-  font-family: "Estedad";
-  src:
-    url("../fonts/Estedad-Variable.woff2") format("woff2-variations"),
-    url("../fonts/Estedad-Variable.woff2") format("woff2");
-  font-weight: 100 900;
+  font-family: "Parastoo";
+  src: url("../fonts/Parastoo.woff2") format("woff2");
+  font-weight: 100 600;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Parastoo";
+  src: url("../fonts/Parastoo-Bold.woff2") format("woff2");
+  font-weight: 700 900;
   font-style: normal;
   font-display: swap;
 }
@@ -28,7 +33,7 @@
   --black: #9a3f4e;
   --radius: 24px;
   --btnradius: 16px;
-  --font: "Estedad", sans-serif;
+  --font: "Parastoo", sans-serif;
   --sig-bg: var(--bg);
   --sig-surface: var(--card);
   --sig-accent: var(--primary);
@@ -329,7 +334,7 @@ textarea {
     inset 0 2px 4px rgba(255, 255, 255, 0.15);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   line-height: 1;
-  font-family: "Estedad", sans-serif;
+  font-family: "Parastoo", sans-serif;
   user-select: none;
   overflow: hidden;
   background-size: cover;
@@ -485,7 +490,7 @@ textarea {
   font-weight: 900;
   font-size: 0.92rem;
   letter-spacing: 0.04em;
-  font-family: "Estedad", sans-serif;
+  font-family: "Parastoo", sans-serif;
   box-shadow:
     0 6px 18px var(--hover),
     0 0 22px var(--hover);
@@ -1827,7 +1832,7 @@ th.sortable:hover {
   }
 }
 .loading-msg {
-  font-family: "Estedad", Tahoma, sans-serif;
+  font-family: "Parastoo", Tahoma, sans-serif;
   font-size: 1rem;
   font-weight: 700;
   color: #f4cf6a;
@@ -2156,7 +2161,7 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 body {
-  font-family: var(--font, "Estedad"), system-ui, sans-serif;
+  font-family: var(--font, "Parastoo"), system-ui, sans-serif;
   font-size: var(--t-base);
   line-height: 1.6;
   padding: calc(var(--space-md) + var(--safe-t)) calc(var(--space-md) + var(--safe-r))
@@ -2165,7 +2170,7 @@ body {
 h1,
 h2,
 h3 {
-  font-family: var(--font, "Estedad"), system-ui, sans-serif;
+  font-family: var(--font, "Parastoo"), system-ui, sans-serif;
   letter-spacing: -0.02em;
 }
 .hero {
@@ -2448,7 +2453,7 @@ textarea {
   border: 1px solid var(--soft);
   border-radius: var(--r-full);
   color: var(--muted);
-  font-family: var(--font, "Estedad"), system-ui, sans-serif;
+  font-family: var(--font, "Parastoo"), system-ui, sans-serif;
   font-size: var(--t-sm);
   font-weight: 600;
   cursor: pointer;
@@ -2729,7 +2734,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   background: none;
   border: 0;
   color: var(--muted);
-  font-family: var(--font, "Estedad"), system-ui, sans-serif;
+  font-family: var(--font, "Parastoo"), system-ui, sans-serif;
   font-size: 0.7rem;
   font-weight: 600;
   cursor: pointer;

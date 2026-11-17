@@ -58,7 +58,7 @@
         "#f4cf6a",
         "#07070c",
         "rgba(212,175,55,.20)",
-        "'Estedad',sans-serif",
+        "'Parastoo',sans-serif",
         "16px",
         "10px",
         "radial-gradient(ellipse at 50% -30%,rgba(244,207,106,.20),transparent 55%),radial-gradient(ellipse at 100% 100%,rgba(212,175,55,.10),transparent 45%),radial-gradient(ellipse at 0% 50%,rgba(138,111,42,.08),transparent 40%),linear-gradient(180deg,#0e0e16 0%,#07070c 60%,#04040a 100%)",
