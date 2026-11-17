@@ -3538,10 +3538,8 @@
       /* مانیفست دیگر با blob ساخته نمی‌شود: Chrome برای «نصب» مانیفست
      blob را قبول نمی‌کند. به‌جایش فایل استاتیک manifest.json لینک شده. */
       try {
-        var fav =
-          '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d4af37"/><stop offset="1" stop-color="#7a5f1a"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="#0a0a12"/><g fill="none" stroke="#d4af37" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 22 L32 6 L50 22"/><path d="M14 42 L32 58 L50 42"/></g><circle cx="32" cy="28.2" r="1.5" fill="#f4cf6a"/><circle cx="32" cy="32" r="1.5" fill="#f4cf6a"/><circle cx="32" cy="35.8" r="1.5" fill="#f4cf6a"/></svg>';
         var fl = document.getElementById("faviconLink");
-        if (fl) fl.href = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(fav);
+        if (fl) fl.href = "icon-crane-192.png?v=81";
       } catch (_) {}
       /* ثبت service worker برای اجرای آفلاین.
      فقط روی HTTPS یا localhost ثبت می‌شود؛ روی http ساده بی‌اثر است. */

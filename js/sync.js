@@ -1061,7 +1061,7 @@
       if (document.hidden && "Notification" in window && Notification.permission === "granted" && navigator.serviceWorker) {
         navigator.serviceWorker.ready.then(function (reg) {
           reg.showNotification("پاتوق تخته‌نرد", {
-            body: text, icon: "./icon-192.png", badge: "./icon-192.png",
+            body: text, icon: "./icon-crane-192.png", badge: "./icon-crane-192.png",
             dir: "rtl", lang: "fa", tag: "patogh-game"
           });
         }).catch(function () {});
