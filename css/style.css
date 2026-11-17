@@ -3439,21 +3439,40 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #register #typeButtons .choice.active .type-ring {
   display: block;
 }
+#register #typeButtons .choice.active .choice-die-wrap {
+  animation: typeDieGlow 0.85s ease-in-out infinite;
+}
 #register #typeButtons .choice.active .choice-die {
-  animation: typeDieLive 2.2s ease-in-out infinite;
-  transform-origin: center;
+  animation: typeDieLive 0.75s ease-in-out infinite;
+  transform-origin: 50% 55%;
 }
 @keyframes typeDieLive {
   0%,
   100% {
-    transform: translateY(0) rotate(-8deg);
+    transform: translateY(5px) rotate(-24deg) scale(0.9);
+  }
+  28% {
+    transform: translateY(-13px) rotate(18deg) scale(1.16);
+  }
+  52% {
+    transform: translateY(3px) rotate(-12deg) scale(1.04);
+  }
+  76% {
+    transform: translateY(-9px) rotate(22deg) scale(1.12);
+  }
+}
+@keyframes typeDieGlow {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 4px var(--primary));
   }
   50% {
-    transform: translateY(-5px) rotate(8deg);
+    filter: drop-shadow(0 0 16px var(--accent));
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  #register #typeButtons .choice.active .choice-die {
+  #register #typeButtons .choice.active .choice-die,
+  #register #typeButtons .choice.active .choice-die-wrap {
     animation: none;
   }
 }
