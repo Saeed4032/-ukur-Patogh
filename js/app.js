@@ -911,20 +911,23 @@
       var wasHidden = ta.classList.contains("hidden");
       ta.classList.remove("hidden");
       if (wasHidden) revealCard(ta);
-      if (!tb.children.length) {
+      if (tb.dataset.skin !== "club") {
+        tb.dataset.skin = "club";
         tb.innerHTML = Object.keys(TYPES)
           .map(function (t) {
             var x = TYPES[t];
             return (
               '<button class="choice" data-t="' +
               t +
-              '" aria-pressed="false"><span class="choice-emoji">' +
-              x.emoji +
-              '</span><span class="choice-name">' +
+              '" aria-pressed="false" aria-label="' +
+              x.full +
+              "، " +
+              n(x.points, 0) +
+              ' امتیاز"><span class="choice-pip" aria-hidden="true"></span><span class="choice-name">' +
               x.name +
               "</span><small>" +
               n(x.points, 0) +
-              "×</small></button>"
+              " امتیاز</small></button>"
             );
           })
           .join("");
