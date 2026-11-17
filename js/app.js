@@ -1002,9 +1002,6 @@
           b.onclick = function () {
             selected.type = b.dataset.t;
             renderRegister();
-            requestAnimationFrame(function () {
-              forceScrollBottom();
-            });
           };
         });
       }
