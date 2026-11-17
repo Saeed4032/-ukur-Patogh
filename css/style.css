@@ -3440,34 +3440,47 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   display: block;
 }
 #register #typeButtons .choice.active .choice-die-wrap {
-  animation: typeDieGlow 0.85s ease-in-out infinite;
+  animation: typeDieGlow 2.2s ease-in-out 0.65s infinite;
 }
 #register #typeButtons .choice.active .choice-die {
-  animation: typeDieLive 0.75s ease-in-out infinite;
+  animation:
+    typeDieToss 0.65s ease-out 1,
+    typeDieIdle 2.2s ease-in-out 0.65s infinite;
   transform-origin: 50% 55%;
 }
-@keyframes typeDieLive {
+@keyframes typeDieToss {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+  }
+  18% {
+    transform: translateY(-14px) rotate(140deg) scale(1.14);
+  }
+  40% {
+    transform: translateY(3px) rotate(250deg) scale(0.96);
+  }
+  62% {
+    transform: translateY(-11px) rotate(340deg) scale(1.1);
+  }
+  100% {
+    transform: translateY(0) rotate(-6deg) scale(1);
+  }
+}
+@keyframes typeDieIdle {
   0%,
   100% {
-    transform: translateY(5px) rotate(-24deg) scale(0.9);
+    transform: translateY(0) rotate(-6deg);
   }
-  28% {
-    transform: translateY(-13px) rotate(18deg) scale(1.16);
-  }
-  52% {
-    transform: translateY(3px) rotate(-12deg) scale(1.04);
-  }
-  76% {
-    transform: translateY(-9px) rotate(22deg) scale(1.12);
+  50% {
+    transform: translateY(-4px) rotate(6deg);
   }
 }
 @keyframes typeDieGlow {
   0%,
   100% {
-    filter: drop-shadow(0 0 4px var(--primary));
+    filter: drop-shadow(0 0 5px var(--primary));
   }
   50% {
-    filter: drop-shadow(0 0 16px var(--accent));
+    filter: drop-shadow(0 0 12px var(--accent));
   }
 }
 @media (prefers-reduced-motion: reduce) {
