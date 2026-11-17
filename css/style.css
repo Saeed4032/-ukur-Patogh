@@ -505,15 +505,17 @@ textarea {
   border-radius: 50%;
   background: linear-gradient(135deg, var(--primary), var(--accent));
   color: var(--contrast);
-  font-weight: 900;
-  font-size: 0.92rem;
-  letter-spacing: 0.04em;
-  font-family: "Parastoo", sans-serif;
   box-shadow:
     0 6px 18px var(--hover),
     0 0 22px var(--hover);
   animation: vsPulse 2.4s ease-in-out infinite;
   flex-shrink: 0;
+}
+.vs-mark {
+  width: 22px;
+  height: 22px;
+  display: block;
+  fill: currentColor;
 }
 @keyframes vsPulse {
   0%,
@@ -3573,9 +3575,12 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #register .vs-slots.has-winner .vs-text {
   width: 26px;
   height: 26px;
-  font-size: 0.55rem;
   box-shadow: none;
   animation: none;
+}
+#register .vs-slots.has-winner .vs-mark {
+  width: 14px;
+  height: 14px;
 }
 #register .vs-slot-name {
   font-size: 0.88rem;

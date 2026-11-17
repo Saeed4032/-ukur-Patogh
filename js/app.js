@@ -631,6 +631,16 @@
       if (typeof callback === "function") callback();
     }
 
+    function vsMarkHTML() {
+      return (
+        '<span class="vs-text" aria-hidden="true">' +
+        '<svg class="vs-mark" viewBox="0 0 48 48">' +
+        '<polygon points="6,24 20,12 20,36"/>' +
+        '<polygon points="42,24 28,12 28,36"/>' +
+        '<circle cx="24" cy="24" r="3.6"/>' +
+        "</svg></span>"
+      );
+    }
     function winRingHTML() {
       return '<img class="win-ring" src="img/register/win-ring.png" alt="" aria-hidden="true">';
     }
@@ -674,7 +684,7 @@
       }
       el.innerHTML =
         slotBtn("1", s1) +
-        (s1 && s2 ? '<div class="vs-slot-divider"><span class="vs-text">VS</span></div>' : "") +
+        (s1 && s2 ? '<div class="vs-slot-divider">' + vsMarkHTML() + "</div>" : "") +
         slotBtn("2", s2);
       [].forEach.call(el.querySelectorAll(".vs-slot"), function (slot) {
         var slotNum = slot.dataset.slot;
