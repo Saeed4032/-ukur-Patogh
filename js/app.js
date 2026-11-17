@@ -991,11 +991,20 @@
           };
         });
       }
+      tb.classList.toggle("has-pick", !!selected.type);
       [].forEach.call(tb.children, function (b) {
         var on = b.dataset.t === selected.type;
         b.classList.toggle("active", on);
+        b.classList.toggle("is-dim", !!selected.type && !on);
         b.setAttribute("aria-pressed", on ? "true" : "false");
       });
+      tb.style.gridTemplateColumns = selected.type
+        ? Object.keys(TYPES)
+            .map(function (t) {
+              return t === selected.type ? "1.7fr" : "0.65fr";
+            })
+            .join(" ")
+        : "";
     }
     function renderPreview() {
       var el = $("preview");

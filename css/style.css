@@ -3246,6 +3246,35 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* دکمه ثبت تمام‌عرض در صفحه ثبت */
 #register .actions { margin-top: 14px; }
+@media (max-width: 767px) {
+  #register .reg-dock {
+    position: fixed;
+    left: 11px;
+    right: 11px;
+    bottom: calc(var(--nav-h) + var(--safe-b) + 8px);
+    z-index: 50;
+    padding-top: 10px;
+    background: linear-gradient(to top, var(--bg) 72%, transparent);
+  }
+  #register {
+    padding-bottom: 96px;
+  }
+  #register:has(#typeArea:not(.hidden)) {
+    padding-bottom: 250px;
+  }
+  #register .reg-dock .actions {
+    position: static;
+    bottom: auto;
+    z-index: auto;
+    margin-top: 8px;
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+}
 #register .actions[hidden],
 #register #add[hidden] {
   display: none !important;
@@ -3300,8 +3329,12 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   backdrop-filter: blur(22px) saturate(160%);
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
 }
+#register #typeButtons {
+  align-items: end;
+  transition: grid-template-columns 0.28s ease;
+}
 #register #typeButtons .choice {
-  min-height: 104px;
+  min-height: 96px;
   padding: 14px 8px 12px;
   gap: 8px;
   color: var(--text);
@@ -3311,6 +3344,39 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   box-shadow: none;
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
+  transition:
+    min-height 0.28s ease,
+    padding 0.28s ease,
+    opacity 0.28s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+#register #typeButtons .choice.active {
+  min-height: 122px;
+  padding: 16px 10px 14px;
+}
+#register #typeButtons .choice.active .choice-die {
+  width: 46px;
+  height: 46px;
+}
+#register #typeButtons .choice.active .choice-name {
+  font-size: 1.12rem;
+}
+#register #typeButtons .choice.is-dim {
+  min-height: 58px;
+  padding: 8px 4px;
+  opacity: 0.48;
+  border-color: var(--soft);
+  box-shadow: none;
+}
+#register #typeButtons .choice.is-dim .choice-die {
+  width: 22px;
+  height: 22px;
+  filter: none;
+}
+#register #typeButtons .choice.is-dim .choice-name {
+  font-size: 0.7rem;
+  line-height: 1.15;
 }
 #register #typeButtons .choice-die {
   width: 38px;
