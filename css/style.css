@@ -3356,8 +3356,8 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   padding: 16px 10px 14px;
 }
 #register #typeButtons .choice.active .choice-die {
-  width: 46px;
-  height: 46px;
+  width: 52px;
+  height: 52px;
 }
 #register #typeButtons .choice.active .choice-name {
   font-size: 1.12rem;
