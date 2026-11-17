@@ -3390,6 +3390,14 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-size: 0.7rem;
   line-height: 1.15;
 }
+#register #typeButtons .choice-mark {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px 10px;
+}
 #register #typeButtons .choice-die-wrap {
   position: relative;
   width: 42px;
@@ -3410,13 +3418,14 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: 74px;
-  height: 74px;
-  margin: -37px 0 0 -37px;
+  width: calc(100% + 20px);
+  height: calc(100% + 16px);
+  margin: 0;
+  transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 2;
   display: none;
-  object-fit: contain;
+  object-fit: fill;
 }
 #register #typeButtons .choice.active .type-ring {
   display: block;
