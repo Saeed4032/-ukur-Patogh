@@ -7,7 +7,7 @@
     var overlay = document.createElement("div");
     overlay.id = "supaSignupOverlay";
     overlay.style.cssText =
-      "position:fixed;inset:0;z-index:9999;background:var(--bg);display:none;align-items:center;justify-content:center;padding:20px;direction:rtl;font-family:Vazirmatn,sans-serif";
+      "position:fixed;inset:0;z-index:9999;background:var(--bg);display:none;align-items:center;justify-content:center;padding:20px;direction:rtl;font-family:Estedad,sans-serif";
     overlay.innerHTML =
       '<div style="width:100%;max-width:400px;background:linear-gradient(145deg,var(--card2),var(--card));border:1px solid var(--soft);border-radius:24px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.4)">' +
       '<div class="login-logo"><img src="img/logo-crane.jpg" alt="" aria-hidden="true"></div>' +
