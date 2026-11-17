@@ -3411,7 +3411,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   color: inherit;
 }
 #register .winner-side.active .win-bow {
-  display: block;
+  display: none;
 }
 #register .win-bow::before,
 #register .win-bow::after {

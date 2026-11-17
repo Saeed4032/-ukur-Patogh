@@ -635,12 +635,7 @@
       return '<img class="win-ring" src="img/register/win-ring.png" alt="" aria-hidden="true">';
     }
     function winBowHTML() {
-      return (
-        '<span class="win-bow">' +
-        '<img src="img/register/win-bow.png" alt="" aria-hidden="true">' +
-        "<b>برنده</b>" +
-        "</span>"
-      );
+      return "";
     }
     function slotContentHTML(name) {
       return (
