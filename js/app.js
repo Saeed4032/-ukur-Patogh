@@ -969,7 +969,7 @@
     function renderTypes() {
       var ta = $("typeArea"),
         tb = $("typeButtons");
-      if (!selected.pair) {
+      if (!selected.pair || !selected.winner) {
         ta.classList.add("hidden");
         return;
       }
