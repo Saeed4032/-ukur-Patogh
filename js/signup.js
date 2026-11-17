@@ -11,7 +11,7 @@
     overlay.innerHTML =
       '<div style="width:100%;max-width:400px;background:linear-gradient(145deg,var(--card2),var(--card));border:1px solid var(--soft);border-radius:24px;padding:28px;box-shadow:0 20px 60px rgba(0,0,0,.4)">' +
       '<div class="login-logo"><img src="img/logo-crane.jpg" alt="" aria-hidden="true"></div>' +
-      '<h1 style="text-align:center;color:var(--accent);font-size:1.6rem;margin-bottom:6px">پاتوق تخته‌نرد</h1>' +
+      '<h1 class="login-title">پاتوق تخته‌نرد</h1>' +
       '<p style="text-align:center;color:var(--muted);font-size:.85rem;margin-bottom:22px">ساخت حساب جدید</p>' +
       '<div style="margin-bottom:14px">' +
       '<label style="display:block;color:var(--muted);font-size:.82rem;font-weight:600;margin-bottom:6px">📱 شماره موبایل</label>' +
