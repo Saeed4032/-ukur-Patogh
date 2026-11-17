@@ -29,6 +29,9 @@
   --radius: 24px;
   --btnradius: 16px;
   --font: "Vazirmatn", sans-serif;
+  --sig-bg: var(--bg);
+  --sig-surface: var(--card);
+  --sig-accent: var(--primary);
 }
 * {
   box-sizing: border-box;
