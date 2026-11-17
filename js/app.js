@@ -964,8 +964,8 @@
       var wasHidden = ta.classList.contains("hidden");
       ta.classList.remove("hidden");
       if (wasHidden) revealCard(ta);
-      if (tb.dataset.skin !== "gold-die-ring-full") {
-        tb.dataset.skin = "gold-die-ring-full";
+      if (tb.dataset.skin !== "gold-die-ring-circle") {
+        tb.dataset.skin = "gold-die-ring-circle";
         tb.innerHTML = Object.keys(TYPES)
           .map(function (t) {
             var x = TYPES[t];
@@ -976,13 +976,13 @@
               x.full +
               "، " +
               n(x.points, 0) +
-              ' امتیاز"><span class="choice-mark"><span class="choice-die-wrap">' +
+              ' امتیاز">' +
+              typeRingHTML() +
+              '<span class="choice-mark"><span class="choice-die-wrap">' +
               typeDieHTML(x.points) +
               '</span><span class="choice-name">' +
               x.name +
-              "</span>" +
-              typeRingHTML() +
-              "</span></button>"
+              "</span></span></button>"
             );
           })
           .join("");

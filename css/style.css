@@ -3427,17 +3427,35 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   position: absolute;
   left: 50%;
   top: 50%;
-  width: calc(100% + 20px);
-  height: calc(100% + 16px);
+  width: 124%;
+  height: 124%;
   margin: 0;
   transform: translate(-50%, -50%);
   pointer-events: none;
-  z-index: 2;
+  z-index: 3;
   display: none;
-  object-fit: fill;
+  object-fit: contain;
 }
 #register #typeButtons .choice.active .type-ring {
   display: block;
+}
+#register #typeButtons .choice.active .choice-die {
+  animation: typeDieLive 2.2s ease-in-out infinite;
+  transform-origin: center;
+}
+@keyframes typeDieLive {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-8deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(8deg);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  #register #typeButtons .choice.active .choice-die {
+    animation: none;
+  }
 }
 #register #typeButtons .choice-die svg {
   width: 100%;
