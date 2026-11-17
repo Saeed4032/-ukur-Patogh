@@ -3370,8 +3370,8 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   position: relative;
   left: auto;
   top: auto;
-  width: 220px;
-  height: 80px;
+  width: 248px;
+  height: 88px;
   margin: -16px auto 2px;
   padding: 0;
   z-index: 4;
@@ -3381,11 +3381,13 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   border-radius: 0;
   box-shadow: none;
   color: #241606;
-  font-size: 0.72rem;
+  font-family: var(--font);
+  font-size: 1.22rem;
   font-weight: 900;
   line-height: 1;
+  letter-spacing: 0.08em;
   white-space: nowrap;
-  text-shadow: 0 1px 0 rgba(255, 236, 190, 0.35);
+  text-shadow: 0 1px 0 rgba(255, 236, 190, 0.45);
   flex-shrink: 0;
 }
 #register .win-bow img {
@@ -3398,13 +3400,14 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #register .win-bow b {
   position: absolute;
-  left: 18%;
-  right: 18%;
-  top: 46%;
+  left: 24%;
+  right: 24%;
+  top: 49%;
   transform: translateY(-50%);
   text-align: center;
   font-weight: 900;
-  font-size: inherit;
+  font-size: 1.22rem;
+  letter-spacing: 0.1em;
   color: inherit;
 }
 #register .winner-side.active .win-bow {
