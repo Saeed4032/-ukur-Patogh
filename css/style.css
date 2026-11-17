@@ -3329,11 +3329,18 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   backdrop-filter: blur(22px) saturate(160%);
   text-shadow: 0 1px 10px rgba(0, 0, 0, 0.7);
 }
+#register #typeArea.card,
+#register #typeButtons,
+#register #typeButtons .choice {
+  overflow: visible;
+}
 #register #typeButtons {
   align-items: end;
   transition: grid-template-columns 0.28s ease;
 }
 #register #typeButtons .choice {
+  position: relative;
+  z-index: 0;
   min-height: 96px;
   padding: 14px 8px 12px;
   gap: 8px;
@@ -3352,10 +3359,13 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
     box-shadow 0.2s ease;
 }
 #register #typeButtons .choice.active {
+  z-index: 2;
   min-height: 122px;
-  padding: 16px 10px 14px;
+  padding: 18px 10px 14px;
+  border-color: transparent;
+  box-shadow: none;
 }
-#register #typeButtons .choice.active .choice-die {
+#register #typeButtons .choice.active .choice-die-wrap {
   width: 52px;
   height: 52px;
 }
@@ -3369,23 +3379,47 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   border-color: var(--soft);
   box-shadow: none;
 }
-#register #typeButtons .choice.is-dim .choice-die {
+#register #typeButtons .choice.is-dim .choice-die-wrap {
   width: 22px;
   height: 22px;
+}
+#register #typeButtons .choice.is-dim .choice-die {
   filter: none;
 }
 #register #typeButtons .choice.is-dim .choice-name {
   font-size: 0.7rem;
   line-height: 1.15;
 }
-#register #typeButtons .choice-die {
-  width: 38px;
-  height: 38px;
+#register #typeButtons .choice-die-wrap {
+  position: relative;
+  width: 42px;
+  height: 42px;
   display: block;
   flex-shrink: 0;
+  transition: width 0.28s ease, height 0.28s ease;
+}
+#register #typeButtons .choice-die {
+  width: 100%;
+  height: 100%;
+  display: block;
   filter:
     drop-shadow(0 3px 6px rgba(0, 0, 0, 0.45))
     drop-shadow(0 0 7px color-mix(in srgb, var(--primary) 38%, transparent));
+}
+#register #typeButtons .type-ring {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 74px;
+  height: 74px;
+  margin: -37px 0 0 -37px;
+  pointer-events: none;
+  z-index: 2;
+  display: none;
+  object-fit: contain;
+}
+#register #typeButtons .choice.active .type-ring {
+  display: block;
 }
 #register #typeButtons .choice-die svg {
   width: 100%;
@@ -3423,8 +3457,6 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #register #typeButtons .choice.active {
   color: var(--text);
   background: var(--card);
-  border-color: var(--primary);
-  box-shadow: 0 0 0 1px var(--primary), 0 8px 20px var(--hover);
 }
 #register #winnerArea.card,
 #register #winnerArea.card.subsection {

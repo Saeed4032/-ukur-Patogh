@@ -694,6 +694,9 @@
     function winRingHTML() {
       return '<img class="win-ring" src="img/register/win-ring.png" alt="" aria-hidden="true">';
     }
+    function typeRingHTML() {
+      return '<img class="type-ring" src="img/register/win-ring.png" alt="" aria-hidden="true">';
+    }
     function winBowHTML() {
       return "";
     }
@@ -961,8 +964,8 @@
       var wasHidden = ta.classList.contains("hidden");
       ta.classList.remove("hidden");
       if (wasHidden) revealCard(ta);
-      if (tb.dataset.skin !== "gold-die-plain") {
-        tb.dataset.skin = "gold-die-plain";
+      if (tb.dataset.skin !== "gold-die-ring") {
+        tb.dataset.skin = "gold-die-ring";
         tb.innerHTML = Object.keys(TYPES)
           .map(function (t) {
             var x = TYPES[t];
@@ -973,9 +976,10 @@
               x.full +
               "، " +
               n(x.points, 0) +
-              ' امتیاز">' +
+              ' امتیاز"><span class="choice-die-wrap">' +
               typeDieHTML(x.points) +
-              '<span class="choice-name">' +
+              typeRingHTML() +
+              '</span><span class="choice-name">' +
               x.name +
               "</span></button>"
             );
