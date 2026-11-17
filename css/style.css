@@ -4018,7 +4018,7 @@ html[data-theme="blackgold"] #register .reg-scene-layer {
   background-position: center 30%;
   background-repeat: no-repeat;
   opacity: 0;
-  transition: opacity 1.15s ease;
+  transition: opacity 2.5s ease;
 }
 html:not([data-theme]) #register .reg-scene-layer:first-child,
 html[data-theme="blackgold"] #register .reg-scene-layer:first-child {

@@ -3745,7 +3745,7 @@
       }
       function loop() {
         if (timer) clearInterval(timer);
-        timer = setInterval(tick, 5500);
+        timer = setInterval(tick, 15000);
       }
       document.addEventListener("visibilitychange", function () {
         if (document.hidden) {
