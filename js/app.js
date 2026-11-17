@@ -642,51 +642,63 @@
       );
     }
     function typeDieHTML(points) {
-      var gid = "dieRim" + points;
+      var goldId = "dieGold" + points;
+      var pipId = "diePipG" + points;
       var layout = {
-        1: [[17.5, 17.5]],
+        1: [[18, 18]],
         2: [
-          [11.3, 11.3],
-          [23.7, 23.7],
+          [12.2, 12.2],
+          [23.8, 23.8],
         ],
         3: [
-          [11.3, 11.3],
-          [17.5, 17.5],
-          [23.7, 23.7],
+          [12.2, 12.2],
+          [18, 18],
+          [23.8, 23.8],
         ],
       };
       var pips = (layout[points] || layout[1])
         .map(function (xy) {
           return (
-            '<circle class="die-pip" cx="' +
+            '<circle cx="' +
             xy[0] +
             '" cy="' +
             xy[1] +
-            '" r="2.55"/>' +
+            '" r="2.95" fill="url(#' +
+            pipId +
+            ')"/>' +
             '<circle class="die-pip-shine" cx="' +
-            (xy[0] - 0.65) +
+            (xy[0] - 0.85) +
             '" cy="' +
-            (xy[1] - 0.7) +
-            '" r="0.9"/>'
+            (xy[1] - 0.9) +
+            '" r="0.85"/>'
           );
         })
         .join("");
       return (
         '<span class="choice-die" aria-hidden="true">' +
         '<svg viewBox="0 0 36 36">' +
-        '<defs><linearGradient id="' +
-        gid +
-        '" x1="5" y1="4" x2="30" y2="32">' +
+        "<defs>" +
+        '<linearGradient id="' +
+        goldId +
+        '" x1="4" y1="3" x2="32" y2="33">' +
         '<stop offset="0" stop-color="var(--accent)"/>' +
-        '<stop offset="0.45" stop-color="var(--primary)"/>' +
+        '<stop offset="0.42" stop-color="var(--primary)"/>' +
         '<stop offset="1" stop-color="var(--dark)"/>' +
-        "</linearGradient></defs>" +
-        '<rect class="die-plate" x="6" y="7" width="25" height="25" rx="6.4"/>' +
-        '<rect class="die-face" x="5" y="5" width="25" height="25" rx="6.4" stroke="url(#' +
-        gid +
+        "</linearGradient>" +
+        '<radialGradient id="' +
+        pipId +
+        '" cx="34%" cy="30%" r="72%">' +
+        '<stop offset="0" stop-color="var(--text)"/>' +
+        '<stop offset="0.32" stop-color="var(--accent)"/>' +
+        '<stop offset="1" stop-color="var(--dark)"/>' +
+        "</radialGradient>" +
+        "</defs>" +
+        '<rect class="die-plate" x="4.4" y="5.6" width="29.2" height="29.2" rx="8.2"/>' +
+        '<rect class="die-body" x="3.2" y="3.2" width="29.6" height="29.6" rx="8.2" fill="url(#' +
+        goldId +
         ')"/>' +
-        '<rect class="die-inner" x="7.1" y="7.1" width="20.8" height="20.8" rx="4.8"/>' +
-        '<ellipse class="die-sheen" cx="17.5" cy="11.2" rx="8.2" ry="3.1"/>' +
+        '<rect class="die-face" x="6.6" y="6.6" width="22.8" height="22.8" rx="5.4"/>' +
+        '<ellipse class="die-sheen" cx="18" cy="11.4" rx="7.6" ry="3.2"/>' +
         pips +
         "</svg></span>"
       );
@@ -964,8 +976,8 @@
       var wasHidden = ta.classList.contains("hidden");
       ta.classList.remove("hidden");
       if (wasHidden) revealCard(ta);
-      if (tb.dataset.skin !== "gold-die-ring-circle") {
-        tb.dataset.skin = "gold-die-ring-circle";
+      if (tb.dataset.skin !== "casino-die") {
+        tb.dataset.skin = "casino-die";
         tb.innerHTML = Object.keys(TYPES)
           .map(function (t) {
             var x = TYPES[t];

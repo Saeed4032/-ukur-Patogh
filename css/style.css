@@ -3484,25 +3484,16 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #register #typeButtons .die-plate {
   fill: var(--dark);
-  opacity: 0.55;
+  opacity: 0.85;
 }
 #register #typeButtons .die-face {
-  fill: color-mix(in srgb, var(--card) 62%, transparent);
-  stroke-width: 1.85;
-}
-#register #typeButtons .die-inner {
-  fill: none;
-  stroke: color-mix(in srgb, var(--accent) 55%, transparent);
-  stroke-width: 0.7;
+  fill: var(--contrast);
 }
 #register #typeButtons .die-sheen {
-  fill: color-mix(in srgb, var(--accent) 28%, transparent);
-}
-#register #typeButtons .die-pip {
-  fill: var(--accent);
+  fill: color-mix(in srgb, var(--text) 16%, transparent);
 }
 #register #typeButtons .die-pip-shine {
-  fill: color-mix(in srgb, var(--text) 82%, transparent);
+  fill: color-mix(in srgb, var(--text) 88%, transparent);
 }
 #register #typeButtons .choice-name {
   font-family: "Parastoo", sans-serif;
