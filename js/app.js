@@ -961,8 +961,8 @@
       var wasHidden = ta.classList.contains("hidden");
       ta.classList.remove("hidden");
       if (wasHidden) revealCard(ta);
-      if (tb.dataset.skin !== "gold-die") {
-        tb.dataset.skin = "gold-die";
+      if (tb.dataset.skin !== "gold-die-plain") {
+        tb.dataset.skin = "gold-die-plain";
         tb.innerHTML = Object.keys(TYPES)
           .map(function (t) {
             var x = TYPES[t];
@@ -977,9 +977,7 @@
               typeDieHTML(x.points) +
               '<span class="choice-name">' +
               x.name +
-              "</span><small>" +
-              n(x.points, 0) +
-              " امتیاز</small></button>"
+              "</span></button>"
             );
           })
           .join("");
