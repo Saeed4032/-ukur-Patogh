@@ -446,7 +446,9 @@
     }
 
     function apply() {
-      var v = THEMES[settings.theme] || THEMES.blackgold;
+      /* SIGNATURE CLUB: ظاهر ثابت. پالت اجرایی همان توکن‌های blackgold است
+         (HEX جدید در این مرحله انتخاب نشد). settings.theme خوانده نمی‌شود. */
+      var v = THEMES.blackgold;
       var k = [
         "--bg",
         "--card",
@@ -469,14 +471,12 @@
       k.forEach(function (x, i) {
         document.documentElement.style.setProperty(x, v[i]);
       });
-      document.documentElement.setAttribute("data-theme", settings.theme);
-      if (LUX_THEMES.indexOf(settings.theme) > -1) document.documentElement.setAttribute("data-lux", "");
-      else document.documentElement.removeAttribute("data-lux");
+      document.documentElement.setAttribute("data-theme", "blackgold");
+      document.documentElement.removeAttribute("data-lux");
       document.documentElement.style.fontSize = 16 * Number(settings.font || 1) + "px";
       document.querySelector(".app").style.filter =
         settings.intensity === "calm" ? "saturate(.82)" : settings.intensity === "bold" ? "saturate(1.16)" : "";
       document.documentElement.style.scrollBehavior = "smooth";
-      $("themeCurrent") && renderThemes();
     }
     function statsIn(p, list) {
       var s = { name: p, games: 0, wins: 0, losses: 0, normal: 0, mars: 0, black: 0, total: 0 };
@@ -2996,56 +2996,6 @@
         );
       });
     }
-    function themeGridHTML() {
-      return Object.keys(THEMES)
-        .map(function (k) {
-          var v = THEMES[k];
-          return (
-            '<button class="theme ' +
-            (settings.theme === k ? "active" : "") +
-            '" data-theme="' +
-            k +
-            '"><div class="swatch" style="background:linear-gradient(135deg,' +
-            v[8] +
-            "," +
-            v[9] +
-            ')"></div>' +
-            themeNames[k] +
-            "</button>"
-          );
-        })
-        .join("");
-    }
-    function renderThemes() {
-      var k = settings.theme,
-        v = THEMES[k] || THEMES.blackgold;
-      if ($("themeCurrent"))
-        $("themeCurrent").innerHTML =
-          '<span class="theme-hint">برای تغییر، کلیک کن</span><div class="swatch" style="background:linear-gradient(135deg,' +
-          v[8] +
-          "," +
-          v[9] +
-          ')"></div><span>' +
-          themeNames[k] +
-          "</span>";
-    }
-    function openThemes() {
-      $("modalBg").innerHTML =
-        '<div class="modal"><h2>🎨 انتخاب قالب</h2><div class="themegrid">' +
-        themeGridHTML() +
-        '</div><div class="actions"><button id="closeThemes" class="btn secondary">بستن</button></div></div>';
-      $("modalBg").className = "modalbg show";
-      [].forEach.call($("modalBg").querySelectorAll(".theme"), function (b) {
-        b.onclick = function () {
-          settings.theme = b.dataset.theme;
-          apply();
-          saveSettings();
-          renderThemes();
-          closeModal();
-        };
-      });
-      $("closeThemes").onclick = closeModal;
-    }
     function fill() {
       var fp = $("filterPlayer");
       if (fp) {
@@ -3245,7 +3195,6 @@
       else if (p === "history") renderHistory();
       else if (p === "analytics") renderAnalytics();
       else if (p === "settings") {
-        renderThemes();
         renderPlayers();
       } else if (p === "profile") {
         if (window.__renderProfile) window.__renderProfile();
@@ -3601,16 +3550,6 @@
         apply();
         saveSettings();
       };
-      var tc = $("themeCurrent");
-      if (tc) {
-        tc.onclick = openThemes;
-        tc.onkeydown = function (e) {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            openThemes();
-          }
-        };
-      }
       $("tReset").onclick = startNewTournament;
       $("tEditName").onclick = editTournamentName;
       $("tEditStart").onclick = editTournamentStart;
