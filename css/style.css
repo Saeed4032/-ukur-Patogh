@@ -162,6 +162,15 @@ h1 {
   line-height: 1.85;
   letter-spacing: 0;
 }
+.pp-name,
+.vs-slot-name,
+.winner-name,
+.rank-col-name,
+.rank-slim-name {
+  font-family: "IranNastaliq", var(--font);
+  font-weight: 400;
+  letter-spacing: 0;
+}
 h2 {
   font-size: 1.3rem;
   margin-bottom: 12px;
@@ -2990,8 +2999,9 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   border-color: #c4894a;
 }
 .rank-col-name {
-  font-size: 0.78rem;
-  font-weight: 800;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.7;
   max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3449,19 +3459,20 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 #register .winner-name {
-  font-size: 0.78rem;
-  font-weight: 700;
+  font-size: 1.15rem;
+  font-weight: 400;
+  line-height: 1.8;
   color: var(--muted);
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.75);
   transition: font-size 0.4s ease, color 0.4s ease;
 }
 #register .winner-side.active .winner-name {
   color: var(--accent);
-  font-size: 1.05rem;
-  font-weight: 800;
+  font-size: 1.45rem;
+  font-weight: 400;
 }
 #register .winner-arena:has(.active) .winner-side:not(.active) .winner-name {
-  font-size: 0.68rem;
+  font-size: 1rem;
   opacity: 0.7;
 }
 #register .winner-stat,
@@ -3567,9 +3578,9 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   animation: none;
 }
 #register .vs-slot-name {
-  font-size: 0.62rem;
-  font-weight: 700;
-  line-height: 1.15;
+  font-size: 1.05rem;
+  font-weight: 400;
+  line-height: 1.7;
   max-width: 144px;
 }
 #register .vs-slot-label,
@@ -3676,9 +3687,9 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   z-index: 2;
 }
 #register .pool-player .pp-name {
-  font-size: 1.2rem;
-  font-weight: 800;
-  line-height: 1.25;
+  font-size: 1.45rem;
+  font-weight: 400;
+  line-height: 1.75;
   max-width: none;
   text-align: right;
 }
