@@ -1080,11 +1080,12 @@
       if (!btn) return;
       btn.textContent = "🎲 ثبت بازی";
       var ready = !!(selected.pair && selected.winner && selected.type);
+      var showBar = !!(selected.pair && selected.winner);
       btn.disabled = !ready;
-      btn.hidden = !ready;
+      btn.hidden = !showBar;
       var actions = btn.parentNode;
       if (actions && actions.classList && actions.classList.contains("actions")) {
-        actions.hidden = !ready;
+        actions.hidden = !showBar;
       }
     }
     function renderQuickTags() {
