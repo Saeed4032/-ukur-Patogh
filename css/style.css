@@ -109,8 +109,8 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 42px;
+  width: 36px;
+  height: 36px;
   color: var(--accent);
   filter: drop-shadow(0 3px 8px var(--hover));
   animation: logoFloat 4s ease-in-out infinite;
@@ -132,6 +132,8 @@ body {
   width: 100%;
   height: 100%;
   display: block;
+  object-fit: cover;
+  border-radius: 8px;
 }
 h1,
 h2,
@@ -1514,8 +1516,8 @@ body.guest-mode #tEditStart {
     padding: 10px 12px 8px;
   }
   .hero-logo {
-    width: 18px;
-    height: 36px;
+    width: 28px;
+    height: 28px;
   }
   .tabs {
     gap: 4px;
@@ -1757,8 +1759,8 @@ th.sortable:hover {
 }
 .loading-content .logo-wrap {
   position: relative;
-  width: 80px;
-  height: 160px;
+  width: 120px;
+  height: 120px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1786,6 +1788,8 @@ th.sortable:hover {
 .loading-content .logo-svg {
   width: 100%;
   height: 100%;
+  object-fit: cover;
+  border-radius: 16px;
   color: #f4cf6a;
   filter: drop-shadow(0 3px 12px rgba(244, 207, 106, 0.5));
   animation: loadingFloat 3s ease-in-out infinite;

@@ -17,7 +17,7 @@
 <link rel="preload" href="fonts/Vazirmatn-Variable.woff2" as="font" type="font/woff2" crossorigin>
 <script>
 (function () {
-  var V = "v79";
+  var V = "v80";
   try {
     if (localStorage.getItem("patoghNuke") === V) return;
     localStorage.setItem("patoghNuke", V);
@@ -49,7 +49,7 @@
   }).then(reload, reload);
 })();
 </script>
-<link rel="stylesheet" href="css/style.css?v=79">
+<link rel="stylesheet" href="css/style.css?v=80">
 <link rel="stylesheet" href="css/login.css">
 <style id="rankPodiumFix">
 #ranking .rank-col.gold .rank-shaft {
@@ -76,13 +76,7 @@
 <div id="loadingScreen" class="loading-screen hide">
   <div class="loading-content">
     <div class="logo-wrap">
-      <svg class="logo-svg" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M6 26 L30 4 L54 26" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="30" cy="40" r="3" fill="currentColor"/>
-        <circle cx="30" cy="60" r="3" fill="currentColor"/>
-        <circle cx="30" cy="80" r="3" fill="currentColor"/>
-        <path d="M6 94 L30 116 L54 94" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <img class="logo-svg" src="img/logo-crane.jpg" alt="" aria-hidden="true">
     </div>
     <div id="loadingMsg" class="loading-msg">🎲 در حال چیدن مهره‌ها...</div>
     <div class="loading-bar"></div>
@@ -92,13 +86,7 @@
 <div id="supaAuthOverlay" class="login-overlay">
   <div class="login-card">
     <div class="login-logo">
-      <svg viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M6 26 L30 4 L54 26" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="30" cy="40" r="3" fill="currentColor"/>
-        <circle cx="30" cy="60" r="3" fill="currentColor"/>
-        <circle cx="30" cy="80" r="3" fill="currentColor"/>
-        <path d="M6 94 L30 116 L54 94" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <img src="img/logo-crane.jpg" alt="" aria-hidden="true">
     </div>
     <h1 class="login-title">پاتوق تخته‌نرد</h1>
     <p class="login-sub">خوش اومدی، بشین سر میز 🎲</p>
@@ -150,23 +138,11 @@
   <div class="hero-title-row">
     <button id="notifyBell" class="notify-bell" type="button" aria-label="اعلان بازی جدید">🔕</button>
     <span class="hero-logo">
-      <svg class="cukur-logo" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M6 26 L30 4 L54 26" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="30" cy="40" r="3" fill="currentColor"/>
-        <circle cx="30" cy="60" r="3" fill="currentColor"/>
-        <circle cx="30" cy="80" r="3" fill="currentColor"/>
-        <path d="M6 94 L30 116 L54 94" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <img class="cukur-logo" src="img/logo-crane.jpg" alt="" aria-hidden="true">
     </span>
     <h1>پاتوق تخته‌نرد</h1>
     <span class="hero-logo">
-      <svg class="cukur-logo" viewBox="0 0 60 120" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M6 26 L30 4 L54 26" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-        <circle cx="30" cy="40" r="3" fill="currentColor"/>
-        <circle cx="30" cy="60" r="3" fill="currentColor"/>
-        <circle cx="30" cy="80" r="3" fill="currentColor"/>
-        <path d="M6 94 L30 116 L54 94" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <img class="cukur-logo" src="img/logo-crane.jpg" alt="" aria-hidden="true">
     </span>
   </div>
   <div id="storageWarning" class="warning hidden">ذخیره‌سازی مرورگر در دسترس نیست؛ حتماً پشتیبان بگیرید</div>
@@ -415,7 +391,7 @@
 <div id="modalBg" class="modalbg"></div>
 <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 <script src="js/config.js"></script>
-<script src="js/app.js?v=79"></script>
+<script src="js/app.js?v=80"></script>
 <div id="offlineBar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#7a5f1a;color:#fff;padding:8px 12px;z-index:99999;text-align:center;font-size:13px;cursor:pointer">🔌 حالت محلی — سرور در دسترس نیست. برای تلاش مجدد اینجا را لمس کن</div>
 <script src="js/local-mode.js"></script>
 <!-- بارگذاری از CDN رسمی، همراه با fallback از CDNهای جایگزین -->

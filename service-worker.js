@@ -2,7 +2,7 @@
    - صفحه و کدهای برنامه (html/js/css): اول شبکه (با timeout)، اگه نشد از کش.
      این‌طوری نسخه‌ی جدید با اولین رفرش دیده می‌شه.
    - فونت، آیکون و supabase.js: اول کش، پشت‌صحنه تازه می‌شن. */
-var VERSION = 'v79';
+var VERSION = 'v80';
 var CACHE = 'patogh-' + VERSION;
 var CORE = [
   './',
@@ -24,6 +24,7 @@ var CORE = [
   './icon-192.png',
   './icon-512.png',
   './apple-touch-icon.png',
+  './img/logo-crane.jpg',
   './img/register/win-ring.png',
   './img/register/win-bow.png',
   './img/register/tab-bg.jpg',
