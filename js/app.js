@@ -641,6 +641,56 @@
         "</svg></span>"
       );
     }
+    function typeDieHTML(points) {
+      var gid = "dieRim" + points;
+      var layout = {
+        1: [[17.5, 17.5]],
+        2: [
+          [11.3, 11.3],
+          [23.7, 23.7],
+        ],
+        3: [
+          [11.3, 11.3],
+          [17.5, 17.5],
+          [23.7, 23.7],
+        ],
+      };
+      var pips = (layout[points] || layout[1])
+        .map(function (xy) {
+          return (
+            '<circle class="die-pip" cx="' +
+            xy[0] +
+            '" cy="' +
+            xy[1] +
+            '" r="2.55"/>' +
+            '<circle class="die-pip-shine" cx="' +
+            (xy[0] - 0.65) +
+            '" cy="' +
+            (xy[1] - 0.7) +
+            '" r="0.9"/>'
+          );
+        })
+        .join("");
+      return (
+        '<span class="choice-die" aria-hidden="true">' +
+        '<svg viewBox="0 0 36 36">' +
+        '<defs><linearGradient id="' +
+        gid +
+        '" x1="5" y1="4" x2="30" y2="32">' +
+        '<stop offset="0" stop-color="var(--accent)"/>' +
+        '<stop offset="0.45" stop-color="var(--primary)"/>' +
+        '<stop offset="1" stop-color="var(--dark)"/>' +
+        "</linearGradient></defs>" +
+        '<rect class="die-plate" x="6" y="7" width="25" height="25" rx="6.4"/>' +
+        '<rect class="die-face" x="5" y="5" width="25" height="25" rx="6.4" stroke="url(#' +
+        gid +
+        ')"/>' +
+        '<rect class="die-inner" x="7.1" y="7.1" width="20.8" height="20.8" rx="4.8"/>' +
+        '<ellipse class="die-sheen" cx="17.5" cy="11.2" rx="8.2" ry="3.1"/>' +
+        pips +
+        "</svg></span>"
+      );
+    }
     function winRingHTML() {
       return '<img class="win-ring" src="img/register/win-ring.png" alt="" aria-hidden="true">';
     }
@@ -911,8 +961,8 @@
       var wasHidden = ta.classList.contains("hidden");
       ta.classList.remove("hidden");
       if (wasHidden) revealCard(ta);
-      if (tb.dataset.skin !== "club") {
-        tb.dataset.skin = "club";
+      if (tb.dataset.skin !== "gold-die") {
+        tb.dataset.skin = "gold-die";
         tb.innerHTML = Object.keys(TYPES)
           .map(function (t) {
             var x = TYPES[t];
@@ -923,7 +973,9 @@
               x.full +
               "، " +
               n(x.points, 0) +
-              ' امتیاز"><span class="choice-pip" aria-hidden="true"></span><span class="choice-name">' +
+              ' امتیاز">' +
+              typeDieHTML(x.points) +
+              '<span class="choice-name">' +
               x.name +
               "</span><small>" +
               n(x.points, 0) +
