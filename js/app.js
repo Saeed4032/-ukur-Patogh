@@ -1825,36 +1825,6 @@
         esc(seasonLabelOf(seasonFilter)) + ': ' + esc(c.name) + '</strong><span class="muted">' +
         n(c.wins, 0) + " برد از " + n(c.games, 0) + " بازی · " + n(c.total, 0) + " امتیاز</span></div></div>";
     }
-    var GOLD3D = {
-      "کل": "img/ranking/gold3d/kol.png",
-      "فروردین": "img/ranking/gold3d/farvardin.png",
-      "اردیبهشت": "img/ranking/gold3d/ordibehesht.png",
-      "خرداد": "img/ranking/gold3d/khordad.png",
-      "تیر": "img/ranking/gold3d/tir.png",
-      "مرداد": "img/ranking/gold3d/mordad.png",
-      "شهریور": "img/ranking/gold3d/shahrivar.png",
-      "مهر": "img/ranking/gold3d/mehr.png",
-      "آبان": "img/ranking/gold3d/aban.png",
-      "آذر": "img/ranking/gold3d/azar.png",
-      "دی": "img/ranking/gold3d/dey.png",
-      "بهمن": "img/ranking/gold3d/bahman.png",
-      "اسفند": "img/ranking/gold3d/esfand.png",
-      "۱۴۰۴": "img/ranking/gold3d/y1404.png",
-      "۱۴۰۵": "img/ranking/gold3d/y1405.png",
-    };
-    function gold3dImg(key, alt, extra) {
-      var src = GOLD3D[key];
-      if (!src) return '<span class="gold3d-fallback">' + esc(alt || key) + "</span>";
-      return (
-        '<img class="gold3d-img' +
-        (extra ? " " + extra : "") +
-        '" src="' +
-        src +
-        '" alt="' +
-        esc(alt || key) +
-        '">'
-      );
-    }
     function renderSeasonBar() {
       var bar = $("seasonBar");
       if (!bar) return;
@@ -1878,25 +1848,16 @@
             })
             .join("")
         : '<div class="muted" style="padding:8px 10px;font-size:.8rem">ماهی با بازی ثبت‌شده نیست</div>';
-      var monthParts = String(monthLabel || "").trim().split(/\s+/);
-      var monthYear = monthParts.length > 1 ? monthParts.pop() : "";
-      var monthName = monthParts.join(" ");
       bar.innerHTML =
         '<button type="button" class="seasonchip' +
         (seasonFilter === "all" ? " active" : "") +
-        '" data-season="all" aria-label="کل">' +
-        gold3dImg("کل", "کل") +
-        "</button>" +
+        '" data-season="all">کل</button>' +
         '<div class="season-month">' +
         '<button type="button" class="seasonchip' +
         (monthActive ? " active" : "") +
-        '" id="seasonMonthBtn" aria-haspopup="listbox" aria-expanded="false" aria-label="' +
+        '" id="seasonMonthBtn" aria-haspopup="listbox" aria-expanded="false">' +
         esc(monthLabel) +
-        '">' +
-        gold3dImg(monthName, monthName) +
-        (monthYear ? gold3dImg(monthYear, monthYear) : "") +
-        '<img class="gold3d-img chev" src="img/ranking/gold3d/chev.png" alt="">' +
-        "</button>" +
+        " ▾</button>" +
         '<div class="season-menu" role="listbox">' +
         menu +
         "</div></div>";
