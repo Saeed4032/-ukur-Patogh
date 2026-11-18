@@ -3291,55 +3291,65 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   position: relative;
   z-index: 8;
   display: flex;
-  gap: 0;
-  align-items: center;
-  justify-content: space-evenly;
+  gap: 28px;
+  align-items: flex-end;
+  justify-content: center;
   overflow: visible;
   width: 100%;
   max-width: none;
-  margin: 4px 0 12px;
-  padding: 12px 28px;
-  border-radius: 6px;
-  border: 1px solid #c4a35a;
-  background-color: #2a2a2e;
-  background-image:
-    linear-gradient(180deg, rgba(255, 236, 180, 0.14), transparent 40%, rgba(0, 0, 0, 0.42)),
-    url("../img/ranking/bar-metal.jpg");
-  background-size: cover;
-  background-position: center;
-  box-shadow:
-    0 10px 24px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 236, 180, 0.28),
-    inset 0 -2px 3px rgba(0, 0, 0, 0.55);
+  margin: 8px 0 16px;
+  padding: 8px 8px 12px;
+  background: none;
+  border: 0;
+  box-shadow: none;
 }
 .seasonchip {
   position: relative;
   flex: none;
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
   padding: 4px 2px;
   border: 0;
   border-radius: 0;
   background: transparent;
-  color: #b08a3e;
+  color: var(--accent);
   font-family: inherit;
   font-size: 1.05rem;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
-  letter-spacing: 0.02em;
   box-shadow: none;
-  text-shadow:
-    0 1px 0 rgba(255, 220, 150, 0.28),
-    0 -1px 0 rgba(0, 0, 0, 0.8);
-  transition: color 0.2s, text-shadow 0.2s;
+  transition: opacity 0.2s, filter 0.2s;
+}
+.seasonchip:not(.active) {
+  opacity: 0.42;
+  filter: brightness(0.72);
 }
 .seasonchip.active {
+  opacity: 1;
+  filter: none;
   background: transparent;
-  color: #f4cf6a;
+  color: var(--accent);
   border: 0;
   box-shadow: none;
-  text-shadow:
-    0 1px 0 rgba(0, 0, 0, 0.75),
-    0 0 8px rgba(212, 175, 55, 0.4);
+}
+.gold3d-img {
+  display: block;
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+  pointer-events: none;
+}
+.gold3d-img.chev {
+  height: 22px;
+  margin-bottom: 6px;
+}
+.gold3d-fallback {
+  color: var(--accent);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 52px;
 }
 .season-month { position: relative; z-index: 9; flex: none; display: flex; }
 .season-month > .seasonchip { width: auto; flex: none; }
