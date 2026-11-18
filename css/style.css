@@ -3311,15 +3311,30 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   position: relative;
   z-index: 8;
   display: flex;
-  gap: 28px;
+  gap: 22px;
   align-items: center;
   justify-content: center;
   overflow: visible;
-  padding: 6px 4px 12px;
-  margin: 0;
-  background: none;
-  border: 0;
-  box-shadow: none;
+  width: fit-content;
+  max-width: calc(100% - 16px);
+  margin: 4px auto 12px;
+  padding: 8px 22px;
+  border-radius: 7px;
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  background-color: #16161c;
+  background-image:
+    linear-gradient(180deg, rgba(255, 236, 180, 0.12), transparent 42%, rgba(0, 0, 0, 0.42)),
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.045) 0px,
+      rgba(255, 255, 255, 0) 1px,
+      rgba(0, 0, 0, 0.18) 2px,
+      transparent 3px
+    );
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 236, 180, 0.16),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.55);
 }
 .seasonchip {
   position: relative;
@@ -3328,13 +3343,16 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   border: 0;
   border-radius: 0;
   background: transparent;
-  color: var(--muted);
+  color: #8a7340;
   font-family: inherit;
   font-size: 0.92rem;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
   box-shadow: none;
+  text-shadow:
+    0 1px 0 rgba(255, 236, 180, 0.12),
+    0 -1px 0 rgba(0, 0, 0, 0.65);
   transition: color 0.2s, text-shadow 0.2s;
 }
 .seasonchip.active {
@@ -3342,7 +3360,9 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   color: var(--accent);
   border: 0;
   box-shadow: none;
-  text-shadow: 0 0 14px color-mix(in srgb, var(--primary) 55%, transparent);
+  text-shadow:
+    0 1px 0 rgba(0, 0, 0, 0.7),
+    0 0 10px rgba(212, 175, 55, 0.32);
 }
 .season-month { position: relative; z-index: 9; flex: none; display: flex; }
 .season-month > .seasonchip { width: auto; flex: none; }
