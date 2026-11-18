@@ -747,6 +747,10 @@
         el.classList.remove("is-toss");
         void el.offsetWidth;
         el.classList.add("is-toss");
+        clearTimeout(el._tossTimer);
+        el._tossTimer = setTimeout(function () {
+          el.classList.remove("is-toss");
+        }, 1650);
       });
     }
     function winRingHTML() {

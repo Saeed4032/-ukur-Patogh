@@ -241,35 +241,49 @@ textarea {
 .tab-die .die-pip-shine {
   fill: color-mix(in srgb, var(--text) 88%, transparent);
 }
-.tab-dice.is-toss .tab-die:first-child,
-.tab.active .tab-dice .tab-die:first-child,
-.nav-item.active .tab-dice .tab-die:first-child {
-  animation: tabDieToss 0.75s ease-out 1;
+.tab.active .tab-dice .tab-die,
+.nav-item.active .tab-dice .tab-die {
+  animation: tabDieIdle 1.7s ease-in-out infinite;
 }
-.tab-dice.is-toss .tab-die:last-child,
-.tab.active .tab-dice .tab-die:last-child,
-.nav-item.active .tab-dice .tab-die:last-child {
-  animation: tabDieToss 0.75s ease-out 0.1s 1;
+.tab-dice.is-toss .tab-die:first-child {
+  animation: tabDieToss 1.4s cubic-bezier(0.22, 0.8, 0.28, 1) 1;
+}
+.tab-dice.is-toss .tab-die:last-child {
+  animation: tabDieToss 1.4s cubic-bezier(0.22, 0.8, 0.28, 1) 0.12s 1;
 }
 @keyframes tabDieToss {
   0% {
     transform: translateY(0) rotate(0deg) scale(1);
   }
-  22% {
-    transform: translateY(-7px) rotate(150deg) scale(1.12);
+  18% {
+    transform: translateY(-10px) rotate(240deg) scale(1.2);
   }
-  48% {
-    transform: translateY(2px) rotate(260deg) scale(0.94);
+  38% {
+    transform: translateY(3px) rotate(480deg) scale(0.9);
   }
-  72% {
-    transform: translateY(-5px) rotate(340deg) scale(1.08);
+  58% {
+    transform: translateY(-8px) rotate(720deg) scale(1.15);
+  }
+  78% {
+    transform: translateY(2px) rotate(960deg) scale(0.96);
   }
   100% {
-    transform: translateY(0) rotate(0deg) scale(1);
+    transform: translateY(0) rotate(1080deg) scale(1);
+  }
+}
+@keyframes tabDieIdle {
+  0%,
+  100% {
+    transform: translateY(0) rotate(-10deg);
+  }
+  50% {
+    transform: translateY(-3px) rotate(10deg);
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .tab-dice.is-toss .tab-die {
+  .tab-dice.is-toss .tab-die,
+  .tab.active .tab-dice .tab-die,
+  .nav-item.active .tab-dice .tab-die {
     animation: none;
   }
 }
@@ -2852,6 +2866,9 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .nav-item.active .nav-icon {
   transform: translateY(-2px) scale(1.1);
+}
+.nav-item.active .nav-icon:has(.tab-dice) {
+  transform: none;
 }
 .nav-item.active::after {
   content: "";
