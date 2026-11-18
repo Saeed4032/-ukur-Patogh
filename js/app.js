@@ -641,9 +641,11 @@
         "</svg></span>"
       );
     }
-    function typeDieHTML(points) {
-      var goldId = "dieGold" + points;
-      var pipId = "diePipG" + points;
+    function casinoDieHTML(points, suffix, className) {
+      var goldId = "dieGold" + suffix;
+      var pipId = "diePipG" + suffix;
+      var pipR = points === 6 ? 2.35 : 2.95;
+      var shineR = points === 6 ? 0.7 : 0.85;
       var layout = {
         1: [[18, 18]],
         2: [
@@ -655,6 +657,14 @@
           [18, 18],
           [23.8, 23.8],
         ],
+        6: [
+          [12.2, 12.2],
+          [23.8, 12.2],
+          [12.2, 18],
+          [23.8, 18],
+          [12.2, 23.8],
+          [23.8, 23.8],
+        ],
       };
       var pips = (layout[points] || layout[1])
         .map(function (xy) {
@@ -663,19 +673,25 @@
             xy[0] +
             '" cy="' +
             xy[1] +
-            '" r="2.95" fill="url(#' +
+            '" r="' +
+            pipR +
+            '" fill="url(#' +
             pipId +
             ')"/>' +
             '<circle class="die-pip-shine" cx="' +
-            (xy[0] - 0.85) +
+            (xy[0] - 0.75) +
             '" cy="' +
-            (xy[1] - 0.9) +
-            '" r="0.85"/>'
+            (xy[1] - 0.8) +
+            '" r="' +
+            shineR +
+            '"/>'
           );
         })
         .join("");
       return (
-        '<span class="choice-die" aria-hidden="true">' +
+        '<span class="' +
+        (className || "choice-die") +
+        '" aria-hidden="true">' +
         '<svg viewBox="0 0 36 36">' +
         "<defs>" +
         '<linearGradient id="' +
@@ -702,6 +718,36 @@
         pips +
         "</svg></span>"
       );
+    }
+    function typeDieHTML(points) {
+      return casinoDieHTML(points, String(points), "choice-die");
+    }
+    function pairSixHTML(prefix) {
+      return (
+        '<span class="tab-dice" aria-hidden="true">' +
+        casinoDieHTML(6, prefix + "a", "tab-die") +
+        casinoDieHTML(6, prefix + "b", "tab-die") +
+        "</span>"
+      );
+    }
+    function fillRegisterTabDice() {
+      var top = $("tab-register");
+      if (top && !top.querySelector(".tab-die")) {
+        top.innerHTML = pairSixHTML("tab") + " ثبت";
+      }
+      var navIcon = document.querySelector('.nav-item[data-page="register"] .nav-icon');
+      if (navIcon && !navIcon.querySelector(".tab-die")) {
+        navIcon.innerHTML = pairSixHTML("nav");
+      }
+    }
+    function tossRegisterDice() {
+      if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+      var nodes = document.querySelectorAll(".tab-dice");
+      [].forEach.call(nodes, function (el) {
+        el.classList.remove("is-toss");
+        void el.offsetWidth;
+        el.classList.add("is-toss");
+      });
     }
     function winRingHTML() {
       return '<img class="win-ring" src="img/register/win-ring.png" alt="" aria-hidden="true">';
@@ -3518,6 +3564,7 @@
     }
     document.addEventListener("visibilitychange", requestScreenWake);
     function bind() {
+      fillRegisterTabDice();
       function gotoPage(p) {
         [].forEach.call(document.querySelectorAll(".page"), function (x) {
           x.classList.toggle("active", x.id === p);
@@ -3525,6 +3572,7 @@
         renderPage(p);
         window.scrollTo(0, 0);
         requestScreenWake();
+        if (p === "register") tossRegisterDice();
       }
       window.gotoPage = gotoPage;
       window.deselectTabs = function () {
@@ -3797,6 +3845,7 @@
     apply();
     fill();
     bind();
+    tossRegisterDice();
     renderAll();
     setupPWA();
     initRegisterScene();
