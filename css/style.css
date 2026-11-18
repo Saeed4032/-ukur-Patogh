@@ -433,9 +433,8 @@ textarea {
   font-weight: 900;
   flex-shrink: 0;
   box-shadow:
-    0 2px 6px rgba(0, 0, 0, 0.18),
-    inset 0 -2px 4px rgba(0, 0, 0, 0.12),
-    inset 0 2px 4px rgba(255, 255, 255, 0.15);
+    0 0 0 2px rgba(255, 255, 255, 0.15),
+    0 2px 6px rgba(0, 0, 0, 0.18);
   text-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
   line-height: 1;
   font-family: "Parastoo", sans-serif;
@@ -444,14 +443,14 @@ textarea {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border: 2px solid rgba(255, 255, 255, 0.15);
+  border: 0;
 }
 .avatar.avatar-img {
   background-color: var(--input);
-  border-color: var(--primary);
+  border: 0;
   box-shadow:
-    0 3px 10px rgba(0, 0, 0, 0.28),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
+    0 0 0 2px var(--primary),
+    0 3px 10px rgba(0, 0, 0, 0.28);
 }
 .dnd-hint {
   text-align: center;
@@ -2047,8 +2046,10 @@ th.sortable:hover {
   z-index: 2;
 }
 .online-av .avatar {
-  border: 2px solid var(--card);
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  border: 0;
+  box-shadow:
+    0 0 0 2px var(--card),
+    0 2px 6px rgba(0, 0, 0, 0.35);
   width: 24px;
   height: 24px;
   font-size: 10px;
@@ -2502,7 +2503,7 @@ h3 {
    (avatarHTML در خط ~694) و هر مقدار CSS اینجا بی‌اثر می‌شد */
 .avatar {
   font-weight: 900;
-  border: 2px solid rgba(255, 255, 255, 0.12);
+  border: 0;
 }
 
 /* ---------- فرم‌ها ---------- */
@@ -3148,9 +3149,9 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   width: 52px !important;
   height: 52px !important;
   margin-bottom: 0;
-  border: 5px solid #cfd3d8;
+  border: 0;
   box-shadow:
-    inset 0 0 0 1px #8e969e,
+    0 0 0 4px #cfd3d8,
     0 6px 14px rgba(0, 0, 0, 0.45);
   overflow: hidden;
   position: relative;
@@ -3174,9 +3175,9 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   background: #050508 !important;
 }
 #ranking .rank-col.bronze .avatar {
-  border-color: #c4894a;
+  border: 0;
   box-shadow:
-    inset 0 0 0 1px #8a4e28,
+    0 0 0 4px #c4894a,
     0 6px 14px rgba(0, 0, 0, 0.45);
 }
 #ranking .rank-col.bronze .avatar:not(.avatar-img) {
@@ -3719,8 +3720,8 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   height: 100px !important;
   font-size: 42px !important;
   border-radius: 50%;
-  border: 2px solid rgba(180, 150, 70, 0.28);
-  box-shadow: none;
+  border: 0;
+  box-shadow: 0 0 0 2px rgba(180, 150, 70, 0.28);
   opacity: 1 !important;
   filter: none;
   -webkit-backdrop-filter: none !important;
@@ -3739,9 +3740,8 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   filter: none;
   opacity: 1;
   border: 0;
-  box-shadow:
-    0 0 0 2px #2a1c08,
-    inset 0 2px 4px rgba(0, 0, 0, 0.35);
+  box-shadow: none;
+  z-index: 2;
 }
 #register .winner-arena:has(.active) .winner-side:not(.active) .avatar {
   width: 52px !important;
@@ -3759,7 +3759,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   height: 243px;
   margin-left: -121px;
   pointer-events: none;
-  z-index: 2;
+  z-index: 0;
   display: none;
   object-fit: contain;
   filter: none;
