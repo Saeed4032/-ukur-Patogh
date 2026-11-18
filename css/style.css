@@ -3288,8 +3288,10 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 
 /* ===== فصل‌ها و قهرمان ماه ===== */
 .seasonbar {
+  position: relative;
+  z-index: 8;
   display: flex;
-  gap: 0;
+  gap: 2px;
   align-items: stretch;
   overflow: visible;
   padding: 4px;
@@ -3305,9 +3307,9 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .seasonchip {
   position: relative;
-  flex: 1 1 0;
+  flex: none;
   min-width: 0;
-  padding: 9px 8px;
+  padding: 9px 12px;
   border: 0;
   border-radius: 999px;
   background: transparent;
@@ -3317,8 +3319,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: visible;
   box-shadow: none;
   transition: color 0.2s;
 }
@@ -3326,20 +3327,11 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   background: transparent;
   color: var(--accent);
   border: 0;
-  box-shadow: none;
+  box-shadow: 0 0 0 2px var(--primary);
 }
-.seasonchip.active::after {
-  content: "";
-  position: absolute;
-  inset: 3px;
-  border-radius: 999px;
-  border: 2px solid var(--primary);
-  box-shadow: 0 0 10px color-mix(in srgb, var(--primary) 40%, transparent);
-  pointer-events: none;
-}
-.seasonchip.grow { flex: 1 1 0; min-width: 0; }
+.seasonchip.grow { flex: 1 1 auto; min-width: 0; }
 .seasonchip.hof { border-style: none; }
-.season-month { position: relative; flex: 1 1 0; min-width: 0; display: flex; }
+.season-month { position: relative; z-index: 9; flex: 1 1 auto; min-width: 0; display: flex; }
 .season-month > .seasonchip { width: 100%; flex: 1 1 auto; }
 .season-menu {
   display: none;
@@ -3347,7 +3339,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   top: calc(100% + 6px);
   right: 0;
   left: 0;
-  z-index: 20;
+  z-index: 40;
   max-height: 40vh;
   overflow: auto;
   padding: 6px;
