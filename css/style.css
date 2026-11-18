@@ -228,12 +228,10 @@ textarea {
   display: block;
   overflow: visible;
 }
-.tab-die .die-plate {
-  fill: var(--dark);
-  opacity: 0.85;
-}
-.tab-die .die-face {
+.tab-die .die-front {
   fill: var(--contrast);
+  stroke: var(--primary);
+  stroke-width: 1.3;
 }
 .tab-die .die-sheen {
   fill: color-mix(in srgb, var(--text) 16%, transparent);
@@ -3586,12 +3584,10 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   display: block;
   overflow: visible;
 }
-#register #typeButtons .die-plate {
-  fill: var(--dark);
-  opacity: 0.85;
-}
-#register #typeButtons .die-face {
+#register #typeButtons .die-front {
   fill: var(--contrast);
+  stroke: var(--primary);
+  stroke-width: 1.3;
 }
 #register #typeButtons .die-sheen {
   fill: color-mix(in srgb, var(--text) 16%, transparent);
