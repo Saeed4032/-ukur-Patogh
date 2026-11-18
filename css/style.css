@@ -3324,13 +3324,15 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   align-items: center;
   justify-content: center;
   gap: 4px;
-  min-height: 44px;
-  padding: 8px 6px;
+  min-height: 52px;
+  padding: 10px 8px 14px;
   border: 0;
   border-radius: 999px;
-  font-family: inherit;
-  font-size: 0.92rem;
-  font-weight: 700;
+  font-family: "IranNastaliq", var(--font);
+  font-size: 1.55rem;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0;
   cursor: pointer;
   white-space: nowrap;
   overflow: hidden;
@@ -3387,14 +3389,16 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   display: block;
   width: 100%;
   text-align: right;
-  padding: 9px 12px;
+  padding: 10px 12px 14px;
   border: 0;
   border-radius: 10px;
   background: none;
   color: var(--text);
-  font-family: inherit;
-  font-size: 0.86rem;
-  font-weight: 700;
+  font-family: "IranNastaliq", var(--font);
+  font-size: 1.35rem;
+  font-weight: 400;
+  line-height: 1.8;
+  letter-spacing: 0;
   cursor: pointer;
 }
 .season-opt.active { color: var(--bg); background: var(--text); }
