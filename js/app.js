@@ -3480,6 +3480,43 @@
       var b = $("playerCountBadge");
       if (b) b.textContent = n(PLAYERS.length, 0) + " نفر";
     }
+    var screenWakeLock = null;
+    function registerTabActive() {
+      var el = $("register");
+      return !!(el && el.classList.contains("active"));
+    }
+    function releaseScreenWake() {
+      if (!screenWakeLock) return;
+      var lock = screenWakeLock;
+      screenWakeLock = null;
+      try {
+        lock.release();
+      } catch (e) {}
+    }
+    function requestScreenWake() {
+      if (!navigator.wakeLock || typeof navigator.wakeLock.request !== "function") return;
+      if (document.visibilityState !== "visible" || !registerTabActive()) {
+        releaseScreenWake();
+        return;
+      }
+      if (screenWakeLock) return;
+      navigator.wakeLock
+        .request("screen")
+        .then(function (lock) {
+          if (!registerTabActive() || document.visibilityState !== "visible") {
+            try {
+              lock.release();
+            } catch (e2) {}
+            return;
+          }
+          screenWakeLock = lock;
+          lock.addEventListener("release", function () {
+            if (screenWakeLock === lock) screenWakeLock = null;
+          });
+        })
+        .catch(function () {});
+    }
+    document.addEventListener("visibilitychange", requestScreenWake);
     function bind() {
       function gotoPage(p) {
         [].forEach.call(document.querySelectorAll(".page"), function (x) {
@@ -3487,6 +3524,7 @@
         });
         renderPage(p);
         window.scrollTo(0, 0);
+        requestScreenWake();
       }
       window.gotoPage = gotoPage;
       window.deselectTabs = function () {
@@ -3762,6 +3800,7 @@
     renderAll();
     setupPWA();
     initRegisterScene();
+    requestScreenWake();
     setupCollapsibles();
     updatePlayerCountBadge();
     window.renderAll = renderAll;
