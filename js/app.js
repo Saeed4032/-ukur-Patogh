@@ -1630,7 +1630,7 @@
           percent(x.wins, x.games) +
           "</div>" +
           '<div class="rank-disc">' +
-          avatarHTML(x.name, place === 1 ? 44 : 42) +
+          avatarHTML(x.name, place === 1 ? 58 : 42) +
           (place === 1
             ? '<img class="rank-frame" src="img/ranking/frame-gold.png" alt="">'
             : "") +
