@@ -217,8 +217,8 @@ textarea {
   flex-shrink: 0;
 }
 .tab-die {
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
   display: block;
   transform-origin: 50% 55%;
 }
@@ -241,11 +241,15 @@ textarea {
 .tab-die .die-pip-shine {
   fill: color-mix(in srgb, var(--text) 88%, transparent);
 }
-.tab-dice.is-toss .tab-die:first-child {
-  animation: tabDieToss 0.7s ease-out 1;
+.tab-dice.is-toss .tab-die:first-child,
+.tab.active .tab-dice .tab-die:first-child,
+.nav-item.active .tab-dice .tab-die:first-child {
+  animation: tabDieToss 0.75s ease-out 1;
 }
-.tab-dice.is-toss .tab-die:last-child {
-  animation: tabDieToss 0.7s ease-out 0.08s 1;
+.tab-dice.is-toss .tab-die:last-child,
+.tab.active .tab-dice .tab-die:last-child,
+.nav-item.active .tab-dice .tab-die:last-child {
+  animation: tabDieToss 0.75s ease-out 0.1s 1;
 }
 @keyframes tabDieToss {
   0% {
@@ -2824,14 +2828,18 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 .nav-item .nav-icon {
   font-size: 1.3rem;
   line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 22px;
   transition: transform 0.2s;
 }
 .nav-item .nav-icon .tab-dice {
   display: inline-flex;
 }
 .nav-item .nav-icon .tab-die {
-  width: 16px;
-  height: 16px;
+  width: 20px;
+  height: 20px;
 }
 .nav-item span:last-child {
   max-width: 100%;
