@@ -210,6 +210,17 @@ textarea {
 .theme {
   cursor: pointer;
 }
+.tab-rank-icon {
+  width: 18px;
+  height: 18px;
+  display: block;
+  flex-shrink: 0;
+  overflow: visible;
+}
+.nav-item .nav-icon .tab-rank-icon {
+  width: 22px;
+  height: 22px;
+}
 .tab-dice {
   display: inline-flex;
   align-items: center;
