@@ -1623,14 +1623,16 @@
           '<div class="rank-col ' +
           cls +
           '">' +
+          '<div class="rank-disc">' +
           avatarHTML(x.name, place === 1 ? 62 : 46) +
+          "</div>" +
+          '<div class="rank-shaft"><span class="rs-top"></span><span class="rs-face"></span><span class="rs-side"></span></div>' +
           '<div class="rank-col-name">' +
           esc(x.name) +
           "</div>" +
           '<div class="rank-col-pct">' +
           percent(x.wins, x.games) +
-          "</div>" +
-          '<div class="rank-shaft"><span class="rs-top"></span><span class="rs-face"></span><span class="rs-side"></span></div></div>'
+          "</div></div>"
         );
       }
       var top = s.slice(0, 3);

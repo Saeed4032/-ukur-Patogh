@@ -3088,7 +3088,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  gap: 26px;
+  gap: 22px;
   min-height: 280px;
   padding: 18px 22px 8px 4px;
   color-scheme: light;
@@ -3101,27 +3101,65 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   align-items: center;
   text-align: center;
 }
+.rank-col.gold {
+  width: 96px;
+}
 .rank-col.is-empty {
   visibility: hidden;
+}
+#ranking .rank-col .rank-disc {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: -12px;
+}
+#ranking .rank-col.gold .rank-disc {
+  width: 84px;
+  height: 84px;
+}
+#ranking .rank-col.gold .rank-disc::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  border: 2px solid #fff6d2;
+  box-shadow:
+    0 0 0 3px #8a6a22,
+    0 0 0 6px #e8c56a,
+    0 0 0 8px #4a3408,
+    0 0 18px rgba(232, 197, 106, 0.55);
 }
 #ranking .rank-col .avatar,
 #ranking .rank-col .avatar.avatar-img {
   width: 46px !important;
   height: 46px !important;
-  margin-bottom: 7px;
+  margin-bottom: 0;
   border: 2px solid #cfd3d8;
   box-shadow: 0 6px 14px rgba(0, 0, 0, 0.45);
   overflow: visible;
+}
+#ranking .rank-col .avatar:not(.avatar-img) {
+  background: #0c0c12 !important;
+  color: #e8eef4;
 }
 #ranking .rank-col.gold .avatar,
 #ranking .rank-col.gold .avatar.avatar-img {
   width: 64px !important;
   height: 64px !important;
   border: 3px solid #e8c56a;
-  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.2), 0 10px 20px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+#ranking .rank-col.gold .avatar:not(.avatar-img) {
+  color: #f3e0a4;
 }
 #ranking .rank-col.bronze .avatar {
   border-color: #c4894a;
+}
+#ranking .rank-col.bronze .avatar:not(.avatar-img) {
+  color: #f0c9a0;
 }
 .rank-col-name {
   font-size: 0.88rem;
@@ -3132,9 +3170,10 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   text-overflow: ellipsis;
   white-space: nowrap;
   direction: rtl;
+  margin-top: 10px;
 }
 .rank-col-pct {
-  margin: 3px 0 10px;
+  margin: 2px 0 0;
   font-size: 1.12rem;
   font-weight: 900;
   direction: rtl;
@@ -3158,6 +3197,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   margin: 0 auto;
   overflow: visible;
   color-scheme: light;
+  border-radius: 8px 8px 6px 6px;
 }
 .rank-shaft span {
   display: block;
@@ -3170,7 +3210,36 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   width: 70px;
   bottom: 0;
   z-index: 1;
-  border-radius: 7px 3px 3px 5px;
+  border-radius: 8px 8px 6px 6px;
+}
+.rank-shaft .rs-face::before {
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  font-family: "Parastoo", sans-serif;
+  font-weight: 800;
+  line-height: 1;
+  pointer-events: none;
+}
+.rank-col.gold .rs-face::before {
+  content: "1";
+  color: #4a3408;
+  font-size: 1.45rem;
+  text-shadow: 0 1px 0 #fff6d2;
+}
+.rank-col.silver .rs-face::before {
+  content: "2";
+  color: #4a5560;
+  font-size: 1.25rem;
+  text-shadow: 0 1px 0 #fff;
+}
+.rank-col.bronze .rs-face::before {
+  content: "3";
+  color: #3a1c08;
+  font-size: 1.15rem;
+  text-shadow: 0 1px 0 #ffd9b4;
 }
 .rank-shaft .rs-face::after {
   content: "";
@@ -3179,6 +3248,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   bottom: 0;
   left: 0;
   width: 34%;
+  z-index: 1;
   border-radius: inherit;
   background: linear-gradient(90deg, rgba(255, 255, 255, 0.42), rgba(255, 255, 255, 0));
 }
