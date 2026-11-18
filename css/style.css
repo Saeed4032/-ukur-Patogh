@@ -3303,6 +3303,8 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   border-radius: 999px;
   background: var(--card);
   box-shadow: 0 0 0 1px rgba(248, 240, 216, 0.08);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 .season-ind {
   position: absolute;
@@ -3313,7 +3315,35 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   background: var(--text);
   pointer-events: none;
   transform: translate(0, 0);
-  transition: transform 240ms cubic-bezier(0.65, 0, 0.35, 1);
+  transition: transform 220ms var(--ease-in-out);
+}
+.season-ink {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  padding: 4px;
+  pointer-events: none;
+  color: var(--bg);
+  clip-path: inset(0 50% 0 0 round 999px);
+  transition: clip-path 220ms var(--ease-in-out);
+}
+.season-ink span {
+  flex: 1 1 0;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 48px;
+  padding: 18px 14px 4px;
+  font-family: "IranNastaliq", var(--font);
+  font-size: 1.18rem;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  white-space: nowrap;
+  overflow: hidden;
 }
 .seasonchip {
   position: relative;
@@ -3323,15 +3353,16 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 4px;
-  min-height: 52px;
-  padding: 10px 8px 14px;
+  gap: 6px;
+  height: 48px;
+  min-height: 48px;
+  padding: 18px 14px 4px;
   border: 0;
   border-radius: 999px;
   font-family: "IranNastaliq", var(--font);
-  font-size: 1.55rem;
+  font-size: 1.18rem;
   font-weight: 400;
-  line-height: 1.8;
+  line-height: 1;
   letter-spacing: 0;
   cursor: pointer;
   white-space: nowrap;
@@ -3339,29 +3370,34 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   text-overflow: ellipsis;
   color: var(--primary);
   background: transparent;
-  transition: color 240ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 90ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  transition: transform 120ms var(--ease-out);
 }
 .seasonchip.active { color: var(--bg); background: transparent; }
-.seasonchip:active { transform: translateY(1px) scale(0.985); }
+.seasonchip:active { transform: scale(0.97); }
 .seasonchip:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
-.seasonchip svg {
-  width: 12px;
-  height: 12px;
+.seasonchip svg,
+.season-ink svg {
+  width: 11px;
+  height: 11px;
   flex: none;
+  margin-top: 6px;
   fill: none;
   stroke: currentColor;
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
+  transform-origin: 50% 45%;
+  transition: transform 180ms var(--ease-out);
 }
+.seasonbar.is-open .seasonchip svg,
+.seasonbar.is-open .season-ink svg { transform: rotate(180deg); }
 .season-month { position: relative; z-index: 9; flex: 1 1 0; min-width: 0; display: flex; }
 .season-month > .seasonchip { width: 100%; flex: 1 1 auto; overflow: hidden; }
 .season-menu {
   position: absolute;
   top: calc(100% + 8px);
-  left: 50%;
-  right: auto;
-  min-width: 160px;
+  left: 0;
+  right: 0;
   z-index: 40;
   max-height: 40vh;
   overflow: auto;
@@ -3369,38 +3405,55 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   background: var(--card);
   border-radius: 14px;
   box-shadow: 0 0 0 1px rgba(248, 240, 216, 0.1), 0 16px 32px rgba(0, 0, 0, 0.45);
+  transform-origin: 50% 0;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transform: translateX(-50%) translateY(-6px);
-  transition: opacity 120ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 120ms cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s linear 120ms;
+  transform: scale(0.96);
+  transition: opacity 140ms var(--ease-out), transform 140ms var(--ease-out), visibility 0s linear 140ms;
 }
 .season-month.open .season-menu {
   opacity: 1;
   visibility: visible;
   pointer-events: auto;
-  transform: translateX(-50%) translateY(0);
-  transition: opacity 200ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 200ms cubic-bezier(0.2, 0.8, 0.2, 1), visibility 0s;
+  transform: scale(1);
+  transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out), visibility 0s;
 }
 @media (prefers-reduced-motion: reduce) {
-  .season-ind, .seasonchip, .season-menu { transition: none; }
+  .season-ind, .season-ink, .seasonchip, .seasonchip svg, .season-ink svg, .season-menu, .season-opt { transition: none; }
+  .season-menu { transform: none; }
+  .season-opt { opacity: 1; transform: none; }
 }
 .season-opt {
   display: block;
   width: 100%;
   text-align: right;
-  padding: 10px 12px 14px;
+  padding: 14px 14px 6px;
   border: 0;
   border-radius: 10px;
   background: none;
   color: var(--text);
   font-family: "IranNastaliq", var(--font);
-  font-size: 1.35rem;
+  font-size: 1.12rem;
   font-weight: 400;
-  line-height: 1.8;
+  line-height: 1;
   letter-spacing: 0;
   cursor: pointer;
+  opacity: 0;
+  transform: translateY(6px) scale(0.98);
+  transition: opacity 140ms var(--ease-out), transform 120ms var(--ease-out), background-color 160ms ease;
 }
+.season-month.open .season-opt {
+  opacity: 1;
+  transform: none;
+  transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out), background-color 160ms ease;
+}
+.season-month.open .season-opt:nth-child(1) { transition-delay: 0ms; }
+.season-month.open .season-opt:nth-child(2) { transition-delay: 40ms; }
+.season-month.open .season-opt:nth-child(3) { transition-delay: 70ms; }
+.season-month.open .season-opt:nth-child(4) { transition-delay: 95ms; }
+.season-month.open .season-opt:nth-child(5) { transition-delay: 115ms; }
+.season-opt:active { transform: scale(0.97); }
 .season-opt.active { color: var(--bg); background: var(--text); }
 @media (hover: hover) and (pointer: fine) {
   .seasonchip:hover { color: var(--text); }

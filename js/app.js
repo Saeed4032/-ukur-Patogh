@@ -1850,6 +1850,9 @@
         : '<div class="muted" style="padding:8px 10px;font-size:.8rem">ماهی با بازی ثبت‌شده نیست</div>';
       bar.innerHTML =
         '<span class="season-ind" aria-hidden="true"></span>' +
+        '<div class="season-ink" aria-hidden="true"><span>کل</span><span class="ink-month">' +
+        esc(monthLabel) +
+        ' <svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4"/></svg></span></div>' +
         '<button type="button" class="seasonchip' +
         (seasonFilter === "all" ? " active" : "") +
         '" role="tab" aria-selected="' +
@@ -1870,17 +1873,36 @@
       var monthBtn = $("seasonMonthBtn");
       function placeSeasonInd(jump) {
         var ind = bar.querySelector(".season-ind");
+        var ink = bar.querySelector(".season-ink");
         var on = bar.querySelector(".seasonchip.active") || bar.querySelector(".seasonchip");
         if (!ind || !on) return;
         var br = bar.getBoundingClientRect();
         var r = on.getBoundingClientRect();
-        if (jump) ind.style.transition = "none";
+        var left = r.left - br.left;
+        var top = r.top - br.top;
+        if (jump) {
+          ind.style.transition = "none";
+          if (ink) ink.style.transition = "none";
+        }
         ind.style.width = r.width + "px";
         ind.style.height = r.height + "px";
-        ind.style.transform = "translate(" + (r.left - br.left) + "px," + (r.top - br.top) + "px)";
+        ind.style.transform = "translate(" + left + "px," + top + "px)";
+        if (ink) {
+          ink.style.clipPath =
+            "inset(" +
+            top +
+            "px " +
+            (br.width - left - r.width) +
+            "px " +
+            (br.height - top - r.height) +
+            "px " +
+            left +
+            "px round 999px)";
+        }
         if (jump) {
           void ind.offsetWidth;
           ind.style.transition = "";
+          if (ink) ink.style.transition = "";
         }
       }
       if (monthBtn && monthWrap) {
@@ -1888,6 +1910,7 @@
           e.stopPropagation();
           var on = !monthWrap.classList.contains("open");
           monthWrap.classList.toggle("open", on);
+          bar.classList.toggle("is-open", on);
           monthBtn.setAttribute("aria-expanded", on ? "true" : "false");
         };
       }
@@ -1904,7 +1927,12 @@
         window.__seasonMenuBound = true;
         document.addEventListener("click", function () {
           var m = document.querySelector("#ranking .season-month.open");
-          if (m) m.classList.remove("open");
+          if (!m) return;
+          m.classList.remove("open");
+          var b = $("seasonBar");
+          if (b) b.classList.remove("is-open");
+          var btn = $("seasonMonthBtn");
+          if (btn) btn.setAttribute("aria-expanded", "false");
         });
       }
     }
