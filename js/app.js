@@ -1848,23 +1848,41 @@
             })
             .join("")
         : '<div class="muted" style="padding:8px 10px;font-size:.8rem">ماهی با بازی ثبت‌شده نیست</div>';
-      var monthShort = String(monthLabel || "").trim().split(/\s+/)[0] || monthLabel;
       bar.innerHTML =
+        '<span class="season-ind" aria-hidden="true"></span>' +
         '<button type="button" class="seasonchip' +
         (seasonFilter === "all" ? " active" : "") +
+        '" role="tab" aria-selected="' +
+        (seasonFilter === "all" ? "true" : "false") +
         '" data-season="all">کل</button>' +
         '<div class="season-month">' +
         '<button type="button" class="seasonchip' +
         (monthActive ? " active" : "") +
-        '" id="seasonMonthBtn" aria-haspopup="listbox" aria-expanded="false">' +
-        esc(monthShort) +
+        '" id="seasonMonthBtn" role="tab" aria-selected="' +
+        (monthActive ? "true" : "false") +
+        '" aria-haspopup="listbox" aria-expanded="false">' +
+        esc(monthLabel) +
         " ▾</button>" +
         '<div class="season-menu" role="listbox">' +
         menu +
-        "</div></div>" +
-        '<button type="button" class="seasonchip hof" data-season="__hof">تالار</button>';
+        "</div></div>";
       var monthWrap = bar.querySelector(".season-month");
       var monthBtn = $("seasonMonthBtn");
+      function placeSeasonInd(jump) {
+        var ind = bar.querySelector(".season-ind");
+        var on = bar.querySelector(".seasonchip.active") || bar.querySelector(".seasonchip");
+        if (!ind || !on) return;
+        var br = bar.getBoundingClientRect();
+        var r = on.getBoundingClientRect();
+        if (jump) ind.style.transition = "none";
+        ind.style.width = r.width + "px";
+        ind.style.height = r.height + "px";
+        ind.style.transform = "translate(" + (r.left - br.left) + "px," + (r.top - br.top) + "px)";
+        if (jump) {
+          void ind.offsetWidth;
+          ind.style.transition = "";
+        }
+      }
       if (monthBtn && monthWrap) {
         monthBtn.onclick = function (e) {
           e.stopPropagation();
@@ -1877,16 +1895,11 @@
         if (b.id === "seasonMonthBtn") return;
         b.addEventListener("click", function (e) {
           e.stopPropagation();
-          var k = b.getAttribute("data-season");
-          if (k === "__hof") {
-            if (monthWrap) monthWrap.classList.remove("open");
-            renderHallOfFame();
-            return;
-          }
-          seasonFilter = k;
+          seasonFilter = b.getAttribute("data-season");
           renderRanking();
         });
       });
+      requestAnimationFrame(function () { placeSeasonInd(true); });
       if (!window.__seasonMenuBound) {
         window.__seasonMenuBound = true;
         document.addEventListener("click", function () {
