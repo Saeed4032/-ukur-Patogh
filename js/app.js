@@ -1848,6 +1848,7 @@
             })
             .join("")
         : '<div class="muted" style="padding:8px 10px;font-size:.8rem">ماهی با بازی ثبت‌شده نیست</div>';
+      var monthShort = String(monthLabel || "").trim().split(/\s+/)[0] || monthLabel;
       bar.innerHTML =
         '<button type="button" class="seasonchip' +
         (seasonFilter === "all" ? " active" : "") +
@@ -1856,11 +1857,12 @@
         '<button type="button" class="seasonchip' +
         (monthActive ? " active" : "") +
         '" id="seasonMonthBtn" aria-haspopup="listbox" aria-expanded="false">' +
-        esc(monthLabel) +
+        esc(monthShort) +
         " ▾</button>" +
         '<div class="season-menu" role="listbox">' +
         menu +
-        "</div></div>";
+        "</div></div>" +
+        '<button type="button" class="seasonchip hof" data-season="__hof">تالار</button>';
       var monthWrap = bar.querySelector(".season-month");
       var monthBtn = $("seasonMonthBtn");
       if (monthBtn && monthWrap) {
@@ -1876,6 +1878,11 @@
         b.addEventListener("click", function (e) {
           e.stopPropagation();
           var k = b.getAttribute("data-season");
+          if (k === "__hof") {
+            if (monthWrap) monthWrap.classList.remove("open");
+            renderHallOfFame();
+            return;
+          }
           seasonFilter = k;
           renderRanking();
         });

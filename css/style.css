@@ -3287,61 +3287,64 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 /* ===== فصل‌ها و قهرمان ماه ===== */
+.rank-head { display: none; }
 .seasonbar {
   position: relative;
   z-index: 8;
   display: flex;
-  gap: 6px;
+  gap: 0;
   align-items: stretch;
   justify-content: stretch;
   overflow: visible;
   width: 100%;
   max-width: none;
   margin: 4px 0 14px;
-  padding: 5px;
-  border-radius: 16px;
-  background: #0b0b10;
-  border: 1px solid rgba(212, 175, 55, 0.22);
+  padding: 4px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, #3e3e46 0%, #1a1a20 55%, #121216 100%);
+  border: 1.5px solid #c4a35a;
   box-shadow:
-    inset 0 2px 5px rgba(0, 0, 0, 0.7),
-    inset 0 1px 0 rgba(255, 236, 180, 0.08);
+    inset 0 1px 0 rgba(255, 236, 180, 0.18),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.55),
+    0 6px 16px rgba(0, 0, 0, 0.35);
 }
 .seasonchip {
   position: relative;
-  flex: none;
+  flex: 1 1 0;
+  min-width: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 6px;
+  gap: 4px;
   min-height: 44px;
-  padding: 8px 16px;
-  border-radius: 12px;
+  padding: 8px 6px;
+  border: 0;
+  border-radius: 10px;
   font-family: inherit;
-  font-size: 0.92rem;
+  font-size: 0.86rem;
   font-weight: 700;
   cursor: pointer;
   white-space: nowrap;
-  color: #c4a35a;
-  background: linear-gradient(180deg, #3a3424 0%, #1c1810 58%, #12100c 100%);
-  border: 1px solid #8a7340;
-  box-shadow:
-    inset 0 1px 0 rgba(255, 236, 180, 0.2),
-    inset 0 -2px 3px rgba(0, 0, 0, 0.55),
-    0 2px 0 #1a1408;
-  transition: transform 0.15s, box-shadow 0.15s, background 0.15s, color 0.15s;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #e6d7a8;
+  background: linear-gradient(180deg, #2c2c34 0%, #16161c 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s;
+}
+.seasonbar > .seasonchip + .season-month,
+.seasonbar > .season-month + .seasonchip {
+  box-shadow: inset 1px 0 0 rgba(212, 175, 55, 0.28);
 }
 .seasonchip.active {
   color: #1a1408;
-  background: linear-gradient(180deg, #ffe9a8 0%, #f4cf6a 28%, #d4af37 62%, #8a6a1e 100%);
-  border-color: #f4cf6a;
+  background: linear-gradient(180deg, #f8e59a 0%, #e4c04a 38%, #d4af37 68%, #9a7518 100%);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    inset 0 -2px 2px rgba(90, 60, 10, 0.35),
-    0 3px 0 #5a4210,
-    0 6px 14px rgba(0, 0, 0, 0.4);
+    inset 0 -1px 2px rgba(80, 55, 8, 0.35);
 }
-.season-month { position: relative; z-index: 9; flex: 1 1 auto; min-width: 0; display: flex; }
-.season-month > .seasonchip { width: 100%; flex: 1 1 auto; }
+.season-month { position: relative; z-index: 9; flex: 1 1 0; min-width: 0; display: flex; }
+.season-month > .seasonchip { width: 100%; flex: 1 1 auto; overflow: hidden; }
 .season-menu {
   display: none;
   position: absolute;
