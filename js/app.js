@@ -1630,9 +1630,15 @@
           percent(x.wins, x.games) +
           "</div>" +
           '<div class="rank-disc">' +
-          avatarHTML(x.name, place === 1 ? 52 : 42) +
+          avatarHTML(x.name, place === 1 ? 44 : 42) +
+          (place === 1
+            ? '<img class="rank-frame" src="img/ranking/frame-gold.png" alt="">'
+            : "") +
           "</div>" +
-          '<div class="rank-shaft"></div></div>'
+          '<img class="rank-shaft" src="img/ranking/col-' +
+          cls +
+          '.png" alt="">' +
+          "</div>"
         );
       }
       var top = s.slice(0, 3);

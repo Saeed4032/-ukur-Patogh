@@ -19,7 +19,7 @@
 <link rel="preload" href="fonts/IranNastaliq.woff2" as="font" type="font/woff2" crossorigin>
 <script>
 (function () {
-  var V = "v120";
+  var V = "v121";
   try {
     if (localStorage.getItem("patoghNuke") === V) return;
     localStorage.setItem("patoghNuke", V);
@@ -51,25 +51,9 @@
   }).then(reload, reload);
 })();
 </script>
-<link rel="stylesheet" href="css/style.css?v=120">
+<link rel="stylesheet" href="css/style.css?v=121">
 <link rel="stylesheet" href="css/login.css">
-<style id="rankPodiumFix">
-#ranking .rank-col.gold .rank-shaft {
-  height: 172px !important;
-  width: 110px !important;
-  background: url("img/ranking/col-gold.jpg") center bottom / contain no-repeat !important;
-}
-#ranking .rank-col.silver .rank-shaft {
-  height: 140px !important;
-  width: 94px !important;
-  background: url("img/ranking/col-silver.jpg") center bottom / contain no-repeat !important;
-}
-#ranking .rank-col.bronze .rank-shaft {
-  height: 112px !important;
-  width: 84px !important;
-  background: url("img/ranking/col-bronze.jpg") center bottom / contain no-repeat !important;
-}
-</style>
+<style id="rankPodiumFix"></style>
 </head>
 <body>
 <div id="loadingScreen" class="loading-screen hide">
@@ -393,7 +377,7 @@
 <div id="modalBg" class="modalbg"></div>
 <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
 <script src="js/config.js"></script>
-<script src="js/app.js?v=120"></script>
+<script src="js/app.js?v=121"></script>
 <div id="offlineBar" style="display:none;position:fixed;bottom:0;left:0;right:0;background:#7a5f1a;color:#fff;padding:8px 12px;z-index:99999;text-align:center;font-size:13px;cursor:pointer">🔌 حالت محلی — سرور در دسترس نیست. برای تلاش مجدد اینجا را لمس کن</div>
 <script src="js/local-mode.js"></script>
 <!-- بارگذاری از CDN رسمی، همراه با fallback از CDNهای جایگزین -->
