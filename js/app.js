@@ -1833,8 +1833,14 @@
       "تیر": "img/ranking/gold3d/tir.png",
       "مرداد": "img/ranking/gold3d/mordad.png",
       "شهریور": "img/ranking/gold3d/shahrivar.png",
+      "مهر": "img/ranking/gold3d/mehr.png",
       "آبان": "img/ranking/gold3d/aban.png",
+      "آذر": "img/ranking/gold3d/azar.png",
+      "دی": "img/ranking/gold3d/dey.png",
+      "بهمن": "img/ranking/gold3d/bahman.png",
+      "اسفند": "img/ranking/gold3d/esfand.png",
       "۱۴۰۴": "img/ranking/gold3d/y1404.png",
+      "۱۴۰۵": "img/ranking/gold3d/y1405.png",
     };
     function gold3dImg(key, alt, extra) {
       var src = GOLD3D[key];
