@@ -3291,13 +3291,13 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   position: relative;
   z-index: 8;
   display: flex;
-  gap: 22px;
+  gap: 0;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   overflow: visible;
-  width: fit-content;
-  max-width: calc(100% - 16px);
-  margin: 4px auto 12px;
+  width: 100%;
+  max-width: none;
+  margin: 4px 0 12px;
   padding: 12px 28px;
   border-radius: 6px;
   border: 1px solid #c4a35a;
