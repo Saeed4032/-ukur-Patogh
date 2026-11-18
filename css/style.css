@@ -3091,22 +3091,11 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   justify-content: center;
   gap: 6px;
   min-height: 320px;
-  padding: 10px 8px 18px;
+  padding: 16px 8px 22px;
   color-scheme: light;
-  overflow: visible;
-}
-.rank-bars::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 68%;
-  background: url("../img/ranking/bg-marble.jpg") center bottom / cover no-repeat;
+  overflow: hidden;
   border-radius: 18px;
-  z-index: 0;
-  pointer-events: none;
-  box-shadow: inset 0 -30px 36px rgba(0, 0, 0, 0.4);
+  background: url("../img/ranking/bg-marble.jpg") center bottom / cover no-repeat;
 }
 .rank-col {
   position: relative;
