@@ -1862,7 +1862,7 @@
         (monthActive ? "true" : "false") +
         '" aria-haspopup="listbox" aria-expanded="false">' +
         esc(monthLabel) +
-        " ▾</button>" +
+        ' <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button>' +
         '<div class="season-menu" role="listbox">' +
         menu +
         "</div></div>";

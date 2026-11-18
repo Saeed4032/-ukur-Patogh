@@ -3342,6 +3342,16 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 .seasonchip.active { color: var(--bg); background: transparent; }
 .seasonchip:active { transform: translateY(1px) scale(0.985); }
 .seasonchip:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
+.seasonchip svg {
+  width: 12px;
+  height: 12px;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .season-month { position: relative; z-index: 9; flex: 1 1 0; min-width: 0; display: flex; }
 .season-month > .seasonchip { width: 100%; flex: 1 1 auto; overflow: hidden; }
 .season-menu {
@@ -3387,8 +3397,12 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-weight: 700;
   cursor: pointer;
 }
-.season-opt.active { color: var(--contrast); background: linear-gradient(145deg, var(--primary), var(--dark)); }
-.season-opt:not(.active):hover { background: var(--hover); }
+.season-opt.active { color: var(--bg); background: var(--text); }
+@media (hover: hover) and (pointer: fine) {
+  .seasonchip:hover { color: var(--text); }
+  .seasonchip.active:hover { color: var(--bg); }
+  .season-opt:not(.active):hover { background: var(--hover); }
+}
 #seasonBanner { margin: 0 0 10px; }
 .champion-banner { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 16px; background: linear-gradient(135deg, rgba(212,175,55,.18), rgba(212,175,55,.06)); border: 1px solid var(--border); }
 .cb-crown { font-size: 2rem; filter: drop-shadow(0 2px 6px rgba(212,175,55,.5)); }
