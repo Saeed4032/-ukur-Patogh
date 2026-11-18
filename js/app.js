@@ -1853,15 +1853,14 @@
         (seasonFilter === "all" ? " active" : "") +
         '" data-season="all">کل</button>' +
         '<div class="season-month">' +
-        '<button type="button" class="seasonchip grow' +
+        '<button type="button" class="seasonchip' +
         (monthActive ? " active" : "") +
         '" id="seasonMonthBtn" aria-haspopup="listbox" aria-expanded="false">' +
         esc(monthLabel) +
         " ▾</button>" +
         '<div class="season-menu" role="listbox">' +
         menu +
-        "</div></div>" +
-        '<button type="button" class="seasonchip hof" data-season="__hof">تالار افتخارات</button>';
+        "</div></div>";
       var monthWrap = bar.querySelector(".season-month");
       var monthBtn = $("seasonMonthBtn");
       if (monthBtn && monthWrap) {
@@ -1877,11 +1876,6 @@
         b.addEventListener("click", function (e) {
           e.stopPropagation();
           var k = b.getAttribute("data-season");
-          if (k === "__hof") {
-            if (monthWrap) monthWrap.classList.remove("open");
-            renderHallOfFame();
-            return;
-          }
           seasonFilter = k;
           renderRanking();
         });
@@ -1914,6 +1908,7 @@
       $("modalBg").className = "modalbg show";
       $("hofClose").onclick = closeModal;
     }
+    window.renderHallOfFame = renderHallOfFame;
     function dayStart(d) {
       var x = new Date(d);
       x.setHours(0, 0, 0, 0);
@@ -4067,6 +4062,7 @@ document.addEventListener("click", function (e) {
   if (act === "sort" && window.sortTable) window.sortTable(el.getAttribute("data-sort"));
   else if (act === "sort-tournament" && window.sortTournament) window.sortTournament(el.getAttribute("data-sort"), el);
   else if (act === "fullscreen" && window.toggleFullscreen) window.toggleFullscreen();
+  else if (act === "hof" && window.renderHallOfFame) window.renderHallOfFame();
   else if (act === "print") window.print();
 });
 
