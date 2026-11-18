@@ -3317,34 +3317,6 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   transform: translate(0, 0);
   transition: transform 220ms var(--ease-in-out);
 }
-.season-ink {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  padding: 4px;
-  pointer-events: none;
-  color: var(--bg);
-  clip-path: inset(0 50% 0 0 round 999px);
-  transition: clip-path 220ms var(--ease-in-out);
-}
-.season-ink span {
-  flex: 1 1 0;
-  min-width: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  height: 48px;
-  padding: 18px 14px 4px;
-  font-family: "IranNastaliq", var(--font);
-  font-size: 1.18rem;
-  font-weight: 400;
-  line-height: 1;
-  letter-spacing: 0;
-  white-space: nowrap;
-  overflow: hidden;
-}
 .seasonchip {
   position: relative;
   z-index: 1;
@@ -3370,13 +3342,12 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   text-overflow: ellipsis;
   color: var(--primary);
   background: transparent;
-  transition: transform 120ms var(--ease-out);
+  transition: transform 120ms var(--ease-out), color 160ms ease;
 }
 .seasonchip.active { color: var(--bg); background: transparent; }
 .seasonchip:active { transform: scale(0.97); }
 .seasonchip:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
-.seasonchip svg,
-.season-ink svg {
+.seasonchip svg {
   width: 11px;
   height: 11px;
   flex: none;
@@ -3389,8 +3360,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   transform-origin: 50% 45%;
   transition: transform 180ms var(--ease-out);
 }
-.seasonbar.is-open .seasonchip svg,
-.seasonbar.is-open .season-ink svg { transform: rotate(180deg); }
+.seasonbar.is-open .seasonchip svg { transform: rotate(180deg); }
 .season-month { position: relative; z-index: 9; flex: 1 1 0; min-width: 0; display: flex; }
 .season-month > .seasonchip { width: 100%; flex: 1 1 auto; overflow: hidden; }
 .season-menu {
@@ -3420,7 +3390,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   transition: opacity 180ms var(--ease-out), transform 180ms var(--ease-out), visibility 0s;
 }
 @media (prefers-reduced-motion: reduce) {
-  .season-ind, .season-ink, .seasonchip, .seasonchip svg, .season-ink svg, .season-menu, .season-opt { transition: none; }
+  .season-ind, .seasonchip, .seasonchip svg, .season-menu, .season-opt { transition: none; }
   .season-menu { transform: none; }
   .season-opt { opacity: 1; transform: none; }
 }
