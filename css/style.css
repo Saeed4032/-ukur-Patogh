@@ -3039,12 +3039,17 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #ranking .rank-sheet {
   position: absolute;
+  left: 0;
+  top: 0;
   width: 1px;
   height: 1px;
   overflow: hidden;
   clip: rect(0 0 0 0);
-  clip-path: inset(50%);
-  left: -9999px;
+  pointer-events: none;
+}
+#ranking .rank-sheet th,
+#ranking .rank-sheet td {
+  position: static;
 }
 #ranking .rank-fs {
   display: block;
