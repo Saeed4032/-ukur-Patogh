@@ -4063,7 +4063,7 @@ function toggleFullscreen() {
   board.className = "fs-board";
   var cols = document.createElement("div");
   cols.className = "fs-cols";
-  var labels = ["رتبه", "نام بازیکن", "تعداد بازی", "تعداد برد", "تعداد باخت", "درصد برد", "امتیاز کل"];
+  var labels = ["رتبه", "نام بازیکن", "بازی", "برد", "باخت", "درصد برد", "امتیاز کل", "نوع برد"];
   for (var li = 0; li < labels.length; li++) {
     var lab = document.createElement("div");
     lab.textContent = labels[li];
@@ -4117,6 +4117,11 @@ function toggleFullscreen() {
     row.appendChild(fsNum(Math.max(0, games - wins).toLocaleString("fa-IR")));
     row.appendChild(fsNum(rate));
     row.appendChild(fsNum(pts));
+    var type = document.createElement("div");
+    type.className = "fs-type";
+    if (src.cells[5]) type.innerHTML = src.cells[5].innerHTML;
+    else type.textContent = "—";
+    row.appendChild(type);
     list.appendChild(row);
   }
   board.appendChild(list);

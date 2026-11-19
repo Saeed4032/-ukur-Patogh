@@ -3110,18 +3110,18 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   top: 0;
   left: 0;
   right: 0;
-  height: 20%;
+  height: 14%;
   z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 6px 16px 0;
+  padding: 4px 16px 0;
   pointer-events: none;
 }
 #fullscreenOverlay .fs-cup {
-  width: 150px;
-  height: 92px;
+  width: 108px;
+  height: 66px;
   margin: 0;
   z-index: 4;
   filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.55));
@@ -3152,10 +3152,10 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #fullscreenOverlay .fs-close:active { transform: scale(0.97); }
 #fullscreenOverlay .fs-club-in {
   position: absolute;
-  top: 20%;
-  right: 8%;
-  bottom: 40%;
-  left: 8%;
+  top: 14%;
+  right: 4%;
+  bottom: 22%;
+  left: 4%;
   z-index: 2;
   display: flex;
   flex-direction: column;
@@ -3171,21 +3171,21 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #fullscreenOverlay .fs-cols,
 #fullscreenOverlay .fs-row {
   display: grid;
-  grid-template-columns: 0.7fr 1.8fr 0.9fr 0.9fr 0.9fr 1fr 1.1fr;
+  grid-template-columns: 0.55fr 1.45fr 0.7fr 0.7fr 0.7fr 0.95fr 0.95fr 1.35fr;
   align-items: center;
   direction: rtl;
 }
 #fullscreenOverlay .fs-cols {
   flex: 0 0 auto;
-  padding: 7px 16px;
-  margin-bottom: 8px;
+  padding: 6px 10px;
+  margin-bottom: 6px;
   background: rgba(8, 6, 4, 0.72);
   border-radius: 8px;
 }
 #fullscreenOverlay .fs-cols > div {
   color: var(--accent);
   font-weight: 700;
-  font-size: 0.7rem;
+  font-size: 0.64rem;
   text-align: center;
   white-space: nowrap;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
@@ -3200,14 +3200,13 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  gap: 8px;
-  overflow: auto;
+  gap: 6px;
+  overflow: hidden;
 }
 #fullscreenOverlay .fs-row {
   flex: 1 1 0;
-  min-height: 50px;
-  max-height: 84px;
-  padding: 6px 14px;
+  min-height: 0;
+  padding: 5px 10px;
   border-radius: 10px;
   border: 1px solid rgba(212, 175, 55, 0.28);
   background: linear-gradient(180deg, #4a3414, #241808);
@@ -3293,13 +3292,21 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #fullscreenOverlay .fs-num {
   font-weight: 700;
-  font-size: 1.05rem;
+  font-size: 0.92rem;
   color: var(--accent);
   text-align: center;
   white-space: nowrap;
 }
+#fullscreenOverlay .fs-type {
+  font-weight: 700;
+  font-size: 0.78rem;
+  text-align: center;
+  white-space: nowrap;
+  direction: ltr;
+}
 #fullscreenOverlay .fs-row.is-1 .fs-name,
-#fullscreenOverlay .fs-row.is-1 .fs-num {
+#fullscreenOverlay .fs-row.is-1 .fs-num,
+#fullscreenOverlay .fs-row.is-1 .fs-type {
   color: #2a1c08;
 }
 #fullscreenOverlay .fs-row .avatar {
