@@ -4021,16 +4021,8 @@ function toggleFullscreen() {
   bg.src = "img/fs-club-bg.jpg";
   bg.alt = "";
   bg.setAttribute("aria-hidden", "true");
-  var en = document.createElement("div");
-  en.className = "fs-en";
-  en.innerHTML = "<strong>PATOGH</strong><span>SIGNATURE CLUB</span>";
-  var fa = document.createElement("div");
-  fa.className = "fs-fa";
-  fa.textContent = "پاتوق تخته‌نرد";
   var head = document.createElement("div");
   head.className = "fs-head";
-  var plaque = document.createElement("div");
-  plaque.className = "fs-plaque";
   var cup = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   cup.setAttribute("class", "fs-cup");
   cup.setAttribute("viewBox", "0 0 200 86");
@@ -4064,14 +4056,7 @@ function toggleFullscreen() {
     '<rect x="96" y="42" width="8" height="12" rx="1" fill="url(#fsCupG)"/>' +
     '<rect x="88" y="54" width="24" height="4" rx="1" fill="url(#fsCupG)"/>' +
     '<rect x="92" y="58" width="16" height="5" rx="1" fill="#7a5f1a"/>';
-  var title = document.createElement("h1");
-  title.textContent = "جدول رده‌بندی";
-  plaque.appendChild(title);
   head.appendChild(cup);
-  head.appendChild(plaque);
-  var foot = document.createElement("div");
-  foot.className = "fs-foot";
-  foot.textContent = "PLAY  ·  COMPETE  ·  ENJOY";
   var inner = document.createElement("div");
   inner.className = "fs-club-in";
   var board = document.createElement("div");
@@ -4137,12 +4122,9 @@ function toggleFullscreen() {
   board.appendChild(list);
   inner.appendChild(board);
   club.appendChild(bg);
-  club.appendChild(en);
-  club.appendChild(fa);
   club.appendChild(closeBtn);
   club.appendChild(head);
   club.appendChild(inner);
-  club.appendChild(foot);
   stage.appendChild(club);
   overlay.appendChild(stage);
   document.body.appendChild(overlay);

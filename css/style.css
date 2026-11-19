@@ -3105,157 +3105,62 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   z-index: 1;
   pointer-events: none;
 }
-#fullscreenOverlay .fs-en {
-  position: absolute;
-  top: 10px;
-  left: 18px;
-  z-index: 4;
-  direction: ltr;
-  text-align: left;
-  color: #e8c96a;
-  font-family: Georgia, "Times New Roman", serif;
-  pointer-events: none;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.55);
-}
-#fullscreenOverlay .fs-en strong {
-  display: block;
-  font-weight: 600;
-  font-size: 1.05rem;
-  letter-spacing: 0.32em;
-  line-height: 1.15;
-}
-#fullscreenOverlay .fs-en span {
-  display: block;
-  margin-top: 3px;
-  font-size: 0.52rem;
-  letter-spacing: 0.28em;
-  opacity: 0.92;
-}
-#fullscreenOverlay .fs-en span::before,
-#fullscreenOverlay .fs-en span::after {
-  content: " — ";
-  letter-spacing: 0;
-}
-#fullscreenOverlay .fs-fa {
-  position: absolute;
-  top: 6px;
-  right: 56px;
-  z-index: 4;
-  font-family: "IranNastaliq", var(--font);
-  font-size: 1.7rem;
-  font-weight: 400;
-  line-height: 1;
-  color: var(--accent);
-  -webkit-text-stroke: 0.35px var(--dark);
-  pointer-events: none;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
-}
-#fullscreenOverlay .fs-fa::after {
-  content: "";
-  display: block;
-  width: 72%;
-  height: 1px;
-  margin: 2px auto 0;
-  background: linear-gradient(90deg, transparent, #d4af37, transparent);
-}
 #fullscreenOverlay .fs-head {
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
-  height: 27%;
+  height: 20%;
   z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
-  padding: 0 16px;
+  justify-content: center;
+  padding: 6px 16px 0;
   pointer-events: none;
 }
 #fullscreenOverlay .fs-cup {
-  width: 168px;
-  height: 70px;
-  margin-bottom: -18px;
-  z-index: 4;
-  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.5));
-}
-#fullscreenOverlay .fs-plaque {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-width: min(58%, 520px);
-  padding: 8px 64px 6px;
-  background: linear-gradient(180deg, #2a220e 0%, #120e08 55%, #0a0804 100%);
-  border: 2px solid #d4af37;
-  box-shadow:
-    0 8px 22px rgba(0, 0, 0, 0.5),
-    0 0 22px rgba(212, 175, 55, 0.32),
-    inset 0 0 0 3px #0c0a06,
-    inset 0 0 0 5px #d4af37;
-  clip-path: polygon(4.5% 0, 95.5% 0, 100% 50%, 95.5% 100%, 4.5% 100%, 0 50%);
-}
-#fullscreenOverlay .fs-head h1 {
+  width: 150px;
+  height: 92px;
   margin: 0;
-  padding: 2px 0 0;
-  font-family: "IranNastaliq", var(--font);
-  font-size: 1.9rem;
-  font-weight: 400;
-  line-height: 1;
-  color: var(--accent);
-  -webkit-text-stroke: 0.4px var(--dark);
-  text-shadow: 0 2px 0 #3d2e0c, 0 0 12px rgba(212, 175, 55, 0.45);
+  z-index: 4;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.55));
 }
 #fullscreenOverlay .fs-close {
   position: absolute;
   top: 8px;
-  right: 10px;
+  right: 12px;
   z-index: 5;
-  width: 34px;
-  height: 34px;
+  width: 40px;
+  height: 40px;
   display: grid;
   place-items: center;
-  border: 2px solid var(--accent);
-  border-radius: 50%;
-  background: #0a0804;
-  color: var(--accent);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: #e8c96a;
   font-family: inherit;
-  font-size: 1.25rem;
+  font-size: 1.55rem;
   font-weight: 700;
   line-height: 1;
   cursor: pointer;
   padding: 0;
   pointer-events: auto;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
   transition: transform 120ms cubic-bezier(0.23, 1, 0.32, 1);
 }
 #fullscreenOverlay .fs-close:active { transform: scale(0.97); }
 #fullscreenOverlay .fs-club-in {
   position: absolute;
-  top: 28%;
-  right: 6%;
-  bottom: 24%;
-  left: 6%;
+  top: 20%;
+  right: 8%;
+  bottom: 40%;
+  left: 8%;
   z-index: 2;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   background: transparent;
-}
-#fullscreenOverlay .fs-foot {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 8%;
-  z-index: 3;
-  direction: ltr;
-  text-align: center;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 0.68rem;
-  letter-spacing: 0.46em;
-  color: #e8c96a;
-  pointer-events: none;
-  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.65);
 }
 #fullscreenOverlay .fs-board {
   display: flex;
@@ -3266,18 +3171,21 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #fullscreenOverlay .fs-cols,
 #fullscreenOverlay .fs-row {
   display: grid;
-  grid-template-columns: 0.75fr 1.7fr 0.95fr 0.95fr 1fr 1.05fr 1.15fr;
+  grid-template-columns: 0.7fr 1.8fr 0.9fr 0.9fr 0.9fr 1fr 1.1fr;
   align-items: center;
   direction: rtl;
 }
 #fullscreenOverlay .fs-cols {
   flex: 0 0 auto;
-  padding: 0 14px 6px;
+  padding: 7px 16px;
+  margin-bottom: 8px;
+  background: rgba(8, 6, 4, 0.72);
+  border-radius: 8px;
 }
 #fullscreenOverlay .fs-cols > div {
   color: var(--accent);
   font-weight: 700;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
   text-align: center;
   white-space: nowrap;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
@@ -3297,28 +3205,28 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #fullscreenOverlay .fs-row {
   flex: 1 1 0;
-  min-height: 52px;
-  max-height: 92px;
-  padding: 6px 12px;
-  border-radius: 14px;
-  border: 1.5px solid rgba(212, 175, 55, 0.5);
-  background: #16120c;
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+  min-height: 50px;
+  max-height: 84px;
+  padding: 6px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  background: linear-gradient(180deg, #4a3414, #241808);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
 }
 #fullscreenOverlay .fs-row.is-1 {
-  border: 2px solid #f4cf6a;
-  background: linear-gradient(180deg, #5c4a1c 0%, #2a220e 48%, #141008 100%);
+  border: 0;
+  background: linear-gradient(180deg, #f0d78a 0%, #d4af37 48%, #a07c22 100%);
   box-shadow:
-    0 0 18px rgba(212, 175, 55, 0.42),
-    inset 0 0 16px rgba(212, 175, 55, 0.16);
+    0 10px 22px rgba(0, 0, 0, 0.45),
+    0 0 18px rgba(212, 175, 55, 0.28);
 }
 #fullscreenOverlay .fs-row.is-2 {
-  background: #0b0a08;
-  border-color: rgba(212, 175, 55, 0.48);
+  border: 0;
+  background: linear-gradient(180deg, #8a6a28 0%, #5c4818 55%, #3a2c10 100%);
 }
 #fullscreenOverlay .fs-row.is-3 {
-  background: #1a140e;
-  border-color: rgba(212, 175, 55, 0.48);
+  border: 0;
+  background: linear-gradient(180deg, #5a3e16 0%, #2e1e0c 60%, #1a1208 100%);
 }
 #fullscreenOverlay .fs-rk-wrap {
   display: flex;
@@ -3330,10 +3238,10 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   position: relative;
   display: inline-grid;
   place-items: center;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
   font-weight: 700;
   color: #2a220e;
   background: linear-gradient(180deg, #e8e8e8, #8a8a8a);
@@ -3342,7 +3250,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #fullscreenOverlay .fs-rk.is-1 {
   color: #3d2e0c;
   background: linear-gradient(180deg, #f8e7a0, #d4af37 52%, #8a6a18);
-  box-shadow: 0 0 0 2px #f4cf6a, 0 0 12px rgba(212, 175, 55, 0.45), 0 3px 6px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 0 0 2px #f4cf6a, 0 3px 6px rgba(0, 0, 0, 0.4);
 }
 #fullscreenOverlay .fs-rk.is-2 {
   color: #1a1a1a;
@@ -3390,14 +3298,24 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   text-align: center;
   white-space: nowrap;
 }
+#fullscreenOverlay .fs-row.is-1 .fs-name,
+#fullscreenOverlay .fs-row.is-1 .fs-num {
+  color: #2a1c08;
+}
 #fullscreenOverlay .fs-row .avatar {
-  width: 40px !important;
-  height: 40px !important;
+  width: 38px !important;
+  height: 38px !important;
   flex-shrink: 0;
   box-shadow:
     0 0 0 2px #d4af37,
     0 0 0 3px #1a1208,
     0 2px 6px rgba(0, 0, 0, 0.4);
+}
+#fullscreenOverlay .fs-row.is-1 .avatar {
+  box-shadow:
+    0 0 0 2px #7a5f1a,
+    0 0 0 3px #f0d78a,
+    0 2px 6px rgba(0, 0, 0, 0.35);
 }
 #fullscreenOverlay.need-rotate .fs-stage {
   position: absolute;
