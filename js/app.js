@@ -1950,7 +1950,7 @@
           '</strong><span class="hof-champ">' + avatarInline(c.name, 28) + " " + esc(c.name) + '</span></div><div class="hof-side muted">' +
           n(c.total, 0) + " امتیاز · " + n(c.wins, 0) + " برد" + (others ? '<br><span style="font-size:.8em">بعدی: ' + others + "</span>" : "") + "</div></div>";
       }).join("");
-      $("modalBg").innerHTML = '<div class="modal" role="dialog" aria-modal="true"><h2>🏆 تالار افتخار — قهرمانان فصل‌ها</h2>' +
+      $("modalBg").innerHTML = '<div class="modal" role="dialog" aria-modal="true"><h2>قهرمانان فصل</h2>' +
         (rows || '<p class="muted">هنوز فصلی تمام نشده است.</p>') +
         '<div class="actions"><button id="hofClose" class="btn secondary">بستن</button></div></div>';
       $("modalBg").className = "modalbg show";
