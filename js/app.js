@@ -3967,49 +3967,91 @@ function toggleFullscreen() {
   if (!table) return;
   var existing = document.getElementById("fullscreenOverlay");
   if (existing) {
-    existing.remove();
+    if (typeof window.__closeFullscreenOverlay === "function") window.__closeFullscreenOverlay();
+    else existing.remove();
     return;
   }
   var overlay = document.createElement("div");
   overlay.id = "fullscreenOverlay";
-  overlay.style.cssText =
-    "position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: var(--bg); z-index: 9999; overflow: auto; padding: 20px; box-sizing: border-box;";
+  overlay.setAttribute("role", "dialog");
+  overlay.setAttribute("aria-modal", "true");
+  overlay.setAttribute("aria-label", "جدول");
+  var stage = document.createElement("div");
+  stage.className = "fs-stage";
   var clonedTable = table.cloneNode(true);
-  clonedTable.style.cssText = "width: 100%; min-width: 700px; border-collapse: collapse; margin: 0 auto;";
+  clonedTable.removeAttribute("style");
+  clonedTable.className = "fs-table";
+  var clonedBody = clonedTable.querySelector("#rankbody");
+  if (clonedBody) clonedBody.id = "fsRankbody";
   var closeBtn = document.createElement("button");
-  closeBtn.textContent = "✕ بستن";
-  closeBtn.style.cssText =
-    "position: fixed; top: 10px; right: 10px; padding: 10px 20px; background: var(--danger); color: var(--contrast); border: none; border-radius: 8px; font-size: 1rem; font-weight: 700; cursor: pointer; z-index: 10000;";
+  closeBtn.type = "button";
+  closeBtn.className = "fs-close";
+  closeBtn.textContent = "بستن";
+  var closing = false;
+  function onOrient() {
+    overlay.classList.toggle("need-rotate", window.innerHeight > window.innerWidth);
+  }
+  function onKey(e) {
+    if (e.key === "Escape") closeOverlay();
+  }
+  function onFs() {
+    if (!document.fullscreenElement && overlay.parentNode && !closing) closeOverlay();
+  }
   function closeOverlay() {
-    if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function () {});
-    if (screen.orientation && screen.orientation.unlock)
+    if (closing) return;
+    closing = true;
+    overlay.classList.remove("is-on");
+    window.removeEventListener("resize", onOrient);
+    window.removeEventListener("orientationchange", onOrient);
+    document.removeEventListener("keydown", onKey);
+    document.removeEventListener("fullscreenchange", onFs);
+    function done() {
+      if (document.fullscreenElement && document.exitFullscreen) document.exitFullscreen().catch(function () {});
       try {
-        screen.orientation.unlock();
+        if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock();
       } catch (e) {}
-    overlay.remove();
+      if (overlay.parentNode) overlay.remove();
+      window.__closeFullscreenOverlay = null;
+    }
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) done();
+    else setTimeout(done, 160);
   }
   closeBtn.onclick = closeOverlay;
-  overlay.appendChild(closeBtn);
-  overlay.appendChild(clonedTable);
+  stage.appendChild(closeBtn);
+  stage.appendChild(clonedTable);
+  overlay.appendChild(stage);
   document.body.appendChild(overlay);
+  onOrient();
+  requestAnimationFrame(function () {
+    overlay.classList.add("is-on");
+  });
+  window.addEventListener("resize", onOrient);
+  window.addEventListener("orientationchange", onOrient);
+  document.addEventListener("keydown", onKey);
+  document.addEventListener("fullscreenchange", onFs);
+  window.__closeFullscreenOverlay = closeOverlay;
+  function afterFs() {
+    try {
+      if (screen.orientation && screen.orientation.lock) screen.orientation.lock("landscape").catch(function () {});
+    } catch (e) {}
+    onOrient();
+  }
   if (overlay.requestFullscreen) {
-    overlay
-      .requestFullscreen()
-      .then(function () {
-        if (screen.orientation && screen.orientation.lock) screen.orientation.lock("landscape").catch(function () {});
-      })
-      .catch(function () {});
+    overlay.requestFullscreen().then(afterFs).catch(function () {
+      afterFs();
+    });
   } else if (overlay.webkitRequestFullscreen) {
     overlay.webkitRequestFullscreen();
-    if (screen.orientation && screen.orientation.lock) screen.orientation.lock("landscape").catch(function () {});
+    setTimeout(afterFs, 280);
   } else if (overlay.msRequestFullscreen) {
     overlay.msRequestFullscreen();
-  }
+    setTimeout(afterFs, 280);
+  } else afterFs();
 }
 
 var sortDirection = {};
 function sortTable(column) {
-  var tbody = document.getElementById("rankbody");
+  var tbody = document.getElementById("fsRankbody") || document.getElementById("rankbody");
   if (!tbody) return;
   var rows = Array.from(tbody.querySelectorAll("tr"));
   if (!rows.length) return;
