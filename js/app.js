@@ -3988,26 +3988,8 @@ function toggleFullscreen() {
   closeBtn.className = "fs-close";
   closeBtn.textContent = "بستن";
   var closing = false;
-  function fitBays() {
-    var nodes = arcade.querySelectorAll(".fs-bay, .fs-bays h1");
-    for (var i = 0; i < nodes.length; i++) {
-      var el = nodes[i];
-      var isTitle = el.tagName === "H1";
-      var fs = isTitle ? 22 : 12;
-      var min = isTitle ? 11 : 7;
-      el.style.fontSize = fs + "px";
-      var maxW = el.clientWidth;
-      var maxH = el.clientHeight;
-      if (maxW < 4 || maxH < 4) continue;
-      while (fs > min && (el.scrollWidth > maxW + 1 || el.scrollHeight > maxH + 1)) {
-        fs -= 0.5;
-        el.style.fontSize = fs + "px";
-      }
-    }
-  }
   function onOrient() {
     overlay.classList.toggle("need-rotate", window.innerHeight > window.innerWidth);
-    requestAnimationFrame(fitBays);
   }
   function onKey(e) {
     if (e.key === "Escape") closeOverlay();
@@ -4044,47 +4026,47 @@ function toggleFullscreen() {
   frameImg.setAttribute("aria-hidden", "true");
   var inner = document.createElement("div");
   inner.className = "fs-vitrin-in";
-  var arcade = document.createElement("div");
-  arcade.className = "fs-arcade";
-  var arcadeImg = document.createElement("img");
-  arcadeImg.className = "fs-arcade-img";
-  arcadeImg.src = "img/fs-arcade.jpg";
-  arcadeImg.alt = "";
-  arcadeImg.setAttribute("aria-hidden", "true");
-  var bays = document.createElement("div");
-  bays.className = "fs-bays";
+  var head = document.createElement("div");
+  head.className = "fs-head";
+  var plaque = document.createElement("div");
+  plaque.className = "fs-plaque";
+  var cup = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+  cup.setAttribute("class", "fs-cup");
+  cup.setAttribute("viewBox", "0 0 48 40");
+  cup.setAttribute("aria-hidden", "true");
+  cup.innerHTML =
+    '<path fill="#d4af37" d="M18 2h12l1 4h-14z"/>' +
+    '<path fill="#f4cf6a" d="M16 6h16c0 8-3 14-8 16v4h4v2H20v-2h4v-4c-5-2-8-8-8-16z"/>' +
+    '<path fill="none" stroke="#7a5f1a" stroke-width="1.4" d="M16 6c-5 1-8 5-7 10 1 4 5 6 7 6"/>' +
+    '<path fill="none" stroke="#7a5f1a" stroke-width="1.4" d="M32 6c5 1 8 5 7 10-1 4-5 6-7 6"/>' +
+    '<rect x="14" y="30" width="20" height="3" rx="1" fill="#d4af37"/>' +
+    '<rect x="18" y="33" width="12" height="5" rx="1" fill="#7a5f1a"/>';
   var title = document.createElement("h1");
   title.textContent = "جدول";
+  plaque.appendChild(cup);
+  plaque.appendChild(title);
+  head.appendChild(closeBtn);
+  head.appendChild(plaque);
   var headTr = clonedTable.querySelector("thead tr");
   if (headTr) headTr.removeAttribute("style");
   var ths = clonedTable.querySelectorAll("thead th");
-  var labels = [];
   for (var i = 0; i < ths.length; i++) {
     ths[i].removeAttribute("style");
-    var lab = (ths[i].textContent || "")
+    ths[i].textContent = (ths[i].textContent || "")
       .replace(/👤|🎲|🏆|📊|⭐|🎱/g, "")
       .replace(/\s+/g, " ")
       .trim();
-    ths[i].textContent = lab;
-    labels.push(lab);
   }
-  function bay(text) {
-    var s = document.createElement("span");
-    s.className = "fs-bay";
-    s.textContent = text;
-    return s;
+  var rows = clonedTable.querySelectorAll("tbody tr");
+  for (var r = 0; r < rows.length; r++) {
+    var td0 = rows[r].cells[0];
+    if (!td0) continue;
+    var mk = document.createElement("span");
+    mk.className = "fs-rk";
+    mk.textContent = String(r + 1);
+    td0.insertBefore(mk, td0.firstChild);
   }
-  bays.appendChild(bay(labels[0] || "بازیکن"));
-  bays.appendChild(bay(labels[1] || "بازی"));
-  bays.appendChild(bay(labels[2] || "برد"));
-  bays.appendChild(title);
-  bays.appendChild(bay(labels[3] || "درصد برد"));
-  bays.appendChild(bay(labels[4] || "امتیاز کل"));
-  bays.appendChild(bay(labels[5] || "نوع برد"));
-  arcade.appendChild(arcadeImg);
-  arcade.appendChild(closeBtn);
-  arcade.appendChild(bays);
-  inner.appendChild(arcade);
+  inner.appendChild(head);
   inner.appendChild(clonedTable);
   frame.appendChild(frameImg);
   frame.appendChild(inner);
@@ -4094,7 +4076,6 @@ function toggleFullscreen() {
   onOrient();
   requestAnimationFrame(function () {
     overlay.classList.add("is-on");
-    requestAnimationFrame(fitBays);
   });
   window.addEventListener("resize", onOrient);
   window.addEventListener("orientationchange", onOrient);

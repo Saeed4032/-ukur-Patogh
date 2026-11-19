@@ -31,7 +31,6 @@ var CORE = [
   './apple-touch-icon-v80.png',
   './img/logo-crane.jpg',
   './img/fs-vitrin-frame.jpg',
-  './img/fs-arcade.jpg',
   './img/register/win-ring.png',
   './img/register/win-bow.png',
   './img/register/tab-bg.jpg',
