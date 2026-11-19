@@ -4017,8 +4017,14 @@ function toggleFullscreen() {
     else setTimeout(done, 160);
   }
   closeBtn.onclick = closeOverlay;
+  var frame = document.createElement("div");
+  frame.className = "fs-vitrin";
+  var title = document.createElement("h1");
+  title.textContent = "جدول";
+  frame.appendChild(title);
+  frame.appendChild(clonedTable);
   stage.appendChild(closeBtn);
-  stage.appendChild(clonedTable);
+  stage.appendChild(frame);
   overlay.appendChild(stage);
   document.body.appendChild(overlay);
   onOrient();
