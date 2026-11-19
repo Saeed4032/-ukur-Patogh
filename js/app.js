@@ -3988,8 +3988,26 @@ function toggleFullscreen() {
   closeBtn.className = "fs-close";
   closeBtn.textContent = "بستن";
   var closing = false;
+  function fitBays() {
+    var nodes = arcade.querySelectorAll(".fs-bay, .fs-bays h1");
+    for (var i = 0; i < nodes.length; i++) {
+      var el = nodes[i];
+      var isTitle = el.tagName === "H1";
+      var fs = isTitle ? 22 : 12;
+      var min = isTitle ? 11 : 7;
+      el.style.fontSize = fs + "px";
+      var maxW = el.clientWidth;
+      var maxH = el.clientHeight;
+      if (maxW < 4 || maxH < 4) continue;
+      while (fs > min && (el.scrollWidth > maxW + 1 || el.scrollHeight > maxH + 1)) {
+        fs -= 0.5;
+        el.style.fontSize = fs + "px";
+      }
+    }
+  }
   function onOrient() {
     overlay.classList.toggle("need-rotate", window.innerHeight > window.innerWidth);
+    requestAnimationFrame(fitBays);
   }
   function onKey(e) {
     if (e.key === "Escape") closeOverlay();
@@ -4076,6 +4094,7 @@ function toggleFullscreen() {
   onOrient();
   requestAnimationFrame(function () {
     overlay.classList.add("is-on");
+    requestAnimationFrame(fitBays);
   });
   window.addEventListener("resize", onOrient);
   window.addEventListener("orientationchange", onOrient);
