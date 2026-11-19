@@ -3978,11 +3978,6 @@ function toggleFullscreen() {
   overlay.setAttribute("aria-label", "جدول");
   var stage = document.createElement("div");
   stage.className = "fs-stage";
-  var clonedTable = table.cloneNode(true);
-  clonedTable.removeAttribute("style");
-  clonedTable.className = "fs-table";
-  var clonedBody = clonedTable.querySelector("#rankbody");
-  if (clonedBody) clonedBody.id = "fsRankbody";
   var closeBtn = document.createElement("button");
   closeBtn.type = "button";
   closeBtn.className = "fs-close";
@@ -4079,32 +4074,39 @@ function toggleFullscreen() {
   foot.textContent = "PLAY  ·  COMPETE  ·  ENJOY";
   var inner = document.createElement("div");
   inner.className = "fs-club-in";
-  var thead = clonedTable.querySelector("thead");
-  if (thead) {
-    thead.innerHTML =
-      "<tr><th>رتبه</th><th>نام بازیکن</th><th>تعداد بازی</th><th>تعداد برد</th><th>تعداد باخت</th><th>درصد برد</th><th>امتیاز کل</th></tr>";
+  var board = document.createElement("div");
+  board.className = "fs-board";
+  var cols = document.createElement("div");
+  cols.className = "fs-cols";
+  var labels = ["رتبه", "نام بازیکن", "تعداد بازی", "تعداد برد", "تعداد باخت", "درصد برد", "امتیاز کل"];
+  for (var li = 0; li < labels.length; li++) {
+    var lab = document.createElement("div");
+    lab.textContent = labels[li];
+    cols.appendChild(lab);
   }
-  var rows = clonedTable.querySelectorAll("tbody tr");
-  for (var r = 0; r < rows.length; r++) {
-    var row = rows[r];
-    row.removeAttribute("style");
-    var tds = Array.prototype.slice.call(row.cells);
-    var c;
-    for (c = 0; c < tds.length; c++) tds[c].removeAttribute("style");
-    if (tds.length >= 6) row.removeChild(tds[5]);
-    var games = +row.dataset.games || 0;
-    var wins = +row.dataset.wins || 0;
-    var lossTd = document.createElement("td");
-    lossTd.textContent = Math.max(0, games - wins).toLocaleString("fa-IR");
-    if (row.cells[3]) row.insertBefore(lossTd, row.cells[3]);
-    else row.appendChild(lossTd);
-    var pcell = row.cells[0];
-    if (pcell) {
-      var cr = pcell.querySelector(".crown");
-      if (cr) cr.remove();
-    }
-    var rkTd = document.createElement("td");
-    rkTd.className = "fs-rk-td";
+  board.appendChild(cols);
+  var list = document.createElement("div");
+  list.className = "fs-rows";
+  var srcRows = table.querySelectorAll("tbody tr");
+  function fsNum(v) {
+    var d = document.createElement("div");
+    d.className = "fs-num";
+    d.textContent = v;
+    return d;
+  }
+  for (var r = 0; r < srcRows.length; r++) {
+    var src = srcRows[r];
+    var row = document.createElement("div");
+    row.className = "fs-row" + (r === 0 ? " is-1" : r === 1 ? " is-2" : r === 2 ? " is-3" : "");
+    var games = +src.dataset.games || 0;
+    var wins = +src.dataset.wins || 0;
+    var name = src.dataset.name || "";
+    var rate = src.cells[3] ? String(src.cells[3].textContent || "").trim() : "";
+    var pts = src.cells[4] ? String(src.cells[4].textContent || "").trim() : "";
+    var gTxt = src.cells[1] ? String(src.cells[1].textContent || "").trim() : String(games);
+    var wTxt = src.cells[2] ? String(src.cells[2].textContent || "").trim() : String(wins);
+    var rk = document.createElement("div");
+    rk.className = "fs-rk-wrap";
     var mk = document.createElement("span");
     var nn = r + 1;
     mk.className = "fs-rk" + (nn === 1 ? " is-1" : nn === 2 ? " is-2" : nn === 3 ? " is-3" : "");
@@ -4114,10 +4116,26 @@ function toggleFullscreen() {
     } else {
       mk.innerHTML = "<b>" + String(nn) + "</b>";
     }
-    rkTd.appendChild(mk);
-    row.insertBefore(rkTd, row.firstChild);
+    rk.appendChild(mk);
+    var player = document.createElement("div");
+    player.className = "fs-player";
+    var av = src.querySelector(".avatar");
+    if (av) player.appendChild(av.cloneNode(true));
+    var nm = document.createElement("span");
+    nm.className = "fs-name";
+    nm.textContent = name;
+    player.appendChild(nm);
+    row.appendChild(rk);
+    row.appendChild(player);
+    row.appendChild(fsNum(gTxt));
+    row.appendChild(fsNum(wTxt));
+    row.appendChild(fsNum(Math.max(0, games - wins).toLocaleString("fa-IR")));
+    row.appendChild(fsNum(rate));
+    row.appendChild(fsNum(pts));
+    list.appendChild(row);
   }
-  inner.appendChild(clonedTable);
+  board.appendChild(list);
+  inner.appendChild(board);
   club.appendChild(bg);
   club.appendChild(en);
   club.appendChild(fa);
