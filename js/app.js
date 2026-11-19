@@ -1887,7 +1887,7 @@
         '<div class="season-menu" role="listbox">' +
         menu +
         "</div></div>" +
-        '<button type="button" class="seasonchip" data-action="hof">تالار</button>';
+        '<button type="button" class="seasonchip" data-action="hof">قهرمانان فصل</button>';
       var monthWrap = bar.querySelector(".season-month");
       var monthBtn = $("seasonMonthBtn");
       function placeSeasonInd(jump) {
