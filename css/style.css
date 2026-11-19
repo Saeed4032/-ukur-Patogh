@@ -3302,7 +3302,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   padding: 4px;
   border-radius: 999px;
   background: var(--card);
-  box-shadow: 0 0 0 1px rgba(248, 240, 216, 0.08);
+  box-shadow: 0 0 0 1px rgba(212, 175, 55, 0.28);
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
@@ -3312,7 +3312,11 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   top: 0;
   z-index: 0;
   border-radius: 999px;
-  background: var(--text);
+  background: linear-gradient(180deg, var(--accent) 0%, var(--primary) 52%, var(--dark) 100%);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, var(--accent) 50%, transparent),
+    0 4px 14px rgba(212, 175, 55, 0.5),
+    0 0 28px rgba(212, 175, 55, 0.32);
   pointer-events: none;
   transform: translate(0, 0);
   transition: transform 220ms var(--ease-in-out);
@@ -3326,35 +3330,40 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   align-items: center;
   justify-content: center;
   gap: 6px;
-  height: 48px;
-  min-height: 48px;
-  padding: 18px 14px 4px;
+  height: 52px;
+  min-height: 52px;
+  padding: 20px 12px 6px;
   border: 0;
   border-radius: 999px;
   font-family: "IranNastaliq", var(--font);
-  font-size: 1.18rem;
+  font-size: 1.36rem;
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0;
+  -webkit-text-stroke: 0.55px currentColor;
+  paint-order: stroke fill;
   cursor: pointer;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: visible;
   color: var(--primary);
   background: transparent;
   transition: transform 120ms var(--ease-out), color 160ms ease;
 }
-.seasonchip.active { color: var(--bg); background: transparent; }
+.seasonchip.active {
+  color: var(--bg);
+  background: transparent;
+  -webkit-text-stroke: 0.7px var(--bg);
+}
 .seasonchip:active { transform: scale(0.97); }
 .seasonchip:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; }
 .seasonchip svg {
-  width: 11px;
-  height: 11px;
+  width: 12px;
+  height: 12px;
   flex: none;
-  margin-top: 6px;
+  margin-top: 7px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.8;
+  stroke-width: 2.2;
   stroke-linecap: round;
   stroke-linejoin: round;
   transform-origin: 50% 45%;
@@ -3362,7 +3371,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 .seasonbar.is-open .seasonchip svg { transform: rotate(180deg); }
 .season-month { position: relative; z-index: 9; flex: 1 1 0; min-width: 0; display: flex; }
-.season-month > .seasonchip { width: 100%; flex: 1 1 auto; overflow: hidden; }
+.season-month > .seasonchip { width: 100%; flex: 1 1 auto; overflow: visible; }
 .season-menu {
   position: absolute;
   top: calc(100% + 8px);
@@ -3404,10 +3413,12 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   background: none;
   color: var(--text);
   font-family: "IranNastaliq", var(--font);
-  font-size: 1.12rem;
+  font-size: 1.24rem;
   font-weight: 400;
   line-height: 1;
   letter-spacing: 0;
+  -webkit-text-stroke: 0.5px currentColor;
+  paint-order: stroke fill;
   cursor: pointer;
   opacity: 0;
   transform: translateY(6px) scale(0.98);
@@ -3424,9 +3435,13 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 .season-month.open .season-opt:nth-child(4) { transition-delay: 95ms; }
 .season-month.open .season-opt:nth-child(5) { transition-delay: 115ms; }
 .season-opt:active { transform: scale(0.97); }
-.season-opt.active { color: var(--bg); background: var(--text); }
+.season-opt.active {
+  color: var(--bg);
+  background: linear-gradient(180deg, var(--accent), var(--primary));
+  -webkit-text-stroke: 0.6px var(--bg);
+}
 @media (hover: hover) and (pointer: fine) {
-  .seasonchip:hover { color: var(--text); }
+  .seasonchip:hover { color: var(--accent); }
   .seasonchip.active:hover { color: var(--bg); }
   .season-opt:not(.active):hover { background: var(--hover); }
 }
