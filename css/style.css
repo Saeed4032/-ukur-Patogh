@@ -3065,22 +3065,8 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
   font-family: inherit;
 }
-.rank-head {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 4px 0 12px;
-}
-.rank-hof {
-  padding: 4px 2px;
-  border: 0;
-  background: none;
-  color: var(--primary);
-  font-family: inherit;
-  font-size: 0.82rem;
-  font-weight: 700;
-  cursor: pointer;
-}
+.rank-head,
+.rank-hof { display: none; }
 .rank-portrait {
   margin-top: 4px;
 }

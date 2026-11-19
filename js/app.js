@@ -1865,7 +1865,8 @@
         ' <svg viewBox="0 0 12 12" aria-hidden="true"><path d="M2 4l4 4 4-4"/></svg></button>' +
         '<div class="season-menu" role="listbox">' +
         menu +
-        "</div></div>";
+        "</div></div>" +
+        '<button type="button" class="seasonchip" data-action="hof">تالار</button>';
       var monthWrap = bar.querySelector(".season-month");
       var monthBtn = $("seasonMonthBtn");
       function placeSeasonInd(jump) {
