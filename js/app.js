@@ -4026,56 +4026,105 @@ function toggleFullscreen() {
   bg.src = "img/fs-club-bg.jpg";
   bg.alt = "";
   bg.setAttribute("aria-hidden", "true");
+  var en = document.createElement("div");
+  en.className = "fs-en";
+  en.innerHTML = "<strong>PATOGH</strong><span>SIGNATURE CLUB</span>";
+  var fa = document.createElement("div");
+  fa.className = "fs-fa";
+  fa.textContent = "پاتوق تخته‌نرد";
   var head = document.createElement("div");
   head.className = "fs-head";
-  var brand = document.createElement("div");
-  brand.className = "fs-brand";
-  brand.textContent = "پاتوق تخته‌نرد";
   var plaque = document.createElement("div");
   plaque.className = "fs-plaque";
   var cup = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   cup.setAttribute("class", "fs-cup");
-  cup.setAttribute("viewBox", "0 0 80 52");
+  cup.setAttribute("viewBox", "0 0 200 86");
   cup.setAttribute("aria-hidden", "true");
   cup.innerHTML =
-    '<path fill="#d4af37" d="M8 22c2-10 12-16 22-14 2 8 6 12 10 14-12 2-24 0-32 0z"/>' +
-    '<path fill="#d4af37" d="M72 22c-2-10-12-16-22-14-2 8-6 12-10 14 12 2 24 0 32 0z"/>' +
-    '<path fill="#f4cf6a" d="M32 4h16l2 6H30z"/>' +
-    '<path fill="#f4cf6a" d="M28 10h24c0 12-4 20-12 24v6h6v3H34v-3h6v-6C32 30 28 22 28 10z"/>' +
-    '<rect x="26" y="43" width="28" height="3" rx="1" fill="#d4af37"/>' +
-    '<rect x="32" y="46" width="16" height="5" rx="1" fill="#7a5f1a"/>';
+    '<defs><linearGradient id="fsCupG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbe7a8"/><stop offset="0.4" stop-color="#e0b84a"/><stop offset="1" stop-color="#8a6414"/></linearGradient><linearGradient id="fsCupH" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3c4"/><stop offset="1" stop-color="#c9a227"/></linearGradient></defs>' +
+    '<path d="M90 72 C 62 68 40 52 38 24" fill="none" stroke="url(#fsCupG)" stroke-width="2.2"/>' +
+    '<path d="M110 72 C 138 68 160 52 162 24" fill="none" stroke="url(#fsCupG)" stroke-width="2.2"/>' +
+    '<g fill="url(#fsCupG)">' +
+    '<ellipse cx="42" cy="30" rx="8" ry="3.4" transform="rotate(-55 42 30)"/>' +
+    '<ellipse cx="46" cy="40" rx="8" ry="3.4" transform="rotate(-40 46 40)"/>' +
+    '<ellipse cx="52" cy="50" rx="8" ry="3.4" transform="rotate(-28 52 50)"/>' +
+    '<ellipse cx="60" cy="58" rx="7.5" ry="3.2" transform="rotate(-18 60 58)"/>' +
+    '<ellipse cx="70" cy="65" rx="7" ry="3" transform="rotate(-8 70 65)"/>' +
+    '<ellipse cx="50" cy="34" rx="7" ry="3" transform="rotate(-70 50 34)"/>' +
+    '<ellipse cx="56" cy="46" rx="7" ry="3" transform="rotate(-50 56 46)"/>' +
+    '<ellipse cx="64" cy="56" rx="6.5" ry="2.8" transform="rotate(-32 64 56)"/>' +
+    '<ellipse cx="158" cy="30" rx="8" ry="3.4" transform="rotate(55 158 30)"/>' +
+    '<ellipse cx="154" cy="40" rx="8" ry="3.4" transform="rotate(40 154 40)"/>' +
+    '<ellipse cx="148" cy="50" rx="8" ry="3.4" transform="rotate(28 148 50)"/>' +
+    '<ellipse cx="140" cy="58" rx="7.5" ry="3.2" transform="rotate(18 140 58)"/>' +
+    '<ellipse cx="130" cy="65" rx="7" ry="3" transform="rotate(8 130 65)"/>' +
+    '<ellipse cx="150" cy="34" rx="7" ry="3" transform="rotate(70 150 34)"/>' +
+    '<ellipse cx="144" cy="46" rx="7" ry="3" transform="rotate(50 144 46)"/>' +
+    '<ellipse cx="136" cy="56" rx="6.5" ry="2.8" transform="rotate(32 136 56)"/>' +
+    "</g>" +
+    '<path fill="url(#fsCupH)" d="M86 12h28c6 0 10 6 10 16 0 16-10 26-24 30C86 54 76 44 76 28 76 18 80 12 86 12z"/>' +
+    '<ellipse cx="100" cy="12" rx="16" ry="4.5" fill="url(#fsCupG)"/>' +
+    '<path fill="none" stroke="url(#fsCupG)" stroke-width="3.2" d="M78 18 C 64 18 62 36 78 38"/>' +
+    '<path fill="none" stroke="url(#fsCupG)" stroke-width="3.2" d="M122 18 C 136 18 138 36 122 38"/>' +
+    '<rect x="96" y="42" width="8" height="12" rx="1" fill="url(#fsCupG)"/>' +
+    '<rect x="88" y="54" width="24" height="4" rx="1" fill="url(#fsCupG)"/>' +
+    '<rect x="92" y="58" width="16" height="5" rx="1" fill="#7a5f1a"/>';
   var title = document.createElement("h1");
   title.textContent = "جدول رده‌بندی";
   plaque.appendChild(title);
-  head.appendChild(brand);
   head.appendChild(cup);
   head.appendChild(plaque);
-  head.appendChild(closeBtn);
+  var foot = document.createElement("div");
+  foot.className = "fs-foot";
+  foot.textContent = "PLAY  ·  COMPETE  ·  ENJOY";
   var inner = document.createElement("div");
   inner.className = "fs-club-in";
-  var headTr = clonedTable.querySelector("thead tr");
-  if (headTr) headTr.removeAttribute("style");
-  var ths = clonedTable.querySelectorAll("thead th");
-  for (var i = 0; i < ths.length; i++) {
-    ths[i].removeAttribute("style");
-    ths[i].textContent = (ths[i].textContent || "")
-      .replace(/👤|🎲|🏆|📊|⭐|🎱/g, "")
-      .replace(/\s+/g, " ")
-      .trim();
+  var thead = clonedTable.querySelector("thead");
+  if (thead) {
+    thead.innerHTML =
+      "<tr><th>رتبه</th><th>نام بازیکن</th><th>تعداد بازی</th><th>تعداد برد</th><th>تعداد باخت</th><th>درصد برد</th><th>امتیاز کل</th></tr>";
   }
   var rows = clonedTable.querySelectorAll("tbody tr");
   for (var r = 0; r < rows.length; r++) {
-    var td0 = rows[r].cells[0];
-    if (!td0) continue;
+    var row = rows[r];
+    row.removeAttribute("style");
+    var tds = Array.prototype.slice.call(row.cells);
+    var c;
+    for (c = 0; c < tds.length; c++) tds[c].removeAttribute("style");
+    if (tds.length >= 6) row.removeChild(tds[5]);
+    var games = +row.dataset.games || 0;
+    var wins = +row.dataset.wins || 0;
+    var lossTd = document.createElement("td");
+    lossTd.textContent = Math.max(0, games - wins).toLocaleString("fa-IR");
+    if (row.cells[3]) row.insertBefore(lossTd, row.cells[3]);
+    else row.appendChild(lossTd);
+    var pcell = row.cells[0];
+    if (pcell) {
+      var cr = pcell.querySelector(".crown");
+      if (cr) cr.remove();
+    }
+    var rkTd = document.createElement("td");
+    rkTd.className = "fs-rk-td";
     var mk = document.createElement("span");
-    mk.className = "fs-rk";
-    mk.textContent = String(r + 1);
-    td0.insertBefore(mk, td0.firstChild);
+    var nn = r + 1;
+    mk.className = "fs-rk" + (nn === 1 ? " is-1" : nn === 2 ? " is-2" : nn === 3 ? " is-3" : "");
+    if (nn === 1) {
+      mk.innerHTML =
+        '<svg class="fs-crown" viewBox="0 0 24 12" aria-hidden="true"><path fill="#f4cf6a" d="M2 11h20L18.5 4.5 14 8 12 1 10 8 5.5 4.5z"/></svg><b>1</b>';
+    } else {
+      mk.innerHTML = "<b>" + String(nn) + "</b>";
+    }
+    rkTd.appendChild(mk);
+    row.insertBefore(rkTd, row.firstChild);
   }
   inner.appendChild(clonedTable);
   club.appendChild(bg);
+  club.appendChild(en);
+  club.appendChild(fa);
+  club.appendChild(closeBtn);
   club.appendChild(head);
   club.appendChild(inner);
+  club.appendChild(foot);
   stage.appendChild(club);
   overlay.appendChild(stage);
   document.body.appendChild(overlay);
