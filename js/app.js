@@ -4019,10 +4019,13 @@ function toggleFullscreen() {
   closeBtn.onclick = closeOverlay;
   var frame = document.createElement("div");
   frame.className = "fs-vitrin";
+  var inner = document.createElement("div");
+  inner.className = "fs-vitrin-in";
   var title = document.createElement("h1");
   title.textContent = "جدول";
-  frame.appendChild(title);
-  frame.appendChild(clonedTable);
+  inner.appendChild(title);
+  inner.appendChild(clonedTable);
+  frame.appendChild(inner);
   stage.appendChild(closeBtn);
   stage.appendChild(frame);
   overlay.appendChild(stage);
