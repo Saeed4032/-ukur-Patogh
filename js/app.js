@@ -4026,26 +4026,47 @@ function toggleFullscreen() {
   frameImg.setAttribute("aria-hidden", "true");
   var inner = document.createElement("div");
   inner.className = "fs-vitrin-in";
-  var head = document.createElement("div");
-  head.className = "fs-head";
-  var mihrab = document.createElement("div");
-  mihrab.className = "fs-mihrab";
+  var arcade = document.createElement("div");
+  arcade.className = "fs-arcade";
+  var arcadeImg = document.createElement("img");
+  arcadeImg.className = "fs-arcade-img";
+  arcadeImg.src = "img/fs-arcade.jpg";
+  arcadeImg.alt = "";
+  arcadeImg.setAttribute("aria-hidden", "true");
+  var bays = document.createElement("div");
+  bays.className = "fs-bays";
   var title = document.createElement("h1");
   title.textContent = "جدول";
-  mihrab.appendChild(title);
-  head.appendChild(closeBtn);
-  head.appendChild(mihrab);
   var headTr = clonedTable.querySelector("thead tr");
   if (headTr) headTr.removeAttribute("style");
   var ths = clonedTable.querySelectorAll("thead th");
+  var labels = [];
   for (var i = 0; i < ths.length; i++) {
     ths[i].removeAttribute("style");
-    ths[i].textContent = (ths[i].textContent || "")
+    var lab = (ths[i].textContent || "")
       .replace(/👤|🎲|🏆|📊|⭐|🎱/g, "")
       .replace(/\s+/g, " ")
       .trim();
+    ths[i].textContent = lab;
+    labels.push(lab);
   }
-  inner.appendChild(head);
+  function bay(text) {
+    var s = document.createElement("span");
+    s.className = "fs-bay";
+    s.textContent = text;
+    return s;
+  }
+  bays.appendChild(bay(labels[0] || "بازیکن"));
+  bays.appendChild(bay(labels[1] || "بازی"));
+  bays.appendChild(bay(labels[2] || "برد"));
+  bays.appendChild(title);
+  bays.appendChild(bay(labels[3] || "درصد برد"));
+  bays.appendChild(bay(labels[4] || "امتیاز کل"));
+  bays.appendChild(bay(labels[5] || "نوع برد"));
+  arcade.appendChild(arcadeImg);
+  arcade.appendChild(closeBtn);
+  arcade.appendChild(bays);
+  inner.appendChild(arcade);
   inner.appendChild(clonedTable);
   frame.appendChild(frameImg);
   frame.appendChild(inner);
