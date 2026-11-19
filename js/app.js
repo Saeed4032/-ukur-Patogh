@@ -4028,10 +4028,23 @@ function toggleFullscreen() {
   inner.className = "fs-vitrin-in";
   var head = document.createElement("div");
   head.className = "fs-head";
+  var mihrab = document.createElement("div");
+  mihrab.className = "fs-mihrab";
   var title = document.createElement("h1");
   title.textContent = "جدول";
+  mihrab.appendChild(title);
   head.appendChild(closeBtn);
-  head.appendChild(title);
+  head.appendChild(mihrab);
+  var headTr = clonedTable.querySelector("thead tr");
+  if (headTr) headTr.removeAttribute("style");
+  var ths = clonedTable.querySelectorAll("thead th");
+  for (var i = 0; i < ths.length; i++) {
+    ths[i].removeAttribute("style");
+    ths[i].textContent = (ths[i].textContent || "")
+      .replace(/👤|🎲|🏆|📊|⭐|🎱/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  }
   inner.appendChild(head);
   inner.appendChild(clonedTable);
   frame.appendChild(frameImg);
