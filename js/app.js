@@ -4019,14 +4019,52 @@ function toggleFullscreen() {
   closeBtn.onclick = closeOverlay;
   var frame = document.createElement("div");
   frame.className = "fs-vitrin";
+  function orn(cls, rot) {
+    var s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    s.setAttribute("class", "fs-orn " + cls);
+    s.setAttribute("viewBox", "0 0 120 120");
+    s.setAttribute("aria-hidden", "true");
+    if (rot) s.style.transform = rot;
+    s.innerHTML =
+      '<path fill="#d4af37" d="M6 118C6 48 8 6 80 6h34C72 12 54 30 42 52 24 80 14 100 6 118z"/>' +
+      '<path fill="#f4cf6a" d="M6 118C10 86 22 58 48 38 70 20 96 10 118 6 70 8 40 28 28 52 16 76 10 98 6 118z"/>' +
+      '<circle cx="24" cy="24" r="14" fill="#f4cf6a" stroke="#7a5f1a" stroke-width="2"/>' +
+      '<circle cx="24" cy="24" r="6" fill="#7a5f1a"/>' +
+      '<circle cx="24" cy="24" r="2.5" fill="#f4cf6a"/>' +
+      '<path fill="none" stroke="#7a5f1a" stroke-width="2" d="M52 12c-12 22-30 36-38 64"/>' +
+      '<path fill="#7a5f1a" d="M72 10c-10 16-6 22 6 14 8-4 10-12 2-16z"/>';
+    return s;
+  }
+  function crest(cls, rot) {
+    var s = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+    s.setAttribute("class", "fs-crest " + cls);
+    s.setAttribute("viewBox", "0 0 220 48");
+    s.setAttribute("aria-hidden", "true");
+    if (rot) s.style.transform = rot;
+    s.innerHTML =
+      '<path fill="#d4af37" d="M8 40c36 2 48-28 102-28S176 42 212 40c-44-16-70-22-102-22S52 24 8 40z"/>' +
+      '<path fill="#f4cf6a" d="M70 36c18-18 80-18 80 0 0 8-20 14-40 14s-40-6-40-14z"/>' +
+      '<ellipse cx="110" cy="22" rx="16" ry="10" fill="#f4cf6a" stroke="#7a5f1a" stroke-width="1.6"/>' +
+      '<circle cx="110" cy="22" r="4" fill="#7a5f1a"/>';
+    return s;
+  }
+  frame.appendChild(orn("tl"));
+  frame.appendChild(orn("tr", "scaleX(-1)"));
+  frame.appendChild(orn("bl", "scaleY(-1)"));
+  frame.appendChild(orn("br", "scale(-1,-1)"));
+  frame.appendChild(crest("top"));
+  frame.appendChild(crest("bot", "translateX(-50%) rotate(180deg)"));
   var inner = document.createElement("div");
   inner.className = "fs-vitrin-in";
+  var head = document.createElement("div");
+  head.className = "fs-head";
   var title = document.createElement("h1");
   title.textContent = "جدول";
-  inner.appendChild(title);
+  head.appendChild(closeBtn);
+  head.appendChild(title);
+  inner.appendChild(head);
   inner.appendChild(clonedTable);
   frame.appendChild(inner);
-  stage.appendChild(closeBtn);
   stage.appendChild(frame);
   overlay.appendChild(stage);
   document.body.appendChild(overlay);

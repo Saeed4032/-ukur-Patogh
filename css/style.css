@@ -3071,7 +3071,9 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   position: fixed;
   inset: 0;
   z-index: 9999;
-  background: var(--bg);
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(212, 175, 55, 0.07), transparent 55%),
+    var(--bg);
   opacity: 0;
   transform: scale(0.96);
   transition: opacity 180ms cubic-bezier(0.23, 1, 0.32, 1), transform 180ms cubic-bezier(0.23, 1, 0.32, 1);
@@ -3080,53 +3082,97 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #fullscreenOverlay .fs-stage {
   height: 100%;
   overflow: hidden;
-  padding: 40px 16px 14px;
+  padding: 10px;
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
 }
+#fullscreenOverlay .fs-vitrin {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  overflow: visible;
+  padding: 36px 40px 40px;
+  border-radius: 22px;
+  background: linear-gradient(180deg, var(--accent) 0%, var(--primary) 22%, var(--dark) 52%, var(--primary) 78%, var(--accent) 100%);
+  box-shadow:
+    0 12px 32px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 #fff1c2,
+    inset 0 0 0 6px var(--dark),
+    inset 0 0 0 8px var(--accent),
+    inset 0 0 0 16px var(--primary),
+    inset 0 0 0 19px #3d2e0c;
+}
+#fullscreenOverlay .fs-orn {
+  position: absolute;
+  z-index: 3;
+  width: 86px;
+  height: 86px;
+  pointer-events: none;
+  overflow: visible;
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.45));
+}
+#fullscreenOverlay .fs-orn.tl { top: 0; right: 0; }
+#fullscreenOverlay .fs-orn.tr { top: 0; left: 0; }
+#fullscreenOverlay .fs-orn.bl { bottom: 0; right: 0; }
+#fullscreenOverlay .fs-orn.br { bottom: 0; left: 0; }
+#fullscreenOverlay .fs-crest {
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  width: 168px;
+  height: 34px;
+  pointer-events: none;
+  transform: translateX(-50%);
+  filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4));
+}
+#fullscreenOverlay .fs-crest.top { top: 2px; }
+#fullscreenOverlay .fs-crest.bot { bottom: 2px; }
+#fullscreenOverlay .fs-vitrin-in {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  background: var(--bg);
+  border: 2px solid #3d2e0c;
+  border-radius: 14px;
+}
+#fullscreenOverlay .fs-head {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, var(--accent), var(--primary) 48%, var(--dark));
+  padding: 8px 52px 6px;
+}
+#fullscreenOverlay .fs-head h1 {
+  margin: 0;
+  padding: 4px 0 2px;
+  font-family: "IranNastaliq", var(--font);
+  font-size: 1.7rem;
+  font-weight: 400;
+  line-height: 1;
+  color: var(--bg);
+}
 #fullscreenOverlay .fs-close {
   position: absolute;
-  top: 8px;
+  top: 50%;
   left: 8px;
   z-index: 2;
   border: 0;
   background: transparent;
-  color: var(--primary);
+  color: var(--bg);
   font-family: inherit;
   font-size: 0.95rem;
   font-weight: 700;
   cursor: pointer;
   padding: 8px 12px;
+  transform: translateY(-50%);
   transition: transform 120ms cubic-bezier(0.23, 1, 0.32, 1);
 }
-#fullscreenOverlay .fs-close:active { transform: scale(0.97); }
-#fullscreenOverlay .fs-vitrin {
-  flex: 1;
-  min-height: 0;
-  display: flex;
-  overflow: hidden;
-  padding: 8px;
-  border: 3px solid var(--primary);
-  background: var(--bg);
-  box-shadow: 0 0 28px rgba(212, 175, 55, 0.28);
-}
-#fullscreenOverlay .fs-vitrin-in {
-  flex: 1;
-  min-height: 0;
-  overflow: auto;
-  padding: 10px 14px 12px;
-  border: 2px solid var(--accent);
-}
-#fullscreenOverlay .fs-vitrin h1 {
-  margin: 0;
-  padding: 6px 4px 10px;
-  font-family: "IranNastaliq", var(--font);
-  font-size: 1.85rem;
-  font-weight: 400;
-  line-height: 1;
-  color: var(--accent);
-}
+#fullscreenOverlay .fs-close:active { transform: translateY(-50%) scale(0.97); }
 #fullscreenOverlay .fs-table {
   width: 100%;
   border-collapse: collapse;
@@ -3161,14 +3207,14 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   left: 50%;
   width: 100dvh;
   height: 100dvw;
-  padding: 40px 16px 14px;
+  padding: 10px;
   transform: translate(-50%, -50%) rotate(90deg);
   transform-origin: center center;
 }
 @media (prefers-reduced-motion: reduce) {
   #fullscreenOverlay,
-  #ranking .rank-fs,
-  #fullscreenOverlay .fs-close { transition: none; transform: none; }
+  #ranking .rank-fs { transition: none; transform: none; }
+  #fullscreenOverlay .fs-close { transition: none; }
   #fullscreenOverlay.need-rotate .fs-stage { transition: none; }
 }
 .rank-head,
