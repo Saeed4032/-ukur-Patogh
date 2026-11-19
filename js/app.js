@@ -4016,37 +4016,43 @@ function toggleFullscreen() {
     if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) done();
     else setTimeout(done, 160);
   }
+  closeBtn.textContent = "×";
+  closeBtn.setAttribute("aria-label", "بستن");
   closeBtn.onclick = closeOverlay;
-  var frame = document.createElement("div");
-  frame.className = "fs-vitrin";
-  var frameImg = document.createElement("img");
-  frameImg.className = "fs-frame-img";
-  frameImg.src = "img/fs-vitrin-frame.jpg";
-  frameImg.alt = "";
-  frameImg.setAttribute("aria-hidden", "true");
-  var inner = document.createElement("div");
-  inner.className = "fs-vitrin-in";
+  var club = document.createElement("div");
+  club.className = "fs-club";
+  var bg = document.createElement("img");
+  bg.className = "fs-club-bg";
+  bg.src = "img/fs-club-bg.jpg";
+  bg.alt = "";
+  bg.setAttribute("aria-hidden", "true");
   var head = document.createElement("div");
   head.className = "fs-head";
+  var brand = document.createElement("div");
+  brand.className = "fs-brand";
+  brand.textContent = "پاتوق تخته‌نرد";
   var plaque = document.createElement("div");
   plaque.className = "fs-plaque";
   var cup = document.createElementNS("http://www.w3.org/2000/svg", "svg");
   cup.setAttribute("class", "fs-cup");
-  cup.setAttribute("viewBox", "0 0 48 40");
+  cup.setAttribute("viewBox", "0 0 80 52");
   cup.setAttribute("aria-hidden", "true");
   cup.innerHTML =
-    '<path fill="#d4af37" d="M18 2h12l1 4h-14z"/>' +
-    '<path fill="#f4cf6a" d="M16 6h16c0 8-3 14-8 16v4h4v2H20v-2h4v-4c-5-2-8-8-8-16z"/>' +
-    '<path fill="none" stroke="#7a5f1a" stroke-width="1.4" d="M16 6c-5 1-8 5-7 10 1 4 5 6 7 6"/>' +
-    '<path fill="none" stroke="#7a5f1a" stroke-width="1.4" d="M32 6c5 1 8 5 7 10-1 4-5 6-7 6"/>' +
-    '<rect x="14" y="30" width="20" height="3" rx="1" fill="#d4af37"/>' +
-    '<rect x="18" y="33" width="12" height="5" rx="1" fill="#7a5f1a"/>';
+    '<path fill="#d4af37" d="M8 22c2-10 12-16 22-14 2 8 6 12 10 14-12 2-24 0-32 0z"/>' +
+    '<path fill="#d4af37" d="M72 22c-2-10-12-16-22-14-2 8-6 12-10 14 12 2 24 0 32 0z"/>' +
+    '<path fill="#f4cf6a" d="M32 4h16l2 6H30z"/>' +
+    '<path fill="#f4cf6a" d="M28 10h24c0 12-4 20-12 24v6h6v3H34v-3h6v-6C32 30 28 22 28 10z"/>' +
+    '<rect x="26" y="43" width="28" height="3" rx="1" fill="#d4af37"/>' +
+    '<rect x="32" y="46" width="16" height="5" rx="1" fill="#7a5f1a"/>';
   var title = document.createElement("h1");
-  title.textContent = "جدول";
-  plaque.appendChild(cup);
+  title.textContent = "جدول رده‌بندی";
   plaque.appendChild(title);
-  head.appendChild(closeBtn);
+  head.appendChild(brand);
+  head.appendChild(cup);
   head.appendChild(plaque);
+  head.appendChild(closeBtn);
+  var inner = document.createElement("div");
+  inner.className = "fs-club-in";
   var headTr = clonedTable.querySelector("thead tr");
   if (headTr) headTr.removeAttribute("style");
   var ths = clonedTable.querySelectorAll("thead th");
@@ -4066,11 +4072,11 @@ function toggleFullscreen() {
     mk.textContent = String(r + 1);
     td0.insertBefore(mk, td0.firstChild);
   }
-  inner.appendChild(head);
   inner.appendChild(clonedTable);
-  frame.appendChild(frameImg);
-  frame.appendChild(inner);
-  stage.appendChild(frame);
+  club.appendChild(bg);
+  club.appendChild(head);
+  club.appendChild(inner);
+  stage.appendChild(club);
   overlay.appendChild(stage);
   document.body.appendChild(overlay);
   onOrient();
