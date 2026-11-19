@@ -1774,6 +1774,27 @@
       _fmtSeasonKey = new Intl.DateTimeFormat("en-u-ca-persian", { year: "numeric", month: "2-digit" });
       _fmtSeasonLabel = new Intl.DateTimeFormat("fa-u-ca-persian", { year: "numeric", month: "long" });
     } catch (e) {}
+    var FA_MONTHS = ["", "فروردین", "اردیبهشت", "خرداد", "تیر", "مرداد", "شهریور", "مهر", "آبان", "آذر", "دی", "بهمن", "اسفند"];
+    function seasonLabelFromDate(d) {
+      if (_fmtSeasonLabel) {
+        try {
+          var parts = _fmtSeasonLabel.formatToParts(d);
+          var month = "", year = "";
+          for (var i = 0; i < parts.length; i++) {
+            if (parts[i].type === "month") month = parts[i].value;
+            else if (parts[i].type === "year") year = parts[i].value.replace(/[\u200e\u200f]/g, "");
+          }
+          if (month && year) return month + " " + year;
+        } catch (e) {}
+      }
+      return "";
+    }
+    function seasonLabelFromKey(key) {
+      var p = String(key || "").split("-");
+      var mi = p.length === 2 ? parseInt(p[1], 10) : 0;
+      if (FA_MONTHS[mi]) return FA_MONTHS[mi] + " " + p[0];
+      return key;
+    }
     function seasonKey(t) {
       if (_fmtSeasonKey) {
         try {
@@ -1796,7 +1817,7 @@
       var map = {};
       games.forEach(function (g) {
         var k = seasonKey(g.timestamp);
-        if (!map[k]) map[k] = _fmtSeasonLabel ? _fmtSeasonLabel.format(new Date(g.timestamp)) : k;
+        if (!map[k]) map[k] = seasonLabelFromDate(new Date(g.timestamp)) || seasonLabelFromKey(k);
       });
       var cur = seasonKey(Date.now());
       return Object.keys(map).sort().reverse().map(function (k) {
@@ -1810,7 +1831,7 @@
     function seasonLabelOf(key) {
       var g0 = null;
       for (var i = 0; i < games.length; i++) if (seasonKey(games[i].timestamp) === key) { g0 = games[i]; break; }
-      return g0 && _fmtSeasonLabel ? _fmtSeasonLabel.format(new Date(g0.timestamp)) : key;
+      return (g0 && seasonLabelFromDate(new Date(g0.timestamp))) || seasonLabelFromKey(key);
     }
     function seasonBannerHTML() {
       if (!seasonClosed(seasonFilter)) return "";
@@ -1830,7 +1851,7 @@
       if (!bar) return;
       var seasons = seasonsList();
       var curKey = seasonKey(Date.now());
-      var curLabel = _fmtSeasonLabel ? _fmtSeasonLabel.format(new Date()) : curKey;
+      var curLabel = seasonLabelFromDate(new Date()) || seasonLabelFromKey(curKey);
       var monthLabel = seasonFilter !== "all" ? seasonLabelOf(seasonFilter) : curLabel;
       var monthActive = seasonFilter !== "all";
       var menu = seasons.length

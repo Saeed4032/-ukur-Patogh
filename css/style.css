@@ -3307,6 +3307,8 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   transform: translate(0, 0);
   transition: transform 220ms var(--ease-in-out);
 }
+.seasonchip[data-season="all"] { flex: 0.62 1 0; }
+.seasonchip[data-action="hof"] { flex: 0.78 1 0; }
 .seasonchip {
   position: relative;
   z-index: 1;
@@ -3356,7 +3358,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   transition: transform 180ms var(--ease-out);
 }
 .seasonbar.is-open .seasonchip svg { transform: rotate(180deg); }
-.season-month { position: relative; z-index: 9; flex: 1 1 0; min-width: 0; display: flex; }
+.season-month { position: relative; z-index: 9; flex: 1.7 1 0; min-width: 0; display: flex; }
 .season-month > .seasonchip { width: 100%; flex: 1 1 auto; overflow: visible; }
 .season-menu {
   position: absolute;
