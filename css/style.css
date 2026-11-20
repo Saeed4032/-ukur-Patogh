@@ -3120,13 +3120,6 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   gap: 2px;
   pointer-events: none;
 }
-#fullscreenOverlay .fs-logo {
-  width: 44px;
-  height: 44px;
-  object-fit: contain;
-  z-index: 4;
-  filter: drop-shadow(0 4px 10px rgba(0, 0, 0, 0.55));
-}
 #fullscreenOverlay .fs-head h1 {
   margin: 2px 0 0;
   padding: 0;

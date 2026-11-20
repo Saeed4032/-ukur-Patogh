@@ -4023,16 +4023,11 @@ function toggleFullscreen() {
   bg.setAttribute("aria-hidden", "true");
   var head = document.createElement("div");
   head.className = "fs-head";
-  var logo = document.createElement("img");
-  logo.className = "fs-logo";
-  logo.src = "img/logo-crane.jpg";
-  logo.alt = "";
   var title = document.createElement("h1");
   var chip = document.querySelector("#seasonBar button[data-season].active");
   var isAll = !chip || chip.getAttribute("data-season") === "all";
   title.textContent = isAll ? "جدول کل" : "جدول ماه";
   overlay.setAttribute("aria-label", title.textContent);
-  head.appendChild(logo);
   head.appendChild(title);
   var inner = document.createElement("div");
   inner.className = "fs-club-in";
