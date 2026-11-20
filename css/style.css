@@ -3344,7 +3344,6 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-weight: 400;
   font-size: 1.55rem;
   line-height: 1.9;
-  -webkit-text-stroke: 0.9px var(--dark);
   color: #f8f0d8;
   overflow: visible;
   text-overflow: ellipsis;
