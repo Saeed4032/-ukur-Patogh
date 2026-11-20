@@ -3233,9 +3233,9 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-family: "IranNastaliq", var(--font);
   color: var(--accent);
   font-weight: 400;
-  font-size: 1.15rem;
+  font-size: 1.28rem;
   line-height: 2.05;
-  -webkit-text-stroke: 0.4px var(--dark);
+  -webkit-text-stroke: 0.85px var(--dark);
   text-align: center;
   white-space: nowrap;
   overflow: visible;
