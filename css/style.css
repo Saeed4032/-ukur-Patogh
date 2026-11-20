@@ -3102,6 +3102,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   height: 100%;
   object-fit: cover;
   object-position: center;
+  opacity: 0.85;
   z-index: 1;
   pointer-events: none;
 }
@@ -3110,13 +3111,13 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   top: 0;
   left: 0;
   right: 0;
-  height: 38%;
-  z-index: 3;
+  height: 32%;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
-  padding: 0 56px 6px;
+  padding: 0 56px 0;
   overflow: visible;
   pointer-events: none;
 }
@@ -3167,11 +3168,11 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #fullscreenOverlay .fs-close:active { transform: scale(0.97); }
 #fullscreenOverlay .fs-club-in {
   position: absolute;
-  top: 40%;
+  top: 26%;
   right: 4%;
   bottom: 8%;
   left: 4%;
-  z-index: 2;
+  z-index: 3;
   display: flex;
   flex-direction: column;
   overflow: hidden;
