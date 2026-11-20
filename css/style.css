@@ -3111,13 +3111,13 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   top: 0;
   left: 0;
   right: 0;
-  height: 32%;
+  height: 36%;
   z-index: 2;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
   justify-content: flex-end;
-  padding: 0 56px 0;
+  padding: 0 4%;
   overflow: visible;
   pointer-events: none;
   perspective: 820px;
@@ -3127,8 +3127,9 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   position: relative;
   isolation: isolate;
   margin: 0;
-  padding: 0.22em 1.25em 0.48em;
-  max-width: 100%;
+  padding: 0.28em 1.25em 0.55em;
+  width: 100%;
+  box-sizing: border-box;
   font-family: "IranNastaliq", var(--font);
   font-size: 2.85rem;
   font-weight: 400;
@@ -3147,17 +3148,16 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   -webkit-backdrop-filter: blur(16px) saturate(160%);
   backdrop-filter: blur(16px) saturate(160%);
   border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
-  border-bottom-color: color-mix(in srgb, var(--primary) 40%, var(--dark));
-  border-radius: 18px 18px 14px 14px;
-  transform: rotateX(12deg) translateZ(10px);
-  transform-origin: 50% 90%;
+  border-bottom: 0;
+  border-radius: 18px 18px 0 0;
+  transform: rotateX(7deg) translateY(10px);
+  transform-origin: 50% 100%;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.42),
     inset 0 -10px 18px rgba(0, 0, 0, 0.28),
     inset 8px 0 16px color-mix(in srgb, var(--primary) 10%, transparent),
     inset -8px 0 16px color-mix(in srgb, var(--primary) 10%, transparent),
-    0 18px 28px rgba(0, 0, 0, 0.45),
-    0 6px 0 color-mix(in srgb, var(--primary) 38%, var(--dark));
+    0 18px 28px rgba(0, 0, 0, 0.45);
 }
 #fullscreenOverlay .fs-head h1::before {
   content: "";
@@ -3174,13 +3174,12 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #fullscreenOverlay .fs-head h1::after {
   content: "";
   position: absolute;
-  left: 8px;
-  right: 8px;
-  bottom: -7px;
-  height: 9px;
-  border-radius: 0 0 12px 12px;
-  background: linear-gradient(180deg, color-mix(in srgb, var(--primary) 50%, var(--dark)), var(--dark));
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 10px;
+  border-radius: 0;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--primary) 35%, transparent), transparent);
   pointer-events: none;
   z-index: -1;
 }
@@ -3210,7 +3209,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #fullscreenOverlay .fs-close:active { transform: scale(0.97); }
 #fullscreenOverlay .fs-club-in {
   position: absolute;
-  top: 26%;
+  top: 30%;
   right: 4%;
   bottom: 8%;
   left: 4%;
@@ -3238,7 +3237,9 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   padding: 8px 10px;
   margin-bottom: 4px;
   background: rgba(8, 6, 4, 0.72);
-  border-radius: 8px;
+  border-radius: 0 0 8px 8px;
+  border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
+  border-top: 0;
 }
 #fullscreenOverlay .fs-cols > div {
   font-family: "IranNastaliq", var(--font);
