@@ -3163,7 +3163,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   position: absolute;
   top: 32%;
   right: 4%;
-  bottom: 22%;
+  bottom: 12%;
   left: 4%;
   z-index: 2;
   display: flex;
@@ -3186,8 +3186,8 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #fullscreenOverlay .fs-cols {
   flex: 0 0 auto;
-  padding: 10px 10px 12px;
-  margin-bottom: 6px;
+  padding: 8px 10px;
+  margin-bottom: 4px;
   background: rgba(8, 6, 4, 0.72);
   border-radius: 8px;
 }
