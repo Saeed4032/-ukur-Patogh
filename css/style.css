@@ -3199,33 +3199,37 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   min-height: 0;
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  gap: 6px;
+  justify-content: flex-start;
+  gap: 4px;
   overflow: hidden;
 }
 #fullscreenOverlay .fs-row {
-  flex: 1 1 0;
+  flex: 0 0 auto;
   min-height: 0;
-  padding: 5px 10px;
-  border-radius: 10px;
-  border: 1px solid rgba(212, 175, 55, 0.28);
-  background: linear-gradient(180deg, #4a3414, #241808);
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.45);
+  padding: 3px 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(212, 175, 55, 0.22);
+  background: #161410;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
 }
 #fullscreenOverlay .fs-row.is-1 {
-  border: 0;
-  background: linear-gradient(180deg, #f0d78a 0%, #d4af37 48%, #a07c22 100%);
-  box-shadow:
-    0 10px 22px rgba(0, 0, 0, 0.45),
-    0 0 18px rgba(212, 175, 55, 0.28);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  background:
+    linear-gradient(180deg, rgba(244, 207, 106, 0.22), rgba(212, 175, 55, 0.08)),
+    #1a1810;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
 }
 #fullscreenOverlay .fs-row.is-2 {
-  border: 0;
-  background: linear-gradient(180deg, #8a6a28 0%, #5c4818 55%, #3a2c10 100%);
+  border: 1px solid rgba(192, 196, 204, 0.28);
+  background:
+    linear-gradient(180deg, rgba(210, 214, 220, 0.2), rgba(160, 164, 172, 0.07)),
+    #161416;
 }
 #fullscreenOverlay .fs-row.is-3 {
-  border: 0;
-  background: linear-gradient(180deg, #5a3e16 0%, #2e1e0c 60%, #1a1208 100%);
+  border: 1px solid rgba(184, 130, 80, 0.28);
+  background:
+    linear-gradient(180deg, rgba(196, 148, 96, 0.2), rgba(160, 100, 50, 0.07)),
+    #181410;
 }
 #fullscreenOverlay .fs-rk-wrap {
   display: flex;
@@ -3237,10 +3241,10 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   position: relative;
   display: inline-grid;
   place-items: center;
-  width: 36px;
-  height: 36px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
-  font-size: 0.92rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: #2a220e;
   background: linear-gradient(180deg, #e8e8e8, #8a8a8a);
@@ -3263,10 +3267,10 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #fullscreenOverlay .fs-crown {
   position: absolute;
-  top: -11px;
+  top: -8px;
   left: 50%;
-  width: 20px;
-  height: 10px;
+  width: 16px;
+  height: 8px;
   transform: translateX(-50%);
   filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.45));
 }
@@ -3284,7 +3288,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #fullscreenOverlay .fs-name {
   font-weight: 700;
-  font-size: 1.02rem;
+  font-size: 0.86rem;
   color: var(--accent);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3304,14 +3308,9 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   white-space: nowrap;
   direction: ltr;
 }
-#fullscreenOverlay .fs-row.is-1 .fs-name,
-#fullscreenOverlay .fs-row.is-1 .fs-num,
-#fullscreenOverlay .fs-row.is-1 .fs-type {
-  color: #2a1c08;
-}
 #fullscreenOverlay .fs-row .avatar {
-  width: 38px !important;
-  height: 38px !important;
+  width: 26px !important;
+  height: 26px !important;
   flex-shrink: 0;
   box-shadow:
     0 0 0 2px #d4af37,
