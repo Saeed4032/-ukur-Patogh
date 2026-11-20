@@ -3185,7 +3185,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #fullscreenOverlay .fs-cols > div {
   color: var(--accent);
   font-weight: 700;
-  font-size: 0.74rem;
+  font-size: 0.85rem;
   line-height: 1.1;
   text-align: center;
   white-space: nowrap;
@@ -3208,8 +3208,8 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #fullscreenOverlay .fs-row {
   flex: 0 0 auto;
-  min-height: 37px;
-  height: 37px;
+  min-height: 43px;
+  height: 43px;
   padding: 0 10px;
   overflow: hidden;
   border-radius: 8px;
@@ -3246,10 +3246,10 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   position: relative;
   display: inline-grid;
   place-items: center;
-  width: 30px;
-  height: 30px;
+  width: 34px;
+  height: 34px;
   border-radius: 50%;
-  font-size: 0.82rem;
+  font-size: 0.88rem;
   font-weight: 700;
   color: #2a220e;
   background: linear-gradient(180deg, #e8e8e8, #8a8a8a);
@@ -3293,7 +3293,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #fullscreenOverlay .fs-name {
   font-weight: 700;
-  font-size: 0.99rem;
+  font-size: 1.14rem;
   line-height: 1.1;
   color: var(--accent);
   overflow: hidden;
@@ -3302,7 +3302,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #fullscreenOverlay .fs-num {
   font-weight: 700;
-  font-size: 1.06rem;
+  font-size: 1.22rem;
   line-height: 1.1;
   color: var(--accent);
   text-align: center;
@@ -3313,7 +3313,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #fullscreenOverlay .fs-type {
   font-weight: 700;
-  font-size: 0.9rem;
+  font-size: 1.04rem;
   line-height: 1.1;
   text-align: center;
   white-space: nowrap;
@@ -3323,8 +3323,8 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   direction: ltr;
 }
 #fullscreenOverlay .fs-row .avatar {
-  width: 30px !important;
-  height: 30px !important;
+  width: 34px !important;
+  height: 34px !important;
   flex-shrink: 0;
   box-shadow:
     0 0 0 2px #d4af37,
