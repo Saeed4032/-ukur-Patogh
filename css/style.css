@@ -3233,7 +3233,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-family: "IranNastaliq", var(--font);
   color: var(--accent);
   font-weight: 400;
-  font-size: 1.28rem;
+  font-size: 1.55rem;
   line-height: 2.05;
   -webkit-text-stroke: 0.85px var(--dark);
   text-align: center;
@@ -3256,10 +3256,10 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #fullscreenOverlay .fs-row {
   flex: 0 0 auto;
-  min-height: 43px;
-  height: 43px;
+  min-height: 50px;
+  height: 50px;
   padding: 0 10px;
-  overflow: hidden;
+  overflow: visible;
   border-radius: 8px;
   border: 1px solid rgba(212, 175, 55, 0.22);
   background: #161410;
@@ -3340,11 +3340,13 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   padding-right: 4px;
 }
 #fullscreenOverlay .fs-name {
-  font-weight: 700;
-  font-size: 1.14rem;
-  line-height: 1.1;
+  font-family: "IranNastaliq", var(--font);
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 1.9;
+  -webkit-text-stroke: 0.55px var(--dark);
   color: #f8f0d8;
-  overflow: hidden;
+  overflow: visible;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
