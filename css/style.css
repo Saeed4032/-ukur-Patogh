@@ -3110,13 +3110,14 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   top: 0;
   left: 0;
   right: 0;
-  height: 14%;
+  height: 26%;
   z-index: 3;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: 4px 16px 0;
+  justify-content: flex-start;
+  padding: 10px 16px 0;
+  gap: 2px;
   pointer-events: none;
 }
 #fullscreenOverlay .fs-logo {
@@ -3163,7 +3164,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #fullscreenOverlay .fs-close:active { transform: scale(0.97); }
 #fullscreenOverlay .fs-club-in {
   position: absolute;
-  top: 14%;
+  top: 28%;
   right: 4%;
   bottom: 22%;
   left: 4%;
