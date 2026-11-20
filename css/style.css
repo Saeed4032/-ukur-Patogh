@@ -3171,7 +3171,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #fullscreenOverlay .fs-cols,
 #fullscreenOverlay .fs-row {
   display: grid;
-  grid-template-columns: 0.55fr 1.45fr 0.7fr 0.7fr 0.7fr 0.95fr 0.95fr 1.35fr;
+  grid-template-columns: minmax(0, 0.55fr) minmax(0, 1.45fr) minmax(0, 0.7fr) minmax(0, 0.7fr) minmax(0, 0.7fr) minmax(0, 0.95fr) minmax(0, 0.95fr) minmax(0, 1.35fr);
   align-items: center;
   direction: rtl;
 }
@@ -3185,9 +3185,12 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #fullscreenOverlay .fs-cols > div {
   color: var(--accent);
   font-weight: 700;
-  font-size: 0.64rem;
+  font-size: 0.74rem;
+  line-height: 1.1;
   text-align: center;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
 }
 #fullscreenOverlay .fs-cols > div:nth-child(2) {
@@ -3205,8 +3208,10 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #fullscreenOverlay .fs-row {
   flex: 0 0 auto;
-  min-height: 0;
-  padding: 3px 10px;
+  min-height: 37px;
+  height: 37px;
+  padding: 0 10px;
+  overflow: hidden;
   border-radius: 8px;
   border: 1px solid rgba(212, 175, 55, 0.22);
   background: #161410;
@@ -3241,10 +3246,10 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   position: relative;
   display: inline-grid;
   place-items: center;
-  width: 26px;
-  height: 26px;
+  width: 30px;
+  height: 30px;
   border-radius: 50%;
-  font-size: 0.72rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: #2a220e;
   background: linear-gradient(180deg, #e8e8e8, #8a8a8a);
@@ -3288,7 +3293,8 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #fullscreenOverlay .fs-name {
   font-weight: 700;
-  font-size: 0.86rem;
+  font-size: 0.99rem;
+  line-height: 1.1;
   color: var(--accent);
   overflow: hidden;
   text-overflow: ellipsis;
@@ -3296,21 +3302,29 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 }
 #fullscreenOverlay .fs-num {
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 1.06rem;
+  line-height: 1.1;
   color: var(--accent);
   text-align: center;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
 }
 #fullscreenOverlay .fs-type {
   font-weight: 700;
-  font-size: 0.78rem;
+  font-size: 0.9rem;
+  line-height: 1.1;
   text-align: center;
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
   direction: ltr;
 }
 #fullscreenOverlay .fs-row .avatar {
-  width: 26px !important;
-  height: 26px !important;
+  width: 30px !important;
+  height: 30px !important;
   flex-shrink: 0;
   box-shadow:
     0 0 0 2px #d4af37,
