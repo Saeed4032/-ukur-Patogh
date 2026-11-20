@@ -3125,7 +3125,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   position: relative;
   isolation: isolate;
   margin: 0;
-  padding: 0.28em 1.25em 0.55em;
+  padding: 0.45em 1.25em 0.55em;
   width: 100%;
   box-sizing: border-box;
   font-family: "IranNastaliq", var(--font);
@@ -3215,14 +3215,15 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #fullscreenOverlay .fs-cols,
 #fullscreenOverlay .fs-row {
   display: grid;
-  grid-template-columns: minmax(0, 0.55fr) minmax(0, 1.45fr) minmax(0, 0.7fr) minmax(0, 0.7fr) minmax(0, 0.7fr) minmax(0, 0.95fr) minmax(0, 0.95fr) minmax(0, 1.35fr);
+  grid-template-columns: minmax(0, 0.55fr) minmax(0, 1.7fr) minmax(0, 0.65fr) minmax(0, 0.65fr) minmax(0, 0.65fr) minmax(0, 0.9fr) minmax(0, 0.9fr) minmax(0, 1.25fr);
   align-items: center;
   direction: rtl;
 }
 #fullscreenOverlay .fs-cols {
   flex: 0 0 auto;
-  padding: 8px 10px;
+  padding: 16px 10px 14px;
   margin-bottom: 4px;
+  overflow: visible;
   background: rgba(8, 6, 4, 0.72);
   border-radius: 0 0 8px 8px;
   border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
@@ -3232,13 +3233,12 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-family: "IranNastaliq", var(--font);
   color: var(--accent);
   font-weight: 400;
-  font-size: 1.2rem;
-  line-height: 1.9;
+  font-size: 1.15rem;
+  line-height: 2.05;
   -webkit-text-stroke: 0.4px var(--dark);
   text-align: center;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: visible;
   text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
 }
 #fullscreenOverlay .fs-cols > div:nth-child(2) {
