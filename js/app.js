@@ -4023,40 +4023,17 @@ function toggleFullscreen() {
   bg.setAttribute("aria-hidden", "true");
   var head = document.createElement("div");
   head.className = "fs-head";
-  var cup = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-  cup.setAttribute("class", "fs-cup");
-  cup.setAttribute("viewBox", "0 0 200 86");
-  cup.setAttribute("aria-hidden", "true");
-  cup.innerHTML =
-    '<defs><linearGradient id="fsCupG" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fbe7a8"/><stop offset="0.4" stop-color="#e0b84a"/><stop offset="1" stop-color="#8a6414"/></linearGradient><linearGradient id="fsCupH" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#fff3c4"/><stop offset="1" stop-color="#c9a227"/></linearGradient></defs>' +
-    '<path d="M90 72 C 62 68 40 52 38 24" fill="none" stroke="url(#fsCupG)" stroke-width="2.2"/>' +
-    '<path d="M110 72 C 138 68 160 52 162 24" fill="none" stroke="url(#fsCupG)" stroke-width="2.2"/>' +
-    '<g fill="url(#fsCupG)">' +
-    '<ellipse cx="42" cy="30" rx="8" ry="3.4" transform="rotate(-55 42 30)"/>' +
-    '<ellipse cx="46" cy="40" rx="8" ry="3.4" transform="rotate(-40 46 40)"/>' +
-    '<ellipse cx="52" cy="50" rx="8" ry="3.4" transform="rotate(-28 52 50)"/>' +
-    '<ellipse cx="60" cy="58" rx="7.5" ry="3.2" transform="rotate(-18 60 58)"/>' +
-    '<ellipse cx="70" cy="65" rx="7" ry="3" transform="rotate(-8 70 65)"/>' +
-    '<ellipse cx="50" cy="34" rx="7" ry="3" transform="rotate(-70 50 34)"/>' +
-    '<ellipse cx="56" cy="46" rx="7" ry="3" transform="rotate(-50 56 46)"/>' +
-    '<ellipse cx="64" cy="56" rx="6.5" ry="2.8" transform="rotate(-32 64 56)"/>' +
-    '<ellipse cx="158" cy="30" rx="8" ry="3.4" transform="rotate(55 158 30)"/>' +
-    '<ellipse cx="154" cy="40" rx="8" ry="3.4" transform="rotate(40 154 40)"/>' +
-    '<ellipse cx="148" cy="50" rx="8" ry="3.4" transform="rotate(28 148 50)"/>' +
-    '<ellipse cx="140" cy="58" rx="7.5" ry="3.2" transform="rotate(18 140 58)"/>' +
-    '<ellipse cx="130" cy="65" rx="7" ry="3" transform="rotate(8 130 65)"/>' +
-    '<ellipse cx="150" cy="34" rx="7" ry="3" transform="rotate(70 150 34)"/>' +
-    '<ellipse cx="144" cy="46" rx="7" ry="3" transform="rotate(50 144 46)"/>' +
-    '<ellipse cx="136" cy="56" rx="6.5" ry="2.8" transform="rotate(32 136 56)"/>' +
-    "</g>" +
-    '<path fill="url(#fsCupH)" d="M86 12h28c6 0 10 6 10 16 0 16-10 26-24 30C86 54 76 44 76 28 76 18 80 12 86 12z"/>' +
-    '<ellipse cx="100" cy="12" rx="16" ry="4.5" fill="url(#fsCupG)"/>' +
-    '<path fill="none" stroke="url(#fsCupG)" stroke-width="3.2" d="M78 18 C 64 18 62 36 78 38"/>' +
-    '<path fill="none" stroke="url(#fsCupG)" stroke-width="3.2" d="M122 18 C 136 18 138 36 122 38"/>' +
-    '<rect x="96" y="42" width="8" height="12" rx="1" fill="url(#fsCupG)"/>' +
-    '<rect x="88" y="54" width="24" height="4" rx="1" fill="url(#fsCupG)"/>' +
-    '<rect x="92" y="58" width="16" height="5" rx="1" fill="#7a5f1a"/>';
-  head.appendChild(cup);
+  var logo = document.createElement("img");
+  logo.className = "fs-logo";
+  logo.src = "img/logo-crane.jpg";
+  logo.alt = "";
+  var title = document.createElement("h1");
+  var chip = document.querySelector("#seasonBar button[data-season].active");
+  var isAll = !chip || chip.getAttribute("data-season") === "all";
+  title.textContent = isAll ? "جدول کل" : "جدول ماه";
+  overlay.setAttribute("aria-label", title.textContent);
+  head.appendChild(logo);
+  head.appendChild(title);
   var inner = document.createElement("div");
   inner.className = "fs-club-in";
   var board = document.createElement("div");
