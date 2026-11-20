@@ -3304,7 +3304,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-weight: 700;
   font-size: 1.14rem;
   line-height: 1.1;
-  color: var(--accent);
+  color: #f8f0d8;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -3313,7 +3313,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-weight: 700;
   font-size: 1.22rem;
   line-height: 1.1;
-  color: var(--accent);
+  color: #f8f0d8;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
@@ -3324,6 +3324,7 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   font-weight: 700;
   font-size: 1.04rem;
   line-height: 1.1;
+  color: #f8f0d8;
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
