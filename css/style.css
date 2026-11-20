@@ -3121,14 +3121,14 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   pointer-events: none;
 }
 #fullscreenOverlay .fs-head h1 {
-  margin: 2px 0 0;
+  margin: 0;
   padding: 0;
   font-family: "IranNastaliq", var(--font);
-  font-size: 1.7rem;
+  font-size: 2.45rem;
   font-weight: 400;
   line-height: 1;
   color: var(--accent);
-  -webkit-text-stroke: 0.35px var(--dark);
+  -webkit-text-stroke: 0.6px var(--dark);
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
 }
 #fullscreenOverlay .fs-close {
