@@ -3761,6 +3761,12 @@
           deleteLast();
         }
       });
+      function stopRegisterScroll(e) {
+        if (!registerTabActive()) return;
+        e.preventDefault();
+      }
+      document.addEventListener("touchmove", stopRegisterScroll, { passive: false });
+      document.addEventListener("wheel", stopRegisterScroll, { passive: false });
     }
     function setupPWA() {
       /* مانیفست دیگر با blob ساخته نمی‌شود: Chrome برای «نصب» مانیفست

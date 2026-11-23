@@ -4400,6 +4400,16 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
 #register .vs-slot-remove {
   display: none !important;
 }
+html:has(#register.page.active),
+html:has(#register.page.active) body {
+  overflow: hidden;
+  height: 100%;
+  overscroll-behavior: none;
+}
+#register.page.active {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
 #register.page > .card {
   display: flex;
   flex-direction: column;
@@ -4416,7 +4426,8 @@ html[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator {
   padding: 12px 0 14px;
   transition: opacity 0.28s ease, max-height 0.28s ease, margin 0.28s ease, padding 0.28s ease;
   max-height: 58vh;
-  overflow: auto;
+  overflow: hidden;
+  overscroll-behavior: none;
   width: 100%;
   background: none;
   border: 0;
