@@ -4764,43 +4764,6 @@ html[data-theme="blackgold"] #register .player-pool {
   color: var(--accent);
   font-weight: 700;
 }
-.versus-receipts {
-  flex: 1 1 auto;
-  min-height: 0;
-  overflow: auto;
-  width: 100%;
-  margin: 0;
-  background: transparent;
-  color: #07070c;
-}
-.versus-slip-head,
-.versus-slip {
-  background: #f0e2b8;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
-}
-.versus-slip-head {
-  text-align: center;
-  font-weight: 700;
-  padding: 6px 10px 2px;
-}
-.versus-slip {
-  padding: 6px 12px 8px;
-  margin-top: -6px;
-}
-.versus-receipts > :first-child {
-  margin-top: 0;
-}
-.versus-slip-date,
-.versus-slip-type {
-  font-size: 0.75rem;
-  color: #7a5f1a;
-  text-align: center;
-}
-.versus-slip-who {
-  font-weight: 700;
-  line-height: 1.35;
-  text-align: center;
-}
 .versus-pool {
   flex: 1 1 auto;
   min-height: 0;

@@ -1413,36 +1413,29 @@
       renderVersusPool();
       var score = $("versusScore");
       var box = $("versusList");
-      if (vsChoosing) {
-        if (score) score.classList.add("hidden");
-        if (box) box.classList.add("hidden");
-        return;
-      }
-      if (score) score.classList.remove("hidden");
-      if (box) box.classList.remove("hidden");
-      var a = vsPick.a,
-        b = vsPick.b;
-      if (!a || !b || a === b) {
-        if (score) score.innerHTML = "";
-        if (box)
-          box.innerHTML =
-            '<article class="versus-slip"><div class="versus-slip-who">' +
-            (PLAYERS.length < 2 ? "حداقل دو بازیکن لازم است." : "یک طرف تخته را لمس کن.") +
-            "</div></article>";
-        return;
-      }
-      var list = games
-        .filter(function (g) {
-          return (g.player1 === a && g.player2 === b) || (g.player1 === b && g.player2 === a);
-        })
-        .sort(function (x, y) {
-          return y.timestamp - x.timestamp;
-        });
-      if (score) score.innerHTML = versusInkHTML(versusSide(a, list), versusSide(b, list), list.length);
       if (box) {
         box.innerHTML = "";
         box.classList.add("hidden");
       }
+      if (vsChoosing) {
+        if (score) score.classList.add("hidden");
+        return;
+      }
+      if (score) score.classList.remove("hidden");
+      var a = vsPick.a,
+        b = vsPick.b;
+      if (!a || !b || a === b) {
+        if (score)
+          score.innerHTML =
+            '<div class="versus-ink-name">' +
+            (PLAYERS.length < 2 ? "حداقل دو بازیکن لازم است." : "یک طرف تخته را لمس کن.") +
+            "</div>";
+        return;
+      }
+      var list = games.filter(function (g) {
+        return (g.player1 === a && g.player2 === b) || (g.player1 === b && g.player2 === a);
+      });
+      if (score) score.innerHTML = versusInkHTML(versusSide(a, list), versusSide(b, list), list.length);
     }
     function tournamentGames() {
       return games.filter(function (g) {
