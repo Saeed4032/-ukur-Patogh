@@ -4638,53 +4638,40 @@ html[data-theme="blackgold"] #register .player-pool {
 
 /* ---------- رودررو (میز و دو صندلی) ---------- */
 #versus.page {
-  padding: 0;
+  padding: 10px 10px 16px;
   background: #07070c;
   border-color: var(--soft);
-  display: flex;
-  justify-content: center;
-}
-.versus-scene {
-  position: relative;
-  width: 100%;
-  max-width: 430px;
-  aspect-ratio: 576 / 945;
-  overflow: hidden;
-  background: #07070c;
-}
-.versus-scene-img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: fill;
-  pointer-events: none;
-  z-index: 0;
 }
 .versus-title {
-  position: absolute;
-  z-index: 2;
-  top: 0.6%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin: 0;
-  padding: 1px 22px 4px;
-  white-space: nowrap;
+  margin: 0 auto 8px;
+  width: max-content;
+  padding: 2px 28px 6px;
   text-align: center;
   font-family: "IranNastaliq", serif;
   font-weight: 400;
-  font-size: 1.7rem;
-  color: #d4af37;
-  background: #0c0c12;
+  font-size: 2rem;
+  color: var(--primary);
   border: 1px solid rgba(212, 175, 55, 0.4);
   border-radius: 999px;
 }
+.versus-stage {
+  background: #0a0a10;
+  border: 1px solid var(--soft);
+  border-radius: 18px;
+  overflow: hidden;
+}
+.versus-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  padding: 10px 8px 0;
+  position: relative;
+  z-index: 2;
+}
 .versus-seat {
-  position: absolute;
-  z-index: 3;
-  top: 15.5%;
-  width: 47%;
-  height: 14.5%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin: 0;
   padding: 0;
   background: none;
@@ -4694,22 +4681,36 @@ html[data-theme="blackgold"] #register .player-pool {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
-.versus-seat-a {
-  right: 1.5%;
+.versus-chair {
+  display: block;
+  width: 88%;
+  height: 78px;
+  background: linear-gradient(180deg, #2c2c34 0%, #121218 100%);
+  border: 2px solid #d4af37;
+  border-bottom: 0;
+  border-radius: 28px 28px 6px 6px;
+  box-shadow: inset 0 12px 16px rgba(244, 207, 106, 0.06);
 }
-.versus-seat-b {
-  left: 1.5%;
+.versus-seat.is-on .versus-chair {
+  box-shadow:
+    inset 0 12px 16px rgba(244, 207, 106, 0.06),
+    0 0 0 1px #f4cf6a;
+}
+.versus-plate-slot {
+  display: block;
+  width: 94%;
+  margin-top: -22px;
+  position: relative;
+  z-index: 1;
 }
 .versus-plate {
   display: flex;
   align-items: center;
-  width: 100%;
-  height: 100%;
-  padding: 4px 8px 4px 4px;
-  box-sizing: border-box;
+  min-height: 52px;
+  padding: 5px 10px 5px 5px;
   background: linear-gradient(180deg, #f4cf6a 0%, #d4af37 42%, #a8862a 100%);
   color: #07070c;
-  border-radius: 10px;
+  border-radius: 8px;
   box-shadow:
     0 6px 14px rgba(0, 0, 0, 0.45),
     inset 0 1px 0 rgba(255, 255, 255, 0.35);
@@ -4719,11 +4720,6 @@ html[data-theme="blackgold"] #register .player-pool {
 }
 .versus-seat-b .versus-plate {
   flex-direction: row-reverse;
-}
-.versus-seat.is-on .versus-plate {
-  box-shadow:
-    0 0 0 2px #f4cf6a,
-    0 6px 14px rgba(0, 0, 0, 0.45);
 }
 .versus-badge {
   display: inline-flex;
@@ -4738,49 +4734,45 @@ html[data-theme="blackgold"] #register .player-pool {
   border: 2px solid #7a5f1a;
   color: #07070c;
   font-weight: 700;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
 }
 .versus-plate-name {
   flex: 1;
   font-weight: 700;
   font-size: 0.95rem;
   text-align: center;
-  padding: 0 6px;
+  padding: 0 8px;
   word-break: break-word;
   color: #07070c;
 }
+.versus-board {
+  margin-top: -2px;
+  padding: 20px 14px 16px;
+  min-height: 220px;
+  background: linear-gradient(180deg, #16161e, #0c0c12);
+  clip-path: polygon(6% 0, 94% 0, 100% 100%, 0 100%);
+}
 .versus-ink {
-  position: absolute;
-  z-index: 2;
-  top: 31%;
-  left: 12%;
-  width: 76%;
-  height: 15%;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  align-content: center;
-  gap: 4px 12px;
-  margin: 0;
+  gap: 8px 16px;
+  width: 86%;
+  margin: 0 auto 14px;
   text-align: center;
-  color: #d4af37;
+  color: var(--primary);
   font-size: 1.05rem;
-  background: #27282d;
+  min-height: 2.5em;
 }
 .versus-ink-cell b {
-  color: #f4cf6a;
+  color: var(--accent);
   font-weight: 700;
 }
 .versus-receipts {
-  position: absolute;
-  z-index: 2;
-  top: 47%;
-  left: 12%;
-  width: 76%;
-  bottom: 2%;
-  overflow: auto;
+  width: 78%;
+  margin: 0 auto;
   background: #f0e2b8;
   color: #07070c;
-  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.28);
 }
 .versus-slip-head {
   text-align: center;
@@ -4788,7 +4780,7 @@ html[data-theme="blackgold"] #register .player-pool {
   padding: 8px 12px 4px;
 }
 .versus-slip {
-  padding: 6px 14px 8px;
+  padding: 6px 14px 10px;
 }
 .versus-slip-date,
 .versus-slip-type {
@@ -4798,25 +4790,18 @@ html[data-theme="blackgold"] #register .player-pool {
 }
 .versus-slip-who {
   font-weight: 700;
-  line-height: 1.35;
+  line-height: 1.4;
   text-align: center;
 }
 .versus-pool {
-  position: absolute;
-  z-index: 4;
-  top: 47%;
-  left: 8%;
-  width: 84%;
-  bottom: 2%;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
   gap: 8px;
-  align-content: start;
-  overflow: auto;
+  margin-top: 10px;
   padding: 10px;
-  background: rgba(12, 12, 18, 0.96);
-  border: 1px solid rgba(212, 175, 55, 0.25);
-  border-radius: 12px;
+  background: var(--card);
+  border: 1px solid var(--soft);
+  border-radius: 14px;
 }
 .versus-pick {
   display: flex;
@@ -4825,8 +4810,8 @@ html[data-theme="blackgold"] #register .player-pool {
   gap: 4px;
   margin: 0;
   padding: 8px 4px;
-  background: #181820;
-  border: 1px solid rgba(212, 175, 55, 0.22);
+  background: var(--card2);
+  border: 1px solid var(--soft);
   border-radius: 12px;
   color: var(--text);
   font: inherit;

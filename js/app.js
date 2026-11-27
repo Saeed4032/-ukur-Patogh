@@ -1399,12 +1399,14 @@
       var seatA = $("vsSeatA");
       var seatB = $("vsSeatB");
       if (seatA) {
-        seatA.innerHTML = versusSeatHTML(vsPick.a);
+        var slotA = seatA.querySelector(".versus-plate-slot");
+        if (slotA) slotA.innerHTML = versusSeatHTML(vsPick.a);
         seatA.classList.toggle("is-on", vsChoosing === "a");
         seatA.setAttribute("aria-pressed", vsChoosing === "a" ? "true" : "false");
       }
       if (seatB) {
-        seatB.innerHTML = versusSeatHTML(vsPick.b);
+        var slotB = seatB.querySelector(".versus-plate-slot");
+        if (slotB) slotB.innerHTML = versusSeatHTML(vsPick.b);
         seatB.classList.toggle("is-on", vsChoosing === "b");
         seatB.setAttribute("aria-pressed", vsChoosing === "b" ? "true" : "false");
       }
