@@ -4638,33 +4638,43 @@ html[data-theme="blackgold"] #register .player-pool {
 
 /* ---------- رودررو (میز و دو صندلی) ---------- */
 #versus.page {
-  background: linear-gradient(180deg, #101018, #07070c);
+  padding: 0;
+  overflow: hidden;
+  background: #07070c;
+  border-color: var(--soft);
+}
+.versus-scene {
+  position: relative;
+  width: 100%;
+  min-height: calc(100dvh - var(--nav-h, 62px) - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px) - 28px);
+}
+.versus-scene-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 18%;
+  pointer-events: none;
+  z-index: 0;
 }
 .versus-title {
-  margin: 0 0 12px;
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  padding: 10px 12px 0;
   text-align: center;
   font-family: "IranNastaliq", serif;
   font-weight: 400;
   font-size: 2.05rem;
-  color: var(--text);
-}
-.versus-room {
-  border: 1px solid var(--soft);
-  border-radius: var(--radius);
-  overflow: hidden;
-  background: #07070c;
-}
-.versus-chairs {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 16px;
-  padding: 16px 14px 0;
+  color: var(--primary);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.75);
 }
 .versus-seat {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0;
+  position: absolute;
+  z-index: 3;
+  top: 29%;
+  width: 46%;
   margin: 0;
   padding: 0;
   background: none;
@@ -4674,128 +4684,150 @@ html[data-theme="blackgold"] #register .player-pool {
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
 }
-.versus-chairback {
-  display: block;
-  width: 78%;
-  max-width: 150px;
-  height: 58px;
-  background: linear-gradient(180deg, #2a2a34 0%, #121218 100%);
-  border: 1px solid rgba(212, 175, 55, 0.32);
-  border-bottom-color: transparent;
-  border-radius: 36px 36px 8px 8px;
-  box-shadow: inset 0 10px 14px rgba(244, 207, 106, 0.05);
+.versus-seat-a {
+  right: 3%;
 }
-.versus-seat.is-on .versus-chairback {
-  border-color: var(--primary);
+.versus-seat-b {
+  left: 3%;
 }
 .versus-plate {
   display: flex;
   align-items: center;
-  gap: 8px;
-  min-width: 72%;
-  max-width: 100%;
-  margin-top: -18px;
-  padding: 7px 12px 7px 7px;
-  background: linear-gradient(180deg, #2a2414, #14100a);
-  border: 1px solid var(--primary);
-  border-radius: 10px;
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
-  z-index: 1;
+  min-height: 52px;
+  padding: 6px 12px 6px 6px;
+  background: linear-gradient(180deg, #f4cf6a 0%, #d4af37 42%, #a8862a 100%);
+  color: #07070c;
+  border-radius: 8px;
+  box-shadow:
+    0 6px 16px rgba(0, 0, 0, 0.45),
+    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+.versus-seat-a .versus-plate {
+  flex-direction: row;
+}
+.versus-seat-b .versus-plate {
+  flex-direction: row-reverse;
 }
 .versus-plate.is-empty {
-  justify-content: center;
-  border-style: dashed;
-  opacity: 0.85;
+  opacity: 0.88;
 }
-.versus-letter {
+.versus-seat.is-on .versus-plate {
+  box-shadow:
+    0 0 0 2px var(--accent),
+    0 6px 16px rgba(0, 0, 0, 0.45);
+}
+.versus-badge {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
+  margin: 0 -4px;
+  flex-shrink: 0;
   border-radius: 50%;
-  color: var(--accent);
-  border: 2px solid var(--primary);
+  background: linear-gradient(180deg, #f8e08a, #d4af37);
+  border: 2px solid #7a5f1a;
+  color: #07070c;
   font-weight: 700;
+  font-size: 1.15rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
 }
 .versus-plate-name {
+  flex: 1;
   font-weight: 700;
-  font-size: 0.92rem;
-  line-height: 1.25;
+  font-size: 0.95rem;
+  text-align: center;
+  padding: 0 8px;
   word-break: break-word;
-  text-align: right;
+  color: #07070c;
 }
-#versus .versus-plate .avatar {
-  box-shadow:
-    0 0 0 2px var(--primary),
-    0 2px 8px rgba(0, 0, 0, 0.35);
-}
-.versus-table {
-  margin: 10px 10px 12px;
-  padding: 16px 12px 14px;
-  min-height: 210px;
-  background: linear-gradient(180deg, #16161e, #0a0a10);
-  border: 1px solid rgba(212, 175, 55, 0.16);
-  border-radius: 8px 8px 20px 20px;
+.versus-tabletop {
+  position: absolute;
+  z-index: 2;
+  left: 9%;
+  right: 9%;
+  top: 42%;
+  bottom: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 .versus-hint {
-  color: var(--muted);
+  color: var(--primary);
   text-align: center;
-  padding: 28px 8px;
-  font-size: 0.92rem;
+  padding: 20px 8px;
+  font-size: 0.95rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 .versus-ink {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px 18px;
-  margin-bottom: 16px;
-}
-.versus-ink-col {
-  display: grid;
-  gap: 6px;
+  gap: 8px 20px;
+  width: 90%;
+  margin: 0 0 12px;
   text-align: center;
-}
-.versus-ink-row {
   color: var(--primary);
-  font-size: 0.92rem;
+  font-size: 1.05rem;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
 }
-.versus-ink-row strong {
-  display: inline-block;
-  margin-right: 6px;
+.versus-ink-cell b {
   color: var(--accent);
   font-weight: 700;
 }
 .versus-receipts {
+  width: 86%;
+  max-height: 100%;
+  overflow: auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 8px;
+  align-items: stretch;
+}
+.versus-slip-head {
+  text-align: center;
+  font-weight: 700;
+  color: #07070c;
+  background: #f0e2b8;
+  padding: 8px 12px 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.28);
 }
 .versus-slip {
-  width: 88%;
-  background: #f8f0d8;
+  background: #f0e2b8;
   color: #07070c;
-  padding: 10px 14px;
-  border-radius: 3px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.28);
+  padding: 8px 14px 10px;
+  margin-top: -2px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.28);
 }
 .versus-slip-date {
   font-size: 0.75rem;
   color: #7a5f1a;
+  text-align: center;
 }
 .versus-slip-who {
   font-weight: 700;
   line-height: 1.4;
+  text-align: center;
 }
 .versus-slip-type {
   font-size: 0.8rem;
   color: #7a5f1a;
+  text-align: center;
 }
 .versus-pool {
+  position: absolute;
+  z-index: 4;
+  left: 8%;
+  right: 8%;
+  top: 42%;
+  bottom: 4%;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
   gap: 8px;
-  margin-top: 12px;
+  align-content: start;
+  overflow: auto;
+  padding: 10px;
+  background: rgba(7, 7, 12, 0.9);
+  border: 1px solid var(--soft);
+  border-radius: 14px;
 }
 .versus-pick {
   display: flex;
