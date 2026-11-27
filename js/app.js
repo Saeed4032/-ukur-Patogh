@@ -90,7 +90,8 @@
       undoTimer = null,
       poolFilter = "";
     var vsPick = { a: "", b: "" },
-      vsPickLoaded = false;
+      vsPickLoaded = false,
+      vsChoosing = null;
     var TKEY = "backgammon_tournaments" + LGS;
     var tournament = { name: "تورنمنت ۱", start: 0, nextNum: 1 };
     var archive = [];
@@ -1318,24 +1319,6 @@
         sessionStorage.setItem("patogh_versus", JSON.stringify(vsPick));
       } catch (e) {}
     }
-    function fillVsSelect(el, selectedName, otherName) {
-      if (!el) return;
-      el.innerHTML =
-        '<option value="">انتخاب کن</option>' +
-        PLAYERS.map(function (p) {
-          return (
-            '<option value="' +
-            esc(p) +
-            '"' +
-            (p === otherName ? " disabled" : "") +
-            ">" +
-            esc(p) +
-            "</option>"
-          );
-        }).join("");
-      if (selectedName && PLAYERS.indexOf(selectedName) > -1) el.value = selectedName;
-      else el.value = "";
-    }
     function versusSide(name, list) {
       var s = { name: name, wins: 0, losses: 0, mars: 0, black: 0, normal: 0 };
       list.forEach(function (g) {
@@ -1348,32 +1331,92 @@
       });
       return s;
     }
-    function versusFace(s) {
+    function versusSeatHTML(name) {
+      if (!name) {
+        return (
+          '<span class="versus-chairback" aria-hidden="true"></span>' +
+          '<span class="versus-plate is-empty"><span class="versus-letter">؟</span>' +
+          '<span class="versus-plate-name">انتخاب</span></span>'
+        );
+      }
       return (
-        '<div class="versus-face">' +
-        avatarHTML(s.name, 56) +
-        '<div class="versus-name">' +
-        esc(s.name) +
-        "</div>" +
-        '<div class="versus-wins">' +
-        n(s.wins, 0) +
-        " برد</div>" +
-        '<div class="versus-meta">' +
-        n(s.losses, 0) +
-        " باخت</div>" +
-        '<div class="versus-meta">مارس ' +
-        n(s.mars, 0) +
-        " · سیاه " +
-        n(s.black, 0) +
-        "</div></div>"
+        '<span class="versus-chairback" aria-hidden="true"></span>' +
+        '<span class="versus-plate">' +
+        avatarHTML(name, 40) +
+        '<span class="versus-plate-name">' +
+        esc(name) +
+        "</span></span>"
       );
+    }
+    function versusInkCol(s) {
+      return (
+        '<div class="versus-ink-col">' +
+        [
+          ["برد", s.wins],
+          ["باخت", s.losses],
+          ["مارس", s.mars],
+          ["سیاه", s.black],
+        ]
+          .map(function (r) {
+            return (
+              '<div class="versus-ink-row"><span>' +
+              r[0] +
+              ":</span><strong>" +
+              n(r[1], 0) +
+              "</strong></div>"
+            );
+          })
+          .join("") +
+        "</div>"
+      );
+    }
+    function renderVersusPool() {
+      var pool = $("versusPool");
+      if (!pool) return;
+      if (!vsChoosing) {
+        pool.classList.add("hidden");
+        pool.innerHTML = "";
+        return;
+      }
+      var other = vsChoosing === "a" ? vsPick.b : vsPick.a;
+      pool.classList.remove("hidden");
+      pool.innerHTML = PLAYERS.length
+        ? PLAYERS.map(function (p) {
+            var on = (vsChoosing === "a" && p === vsPick.a) || (vsChoosing === "b" && p === vsPick.b);
+            var dis = p === other;
+            return (
+              '<button type="button" class="versus-pick' +
+              (on ? " on" : "") +
+              '"' +
+              (dis ? " disabled" : "") +
+              ' data-vs-name="' +
+              esc(p) +
+              '">' +
+              avatarHTML(p, 36) +
+              "<span>" +
+              esc(p) +
+              "</span></button>"
+            );
+          }).join("")
+        : '<div class="versus-hint">بازیکنی نیست.</div>';
     }
     function renderVersus() {
       ensureVsPick();
       if (PLAYERS.indexOf(vsPick.a) === -1) vsPick.a = "";
       if (PLAYERS.indexOf(vsPick.b) === -1) vsPick.b = "";
-      fillVsSelect($("vsA"), vsPick.a, vsPick.b);
-      fillVsSelect($("vsB"), vsPick.b, vsPick.a);
+      var seatA = $("vsSeatA");
+      var seatB = $("vsSeatB");
+      if (seatA) {
+        seatA.innerHTML = versusSeatHTML(vsPick.a);
+        seatA.classList.toggle("is-on", vsChoosing === "a");
+        seatA.setAttribute("aria-pressed", vsChoosing === "a" ? "true" : "false");
+      }
+      if (seatB) {
+        seatB.innerHTML = versusSeatHTML(vsPick.b);
+        seatB.classList.toggle("is-on", vsChoosing === "b");
+        seatB.setAttribute("aria-pressed", vsChoosing === "b" ? "true" : "false");
+      }
+      renderVersusPool();
       var empty = $("versusEmpty");
       var body = $("versusBody");
       if (!empty || !body) return;
@@ -1383,7 +1426,7 @@
         empty.classList.remove("hidden");
         body.classList.add("hidden");
         empty.textContent =
-          PLAYERS.length < 2 ? "حداقل دو بازیکن لازم است." : "دو بازیکن متفاوت انتخاب کن.";
+          PLAYERS.length < 2 ? "حداقل دو بازیکن لازم است." : "دو صندلی را پر کن.";
         return;
       }
       empty.classList.add("hidden");
@@ -1395,25 +1438,9 @@
         .sort(function (x, y) {
           return y.timestamp - x.timestamp;
         });
-      var sa = versusSide(a, list),
-        sb = versusSide(b, list);
       var score = $("versusScore");
-      if (score)
-        score.innerHTML =
-          versusFace(sa) + '<div class="versus-mid" aria-hidden="true">در برابر</div>' + versusFace(sb);
-      var stats = $("versusStats");
-      if (stats)
-        stats.innerHTML = [
-          ["بازی‌ها", n(list.length, 0)],
-          ["برد " + a, n(sa.wins, 0)],
-          ["برد " + b, n(sb.wins, 0)],
-          ["درصد " + a, percent(sa.wins, list.length)],
-        ]
-          .map(function (x) {
-            return '<div class="stat"><span>' + esc(x[0]) + "</span><strong>" + esc(x[1]) + "</strong></div>";
-          })
-          .join("");
-      var shown = list.slice(0, 20);
+      if (score) score.innerHTML = versusInkCol(versusSide(a, list)) + versusInkCol(versusSide(b, list));
+      var shown = list.slice(0, 12);
       var box = $("versusList");
       if (box)
         box.innerHTML = list.length
@@ -1421,21 +1448,17 @@
               .map(function (g) {
                 var t = TYPES[g.type] || TYPES.normal;
                 return (
-                  '<article class="game"><div class="gamehead"><div class="winner">' +
-                  avatarInline(g.winner, 26) +
-                  " " +
-                  esc(g.winner) +
-                  ' برنده شد</div><span class="muted">' +
-                  esc(t.full) +
-                  "</span></div><div class=\"meta\">" +
+                  '<article class="versus-slip"><div class="versus-slip-date">' +
                   esc(g.date) +
-                  "، " +
-                  esc(g.time) +
+                  "</div><div class=\"versus-slip-who\">" +
+                  esc(g.winner) +
+                  " برنده شد</div><div class=\"versus-slip-type\">" +
+                  esc(t.full) +
                   "</div></article>"
                 );
               })
               .join("")
-          : '<div class="card empty">هنوز بازی‌ای بین این دو ثبت نشده.</div>';
+          : '<article class="versus-slip"><div class="versus-slip-who">هنوز بازی‌ای بین این دو نیست.</div></article>';
     }
     function tournamentGames() {
       return games.filter(function (g) {
@@ -3830,14 +3853,30 @@
         apply();
         saveSettings();
       };
-      function onVsChange() {
-        vsPick.a = ($("vsA") && $("vsA").value) || "";
-        vsPick.b = ($("vsB") && $("vsB").value) || "";
-        saveVsPick();
+      function openVsSeat(side) {
+        vsChoosing = vsChoosing === side ? null : side;
         renderVersus();
       }
-      if ($("vsA")) $("vsA").onchange = onVsChange;
-      if ($("vsB")) $("vsB").onchange = onVsChange;
+      if ($("vsSeatA"))
+        $("vsSeatA").onclick = function () {
+          openVsSeat("a");
+        };
+      if ($("vsSeatB"))
+        $("vsSeatB").onclick = function () {
+          openVsSeat("b");
+        };
+      if ($("versusPool"))
+        $("versusPool").addEventListener("click", function (e) {
+          var btn = e.target.closest("[data-vs-name]");
+          if (!btn || btn.disabled || !vsChoosing) return;
+          var name = btn.getAttribute("data-vs-name") || "";
+          if (!name || PLAYERS.indexOf(name) === -1) return;
+          if (vsChoosing === "a") vsPick.a = name;
+          else vsPick.b = name;
+          vsChoosing = null;
+          saveVsPick();
+          renderVersus();
+        });
       $("export").onclick = backup;
       $("exportCSV").onclick = exportCSV;
       $("importBtn").onclick = function () {

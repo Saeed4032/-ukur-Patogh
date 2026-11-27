@@ -19,7 +19,7 @@
 <link rel="preload" href="fonts/IranNastaliq.woff2" as="font" type="font/woff2" crossorigin>
 <script>
 (function () {
-  var V = "v188";
+  var V = "v189";
   try {
     if (localStorage.getItem("patoghNuke") === V) return;
     localStorage.setItem("patoghNuke", V);
@@ -193,24 +193,21 @@
 </section>
 
 <section id="versus" class="page" role="tabpanel" aria-labelledby="tab-versus" tabindex="0">
-  <div class="card">
-    <h2 class="versus-title">رودررو</h2>
-    <p class="muted versus-lead">دو بازیکن را انتخاب کن تا ببینی مقابل هم چند برد دارند.</p>
-    <div class="versus-picks">
-      <label>بازیکن یک<select id="vsA" aria-label="بازیکن یک"></select></label>
-      <span class="versus-vs" aria-hidden="true">در برابر</span>
-      <label>بازیکن دو<select id="vsB" aria-label="بازیکن دو"></select></label>
+  <h2 class="versus-title">رودررو</h2>
+  <div class="versus-room">
+    <div class="versus-chairs">
+      <button type="button" id="vsSeatA" class="versus-seat" aria-label="بازیکن یک"></button>
+      <button type="button" id="vsSeatB" class="versus-seat" aria-label="بازیکن دو"></button>
+    </div>
+    <div class="versus-table">
+      <div id="versusEmpty" class="versus-hint">دو صندلی را پر کن.</div>
+      <div id="versusBody" class="hidden">
+        <div id="versusScore" class="versus-ink"></div>
+        <div id="versusList" class="versus-receipts"></div>
+      </div>
     </div>
   </div>
-  <div id="versusEmpty" class="card empty">دو بازیکن متفاوت انتخاب کن.</div>
-  <div id="versusBody" class="hidden">
-    <div class="card versus-score" id="versusScore"></div>
-    <div class="summary" id="versusStats"></div>
-    <div class="card">
-      <h2 class="versus-sub">آخرین بازی‌ها</h2>
-      <div id="versusList" class="list"></div>
-    </div>
-  </div>
+  <div id="versusPool" class="versus-pool hidden"></div>
 </section>
 
 <section id="history" class="page" role="tabpanel" aria-labelledby="tab-history" tabindex="0">
