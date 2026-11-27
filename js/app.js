@@ -1439,28 +1439,10 @@
           return y.timestamp - x.timestamp;
         });
       if (score) score.innerHTML = versusInkHTML(versusSide(a, list), versusSide(b, list), list.length);
-      if (box)
-        box.innerHTML = list.length
-          ? '<div class="versus-slip-head">بازی‌های اخیر</div>' +
-            list
-              .map(function (g) {
-                var t = TYPES[g.type] || TYPES.normal;
-                return (
-                  '<article class="versus-slip"><div class="versus-slip-date">' +
-                  esc(g.date) +
-                  '</div><div class="versus-slip-who">' +
-                  esc(g.player1) +
-                  " VS " +
-                  esc(g.player2) +
-                  '</div><div class="versus-slip-type">' +
-                  esc(g.winner) +
-                  " · " +
-                  esc(t.full) +
-                  "</div></article>"
-                );
-              })
-              .join("")
-          : '<article class="versus-slip"><div class="versus-slip-who">هنوز بازی‌ای بین این دو نیست.</div></article>';
+      if (box) {
+        box.innerHTML = "";
+        box.classList.add("hidden");
+      }
     }
     function tournamentGames() {
       return games.filter(function (g) {
