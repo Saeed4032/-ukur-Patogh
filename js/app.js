@@ -1335,6 +1335,7 @@
       var letter = name ? String(name).trim().charAt(0) : "؟";
       var label = name ? esc(name) : "انتخاب";
       return (
+        '<svg class="versus-chair" viewBox="0 0 160 100" aria-hidden="true"><path fill="#14141c" stroke="#d4af37" stroke-width="2.2" d="M20 98V36c0-22 26-30 60-30s60 8 60 30v62"/><path fill="#1a1a22" stroke="#d4af37" stroke-width="1.6" d="M34 98V46c0-16 18-22 46-22s46 6 46 22v52"/><path fill="none" stroke="#d4af37" stroke-width="1.3" opacity=".7" d="M46 98V56c0-12 14-16 34-16s34 4 34 16v42"/></svg>' +
         '<span class="versus-plate' +
         (name ? "" : " is-empty") +
         '"><span class="versus-badge">' +
