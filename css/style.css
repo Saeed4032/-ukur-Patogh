@@ -4636,161 +4636,156 @@ html[data-theme="blackgold"] #register .player-pool {
   backdrop-filter: none;
 }
 
-/* ---------- رودررو (میز و دو صندلی) ---------- */
+/* ---------- رودررو ---------- */
+@media (max-width: 767px) {
+  body:has(#versus.page.active) .hero {
+    display: none;
+  }
+}
 #versus.page.active {
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-#versus.page {
-  padding: 10px 10px 16px;
+  padding: 0;
+  overflow: hidden;
+  height: calc(100dvh - var(--nav-h, 62px) - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
+  max-height: calc(100dvh - var(--nav-h, 62px) - env(safe-area-inset-top, 0px) - env(safe-area-inset-bottom, 0px));
   background: #07070c;
-  border-color: var(--soft);
+  border: 0;
+  border-radius: 0;
+  margin-bottom: 0;
 }
-.versus-title {
-  margin: 0 auto 8px;
-  width: max-content;
-  max-width: 430px;
-  padding: 2px 28px 6px;
-  text-align: center;
-  font-family: "IranNastaliq", serif;
-  font-weight: 400;
-  font-size: 2rem;
-  color: var(--primary);
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  border-radius: 999px;
+.versus-scene {
+  position: relative;
+  flex: 6 0 0;
+  min-height: 0;
+  overflow: hidden;
+  background: #07070c;
 }
-.versus-stage,
-.versus-pool {
+.versus-board-img {
+  position: absolute;
+  inset: 0;
   width: 100%;
-  max-width: 430px;
-}
-.versus-stage {
-  background: #0a0a10;
-  border: 1px solid var(--soft);
-  border-radius: 18px;
-}
-.versus-chairs-img {
-  display: block;
-  width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
   pointer-events: none;
 }
-.versus-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 10px;
-  padding: 0 10px;
-  margin-top: -22px;
-  position: relative;
-  z-index: 2;
-}
-.versus-seat {
-  display: block;
+.versus-half {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50%;
   margin: 0;
   padding: 0;
-  background: none;
   border: 0;
+  background: transparent;
   color: inherit;
   font: inherit;
   cursor: pointer;
-  -webkit-tap-highlight-color: transparent;
-}
-.versus-plate-slot {
-  display: block;
-  width: 100%;
-}
-.versus-plate {
   display: flex;
   align-items: center;
-  min-height: 52px;
-  padding: 5px 10px 5px 5px;
-  background: linear-gradient(180deg, #f4cf6a 0%, #d4af37 42%, #a8862a 100%);
-  color: #07070c;
-  border-radius: 8px;
-  box-shadow:
-    0 6px 14px rgba(0, 0, 0, 0.45),
-    inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  justify-content: center;
+  -webkit-tap-highlight-color: transparent;
 }
-.versus-seat-a .versus-plate {
-  flex-direction: row;
+.versus-half-a {
+  right: 0;
 }
-.versus-seat-b .versus-plate {
-  flex-direction: row-reverse;
+.versus-half-b {
+  left: 0;
 }
-.versus-seat.is-on .versus-plate {
-  box-shadow:
-    0 0 0 2px #f4cf6a,
-    0 6px 14px rgba(0, 0, 0, 0.45);
+.versus-half.is-on {
+  box-shadow: inset 0 0 0 2px var(--primary);
 }
-.versus-badge {
-  display: inline-flex;
+.versus-plate-slot {
+  display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
-  margin: 0 -2px;
-  flex-shrink: 0;
-  border-radius: 50%;
-  background: linear-gradient(180deg, #f8e08a, #d4af37);
-  border: 2px solid #7a5f1a;
-  color: #07070c;
+}
+.versus-pick-hint {
+  color: var(--accent);
   font-weight: 700;
-  font-size: 1.1rem;
+  font-size: 1rem;
+  text-shadow: 0 1px 8px #000;
 }
-.versus-plate-name {
-  flex: 1;
+.versus-onboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+#versus .versus-onboard .avatar {
+  box-shadow:
+    0 0 0 3px var(--primary),
+    0 6px 16px rgba(0, 0, 0, 0.5);
+}
+#versus .versus-onboard .avatar:not(.avatar-img) {
+  background-clip: padding-box;
+}
+.versus-onboard-name {
+  color: var(--text);
   font-weight: 700;
-  font-size: 0.95rem;
-  text-align: center;
-  padding: 0 8px;
-  word-break: break-word;
-  color: #07070c;
+  font-size: 0.85rem;
+  text-shadow: 0 1px 6px #000;
+  max-width: 42vw;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
-.versus-board {
-  padding: 0 0 12px;
-  background: transparent;
-}
-.versus-board-in {
-  min-height: 220px;
-  padding: 22px 26px 16px;
-  background: linear-gradient(180deg, #14141c, #0c0c12);
-  clip-path: polygon(7% 0, 93% 0, 100% 100%, 0 100%);
+.versus-pane {
+  flex: 4 0 0;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 8px 12px 10px;
+  background: #0a0a10;
 }
 .versus-ink {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px 16px;
-  width: 86%;
-  margin: 0 auto 14px;
+  gap: 6px 12px;
+  flex: 0 0 auto;
+  margin: 0 0 8px;
   text-align: center;
   color: var(--primary);
-  font-size: 1.05rem;
-  min-height: 2.5em;
+  font-size: 0.82rem;
 }
-.versus-ink-cell b {
+.versus-ink-col {
+  display: grid;
+  gap: 2px;
+}
+.versus-ink-name {
+  color: var(--text);
+  font-weight: 700;
+  font-size: 0.9rem;
+  margin-bottom: 2px;
+}
+.versus-ink b {
   color: var(--accent);
   font-weight: 700;
 }
 .versus-receipts {
-  width: 78%;
-  margin: 0 auto;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  width: 100%;
+  margin: 0;
   background: transparent;
   color: #07070c;
 }
 .versus-slip-head,
 .versus-slip {
   background: #f0e2b8;
-  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.28);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
 }
 .versus-slip-head {
   text-align: center;
   font-weight: 700;
-  padding: 8px 12px 4px;
+  padding: 6px 10px 2px;
 }
 .versus-slip {
-  padding: 6px 14px 10px;
-  margin-top: -8px;
+  padding: 6px 12px 8px;
+  margin-top: -6px;
 }
 .versus-receipts > :first-child {
   margin-top: 0;
@@ -4803,18 +4798,21 @@ html[data-theme="blackgold"] #register .player-pool {
 }
 .versus-slip-who {
   font-weight: 700;
-  line-height: 1.4;
+  line-height: 1.35;
   text-align: center;
 }
 .versus-pool {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(76px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(72px, 1fr));
   gap: 8px;
-  margin-top: 10px;
-  padding: 10px;
+  margin: 0;
+  padding: 8px;
   background: var(--card);
   border: 1px solid var(--soft);
-  border-radius: 14px;
+  border-radius: 12px;
 }
 .versus-pick {
   display: flex;

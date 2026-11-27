@@ -1332,35 +1332,34 @@
       return s;
     }
     function versusSeatHTML(name) {
-      var letter = name ? String(name).trim().charAt(0) : "؟";
-      var label = name ? esc(name) : "انتخاب";
+      if (!name) return '<span class="versus-pick-hint">انتخاب</span>';
       return (
-        '<span class="versus-plate' +
-        (name ? "" : " is-empty") +
-        '"><span class="versus-badge">' +
-        esc(letter) +
-        '</span><span class="versus-plate-name">' +
-        label +
+        '<span class="versus-onboard">' +
+        avatarHTML(name, 72) +
+        '<span class="versus-onboard-name">' +
+        esc(name) +
         "</span></span>"
       );
     }
-    function versusInkHTML(sa, sb) {
-      return [
-        ["برد", sa.wins],
-        ["باخت", sb.wins],
-        ["مارس", sa.mars + sb.mars],
-        ["سیاه", sa.black + sb.black],
-      ]
-        .map(function (r) {
-          return (
-            '<div class="versus-ink-cell">' +
-            r[0] +
-            ': <b>' +
-            n(r[1], 0) +
-            "</b></div>"
-          );
-        })
-        .join("");
+    function versusInkCol(s, gamesCount) {
+      return (
+        '<div class="versus-ink-col"><div class="versus-ink-name">' +
+        esc(s.name) +
+        "</div><div>برد <b>" +
+        n(s.wins, 0) +
+        "</b></div><div>باخت <b>" +
+        n(s.losses, 0) +
+        "</b></div><div>مارس <b>" +
+        n(s.mars, 0) +
+        "</b></div><div>سیاه <b>" +
+        n(s.black, 0) +
+        "</b></div><div>درصد <b>" +
+        percent(s.wins, gamesCount) +
+        "</b></div></div>"
+      );
+    }
+    function versusInkHTML(sa, sb, gamesCount) {
+      return versusInkCol(sa, gamesCount) + versusInkCol(sb, gamesCount);
     }
     function renderVersusPool() {
       var pool = $("versusPool");
@@ -1413,6 +1412,13 @@
       renderVersusPool();
       var score = $("versusScore");
       var box = $("versusList");
+      if (vsChoosing) {
+        if (score) score.classList.add("hidden");
+        if (box) box.classList.add("hidden");
+        return;
+      }
+      if (score) score.classList.remove("hidden");
+      if (box) box.classList.remove("hidden");
       var a = vsPick.a,
         b = vsPick.b;
       if (!a || !b || a === b) {
@@ -1420,7 +1426,7 @@
         if (box)
           box.innerHTML =
             '<article class="versus-slip"><div class="versus-slip-who">' +
-            (PLAYERS.length < 2 ? "حداقل دو بازیکن لازم است." : "دو صندلی را پر کن.") +
+            (PLAYERS.length < 2 ? "حداقل دو بازیکن لازم است." : "یک طرف تخته را لمس کن.") +
             "</div></article>";
         return;
       }
@@ -1431,12 +1437,11 @@
         .sort(function (x, y) {
           return y.timestamp - x.timestamp;
         });
-      if (score) score.innerHTML = versusInkHTML(versusSide(a, list), versusSide(b, list));
-      var shown = list.slice(0, 8);
+      if (score) score.innerHTML = versusInkHTML(versusSide(a, list), versusSide(b, list), list.length);
       if (box)
         box.innerHTML = list.length
           ? '<div class="versus-slip-head">بازی‌های اخیر</div>' +
-            shown
+            list
               .map(function (g) {
                 var t = TYPES[g.type] || TYPES.normal;
                 return (
