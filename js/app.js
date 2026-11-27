@@ -1378,18 +1378,19 @@
             return (
               '<button type="button" class="versus-pick' +
               (on ? " on" : "") +
+              (dis ? " placed" : "") +
               '"' +
               (dis ? " disabled" : "") +
               ' data-vs-name="' +
               esc(p) +
               '">' +
               avatarHTML(p, 36) +
-              "<span>" +
+              '<span class="pp-name">' +
               esc(p) +
               "</span></button>"
             );
           }).join("")
-        : '<div class="versus-hint">بازیکنی نیست.</div>';
+        : '<div class="empty">بازیکنی نیست.</div>';
     }
     function renderVersus() {
       ensureVsPick();
