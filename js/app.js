@@ -1335,7 +1335,6 @@
       var letter = name ? String(name).trim().charAt(0) : "؟";
       var label = name ? esc(name) : "انتخاب";
       return (
-        '<svg class="versus-chair" viewBox="0 0 160 100" aria-hidden="true"><path fill="#14141c" stroke="#d4af37" stroke-width="2.2" d="M20 98V36c0-22 26-30 60-30s60 8 60 30v62"/><path fill="#1a1a22" stroke="#d4af37" stroke-width="1.6" d="M34 98V46c0-16 18-22 46-22s46 6 46 22v52"/><path fill="none" stroke="#d4af37" stroke-width="1.3" opacity=".7" d="M46 98V56c0-12 14-16 34-16s34 4 34 16v42"/></svg>' +
         '<span class="versus-plate' +
         (name ? "" : " is-empty") +
         '"><span class="versus-badge">' +
@@ -1410,25 +1409,19 @@
         seatB.setAttribute("aria-pressed", vsChoosing === "b" ? "true" : "false");
       }
       renderVersusPool();
-      var empty = $("versusEmpty");
-      var body = $("versusBody");
-      if (!empty || !body) return;
-      if (vsChoosing) {
-        empty.classList.add("hidden");
-        body.classList.add("hidden");
-        return;
-      }
+      var score = $("versusScore");
+      var box = $("versusList");
       var a = vsPick.a,
         b = vsPick.b;
       if (!a || !b || a === b) {
-        empty.classList.remove("hidden");
-        body.classList.add("hidden");
-        empty.textContent =
-          PLAYERS.length < 2 ? "حداقل دو بازیکن لازم است." : "دو صندلی را پر کن.";
+        if (score) score.innerHTML = "";
+        if (box)
+          box.innerHTML =
+            '<article class="versus-slip"><div class="versus-slip-who">' +
+            (PLAYERS.length < 2 ? "حداقل دو بازیکن لازم است." : "دو صندلی را پر کن.") +
+            "</div></article>";
         return;
       }
-      empty.classList.add("hidden");
-      body.classList.remove("hidden");
       var list = games
         .filter(function (g) {
           return (g.player1 === a && g.player2 === b) || (g.player1 === b && g.player2 === a);
@@ -1436,10 +1429,8 @@
         .sort(function (x, y) {
           return y.timestamp - x.timestamp;
         });
-      var score = $("versusScore");
       if (score) score.innerHTML = versusInkHTML(versusSide(a, list), versusSide(b, list));
       var shown = list.slice(0, 8);
-      var box = $("versusList");
       if (box)
         box.innerHTML = list.length
           ? '<div class="versus-slip-head">بازی‌های اخیر</div>' +
