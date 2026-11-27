@@ -19,7 +19,7 @@
 <link rel="preload" href="fonts/IranNastaliq.woff2" as="font" type="font/woff2" crossorigin>
 <script>
 (function () {
-  var V = "v194";
+  var V = "v195";
   try {
     if (localStorage.getItem("patoghNuke") === V) return;
     localStorage.setItem("patoghNuke", V);
@@ -205,8 +205,10 @@
       </button>
     </div>
     <div class="versus-board">
-      <div id="versusScore" class="versus-ink"></div>
-      <div id="versusList" class="versus-receipts"></div>
+      <div class="versus-board-in">
+        <div id="versusScore" class="versus-ink"></div>
+        <div id="versusList" class="versus-receipts"></div>
+      </div>
     </div>
   </div>
   <div id="versusPool" class="versus-pool hidden"></div>

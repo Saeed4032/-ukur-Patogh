@@ -4637,6 +4637,11 @@ html[data-theme="blackgold"] #register .player-pool {
 }
 
 /* ---------- رودررو (میز و دو صندلی) ---------- */
+#versus.page.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 #versus.page {
   padding: 10px 10px 16px;
   background: #07070c;
@@ -4645,6 +4650,7 @@ html[data-theme="blackgold"] #register .player-pool {
 .versus-title {
   margin: 0 auto 8px;
   width: max-content;
+  max-width: 430px;
   padding: 2px 28px 6px;
   text-align: center;
   font-family: "IranNastaliq", serif;
@@ -4654,11 +4660,15 @@ html[data-theme="blackgold"] #register .player-pool {
   border: 1px solid rgba(212, 175, 55, 0.4);
   border-radius: 999px;
 }
+.versus-stage,
+.versus-pool {
+  width: 100%;
+  max-width: 430px;
+}
 .versus-stage {
   background: #0a0a10;
   border: 1px solid var(--soft);
   border-radius: 18px;
-  overflow: hidden;
 }
 .versus-chairs-img {
   display: block;
@@ -4738,9 +4748,14 @@ html[data-theme="blackgold"] #register .player-pool {
   color: #07070c;
 }
 .versus-board {
-  padding: 16px 14px 16px;
+  padding: 0 0 12px;
+  background: transparent;
+}
+.versus-board-in {
   min-height: 220px;
+  padding: 22px 26px 16px;
   background: linear-gradient(180deg, #14141c, #0c0c12);
+  clip-path: polygon(7% 0, 93% 0, 100% 100%, 0 100%);
 }
 .versus-ink {
   display: grid;
@@ -4760,9 +4775,13 @@ html[data-theme="blackgold"] #register .player-pool {
 .versus-receipts {
   width: 78%;
   margin: 0 auto;
-  background: #f0e2b8;
+  background: transparent;
   color: #07070c;
-  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.28);
+}
+.versus-slip-head,
+.versus-slip {
+  background: #f0e2b8;
+  box-shadow: 0 5px 12px rgba(0, 0, 0, 0.28);
 }
 .versus-slip-head {
   text-align: center;
@@ -4771,6 +4790,10 @@ html[data-theme="blackgold"] #register .player-pool {
 }
 .versus-slip {
   padding: 6px 14px 10px;
+  margin-top: -8px;
+}
+.versus-receipts > :first-child {
+  margin-top: 0;
 }
 .versus-slip-date,
 .versus-slip-type {
