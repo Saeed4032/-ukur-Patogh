@@ -4681,20 +4681,16 @@ html[data-theme="blackgold"] #register .player-pool {
   background: transparent;
   color: inherit;
   font: inherit;
-  cursor: pointer;
+  pointer-events: none;
   display: flex;
   align-items: center;
   justify-content: center;
-  -webkit-tap-highlight-color: transparent;
 }
 .versus-half-a {
   right: 0;
 }
 .versus-half-b {
   left: 0;
-}
-.versus-half.is-on {
-  box-shadow: inset 0 0 0 2px var(--primary);
 }
 .versus-plate-slot {
   display: flex;

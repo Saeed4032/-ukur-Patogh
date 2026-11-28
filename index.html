@@ -19,7 +19,7 @@
 <link rel="preload" href="fonts/IranNastaliq.woff2" as="font" type="font/woff2" crossorigin>
 <script>
 (function () {
-  var V = "v201";
+  var V = "v202";
   try {
     if (localStorage.getItem("patoghNuke") === V) return;
     localStorage.setItem("patoghNuke", V);
@@ -195,17 +195,17 @@
 <section id="versus" class="page" role="tabpanel" aria-labelledby="tab-versus" tabindex="0">
   <div class="versus-scene">
     <img class="versus-board-img" src="img/versus-board.jpg" alt="">
-    <button type="button" id="vsSeatA" class="versus-half versus-half-a" aria-label="بازیکن یک">
+    <div id="vsSeatA" class="versus-half versus-half-a">
       <span class="versus-plate-slot"></span>
-    </button>
-    <button type="button" id="vsSeatB" class="versus-half versus-half-b" aria-label="بازیکن دو">
+    </div>
+    <div id="vsSeatB" class="versus-half versus-half-b">
       <span class="versus-plate-slot"></span>
-    </button>
+    </div>
   </div>
   <div class="versus-pane">
     <div id="versusScore" class="versus-ink"></div>
     <div id="versusList" class="versus-receipts hidden"></div>
-    <div id="versusPool" class="versus-pool hidden"></div>
+    <div id="versusPool" class="versus-pool"></div>
   </div>
 </section>
 

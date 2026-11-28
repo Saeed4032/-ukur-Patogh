@@ -1332,7 +1332,7 @@
       return s;
     }
     function versusSeatHTML(name) {
-      if (!name) return '<span class="versus-pick-hint">انتخاب</span>';
+      if (!name) return "";
       return (
         '<span class="versus-onboard">' +
         avatarHTML(name, 72) +
@@ -1364,24 +1364,14 @@
     function renderVersusPool() {
       var pool = $("versusPool");
       if (!pool) return;
-      if (!vsChoosing) {
-        pool.classList.add("hidden");
-        pool.innerHTML = "";
-        return;
-      }
-      var other = vsChoosing === "a" ? vsPick.b : vsPick.a;
       pool.classList.remove("hidden");
       pool.innerHTML = PLAYERS.length
         ? PLAYERS.map(function (p) {
-            var on = (vsChoosing === "a" && p === vsPick.a) || (vsChoosing === "b" && p === vsPick.b);
-            var dis = p === other;
+            var placed = p === vsPick.a || p === vsPick.b;
             return (
               '<button type="button" class="versus-pick' +
-              (on ? " on" : "") +
-              (dis ? " placed" : "") +
-              '"' +
-              (dis ? " disabled" : "") +
-              ' data-vs-name="' +
+              (placed ? " placed on" : "") +
+              '" data-vs-name="' +
               esc(p) +
               '">' +
               avatarHTML(p, 36) +
@@ -1401,14 +1391,10 @@
       if (seatA) {
         var slotA = seatA.querySelector(".versus-plate-slot");
         if (slotA) slotA.innerHTML = versusSeatHTML(vsPick.a);
-        seatA.classList.toggle("is-on", vsChoosing === "a");
-        seatA.setAttribute("aria-pressed", vsChoosing === "a" ? "true" : "false");
       }
       if (seatB) {
         var slotB = seatB.querySelector(".versus-plate-slot");
         if (slotB) slotB.innerHTML = versusSeatHTML(vsPick.b);
-        seatB.classList.toggle("is-on", vsChoosing === "b");
-        seatB.setAttribute("aria-pressed", vsChoosing === "b" ? "true" : "false");
       }
       renderVersusPool();
       var score = $("versusScore");
@@ -1417,10 +1403,6 @@
         box.innerHTML = "";
         box.classList.add("hidden");
       }
-      if (vsChoosing) {
-        if (score) score.classList.add("hidden");
-        return;
-      }
       if (score) score.classList.remove("hidden");
       var a = vsPick.a,
         b = vsPick.b;
@@ -1428,7 +1410,7 @@
         if (score)
           score.innerHTML =
             '<div class="versus-ink-name">' +
-            (PLAYERS.length < 2 ? "حداقل دو بازیکن لازم است." : "یک طرف تخته را لمس کن.") +
+            (PLAYERS.length < 2 ? "حداقل دو بازیکن لازم است." : "یک بازیکن را از لیست انتخاب کن.") +
             "</div>";
         return;
       }
@@ -3830,27 +3812,17 @@
         apply();
         saveSettings();
       };
-      function openVsSeat(side) {
-        vsChoosing = vsChoosing === side ? null : side;
-        renderVersus();
-      }
-      if ($("vsSeatA"))
-        $("vsSeatA").onclick = function () {
-          openVsSeat("a");
-        };
-      if ($("vsSeatB"))
-        $("vsSeatB").onclick = function () {
-          openVsSeat("b");
-        };
       if ($("versusPool"))
         $("versusPool").addEventListener("click", function (e) {
           var btn = e.target.closest("[data-vs-name]");
-          if (!btn || btn.disabled || !vsChoosing) return;
+          if (!btn) return;
           var name = btn.getAttribute("data-vs-name") || "";
           if (!name || PLAYERS.indexOf(name) === -1) return;
-          if (vsChoosing === "a") vsPick.a = name;
-          else vsPick.b = name;
-          vsChoosing = null;
+          if (vsPick.a === name) vsPick.a = "";
+          else if (vsPick.b === name) vsPick.b = "";
+          else if (!vsPick.a) vsPick.a = name;
+          else if (!vsPick.b) vsPick.b = name;
+          else return;
           saveVsPick();
           renderVersus();
         });
